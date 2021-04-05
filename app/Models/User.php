@@ -48,17 +48,17 @@ class User extends Authenticatable
 
     public function payment()
     {
-        return $this->hasOne('App\Payment');
+        return $this->hasMany('App\Payment');
     }
 
     public function remmitance()
     {
-        return $this->hasOne('App\Remmitance');
+        return $this->hasMany('App\Remmitance');
     }
 
     public function activity_log()
     {
-        return $this->hasOne('App\Activity_log');
+        return $this->hasMany('App\Activity_log');
     }
 
     
