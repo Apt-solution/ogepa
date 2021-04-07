@@ -9,17 +9,17 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-            <div class="card">
                 @if(Session::has('status'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success text-center">
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
+            <div class="card">
                 <div class="card-header bg-success">
                     <h5 class="card-title">Update user's data</h5>
                 </div>
                 <div class="card-body">
-                    <form action="route('updateClient', $users->id)" method="post">
+                    <form action="{{route('user.update', $users->id)}}" method="post">
                     @method('PUT')
                     @csrf
                         <div class="input-group mb-3">
@@ -40,7 +40,7 @@ $(document).ready(function() {
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
-                            <select class="form-select" id="inputGroupSelect01">
+                            <select name="state" class="form-select" id="inputGroupSelect01">
                                 <option selected>Choose...</option>
                                 <option value="Abeokuta_North">Abeokuta_North</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>

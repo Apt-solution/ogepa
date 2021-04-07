@@ -71,7 +71,7 @@ class ClientController extends Controller
     public function UpdateClient(Request $request, $id)
     {
         $user = User::findorFail($id);
-        
+
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->phone = $request->input('phone');
@@ -79,7 +79,7 @@ class ClientController extends Controller
         $user->state = $request->input('state');
         $user->address = $request->input('address');
         $user->save();
-        return redirect()->back()-with('status', 'User Info Updated successfully');
+        return redirect()->back()->with('status', 'User Info Updated successfully');
 
     }
 
