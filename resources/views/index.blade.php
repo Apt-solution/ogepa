@@ -3,12 +3,12 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mx-auto">
-            <h4 class="lead">User's Data</h4>
+            <h4 id="ed" class="lead">User's Data</h4>
             <hr>
             <div class="mb-2">
                 <a href="{{ URL::to('/addUser') }}" class="btn btn-primary">Add new User</a>
             </div>
-            <table class="table table-striped data-table text-center">
+            <table class="table table-bordered data-table text-center" style="width:100%">
                 <thead>
                     <th>SN</th>
                     <th>First Name</th>
@@ -50,6 +50,14 @@ $(document).ready(function(){
             },
         ]
     });
+
+    $('body').on('click', '#editUser',function(){
+            
+    }); 
+
+    $('body').on('click', '#delUser',function(){
+            alert('Delete User');
+    }); 
 
 });
 </script>

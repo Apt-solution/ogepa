@@ -12,9 +12,11 @@ class ClientController extends Controller
     protected $clientService;
     public function __construct(
         ClientService $clientService
+
     )
     {
         $this->clientService = $clientService;
+        $this->middleware('auth');
     }
 
     public function addClient(Request $request)
@@ -42,8 +44,8 @@ class ClientController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
      
-                           $btn = '<a href="/addUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
-                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete User" class="link-danger"><i class="fas fa-trash-alt"></i></a>
+                           $btn = '<a href="javascript:void(0)" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
+                                    <a href="javascript:void(0)" id="delUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete User" class="link-danger"><i class="fas fa-trash-alt"></i></a>
                                     ';
     
                             return $btn;

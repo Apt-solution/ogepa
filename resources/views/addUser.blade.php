@@ -2,21 +2,22 @@
 @section('content')
 <script>
 $(document).ready(function() {
+    $.noConflict();
     $('.js-example-basic-single').select2();
 });
 </script>
 <div class="container">
     <div class="row">
-        <div class="col-12 mx-auto">
+        <div class="col-10 mt-2 mx-auto">
             <div class="card">
                 <div class="card-header">
-                    <h4 style="color:green; font-weight:bold" class="lead text-center">Add New User</h4>
+                    <h4 style="color:dark; font-weight:bold;" class="lead text-center">Add New User</h4>
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="">First name:</label>
-                            <input name="fname" type="text" class="form-control" placeholder="First Name">
+                            <input name="fname" type="text"  class="form-control" placeholder="First Name">
                         </div>
                         <div class="form-group">
                             <label for="">Last name:</label>
@@ -32,7 +33,7 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group">
                             <label for="lga">Select LGA:</label>
-                            <select class="form-select js-example-basic-single pb-4" name="lga">
+                            <select class="form-control js-example-basic-single pb-4" name="lga">
                             <option selected>Select LGA</option>
                                     <option value="Abeokuta_North">Abeokuta_North</option>
                                     <option value="Abeokuta_South">Abeokuta_South</option>
