@@ -10,11 +10,18 @@ $(document).ready(function() {
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
             <div class="card">
+                @if(Session::has('status'))
+                    <div class="alert alert-success">
+                        <p>{{ Session::get('status') }}</p>
+                    </div>
+                @endif
                 <div class="card-header bg-success">
                     <h5 class="card-title">Update user's data</h5>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="route('updateClient', $users->id)" method="post">
+                    @method('PUT')
+                    @csrf
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
                             <input type="text" name="first_name" value="{{ $users->first_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">

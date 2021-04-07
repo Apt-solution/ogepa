@@ -63,9 +63,19 @@ class ClientController extends Controller
         return view('showUser', compact('users'));
     }
 
-    public function UpdateClient($id)
+    public function UpdateClient(Request $request, $id)
     {
-        $users = User::findorFail($id);
+        $user = User::findorFail($id);
+        
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->state = $request->input('state');
+        $user->address = $request->input('address');
+        $user->save();
+        return redirect()->back()-with('status', 'User Info Updated successfully');
+
     }
 
     public function deleteClient($id)
