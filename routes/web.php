@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClientController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +23,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
+Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
+Route::post('/addUser', [ClientController::class, 'regUser'])->name('user.reg');
+Route::get('/index', [ClientController::class, 'index'])->name('users.index');
+Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
+Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
+Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
