@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 
 class UserFactory extends Factory
 {
@@ -23,10 +24,16 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
+            'first_name' => $this->faker->name(),
+            'last_name' => $this->faker->name(),
+            'phone'     => $this->faker->phoneNumber(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'state' => $this->faker->randomElement(['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south']),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'address' => $this->faker->address(),
+            'ogwema_ref' => Str::random(10),
+            'role' => $this->faker->randomElement(['user', 'admin']),
+            'password' => $this->faker->password(), // password
             'remember_token' => Str::random(10),
         ];
     }
