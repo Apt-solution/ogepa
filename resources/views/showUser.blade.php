@@ -11,25 +11,25 @@ $(document).ready(function() {
         <div class="col-10 mt-2 mx-auto">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h5 class="card-title">Account Creation</h5>
+                    <h5 class="card-title">Update user's data</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('user.reg')}}" method="post">
+                    <form action="" method="post">
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
-                            <input type="text" class="form-control" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="first_name" value="{{ $users->first_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Last Name</label>
-                            <input type="text" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="last_name" value="{{ $users->last_name }}" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input type="text" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="phone" value="{{ $users->phone }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Email Address</label>
-                            <input type="text" class="form-control" placeholder="emailaddress@domain.com" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" name="email" value="{{ $users->email }}" placeholder="emailaddress@domain.com" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
@@ -58,9 +58,9 @@ $(document).ready(function() {
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text">Address</label>
-                            <textarea class="form-control" aria-label="With textarea"></textarea>
+                            <textarea name="address" value="{{ $users->address }}" class="form-control" aria-label="With textarea">{{ $users->address }}</textarea>
                         </div>
-                        <button class="btn btn-success float-right">ADD NEW USER</button>
+                        <button class="btn btn-success float-right">UPDATE USER</button>
                     </form>
                 </div>
             </div>

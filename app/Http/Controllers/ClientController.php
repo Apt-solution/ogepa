@@ -57,9 +57,21 @@ class ClientController extends Controller
         return view('index');
     }
 
-    public function showUser($id)
+    public function showClient($id)
     {
         $users = User::findorFail($id);
-        return redirect('/addUser')->with('users', $users);
+        return view('showUser', compact('users'));
+    }
+
+    public function UpdateClient($id)
+    {
+        $users = User::findorFail($id);
+    }
+
+    public function deleteClient($id)
+    {
+        $users = User::findOrFail($id);
+        $users->delete();
+        return redirect('/index')->with('status', 'User Deleted Successfully');
     }
 }

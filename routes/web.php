@@ -24,6 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/addUser', [ClientController::class, 'addUser'])->name('addUser');
+Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
+Route::post('/addUser', [ClientController::class, 'regUser'])->name('user.reg');
 Route::get('/index', [ClientController::class, 'index'])->name('users.index');
-Route::get('/show/{id}', [ClientController::class, 'showUser']);
+Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
+Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
+Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
