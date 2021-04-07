@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
 Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
 Route::post('/addUser', [ClientController::class, 'regUser'])->name('user.reg');
 Route::get('/index', [ClientController::class, 'index'])->name('users.index');
