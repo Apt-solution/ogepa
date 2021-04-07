@@ -19,6 +19,11 @@ class ClientController extends Controller
         $this->middleware('auth');
     }
 
+    public function allUser()
+    {
+        return view('index');
+    }
+
     public function addClient(Request $request)
     {
         $request->validate([
