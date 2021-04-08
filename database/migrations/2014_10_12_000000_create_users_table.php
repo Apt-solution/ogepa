@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone')->unique();
             $table->string('email')->unique()->nullable();
-            $table->string('ogwema_ref');
+            $table->string('ogwema_ref')->nullable();
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->enum('state', ['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south']);
             $table->timestamp('email_verified_at')->nullable();

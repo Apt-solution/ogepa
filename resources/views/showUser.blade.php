@@ -26,18 +26,26 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">First Name</label>
                             <input type="text" name="first_name" value="{{ $users->first_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
+                        @error('first_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                       
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Last Name</label>
                             <input type="text" name="last_name" value="{{ $users->last_name }}" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
+                        @error('last_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
                             <input type="text" name="phone" value="{{ $users->phone }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
+                        @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Email Address</label>
                             <input type="text" class="form-control" name="email" value="{{ $users->email }}" placeholder="emailaddress@domain.com" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
+                        @error('email')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select name="state" class="form-select" id="inputGroupSelect01">
@@ -67,6 +75,8 @@ $(document).ready(function() {
                             <label class="input-group-text">Address</label>
                             <textarea name="address" value="{{ $users->address }}" class="form-control" aria-label="With textarea">{{ $users->address }}</textarea>
                         </div>
+                        @error('address')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <button class="btn btn-success float-right">UPDATE USER</button>
                     </form>
                 </div>
