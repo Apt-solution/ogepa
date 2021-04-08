@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'ogwema_ref' => Str::random(10),
             'role' => $this->faker->randomElement(['user', 'admin']),
             'password' => $this->faker->password(), // password
-            'remember_token' => Str::random(10),
+            // 'remember_token' => Str::random(10),
         ];
     }
 
