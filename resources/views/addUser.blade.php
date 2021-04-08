@@ -15,6 +15,7 @@ $(document).ready(function() {
                 </div>
                 <div class="card-body">
                     <form action="{{route('user.reg')}}" method="post">
+                    @csrf
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
                             <input type="text" class="form-control" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
