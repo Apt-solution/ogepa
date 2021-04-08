@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\FormValidationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
@@ -41,6 +41,20 @@ class ClientController extends Controller
         return view('addUser');
     }
 
+    public function regClient(FormValidationRequest $request)
+    {
+        $data = array(
+            'first_name' => $request->input('first_name'),
+            'last_name'  => $request->input('last_name'),
+            'phone'      => $request->input('phone'),
+            'email'      => $request->input('email'),
+            'state'      => $request->input('state'),
+            'address'    => $request->input('address')
+        );
+        User::create($data);
+        return redirect()->back()->with('status', 'User Account Created');
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -68,9 +82,20 @@ class ClientController extends Controller
         return view('showUser', compact('users'));
     }
 
-    public function UpdateClient($id)
+    public function UpdateClient(FormValidationRequest $request , $id)
     {
-        $users = User::findorFail($id);
+        
+        $user = User::findorFail($id);
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->state = $request->input('state');
+        $user->address = $request->input('address');
+        $user->save();
+        return redirect()->back()->withInput()  
+                                ->with('status', 'User Info Updated successfully');
+
     }
 
     public function deleteClient($id)

@@ -26,7 +26,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
 Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
-Route::post('/addUser', [ClientController::class, 'regUser'])->name('user.reg');
+Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
 Route::get('/index', [ClientController::class, 'index'])->name('users.index');
 Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
 Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');

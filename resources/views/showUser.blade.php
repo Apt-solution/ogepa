@@ -9,31 +9,46 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
+                @if(Session::has('status'))
+                    <div class="alert alert-success text-center">
+                        <p>{{ Session::get('status') }}</p>
+                    </div>
+                @endif
             <div class="card">
                 <div class="card-header bg-success">
                     <h5 class="card-title">Update user's data</h5>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{route('user.update', $users->id)}}" method="post">
+                    @method('PUT')
+                    @csrf
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
                             <input type="text" name="first_name" value="{{ $users->first_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
+                        @error('first_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                       
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Last Name</label>
                             <input type="text" name="last_name" value="{{ $users->last_name }}" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
+                        @error('last_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
                             <input type="text" name="phone" value="{{ $users->phone }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
+                        @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Email Address</label>
                             <input type="text" class="form-control" name="email" value="{{ $users->email }}" placeholder="emailaddress@domain.com" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
+                        @error('email')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
-                            <select class="form-select" id="inputGroupSelect01">
+                            <select name="state" class="form-select" id="inputGroupSelect01">
                                 <option selected>Choose...</option>
                                 <option value="Abeokuta_North">Abeokuta_North</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
@@ -60,6 +75,8 @@ $(document).ready(function() {
                             <label class="input-group-text">Address</label>
                             <textarea name="address" value="{{ $users->address }}" class="form-control" aria-label="With textarea">{{ $users->address }}</textarea>
                         </div>
+                        @error('address')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+
                         <button class="btn btn-success float-right">UPDATE USER</button>
                     </form>
                 </div>
