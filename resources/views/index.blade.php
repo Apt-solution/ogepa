@@ -52,7 +52,8 @@ $(document).ready(function(){
     });
 
     $('body').on('click', '#editUser',function(){
-            
+        var Item_id = $(this).data('id');
+        $.get('/show/' + Item_id);
     }); 
 
     $('body').on('click', '#delUser',function(){

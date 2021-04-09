@@ -62,8 +62,7 @@ class ClientController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-     
-                           $btn = '<a href="javascript:void(0)" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
+                           $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
                                     <a href="javascript:void(0)" id="delUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete User" class="link-danger"><i class="fas fa-trash-alt"></i></a>
                                     ';
     

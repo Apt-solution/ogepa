@@ -20,12 +20,12 @@ $(document).ready(function() {
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-            <div class="card">
+            <div class="card elevation-3">
                 <div class="card-header bg-success">
                     <h5 class="card-title">Account Creation</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('user.reg')}}" method="post">
+                    <form action="{{route(user.reg')}}" method="post">
                     @csrf
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>

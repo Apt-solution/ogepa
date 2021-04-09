@@ -14,7 +14,7 @@ $(document).ready(function() {
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
-            <div class="card">
+            <div class="card elevation-3">
                 <div class="card-header bg-success">
                     <h5 class="card-title">Update user's data</h5>
                 </div>
