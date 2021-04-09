@@ -25,7 +25,8 @@ class User extends Authenticatable
         'lga',
         'ogwema_ref',
         'password',
-        'role'
+        'role',
+        'client_type'
     ];
 
     /**
