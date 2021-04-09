@@ -40,7 +40,7 @@ $(document).ready(function(){
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
             {data: 'email', name: 'email'},
-            {data: 'state', name: 'state'},
+            {data: 'lga', name: 'lga'},
             {data: 'address', name: 'address'},
             {
                 data: 'action', 

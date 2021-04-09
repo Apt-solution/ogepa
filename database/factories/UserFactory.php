@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'last_name' => $this->faker->name(),
             'phone'     => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
-            'state' => $this->faker->randomElement(['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south']),
+            'lga' => $this->faker->randomElement(['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south']),
             'email_verified_at' => now(),
             'address' => $this->faker->address(),
             'ogwema_ref' => Str::random(10),
