@@ -21,6 +21,8 @@ class ClientController extends Controller
 
     public function allUser()
     {
+        // $data = User::orderBy('id', 'desc')->first();
+        // return $data->client_type->client_type;
         return view('index');
     }
     
