@@ -63,5 +63,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Activity_log');
     }
 
+    public function clientType()
+    {
+        return $this->belongsTo(ClientType::class, 'client_type', 'client_type');
+    }
+
     
 }

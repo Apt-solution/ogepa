@@ -27,14 +27,15 @@ class UserFactory extends Factory
             'first_name' => $this->faker->name(),
             'last_name' => $this->faker->name(),
             'phone'     => $this->faker->phoneNumber(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => $this->faker->unique()->phoneNumber(),
             'lga' => $this->faker->randomElement(['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south']),
+            'client_type' => $this->faker->randomElement(['residential', 'commercial', 'industrial', 'medical']),
             'email_verified_at' => now(),
             'address' => $this->faker->address(),
             'ogwema_ref' => Str::random(10),
             'role' => $this->faker->randomElement(['user', 'admin']),
             'password' => $this->faker->password(), // password
-            // 'remember_token' => Str::random(10),
+            // User::factory()->count(50)->make();
         ];
     }
 

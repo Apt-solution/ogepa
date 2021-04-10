@@ -44,10 +44,10 @@
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Client Type</label>
                             <select name="client_type" class="form-select" id="">
-                                <option>residential</option>
-                                <option>indestrial</option>
-                                <option>commercial</option>
-                                <option>medical</option>
+                                <option>Residential</option>
+                                <option>Industrial</option>
+                                <option>Commercial</option>
+                                <option>Medical</option>
                             </select>
                         </div>
                         @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror

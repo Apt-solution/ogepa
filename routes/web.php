@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -31,3 +33,11 @@ Route::get('/index', [ClientController::class, 'index'])->name('users.index');
 Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
 Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
 Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
+
+
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
+    Route::get('/setMonthlyPrice', [AdminController::class, 'setMonthlyPrice'])->name('setMonthlyPrice');
+    Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
+});
