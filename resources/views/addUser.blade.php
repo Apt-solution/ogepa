@@ -10,15 +10,6 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-<<<<<<< HEAD
-                @if(Session::has('status'))
-                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                        <strong>Account Created</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-            <div class="card elevation-3">
-=======
             @if(Session::has('status'))
             <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
                 <strong>Account Created</strong>
@@ -26,18 +17,12 @@
             </div>
             @endif
             <div class="card">
->>>>>>> e6e5d22934291511dce989b68e90c46c244a6216
                 <div class="card-header bg-success">
                     <h5 class="card-title">Account Creation</h5>
                 </div>
                 <div class="card-body">
-<<<<<<< HEAD
-                    <form action="{{route(user.reg')}}" method="post">
-                    @csrf
-=======
                     <form action="{{route('user.reg')}}" method="post">
                         @csrf
->>>>>>> e6e5d22934291511dce989b68e90c46c244a6216
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
                             <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
