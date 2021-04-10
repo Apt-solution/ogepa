@@ -23,18 +23,6 @@ class ClientController extends Controller
     {
         return view('index');
     }
-
-    public function addClient(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required|string|min:3',
-            'last_name' => 'required|string|min:3',
-            'address' => 'required|string|min:5',
-            'phone' => 'required|string|min:11',
-            'lga' => 'required|string|min:11',
-        ]);
-        $client = $this->clientService->addNewClient($request->all());
-    }
     
     public function addUser()
     {
@@ -43,15 +31,7 @@ class ClientController extends Controller
 
     public function regClient(FormValidationRequest $request)
     {
-        $data = array(
-            'first_name' => $request->input('first_name'),
-            'last_name'  => $request->input('last_name'),
-            'phone'      => $request->input('phone'),
-            'email'      => $request->input('email'),
-            'state'      => $request->input('state'),
-            'address'    => $request->input('address')
-        );
-        User::create($data);
+        $this->clientService->addNewClient($request->all());
         return redirect()->back()->with('status', 'User Account Created');
     }
 

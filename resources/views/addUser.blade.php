@@ -1,19 +1,16 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="https://cdnjs.com/libraries/select2">
-<link rel="stylesheet" href="https://cdnjs.com/libraries/select2-bootstrap-css">
-<link rel="stylesheet" href="https://cdnjs.com/libraries/select2?ref=driverlayer.com/web">
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-$(document).ready(function() {
-    $.noConflict();
-    $('#js-example-basic-single').select2({
-        theme: "bootstrap"
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
     });
-});
 </script>
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
+<<<<<<< HEAD
                 @if(Session::has('status'))
                     <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
                         <strong>Account Created</strong>
@@ -21,39 +18,58 @@ $(document).ready(function() {
                     </div>
                 @endif
             <div class="card elevation-3">
+=======
+            @if(Session::has('status'))
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong>Account Created</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            <div class="card">
+>>>>>>> e6e5d22934291511dce989b68e90c46c244a6216
                 <div class="card-header bg-success">
                     <h5 class="card-title">Account Creation</h5>
                 </div>
                 <div class="card-body">
+<<<<<<< HEAD
                     <form action="{{route(user.reg')}}" method="post">
                     @csrf
+=======
+                    <form action="{{route('user.reg')}}" method="post">
+                        @csrf
+>>>>>>> e6e5d22934291511dce989b68e90c46c244a6216
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
-                            <input type="text" name="first_name" class="form-control" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
-                        @error('first_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('first_name')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
-                        @error('last_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('last_name')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input type="text" name="phone" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
-                        @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Email Address</label>
-                            <input type="text" name="email" class="form-control" placeholder="emailaddress@domain.com" aria-label="lname" aria-describedby="basic-addon1">
+                            <label class="input-group-text" id="basic-addon1">Client Type</label>
+                            <select name="client_type" class="form-select" id="">
+                                <option>residential</option>
+                                <option>indestrial</option>
+                                <option>commercial</option>
+                                <option>medical</option>
+                            </select>
                         </div>
-                        @error('email')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
-                            <select name="state" width="15%" class="form-select" >
+                            <select name="lga" width="15%" class="form-select">
                                 <option selected>Choose...</option>
                                 <option value="Abeokuta_North">Abeokuta_North</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
@@ -76,13 +92,13 @@ $(document).ready(function() {
                                 <option value="Yewa_South">Yewa_South</option>
                             </select>
                         </div>
-                        @error('state')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('state')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text">Address</label>
-                            <textarea name="address" class="form-control" aria-label="With textarea"></textarea>
+                            <textarea name="address" class="form-control" aria-label="With textarea">{{ old('address') }}</textarea>
                         </div>
-                        @error('address')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('address')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <button class="btn btn-success float-right">ADD NEW USER</button>
                     </form>

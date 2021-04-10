@@ -26,9 +26,9 @@ class FormValidationRequest extends FormRequest
         return [
             'first_name' => ['required','string'],
             'last_name'  => ['required','string'],
-            'phone' => ['required','digits:11', 'unique:users,phone'],
-            'email' => ['required','string', 'unique:users,email'],
-            'state' => ['required'],
+            'phone' => ['required','digits:11'],
+            'lga' => ['required'],
+            'client_type' => ['required'],
             'address' => ['required','string']
         ];
     }
