@@ -14,7 +14,8 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
-                    <th>Email</th>
+                    <th>User No</th>
+                    <th>Type</th>
                     <th>Local Govt</th>
                     <th>Address</th>
                     <th>Action</th>
@@ -39,7 +40,8 @@ $(document).ready(function(){
             {data: 'first_name', name: 'first_name'},
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
-            {data: 'email', name: 'email'},
+            {data: 'ogwema_ref', name: 'ogwema_ref'},
+            {data: 'client_type', name: 'client_type'},
             {data: 'lga', name: 'lga'},
             {data: 'address', name: 'address'},
             {

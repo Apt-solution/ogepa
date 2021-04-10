@@ -21,6 +21,8 @@ class ClientController extends Controller
 
     public function allUser()
     {
+        $data = User::with('clientType')->get();
+        return $data;
         return view('index');
     }
     
