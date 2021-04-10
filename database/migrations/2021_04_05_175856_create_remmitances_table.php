@@ -17,7 +17,7 @@ class CreateRemmitancesTable extends Migration
             $table->id();
             $table->integer('user_id')->unique();
             $table->decimal('amount_to_pay', 12, 2);
-            $table->date('month_due');
+            $table->integer('month_due');
             $table->integer('admin_id');
             $table->timestamps();
         });

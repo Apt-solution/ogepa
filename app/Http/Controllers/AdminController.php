@@ -11,11 +11,10 @@ class AdminController extends Controller
     protected $adminService;
     public function __construct(
         AdminService $adminService
-    )
-    {
+    ) {
         $this->adminService = $adminService;
     }
-    
+
 
     public function automatedPrice()
     {
@@ -26,6 +25,15 @@ class AdminController extends Controller
     public function editAutomatedPrice(Request $request)
     {
         $this->adminService->updateAutomatedService($request->all());
-        return redirect()->back()->with('success', 'amount update successfully');   
+        return redirect()->back()->with('success', 'amount update successfully');
+    }
+
+    public function setMonthlyPrice()
+    {
+        $allUser = $this->adminService->userMonthlyPrice();
+        return $allUser;
+        // foreach($allUser as $allUsers){
+        //     echo '<li>'. $allUsers->ogwema_ref . ' '. $allUsers->client_type.' '. $allUsers->clientType->monthly_payment .'</li>';
+        // }
     }
 }

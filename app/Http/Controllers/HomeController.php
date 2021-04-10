@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\AdminService;
 
 class HomeController extends Controller
 {
@@ -11,9 +12,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $adminService;
+    public function __construct(AdminService $adminService)
     {
         $this->middleware('auth');
+        $this->adminService = $adminService;
     }
 
     /**
@@ -23,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(\Auth::User()->role === 'admin'){
+            $this->adminService->userMonthlyPrice();
+        }
         return view('home');
     }
 }
