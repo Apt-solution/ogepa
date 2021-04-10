@@ -13,7 +13,7 @@
         @endif
 
         <div class="col-md-1"></div>
-        <table class="table table-striped col-md-10">
+        <table class="table table-striped table-bordered col-md-10">
             <tr>
                 <th>Client type</th>
                 <th>Monthly Billing</th>

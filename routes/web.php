@@ -38,5 +38,6 @@ Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
+    Route::get('/setMonthlyPrice', [AdminController::class, 'setMonthlyPrice'])->name('setMonthlyPrice');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
 });
