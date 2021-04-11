@@ -43,7 +43,7 @@ class ClientController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                            $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
-                           <a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Payment History" class="text-success"><i class="fas fa-history"></i></a>';
+                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="text-success"><i class="fas fa-eye"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -57,6 +57,12 @@ class ClientController extends Controller
     {
         $users = User::findorFail($id);
         return view('showUser', compact('users'));
+    }
+
+    public function ClientProfile($id)
+    {
+        $users = User::findorFail($id);
+        return view('userprofile', compact('users'));
     }
 
     public function UpdateClient(FormValidationRequest $request , $id)

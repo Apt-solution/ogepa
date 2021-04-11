@@ -33,6 +33,7 @@ Route::get('/index', [ClientController::class, 'index'])->name('users.index');
 Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
 Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
 Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
+Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
 
 
 
