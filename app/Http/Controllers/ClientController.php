@@ -42,11 +42,8 @@ class ClientController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-     
-                           $btn = '<a href="javascript:void(0)" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
-                                    <a href="javascript:void(0)" id="delUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete User" class="link-danger"><i class="fas fa-trash-alt"></i></a>
-                                    ';
-    
+                           $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class=""><i class="fas fa-edit"></i></a> |
+                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="text-success"><i class="fas fa-eye"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -62,15 +59,20 @@ class ClientController extends Controller
         return view('showUser', compact('users'));
     }
 
+    public function ClientProfile($id)
+    {
+        $users = User::findorFail($id);
+        return view('userprofile', compact('users'));
+    }
+
     public function UpdateClient(FormValidationRequest $request , $id)
     {
-        
         $user = User::findorFail($id);
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->phone = $request->input('phone');
-        $user->email = $request->input('email');
-        $user->state = $request->input('state');
+        $user->client_type = $request->input('client_type');
+        $user->lga = $request->input('lga');
         $user->address = $request->input('address');
         $user->save();
         return redirect()->back()->withInput()  

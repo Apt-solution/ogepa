@@ -26,8 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // setting payment every month
         if(\Auth::User()->role === 'admin'){
             $this->adminService->userMonthlyPrice();
+        }
+        // return user to user profile
+        if(\Auth::User()->role === 'user'){
+            return redirect('user_profile');
         }
         return view('home');
     }

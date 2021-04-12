@@ -30,10 +30,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition register-page">
+<body  style="background-color: mint; background-image:url({{asset('images/80.png')}}); background-repeat:no-repeat;background-size: contain; " class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ url('/home') }}"><img class="" src="{{asset('images/ogwama.png') }}" width="120" height="120" alt="OGWAMA LOGO"></a>
     </div>
 
     <div class="card">

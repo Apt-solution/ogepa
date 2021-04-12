@@ -42,7 +42,7 @@ class AdminService
             foreach ($allUser as $allUsers) {
                 $this->remmitance->create([
                     'user_id' => $allUsers->id,
-                    'amount_to_pay' => $allUsers->clientType->monthly_payment,
+                    'amount_to_pay' => $allUsers->clientType->monthly_payment + 15,
                     'month_due' => date('m'),
                     'admin_id' => 0
                 ]);

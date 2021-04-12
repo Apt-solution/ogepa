@@ -14,7 +14,7 @@ $(document).ready(function() {
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
-            <div class="card">
+            <div class="card elevation-3">
                 <div class="card-header bg-success">
                     <h5 class="card-title">Update user's data</h5>
                 </div>
@@ -41,16 +41,22 @@ $(document).ready(function() {
                         @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Email Address</label>
-                            <input type="text" class="form-control" name="email" value="{{ $users->email }}" placeholder="emailaddress@domain.com" aria-label="lname" aria-describedby="basic-addon1">
+                            <label class="input-group-text" id="basic-addon1">Client Type</label>
+                            <select name="client_type" class="form-select" id="">
+                                    <option selected value="{{$users->client_type}}">{{$users->client_type}}</option>
+                                    <option value="residential">Residential</option>
+                                    <option value="industrial">Industrial</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option  value="medical">Medical</option>
+                            </select>
                         </div>
-                        @error('email')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                        @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
-                            <select name="state" class="form-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
-                                <option value="Abeokuta_North">Abeokuta_North</option>
+                            <select name="lga" class="form-select" id="inputGroupSelect01">
+                                <option>Choose...</option>
+                                <option selected value="{{$users->lga}}">{{$users->lga}}</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
                                 <option value="Ado_Odo_Ota">Ado_Odo_Ota</option>
                                 <option value="Ewekoro">Ewekoro</option>
