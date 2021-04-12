@@ -6,10 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
-<<<<<<< HEAD
 use App\Http\Controllers\UserController;
-=======
->>>>>>> 23a47645bf5f76a1fce5a2150364b83632e8d836
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -37,24 +34,14 @@ Route::get('/index', [ClientController::class, 'index'])->name('users.index');
 Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
 Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
 Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
-<<<<<<< HEAD
-=======
-Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
->>>>>>> 23a47645bf5f76a1fce5a2150364b83632e8d836
 
 
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
-<<<<<<< HEAD
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
 });
 
 Route::middleware(['user'])->group(function () {
     Route::get('user_profile', [UserController::class, 'userProfile'])->name('user_profile');
 });
-=======
-    Route::get('/setMonthlyPrice', [AdminController::class, 'setMonthlyPrice'])->name('setMonthlyPrice');
-    Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
-});
->>>>>>> 23a47645bf5f76a1fce5a2150364b83632e8d836
