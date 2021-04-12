@@ -15,7 +15,7 @@ class CreateRemmitancesTable extends Migration
     {
         Schema::create('remmitances', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unique();
+            $table->integer('user_id');
             $table->decimal('amount_to_pay', 12, 2);
             $table->integer('month_due');
             $table->integer('admin_id');
