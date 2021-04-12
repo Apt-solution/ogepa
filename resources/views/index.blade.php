@@ -53,14 +53,6 @@ $(document).ready(function(){
         ]
     });
 
-    $('body').on('click', '#editUser',function(){
-            
-    }); 
-
-    $('body').on('click', '#delUser',function(){
-        
-    }); 
-
 });
 </script>
 @endsection

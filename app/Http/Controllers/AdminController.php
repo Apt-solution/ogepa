@@ -28,4 +28,5 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'amount update successfully');
     }
 
+    
 }

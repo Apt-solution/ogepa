@@ -31,10 +31,10 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition login-page">
+<body style="background-color: mint; background-image:url({{asset('images/80.png')}}); background-repeat:no-repeat;background-size:contain;" class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ url('/home') }}"><img class="" src="{{asset('images/ogwama.png') }}" width="120" height="120" alt="OGWAMA LOGO"></a>
     </div>
 
     <!-- /.login-logo -->
