@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\AdminService;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -27,13 +28,22 @@ class HomeController extends Controller
     public function index()
     {
         // setting payment every month
-        if(\Auth::User()->role === 'admin'){
+        if (\Auth::User()->role === 'admin') {
             $this->adminService->userMonthlyPrice();
         }
         // return user to user profile
-        if(\Auth::User()->role === 'user'){
+        if (\Auth::User()->role === 'user') {
             return redirect('user_profile');
         }
-        return view('home');
+        return view('home'); {
+            $residential = User::where('client_type', 'residential')->count();
+            $commercial = User::where('client_type', 'commercial')->count();
+            $industrial = User::where('client_type', 'industrial')->count();
+            $medical = User::where('client_type', 'medical')->count();
+            if (\Auth::User()->role === 'admin') {
+                $this->adminService->userMonthlyPrice();
+            }
+            return view('home', compact(['residential', 'commercial', 'industrial', 'medical']));
+        }
     }
 }

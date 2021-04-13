@@ -55,11 +55,47 @@ class UserService
 
     private function totalPayments(int $user_id)
     {
-        $totalPayments = $this->payment->where('user_id', $user_id)->sum('amount');
+        $totalPayments = $this->payment->where('user_id', $user_id)->where('status', 'successful')->sum('amount');
         if(!$totalPayments){
             return 0;
         }
         return $totalPayments;
+    }
+
+    public function confirmPayment(array $credentials)
+    {
+        $ref = $this->getPaymentRef();
+        return $this->payment->create([
+            'user_id' => \Auth::User()->id,
+            'amount' => $credentials['amount'],
+            'bank_charges' => $credentials['charges'],
+            'ref' => $ref
+        ]);
+    }
+
+    private function getPaymentRef()
+    {
+        $code = rand(1111111, 9999999);
+        $chk = $this->payment->where('ref', $code)->first();
+        if($chk){
+            $this->getPaymentRef();
+        }
+        return $code;
+    }
+
+    public function getPaymentDetails()
+    {
+        $user_id = \Auth::User()->id;
+        return $this->payment->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+    }
+
+    public function updatePayment(array $data)
+    {
+        return $this->payment->where('ref', $data['ref'])
+        ->update([
+            'paystack_ref' => $data['paystack_ref'],
+            'status' => 'successful'
+        ]);
     }
 
 }

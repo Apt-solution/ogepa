@@ -6,7 +6,7 @@
             <h4 id="ed" class="lead">User's Data</h4>
             <hr>
             <div class="mb-2">
-                <a href="{{ URL::to('/addUser') }}" class="btn btn-success">Add new User</a>
+                <a href="{{ URL::to('/addUser') }}" class="btn btn-success btn-flat rounded">Add new User</a>
             </div>
             <table class="table table-bordered data-table text-center" style="width:100%">
                 <thead>

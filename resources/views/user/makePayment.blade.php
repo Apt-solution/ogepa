@@ -4,9 +4,6 @@
 <div class="container">
     <div class="row">
 
-        @if(Session::has('success'))
-        <div class="alert alert-success">{{ Session::get('success') }}</div>
-        @endif
 
         <div class="page-content page-container" id="page-content">
             <div class="padding">
@@ -27,43 +24,31 @@
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">Address</p>
-                                                <h6 class="text-muted f-w-400">{{ $data['user_details']->address }}</h6>
+                                                <p class="m-b-10 f-w-600">Amount</p>
+                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($payment->amount, 2) }}</h6>
                                             </div>
                                             <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">Local Govt.</p>
-                                                <h6 class="text-muted f-w-400">{{ $data['user_details']->lga }}</h6>
+                                                <p class="m-b-10 f-w-600">Bank Charges</p>
+                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($payment->bank_charges, 2) }}</h6>
                                             </div>
                                         </div>
-                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Billing</h6>
+                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Total payment: &#8358; {{ number_format(($total = $payment->amount + $payment->bank_charges), 2) }}</h6>
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">{{ date('M-Y') }} Billing</p>
-                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['current_billing'], 2) }}</h6>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">Total Due</p>
-                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['total_due'], 2) }}</h6>
-                                            </div>
-                                        </div>
-                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Make Payment</h6>
-                                        <div class="row">
-                                            <input type="button" name="answer" value="MAKE A PAYMENT" onclick="showDiv()" />
-                                            <div id="welcomeDiv" style="display:none;" class="answer_list">
-                                                <p>&nbsp;</p>
-                                                <form method="POST" action="{{ route('confirmPay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
-                                                    @csrf
-                                                    <input type="number" id="amount-entered" class="form-control" placeholder="enter amount" min="500" required>
-                                                    <input type="hidden" name="amount" id="amount">
-                                                    <input type="hidden" name="charges" id="charges">
-                                                    <input type="hidden" name="total_due" id="total_due">
+                                            <p>&nbsp;</p>
+                                            <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                                <input type="hidden" name="email" value="yd4u2c@yahoo.com"> {{-- required --}}
+                                                <input type="hidden" name="orderID" value="345">
+                                                <input type="hidden" name="amount" value="{{ ($total) * 100 }}"> {{-- required in kobo --}}
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input type="hidden" name="currency" value="NGN">
+                                                <input type="hidden" name="metadata" value="{{ json_encode($array = ['amount_paid' => $total, 'ref' => $payment->ref]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                                                <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+                                                {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 
+                                                <input type="submit" id="payment-btn" class="btn btn-success btn-block" value="PAY {{ $total }}">
 
-                                                    <input type="submit" class="btn btn-success btn-block" value="CONTINUE TO PAY">
+                                            </form>
 
-                                                </form>
-
-                                            </div>
                                         </div>
                                         <ul class="social-link list-unstyled m-t-40 m-b-10">
                                             <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
@@ -79,6 +64,34 @@
             </div>
         </div>
 
+        <!-- <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+            <div class="row" style="margin-bottom:40px;">
+                <div class="col-md-8 col-md-offset-2">
+                    <p>
+                    <div>
+                        Lagos Eyo Print Tee Shirt
+                        ₦ 2,950
+                    </div>
+                    </p>
+                    <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
+                    <input type="hidden" name="orderID" value="345">
+                    <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
+                    <input type="hidden" name="quantity" value="3">
+                    <input type="hidden" name="currency" value="NGN">
+                    <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+                    {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
+
+                    <p>
+                        <input class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
+                        <!-- <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
+                </button> ->
+                    </p>
+                </div>
+            </div>
+        </form> -->
     </div>
 </div>
 <script>
