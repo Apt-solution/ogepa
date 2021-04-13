@@ -46,11 +46,30 @@
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Make Payment</h6>
                                         <div class="row">
                                             <input type="button" name="answer" value="MAKE A PAYMENT" onclick="showDiv()" />
-                                            <div id="welcomeDiv" style="display:none;" class="answer_list"> 
+                                            <div id="welcomeDiv" style="display:none;" class="answer_list">
+                                                <p>&nbsp;</p>
                                                 <form action="">
-                                                @csrf
-                                                <input type="number" class="form-control" placeholder="enter amount" min="500" required>
+                                                    @csrf
+                                                    <input type="number" id="amount-entered" class="form-control" placeholder="enter amount" min="500" required>
+                                                    <input type="hidden" name="amount" id="amount">
+                                                    <input type="hidden" name="charges" id="charges">
+                                                    <input type="hidden" name="total_due" id="total_due">
+                                                    <!-- setting the data out --><br>
+                                                    <span>Bank Charges: </span><b> &#8358; <span id="charges_span"></span></b><br>
+                                                    <span>Total Payment: </span><b> &#8358; <span id="total_payment"></span></b><br>
+                                                
+                                                <input type="submit" id="payment-btn" class="btn btn-success btn-block" value="PAY">
+
                                                 </form>
+
+
+
+
+
+
+
+
+                                                
                                             </div>
                                         </div>
                                         <ul class="social-link list-unstyled m-t-40 m-b-10">
@@ -67,12 +86,53 @@
             </div>
         </div>
 
+        <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+    <div class="row" style="margin-bottom:40px;">
+        <div class="col-md-8 col-md-offset-2">
+            <p>
+                <div>
+                    Lagos Eyo Print Tee Shirt
+                    ₦ 2,950
+                </div>
+            </p>
+            <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
+            <input type="hidden" name="orderID" value="345">
+            <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
+            <input type="hidden" name="quantity" value="3">
+            <input type="hidden" name="currency" value="NGN">
+            <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+            {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
+
+            <p>
+                <input class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
+                    <!-- <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
+                </button> -->
+            </p>
+        </div>
+    </div>
+</form>
     </div>
 </div>
 <script>
-                                                function showDiv() {
-                                                    document.getElementById('welcomeDiv').style.display = "block";
-                                                }
-                                            </script>
+    function showDiv() {
+        document.getElementById('welcomeDiv').style.display = "block";
+    }
+
+    $("#amount-entered").keyup(function() {
+        amount = $("#amount-entered").val();
+        // getting paystack amount and 15 naira pay
+        charges = (amount * 0.015) + 20;
+        total_due = parseInt(amount) + parseInt(charges);
+        $("#amount").val(amount)
+        $("#charges").val(charges)
+        $("#total_due").val(total_due)
+        $("#charges_span").text(charges)
+        $("#total_payment").text(total_due)
+        $("#payment-btn").val('PAY ' + total_due)
+        // console.log($("#amount-entered").val());
+    });
+</script>
 @endsection
