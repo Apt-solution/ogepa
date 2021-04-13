@@ -3,7 +3,7 @@
         <img src="{{asset('images/ogwama.png') }}"
              alt="OGEPA Logo"
              class="brand-image img-circle">
-        <span class="brand-text font-weight-light">OGEPA ADMIN</span>
+        <span class="brand-text font-weight-light">OGWAMA ADMIN</span>
     </a>
 
     <div class="sidebar">
