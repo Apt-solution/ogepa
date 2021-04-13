@@ -51,10 +51,10 @@
                     <input type="text"
                            name="email"
                            value="{{ old('email') }}"
-                           placeholder="Username"
+                           placeholder="Phone Number"
                            class="form-control @error('email') is-invalid @enderror">
                     <div class="input-group-append">
-                        <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                        <div class="input-group-text"><span class="fas fa-phone"></span></div>
                     </div>
                     @error('email')
                     <span class="error invalid-feedback">{{ $message }}</span>
