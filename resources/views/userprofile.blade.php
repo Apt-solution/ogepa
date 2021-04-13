@@ -28,7 +28,7 @@
                                     <h6>
                                         {{ ucwords($users->client_type) }} User
                                     </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                    <p class="proile-rating">USER'S ID : <span>{{ $users->ogwema_ref }}</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -53,7 +53,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>User Id</label>
+                                                <label>User Id:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ $users->ogwema_ref }}</p>
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Client Type</label>
+                                                <label>Client Type:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ ucwords($users->client_type) }}</p>
@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Name</label>
+                                                <label>fullname:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ $users->first_name }} {{ $users->last_name }}</p>
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Phone</label>
+                                                <label>Phone:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ $users->phone }}</p>
@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Local Govt</label>
+                                                <label>Local Govt:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ ucwords($users->lga) }}</p>
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Address</label>
+                                                <label>Address:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ $users->address }}</p>
@@ -103,34 +103,34 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Last Payment:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
+                                                <p>2000</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Total Projects</label>
+                                                <label>Amount Owed:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>230</p>
+                                                <p>400</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>English Level</label>
+                                                <label>Amount to pay:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                                <p>2000</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Total amount to pay:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>2400</p>
                                             </div>
                                         </div>
                                         <div class="row">

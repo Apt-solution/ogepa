@@ -49,6 +49,8 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['user'])->group(function () {
     Route::get('user_profile', [UserController::class, 'userProfile'])->name('user_profile');
+    Route::get('makePayment', [UserController::class, 'makePayment']);
+    Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });

@@ -9,6 +9,15 @@ class Payment extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'user_id',
+        'amount',
+        'bank_charges',
+        'ref',
+        'paystack_ref',
+        'status',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\User');

@@ -22,4 +22,25 @@ class UserController extends Controller
         // return $data;
         return view('user.profile')->with('data', $data);
     }
+
+    public function confirmPay(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|integer|min:500'
+        ]);
+        $this->userService->confirmPayment($request->all());
+        return redirect('makePayment');
+    }
+
+    public function makePayment()
+    {
+        $data = $this->userService->getUserProfile();
+        $payment = $this->userService->getPaymentDetails();
+        return view('user.makePayment')->with('data', $data)->with('payment', $payment);
+    }
+
+    public function updatePayment(array $data)
+    {
+        dd($data);
+    }
 }
