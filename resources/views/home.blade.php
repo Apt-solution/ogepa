@@ -62,39 +62,21 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 
-<div class="col-md-12">
-    <div class="col text-center col-md-3">
-        <div class="card p-2 elevation-0">
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-credit-card p-3"></i></button>
-                </div>
-                <div class="col">
-                    <h5 class="lead">{{ date('M-Y') }} Remmitance</h5>
-                    <span style="margin-right: 40px; font-weight:bolder"> &#8358;{{ number_format($remmitance, 2) }}</span>
-=======
-    <hr>
-    <div class="row">
-        <div class="col-4">
-        <div class="card p-2 elevation-0">
+    <div class="col-md-12">
+        <div class="col text-center col-md-3">
+            <div class="card p-2 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-money-bill p-3"></i></button>
+                        <button class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-credit-card p-3"></i></button>
                     </div>
                     <div class="col">
-                        <h5 class="lead">Accumulation of Money paid for this month</h5>
-                        <span style="margin-right: 40px; font-weight:bolder">&#8358;{{ $amount }}</span> 
+                        <h5 class="lead">{{ date('M-Y') }} Remmitance</h5>
+                        <span style="margin-right: 40px; font-weight:bolder"> &#8358;{{ number_format($remmitance, 2) }}</span>
                     </div>
->>>>>>> 6cea9cfe2c5bf99943d462ceb7719127168a101b
                 </div>
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    </div>
-=======
->>>>>>> 6cea9cfe2c5bf99943d462ceb7719127168a101b
 </div>
 @endsection

@@ -46,13 +46,16 @@ Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('u
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
+    Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
+    Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
+    Route::get('getSearchPayment', [AdminController::class, 'getSearchPayment']);
 });
 
 Route::middleware(['user'])->group(function () {
     Route::get('user_profile', [UserController::class, 'userProfile'])->name('user_profile');
     Route::get('makePayment', [UserController::class, 'makePayment']);
-    Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
+   Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });

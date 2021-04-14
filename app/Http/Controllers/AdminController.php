@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\AdminService;
+use Session;
 
 class AdminController extends Controller
 {
@@ -28,5 +29,24 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'amount update successfully');
     }
 
-    
+    public function payments()
+    {
+        return view('admin.searchPayments');
+    }
+
+    public function searchPayment(Request $request)
+    {
+        $request->validate([
+            'from' => 'required',
+            'to' => 'required',
+        ]);
+        Session::put('request', $request->all());
+        return redirect('getSearchPayment');
+    }
+
+    public function getSearchPayment()
+    {
+        $payments = $this->adminService->getSearchPayment();
+        return view('admin.payment')->with('payments', $payments);
+    }
 }
