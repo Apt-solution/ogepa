@@ -28,12 +28,5 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'amount update successfully');
     }
 
-    public function setMonthlyPrice()
-    {
-        $allUser = $this->adminService->userMonthlyPrice();
-        return $allUser;
-        // foreach($allUser as $allUsers){
-        //     echo '<li>'. $allUsers->ogwema_ref . ' '. $allUsers->client_type.' '. $allUsers->clientType->monthly_payment .'</li>';
-        // }
-    }
+    
 }

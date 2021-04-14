@@ -48,13 +48,13 @@
                 @csrf
 
                 <div class="input-group mb-3">
-                    <input type="email"
+                    <input type="text"
                            name="email"
                            value="{{ old('email') }}"
-                           placeholder="Email"
+                           placeholder="Phone Number"
                            class="form-control @error('email') is-invalid @enderror">
                     <div class="input-group-append">
-                        <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                        <div class="input-group-text"><span class="fas fa-phone"></span></div>
                     </div>
                     @error('email')
                     <span class="error invalid-feedback">{{ $message }}</span>
@@ -64,7 +64,7 @@
                 <div class="input-group mb-3">
                     <input type="password"
                            name="password"
-                           placeholder="Password"
+                           placeholder="Ogwama Code"
                            class="form-control @error('password') is-invalid @enderror">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -92,12 +92,12 @@
                 </div>
             </form>
 
-            <p class="mb-1">
+            <!-- <p class="mb-1">
                 <a href="{{ route('password.request') }}">I forgot my password</a>
             </p>
             <p class="mb-0">
                 <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-            </p>
+            </p> -->
         </div>
         <!-- /.login-card-body -->
     </div>

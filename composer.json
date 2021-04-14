@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "3.0",
         "laravelcollective/html": "^6.2",
+        "unicodeveloper/laravel-paystack": "^1.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

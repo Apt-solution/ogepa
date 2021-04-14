@@ -15,12 +15,12 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unique();
-            $table->decimal('ogwema_amount', 12, 2);
+            $table->integer('user_id');
+            $table->decimal('amount', 12, 2);
             $table->decimal('bank_charges', 4, 2);
             $table->string('ref');
-            $table->string('paystack_ref');
-            $table->enum('status', ['pending', 'successful']);
+            $table->string('paystack_ref')->nullable();
+            $table->enum('status', ['pending', 'successful'])->default('pending');
             $table->timestamps();
         });
     }
