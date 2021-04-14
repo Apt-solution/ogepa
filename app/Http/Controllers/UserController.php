@@ -39,8 +39,5 @@ class UserController extends Controller
         return view('user.makePayment')->with('data', $data)->with('payment', $payment);
     }
 
-    public function updatePayment(array $data)
-    {
-        dd($data);
-    }
+    
 }

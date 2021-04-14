@@ -6,6 +6,7 @@ use App\Models\ClientType;
 use App\Models\User;
 use App\Models\remmitance;
 use App\Models\Payment;
+use Session;
 
 class AdminService
 {
@@ -57,5 +58,13 @@ class AdminService
     {
         return $this->payment->whereMonth('created_at', date('m'))
         ->whereYear('created_at', date('Y'))->sum('amount');
+    }
+
+    public function getSearchPayment()
+    {
+        $request = Session::get('request');
+        return $this->payment->whereDate('created_at', '>=', $request['from'])
+        ->whereDate('created_at', '<=', $request['to'])
+        ->where('status', 'successful')->get();
     }
 }
