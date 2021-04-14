@@ -13,7 +13,7 @@
 </script>
 <div class="container bg-white" style="height: 100%;">
             <div class="text-center bg-success rounded mb-3 p-3">
-                <h5 id="change">User's Profile</h5>
+                <h5 id="change" style="font-family: tahoma;">User's Profile</h5>
             </div>
             <form>
                 <div class="row">
