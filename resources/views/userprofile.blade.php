@@ -1,8 +1,21 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @section('content')
-<div class="container emp-profile">
-            <form method="post">
+<script>
+    $(document).ready(function(){
+        $('#profile-tab').click(function(){
+             $('#change').text("User's Payment History");   
+        });
+        $('#home-tab').click(function(){
+             $('#change').text("User's Profile");   
+        });
+    });
+</script>
+<div class="container bg-white" style="height: 100%;">
+            <div class="text-center bg-success rounded mb-3 p-3">
+                <h5 id="change">User's Profile</h5>
+            </div>
+            <form>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -133,18 +146,9 @@
                                                 <p>2400</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
+                                        <button disabled class="btn btn-default btn-flat">Print Receipt</button>
                                     </div>
                                 </div>
                             </div>
