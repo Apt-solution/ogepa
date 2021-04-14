@@ -62,5 +62,21 @@
             </div>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-4">
+        <div class="card p-2 elevation-0">
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-money-bill p-3"></i></button>
+                    </div>
+                    <div class="col">
+                        <h5 class="lead">Accumulation of Money paid for this month</h5>
+                        <span style="margin-right: 40px; font-weight:bolder">{{ $amount }}</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

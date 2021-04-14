@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\AdminService;
 use App\Models\User;
+use App\Models\Payment;
+use Carbon\Carbon;
+use DB;
 
 class HomeController extends Controller
 {
@@ -42,6 +45,9 @@ class HomeController extends Controller
         if (\Auth::User()->role === 'admin') {
             $this->adminService->userMonthlyPrice();
         }
-        return view('home', compact(['residential', 'commercial', 'industrial', 'medical']));
+       $amount = DB::table('payments')->sum('ogwema_amount');
+       return view('home', compact(['residential', 'commercial', 'industrial', 'medical', 'amount']));
     }
+
+
 }
