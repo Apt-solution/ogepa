@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\AdminService;
 use App\Models\User;
+use App\Models\Payment;
+use Carbon\Carbon;
+use DB;
 
 class HomeController extends Controller
 {
@@ -39,9 +42,13 @@ class HomeController extends Controller
         $commercial = User::where('client_type', 'commercial')->count();
         $industrial = User::where('client_type', 'industrial')->count();
         $medical = User::where('client_type', 'medical')->count();
+        $monthRemmitance = $this->adminService->getMonthRemmitance();
+        // dd($monthRemmitance);
         if (\Auth::User()->role === 'admin') {
             $this->adminService->userMonthlyPrice();
         }
-        return view('home', compact(['residential', 'commercial', 'industrial', 'medical']));
+        return view('home', compact(['residential', 'commercial', 'industrial', 'medical']))->with('remmitance', $monthRemmitance);
     }
+
+
 }

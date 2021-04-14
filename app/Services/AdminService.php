@@ -5,20 +5,23 @@ namespace App\Services;
 use App\Models\ClientType;
 use App\Models\User;
 use App\Models\remmitance;
+use App\Models\Payment;
 
 class AdminService
 {
 
-    protected $clientType, $user, $remmitance;
+    protected $clientType, $user, $remmitance, $payment;
 
     public function __construct(
         ClientType $clientType,
         User $user,
-        remmitance $remmitance
+        remmitance $remmitance,
+        Payment $payment
     ) {
         $this->clientType = $clientType;
         $this->user = $user;
         $this->remmitance = $remmitance;
+        $this->payment = $payment;
     }
 
     public function getAutomatedPrice()
@@ -48,5 +51,11 @@ class AdminService
                 ]);
             }
         }
+    }
+
+    public function getMonthRemmitance()
+    {
+        return $this->payment->whereMonth('created_at', date('m'))
+        ->whereYear('created_at', date('Y'))->sum('amount');
     }
 }

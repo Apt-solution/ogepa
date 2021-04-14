@@ -30,6 +30,7 @@ class UserService
         $data['user_details'] = $this->user->where('id', $user_id)->first();
         $data['current_billing'] = $this->currentBilling($user_id);
         $data['total_due'] = $this->totalDue($user_id);
+        $data['paymentHistories'] = $this->paymentHistory($user_id);
         // dd($data);
         return $data;
     }
@@ -96,6 +97,12 @@ class UserService
             'paystack_ref' => $data['paystack_ref'],
             'status' => 'successful'
         ]);
+    }
+
+    public function paymentHistory(int $user_id)
+    {
+        // dd($user_id);
+        return $this->payment->where('user_id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
     }
 
 }
