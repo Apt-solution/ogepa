@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\AdminService;
 use App\Models\User;
+use App\Models\Payment;
+use Carbon\Carbon;
+use DB;
 
 class HomeController extends Controller
 {
@@ -46,4 +49,6 @@ class HomeController extends Controller
         }
         return view('home', compact(['residential', 'commercial', 'industrial', 'medical']))->with('remmitance', $monthRemmitance);
     }
+
+
 }
