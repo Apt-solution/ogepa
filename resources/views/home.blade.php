@@ -72,7 +72,7 @@
                     </div>
                     <div class="col">
                         <h5 class="lead">Accumulation of Money paid for this month</h5>
-                        <span style="margin-right: 40px; font-weight:bolder">{{ $amount }}</span> 
+                        <span style="margin-right: 40px; font-weight:bolder">&#8358;{{ $amount }}</span> 
                     </div>
                 </div>
             </div>
