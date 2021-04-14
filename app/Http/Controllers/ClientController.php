@@ -80,11 +80,4 @@ class ClientController extends Controller
 
     }
 
-    public function deleteClient($id)
-    {
-        $users = User::findOrFail($id);
-        $users->delete();
-        return redirect('/index')->with('status', 'User Deleted Successfully');
-    }
-
 }

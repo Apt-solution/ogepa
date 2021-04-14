@@ -7,16 +7,16 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                             @if($users->client_type == "residential")
-                            <img src="{{asset('images/residential.png') }}" alt=""/>
+                            <img src="{{asset('images/residential.jpeg') }}" alt=""/>
                             @endif
                             @if($users->client_type == "industrial")
-                            <img src="{{asset('images/industrial.jpg') }}" alt=""/>
+                            <img src="{{asset('images/industry.jpeg') }}" alt=""/>
                             @endif
                             @if($users->client_type == "commercial")
-                            <img src="{{asset('images/commercial.png') }}" alt=""/>
+                            <img src="{{asset('images/commercial.jpeg') }}" alt=""/>
                             @endif
                             @if($users->client_type == "medical")
-                            <img class="text-warning" src="{{asset('images/medical.png') }}" alt=""/>
+                            <img class="text-warning" src="{{asset('images/medical.jfif') }}" alt=""/>
                             @endif
                         </div>
                     </div>
