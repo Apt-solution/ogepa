@@ -5,6 +5,17 @@
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+        $('#industry').hide();
+        $('#client').change(function(){
+            var clientType = $(this).children("option:selected").val();
+            if(clientType == "Industrial" || clientType == "Medical" )
+            {
+                $('#industry').show();
+            }
+            else{
+                $('#industry').hide();
+            }
+        })
     });
 </script>
 <div class="container">
@@ -43,15 +54,21 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Client Type</label>
-                            <select name="client_type" class="form-select" id="">
-                                <option>Residential</option>
-                                <option>Industrial</option>
-                                <option>Commercial</option>
-                                <option>Medical</option>
+                            <select name="client_type" class="form-select" id="client">
+                                <option value="Residential">Residential</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Medical">Medical</option>
                             </select>
                         </div>
                         @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
+                        <div id="industry" class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1">Industry Name</label>
+                            <input type="text" name="industry" value="{{ old('industry') }}" class="form-control" placeholder="OGWAMA" aria-label="lname" aria-describedby="basic-addon1">
+                        </div>
+                        @error('industry')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+                        
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select name="lga" width="15%" class="form-select">
@@ -77,7 +94,7 @@
                                 <option value="Yewa_South">Yewa_South</option>
                             </select>
                         </div>
-                        @error('state')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+                        @error('lga')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text">Address</label>

@@ -31,7 +31,7 @@ class ClientService
             'lga' => $request['lga'],
             'client_type' => $request['client_type'],
         );
-        return$this->user->create($data);
+        return $this->user->create($data);
     }
 
     private function generateOgwemaRef()

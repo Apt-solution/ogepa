@@ -33,6 +33,10 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
+Route::get('/residential', [ClientController::class, 'residentialUser'])->name('residential.user');
+Route::get('/commercial', [ClientController::class, 'commercialUser'])->name('commercial.user');
+Route::get('/industrial', [ClientController::class, 'industryUser'])->name('industry.user');
+Route::get('/medical', [ClientController::class, 'medicalUser'])->name('medical.user');
 Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
 Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
 Route::get('/index', [ClientController::class, 'index'])->name('users.index');

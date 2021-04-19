@@ -5,15 +5,15 @@
 <div class="container">
     <div class="row">
         <div class="col-12 jumbotron bg-dark">
-            <h5>Welcome, Admin!</h5>
+            <h4>Welcome, Admin!</h4>
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
-        <div class="col text-center">
+        <div class="col-3 text-center">
             <div class="card p-1 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-success rounded p-4 btn-flat"><span class="material-icons p-3">apartment</span></button>
+                        <a href="{{ route('residential.user') }}" class="btn btn-success rounded p-4 btn-flat"><span class="material-icons p-3">apartment</span></a>
                     </div>
                     <div class="col">
                         <h5 class="lead">Residential</h5>
@@ -22,11 +22,11 @@
                 </div>
             </div>
         </div>
-        <div class="col text-center">
+        <div class="col-3 text-center">
             <div class="card p-1 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-info rounded p-4 btn-flat"><span class="material-icons p-3">business</span></button>
+                        <a href="{{ route('commercial.user') }}" class="btn btn-info rounded p-4 btn-flat"><span class="material-icons p-3">business</span></a>
                     </div>
                     <div class="col">
                         <h5 class="lead">Commercial</h5>
@@ -35,11 +35,11 @@
                 </div>
             </div>
         </div>
-        <div class="col text-center">
+        <div class="col-3 text-center">
             <div class="card p-2 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></button>
+                        <a href="{{ route('industry.user') }}" class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead">Industry</h5>
@@ -48,11 +48,11 @@
                 </div>
             </div>
         </div>
-        <div class="col text-center">
+        <div class="col-3 text-center">
             <div class="card p-2 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></button>
+                        <a href="{{ route('medical.user') }}" class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead">Medical</h5>
@@ -62,8 +62,7 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-12">
+    <div class="row">
         <div class="col text-center col-md-3">
             <div class="card p-2 elevation-0">
                 <div class="row">
