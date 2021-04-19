@@ -13,7 +13,7 @@
             <div class="card p-1 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('residential.user') }}" class="btn btn-success rounded p-4 btn-flat"><span class="material-icons p-3">apartment</span></a>
+                        <a href="{{ route('residential.user') }}" class="btn btn-success rounded p-4 btn-flat"><i class="fas fa-house-user p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead">Residential</h5>
@@ -26,7 +26,7 @@
             <div class="card p-1 elevation-0">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('commercial.user') }}" class="btn btn-info rounded p-4 btn-flat"><span class="material-icons p-3">business</span></a>
+                        <a href="{{ route('commercial.user') }}" class="btn btn-info rounded p-4 btn-flat"><i class="fas fa-store p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead">Commercial</h5>

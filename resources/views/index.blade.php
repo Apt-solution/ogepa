@@ -15,7 +15,6 @@
         <div class="col-12 mx-auto">
             <table class="table table-bordered all-user text-center" style="width:100%">
                 <thead class="bg-dark">
-                    <th>SN</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
@@ -36,7 +35,6 @@
         <div class="col-12 mx-auto">
             <table class="table table-bordered table-striped residential text-center" style="width:100%">
                 <thead class="bg-green">
-                    <th>SN</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
@@ -57,7 +55,6 @@
         <div class="col-12 mx-auto">
             <table class="table table-bordered commercial text-center" style="width:100%">
                 <thead class="bg-info">
-                    <th>SN</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
@@ -78,7 +75,6 @@
         <div class="col-12 mx-auto">
             <table class="table table-bordered industry text-center" style="width:100%">
                 <thead class="bg-warning">
-                    <th>SN</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
@@ -99,7 +95,6 @@
         <div class="col-12 mx-auto">
             <table class="table table-bordered medical text-center" style="width:100%">
                 <thead class="bg-danger">
-                    <th>SN</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
@@ -126,7 +121,6 @@ $(document).ready(function(){
         ajax: "{{ route('users.index') }}",
         columns: 
         [
-            {data: 'id', name: 'id'},
             {data: 'first_name', name: 'first_name'},
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
@@ -149,7 +143,6 @@ $(document).ready(function(){
         ajax: "{{ route('residential.user') }}",
         columns: 
         [
-            {data: 'id', name: 'id'},
             {data: 'first_name', name: 'first_name'},
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
@@ -172,7 +165,6 @@ $(document).ready(function(){
         ajax: "{{ route('commercial.user') }}",
         columns: 
         [
-            {data: 'id', name: 'id'},
             {data: 'first_name', name: 'first_name'},
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
@@ -196,7 +188,6 @@ $(document).ready(function(){
         ajax: "{{ route('industry.user') }}",
         columns: 
         [
-            {data: 'id', name: 'id'},
             {data: 'first_name', name: 'first_name'},
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
@@ -220,7 +211,6 @@ $(document).ready(function(){
         ajax: "{{ route('medical.user') }}",
         columns: 
         [
-            {data: 'id', name: 'id'},
             {data: 'first_name', name: 'first_name'},
             {data: 'last_name', name: 'last_name'},
             {data: 'phone', name: 'phone'},
