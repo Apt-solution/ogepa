@@ -8,7 +8,9 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DataTableController;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,13 +35,13 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
-Route::get('/residential', [ClientController::class, 'residentialUser'])->name('residential.user');
-Route::get('/commercial', [ClientController::class, 'commercialUser'])->name('commercial.user');
-Route::get('/industrial', [ClientController::class, 'industryUser'])->name('industry.user');
-Route::get('/medical', [ClientController::class, 'medicalUser'])->name('medical.user');
+Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
+Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
+Route::get('/industrial', [DataTableController::class, 'industryUser'])->name('industry.user');
+Route::get('/medical', [DataTableController::class, 'medicalUser'])->name('medical.user');
 Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
 Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
-Route::get('/index', [ClientController::class, 'index'])->name('users.index');
+Route::get('/index', [DataTableController::class, 'index'])->name('users.index');
 Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
 Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
 Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
