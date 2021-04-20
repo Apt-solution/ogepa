@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-3 text-center">
-            <div class="card p-2 elevation-0">
+            <div class="card p-1 elevation-0">
                 <div class="row">
                     <div class="col">
                         <a href="{{ route('industry.user') }}" class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></a>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="col-3 text-center">
-            <div class="card p-2 elevation-0">
+            <div class="card p-1 elevation-0">
                 <div class="row">
                     <div class="col">
                         <a href="{{ route('medical.user') }}" class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></a>
