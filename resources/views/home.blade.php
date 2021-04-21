@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12 jumbotron bg-dark">
+        <div class="col-12 jumbotron bg-dark" style="height: 20%;">
             <h4>Welcome, Admin!</h4>
         </div>
     </div>

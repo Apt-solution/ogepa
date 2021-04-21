@@ -29,9 +29,10 @@ class ChartService
     {
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Industrial Monthly Remmitance.')
-        ->addData('San Francisco', [6, 9, 3, 4, 10, 8])
+        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-        ->setHeight('200');
+        ->setHeight('200')
+        ->setColors(['#ffc63b']);
 
         return $chart;
     }
@@ -40,9 +41,10 @@ class ChartService
     {
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Medical Monthly Remmitance.')
-        ->addData('San Francisco', [6, 9, 3, 4, 10, 8])
+        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-        ->setHeight('200');
+        ->setHeight('200')
+        ->setColors(['#FF0000']);
 
         return $chart;
     }
@@ -51,9 +53,10 @@ class ChartService
     {
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Commercial Monthly Remmitance.')
-        ->addData('San Francisco', [6, 9, 3, 4, 10, 8])
+        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-        ->setHeight('200');
+        ->setHeight('200')
+        ->setColors(['#008080']);
 
         return $chart;
     }
@@ -62,9 +65,10 @@ class ChartService
     {
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Residential Monthly Remmitance.')
-        ->addData('San Francisco', [6, 9, 3, 4, 10, 8])
+        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-        ->setHeight('200');
+        ->setHeight('200')
+        ->setColors(['#008000']);
 
         return $chart;
     }
