@@ -9,8 +9,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\DataTableController;
+use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\VarDumper\Cloner\Data;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +67,17 @@ Route::middleware(['user'])->group(function () {
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });
+
+// chart controller
+
+// Route::get('/home', [ChartController::class, 'industrial']);
+
+Route::get('/chart', function () {
+    $chart = (new LarapexChart)->pieChart()
+        ->setTitle('Top 3 scorers of the team.')
+        ->setSubtitle('Season 2021.')
+        ->addData([40, 50, 30])
+        ->setLabels(['Player 7', 'Player 10', 'Player 9']);
+    
+    return view('chart', compact('chart'));
+}); 

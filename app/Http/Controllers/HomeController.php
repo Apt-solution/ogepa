@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\AdminService;
+use App\Services\ChartService;
 use App\Models\User;
 use App\Models\Payment;
 use Carbon\Carbon;
 use DB;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class HomeController extends Controller
 {
@@ -16,11 +18,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    protected $adminService;
-    public function __construct(AdminService $adminService)
+    protected $adminService, $chartService;
+    public function __construct(AdminService $adminService, ChartService $chartService)
     {
         $this->middleware('auth');
         $this->adminService = $adminService;
+        $this->chartService = $chartService;
+
     }
 
     /**
@@ -43,11 +47,15 @@ class HomeController extends Controller
         $industrial = User::where('client_type', 'industrial')->count();
         $medical = User::where('client_type', 'medical')->count();
         $monthRemmitance = $this->adminService->getMonthRemmitance();
-        // dd($monthRemmitance);
+        $industrialChart = $this->chartService->getIndustrialChart();
+        $medicalChart = $this->chartService->getMedicalChart();
+        $commercialChart = $this->chartService->getCommercialChart();
+        $residentialChart = $this->chartService->getResidentialChart();
+
         if (\Auth::User()->role === 'admin') {
             $this->adminService->userMonthlyPrice();
         }
-        return view('home', compact(['residential', 'commercial', 'industrial', 'medical']))->with('remmitance', $monthRemmitance);
+        return view('home', compact(['residential', 'commercial', 'industrial', 'medical', 'industrialChart', 'medicalChart', 'commercialChart', 'residentialChart']))->with('remmitance', $monthRemmitance);
     }
 
 
