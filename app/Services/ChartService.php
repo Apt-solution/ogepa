@@ -29,7 +29,7 @@ class ChartService
     {
 
         $chart = (new LarapexChart)->barChart()
-        ->setTitle('Industrial Monthly Remmitance.')
+        ->setTitle('Industrial Monthly Remmitance for ' . date('Y'))
         ->addData('Industrial', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
@@ -41,7 +41,7 @@ class ChartService
     public function getMedicalChart()
     {
         $chart = (new LarapexChart)->barChart()
-        ->setTitle('Medical Monthly Remmitance.')
+        ->setTitle('Medical Monthly Remmitance for ' . date('Y'))
         ->addData('Medical', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
@@ -53,7 +53,7 @@ class ChartService
     public function getCommercialChart()
     {
         $chart = (new LarapexChart)->barChart()
-        ->setTitle('Commercial Monthly Remmitance.')
+        ->setTitle('Commercial Monthly Remmitance for ' . date('Y'))
         ->addData('Commercial', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
@@ -66,7 +66,7 @@ class ChartService
     {
         $month = $this->getMonthRemmitance();
         $chart = (new LarapexChart)->barChart()
-        ->setTitle('Residential Monthly Remmitance.')
+        ->setTitle('Residential Monthly Remmitance for ' . date('Y'))
         ->addData('residential', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
