@@ -99,13 +99,23 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12 mx-auto">
+           <div class="card elevation-2">
+               <div class="card-header text-bold">Comparison between the category of users</div>
+               <div class="card-body">
+               {!! $allClientTypeChart->container() !!}
+               </div>
+           </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> 
 {{ $industrialChart->script() }}
 {{ $medicalChart->script() }}
 {{ $commercialChart->script() }}
 {{ $residentialChart->script() }}
-
+{{ $allClientTypeChart->script() }}
 @endsection
 
 <!-- <div class="row">

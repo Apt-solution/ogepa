@@ -51,11 +51,11 @@ class HomeController extends Controller
         $medicalChart = $this->chartService->getMedicalChart();
         $commercialChart = $this->chartService->getCommercialChart();
         $residentialChart = $this->chartService->getResidentialChart();
-
+        $allClientTypeChart = $this->chartService->allClientTypeChart();
         if (\Auth::User()->role === 'admin') {
             $this->adminService->userMonthlyPrice();
         }
-        return view('home', compact(['residential', 'commercial', 'industrial', 'medical', 'industrialChart', 'medicalChart', 'commercialChart', 'residentialChart']))->with('remmitance', $monthRemmitance);
+        return view('home', compact(['residential', 'commercial', 'industrial', 'medical', 'industrialChart', 'medicalChart', 'commercialChart', 'residentialChart', 'allClientTypeChart']))->with('remmitance', $monthRemmitance);
     }
 
 

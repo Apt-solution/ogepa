@@ -27,9 +27,10 @@ class ChartService
 
     public function getIndustrialChart()
     {
+
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Industrial Monthly Remmitance.')
-        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
+        ->addData('Industrial', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#ffc63b']);
@@ -41,7 +42,7 @@ class ChartService
     {
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Medical Monthly Remmitance.')
-        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
+        ->addData('Medical', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#FF0000']);
@@ -53,7 +54,7 @@ class ChartService
     {
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Commercial Monthly Remmitance.')
-        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
+        ->addData('Commercial', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#008080']);
@@ -63,9 +64,10 @@ class ChartService
 
     public function getResidentialChart()
     {
+        $month = $this->getMonthRemmitance();
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Residential Monthly Remmitance.')
-        ->addData('San Francisco', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
+        ->addData('residential', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#008000']);
@@ -73,6 +75,24 @@ class ChartService
         return $chart;
     }
 
+    public function allClientTypeChart()
+    {
+        $month = $this->getMonthRemmitance();
+        $chart = (new LarapexChart)->pieChart()
+        ->setTitle('Income Generated for '. date('M-Y'))
+        ->setSubtitle(date('M-Y'))
+        ->addData([1000, 2000, 3000, 500])
+        ->setLabels(['Residential', 'Commercial', 'Industrial', 'Medical'])
+        ->setHeight('300');
+
+        return $chart;
+    }
+
+    private function getMonthRemmitance()
+    {
+        return $this->payment->whereMonth('created_at', date('m'))
+        ->whereYear('created_at', date('Y'))->sum('amount');
+    }
 
 }
 
