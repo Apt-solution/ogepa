@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 text-center">
+        <div class="col-3  text-center">
             <div class="card p-1 elevation-1">
                 <div class="row">
                     <div class="col">
@@ -66,7 +66,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card elevation-2">
-                <div class="card-header text-left text-bold">Residential</div>
+                <div class="card-header text-left text-bold bg-success">Residential</div>
                 <div class="card-body">
                     {!! $residentialChart->container() !!}
                 </div>
@@ -74,7 +74,7 @@
         </div>
         <div class="col-md-6">
             <div class="card elevation-2">
-                <div class="card-header text-left text-bold">Commercial</div>
+                <div class="card-header text-left text-bold bg-teal">Commercial</div>
                 <div class="card-body">
                     {!! $commercialChart->container() !!}
                 </div>
@@ -84,7 +84,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card elevation-2">
-                <div class="card-header text-left text-bold">Industrial</div>
+                <div class="card-header text-left text-bold bg-warning">Industrial</div>
                 <div class="card-body">
                     {!! $industrialChart->container() !!}
                 </div>
@@ -92,7 +92,7 @@
         </div>
         <div class="col-md-6">
             <div class="card elevation-2">
-                <div class="card-header text-left text-bold">Medical</div>
+                <div class="card-header text-left text-bold bg-danger">Medical</div>
                 <div class="card-body">
                     {!! $medicalChart->container() !!}
                 </div>

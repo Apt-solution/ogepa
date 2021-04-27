@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mx-auto">
-            <h4 id="ed" class="lead">User's Data</h4>
+            <h4 id="ed" onclick="sayHello()" class="lead">User's Data</h4>
             <hr>
             <div class="mb-2">
                 <a href="{{ URL::to('/addUser') }}" class="btn btn-success btn-flat rounded">Add new User</a>
@@ -95,6 +95,7 @@
         <div class="col-12 mx-auto">
             <table class="table table-bordered medical text-center" style="width:100%">
                 <thead class="bg-danger">
+                   
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone</th>
