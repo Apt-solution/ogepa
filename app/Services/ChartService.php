@@ -8,26 +8,31 @@ use App\Models\remmitance;
 use App\Models\Payment;
 use Session;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use App\Services\ResidentMonRemitService;
+use App\Services\YearlyRemitService;
 
 class ChartService
 {
-    protected $clientType, $user, $remmitance, $payment;
+    protected $user, $remmitance, $payment, $monthly, $yearly;
 
     public function __construct(
         ClientType $clientType,
         User $user,
-        remmitance $remmitance,
-        Payment $payment
+        Payment $payment,
+        ResidentMonRemitService $resident,
+        YearlyRemitService $yearly
     ) {
         $this->clientType = $clientType;
         $this->user = $user;
-        $this->remmitance = $remmitance;
         $this->payment = $payment;
+        $this->resident = $resident;
+        $this->yearly = $yearly;
+
     }
 
     public function getIndustrialChart()
     {
-
+       
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Industrial Monthly Remmitance for ' . date('Y'))
         ->addData('Industrial', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
@@ -46,7 +51,7 @@ class ChartService
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#FF0000']);
-
+        
         return $chart;
     }
 
@@ -64,10 +69,11 @@ class ChartService
 
     public function getResidentialChart()
     {
-        $month = $this->getMonthRemmitance();
+        $jan = $this->resident->getJan();
+        $feb = $this->resident->getFeb();
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Residential Monthly Remmitance for ' . date('Y'))
-        ->addData('residential', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
+        ->addData('residential', [$jan, $feb, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#008000']);
@@ -77,21 +83,18 @@ class ChartService
 
     public function allClientTypeChart()
     {
-        $month = $this->getMonthRemmitance();
-        $chart = (new LarapexChart)->pieChart()
-        ->setTitle('Income Generated for '. date('M-Y'))
-        ->setSubtitle(date('M-Y'))
-        ->addData([1000, 2000, 3000, 500])
-        ->setLabels(['Residential', 'Commercial', 'Industrial', 'Medical'])
-        ->setHeight('300');
+        $residential = $this->yearly->residentialYearlyRemit();
+        $commercial= $this->yearly->commercialYearlyRemit();
+        $industrial = $this->yearly->industrialYearlyRemit();
+        $medical = $this->yearly->medicalYearlyRemit();
+
+        $chart = (new LarapexChart)->polarAreaChart()
+        ->setTitle('Income of all Client Type made in year '. Date('Y'))
+        ->setSubtitle('Year '. Date('Y'))
+        ->addData([$residential, $commercial,$industrial, $medical])
+         ->setLabels(['Residential', 'Commercial', 'Industrial', 'Medical']);
 
         return $chart;
-    }
-
-    private function getMonthRemmitance()
-    {
-        return $this->payment->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'))->sum('amount');
     }
 
 }
