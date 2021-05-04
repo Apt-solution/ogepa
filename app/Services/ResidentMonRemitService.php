@@ -13,7 +13,7 @@ class ResidentMonRemitService
        $this->payment = $payment;
     }
 
-    public function getJan()
+    public function getApr()
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
@@ -24,7 +24,7 @@ class ResidentMonRemitService
        return $users;
     }
 
-    public function getFeb()
+    public function getMay()
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')

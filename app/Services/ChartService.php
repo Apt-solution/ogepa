@@ -69,11 +69,11 @@ class ChartService
 
     public function getResidentialChart()
     {
-        $jan = $this->resident->getJan();
-        $feb = $this->resident->getFeb();
+        $apr = $this->resident->getApr();
+        $may = $this->resident->getMay();
         $chart = (new LarapexChart)->barChart()
         ->setTitle('Residential Monthly Remmitance for ' . date('Y'))
-        ->addData('residential', [$jan, $feb, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12])
+        ->addData('residential', [1, 2, 3, $apr, $may, 6, 7, 8, 9, 10, 11 ,12])
         ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ->setHeight('200')
         ->setColors(['#008000']);
