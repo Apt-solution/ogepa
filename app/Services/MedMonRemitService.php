@@ -5,7 +5,7 @@ use App\Models\Payment;
 use App\Models\User;
 use Carbon\Carbon;
 
-class ResidentMonRemitService
+class MedMonRemitService
 {
     protected $payment;
     public function __construct(Payment $payment)
@@ -17,7 +17,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('01'))
             ->whereYear('payments.created_at', date('Y'))
@@ -29,7 +29,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('02'))
             ->whereYear('payments.created_at', date('Y'))
@@ -41,7 +41,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('03'))
             ->whereYear('payments.created_at', date('Y'))
@@ -53,7 +53,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('04'))
             ->whereYear('payments.created_at', date('Y'))
@@ -65,7 +65,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('05'))
             ->whereYear('payments.created_at', date('Y'))
@@ -77,7 +77,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('06'))
             ->whereYear('payments.created_at', date('Y'))
@@ -89,7 +89,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('07'))
             ->whereYear('payments.created_at', date('Y'))
@@ -100,7 +100,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('08'))
             ->whereYear('payments.created_at', date('Y'))
@@ -111,7 +111,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('09'))
             ->whereYear('payments.created_at', date('Y'))
@@ -122,7 +122,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('10'))
             ->whereYear('payments.created_at', date('Y'))
@@ -133,7 +133,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('11'))
             ->whereYear('payments.created_at', date('Y'))
@@ -144,7 +144,7 @@ class ResidentMonRemitService
     {
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
+            ->where('users.client_type', 'medical')
             ->where('payments.status','successful')
             ->whereMonth('payments.created_at', date('12'))
             ->whereYear('payments.created_at', date('Y'))

@@ -17,7 +17,7 @@
                         <a href="{{ route('residential.user') }}" class="btn btn-success rounded p-4 btn-flat"><i class="fas fa-house-user p-3"></i></a>
                     </div>
                     <div class="col">
-                        <h5 class="lead">Residential</h5>
+                        <h5 class="lead text-success">Residential</h5>
                         <span style="margin-right: 60px; font-weight:bolder">{{$residential }}</span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <a href="{{ route('commercial.user') }}" class="btn btn-info rounded p-4 btn-flat"><i class="fas fa-store p-3"></i></a>
                     </div>
                     <div class="col">
-                        <h5 class="lead">Commercial</h5>
+                        <h5 class="lead text-info">Commercial</h5>
                         <span style="margin-right: 70px; font-weight:bolder">{{ $commercial }}</span>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         <a href="{{ route('industry.user') }}" class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></a>
                     </div>
                     <div class="col">
-                        <h5 class="lead">Industry</h5>
+                        <h5 class="lead text-warning">Industry</h5>
                         <span style="margin-right: 40px; font-weight:bolder">{{ $industrial }}</span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         <a href="{{ route('medical.user') }}" class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></a>
                     </div>
                     <div class="col">
-                        <h5 class="lead">Medical</h5>
+                        <h5 class="lead text-danger">Medical</h5>
                         <span style="margin-right: 40px; font-weight:bolder">{{ $medical }}</span>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
         </div>
         <div class="col-md-6">
             <div class="card elevation-2">
-                <div class="card-header text-left text-bold bg-teal">Commercial</div>
+                <div class="card-header text-left text-bold" style = "background-color:teal; color:white;">Commercial</div>
                 <div class="card-body">
                     {!! $commercialChart->container() !!}
                 </div>
@@ -84,7 +84,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card elevation-2">
-                <div class="card-header text-left text-bold bg-warning">Industrial</div>
+                <div class="card-header text-left text-bold bg-warning" style="color:white;">Industrial</div>
                 <div class="card-body">
                     {!! $industrialChart->container() !!}
                 </div>

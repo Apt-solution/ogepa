@@ -19,7 +19,7 @@ class YearlyRemitService
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
             ->where('users.client_type', 'residential')
-            ->where('payments.status','pending')
+            ->where('payments.status','successful')
             ->whereYear('payments.created_at', $current->year)
             ->sum('amount');
         return $users; 
@@ -30,7 +30,7 @@ class YearlyRemitService
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
             ->where('users.client_type', 'commercial')
-            ->where('payments.status','pending')
+            ->where('payments.status','successful')
             ->whereYear('payments.created_at', $current->year)
             ->sum('amount');
         return $users; 
@@ -41,7 +41,7 @@ class YearlyRemitService
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
             ->where('users.client_type', 'industrial')
-            ->where('payments.status','pending')
+            ->where('payments.status','successful')
             ->whereYear('payments.created_at', $current->year)
             ->sum('amount');
         return $users; 
@@ -52,7 +52,7 @@ class YearlyRemitService
         $current = Carbon::now();
         $users = User::join('payments', 'payments.user_id', '=', 'users.id')
             ->where('users.client_type', 'medical')
-            ->where('payments.status','pending')
+            ->where('payments.status','successful')
             ->whereYear('payments.created_at', $current->year)
             ->sum('amount');
         return $users; 
