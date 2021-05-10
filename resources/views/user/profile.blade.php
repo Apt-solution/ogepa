@@ -42,7 +42,7 @@
                                                             <tr>
                                                                 <td>{{ $payment->created_at }}</td>
                                                                 <td>{{ $payment->amount }}</td>
-                                                                <td><a href="">download receipt</a></td>
+                                                                <td><a href="{{route('user.receipt', $payment->id) }}">Download Receipt</a></td>
                                                             </tr>
                                                             @endforeach
                                                         </table>

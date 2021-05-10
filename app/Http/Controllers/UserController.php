@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Models\Payment;
+use PDF;
 
 class UserController extends Controller
 {
@@ -39,5 +41,13 @@ class UserController extends Controller
         return view('user.makePayment')->with('data', $data)->with('payment', $payment);
     }
 
+    public function getReceipt($id)
+    {   
+        $payment = $this->userService->getReceipt($id);
+        $data = $this->userService->getUserProfile();
+        /* $pdf = PDF::loadView('user.receipt', ['payment' => $payment, 'data' => $data]);
+        return $pdf->stream(); */
+        return view('user.receipt', compact(['data', 'payment']));
+    }
     
 }

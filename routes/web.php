@@ -17,6 +17,7 @@ use DB;
 use App\Models\User;
 use App\Models\Payment;
 use Carbon\Carbon;
+use PDF;
 
 
 /*
@@ -68,7 +69,9 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['user'])->group(function () {
     Route::get('user_profile', [UserController::class, 'userProfile'])->name('user_profile');
     Route::get('makePayment', [UserController::class, 'makePayment']);
+    Route::get('user_profile/receipt/{id}', [UserController::class, 'getReceipt'])->name('user.receipt');
     Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });
+
