@@ -6,7 +6,7 @@
             <h4 id="ed" onclick="sayHello()" class="lead">User's Data</h4>
             <hr>
             <div class="mb-2">
-                <a href="{{ URL::to('/addUser') }}" class="btn btn-success btn-flat rounded">Add new User</a>
+                <a href="{{ URL::to('/addUser') }}" class="btn btn-outline-success btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>
             </div>
         </div>
     </div>

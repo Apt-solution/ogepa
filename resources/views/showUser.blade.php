@@ -83,7 +83,7 @@ $(document).ready(function() {
                         </div>
                         @error('address')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
 
-                        <button class="btn btn-success float-right">UPDATE USER</button>
+                        <button class="btn btn-outline-success float-right">Update</button>
                     </form>
                 </div>
             </div>

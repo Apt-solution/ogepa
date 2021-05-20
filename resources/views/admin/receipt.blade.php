@@ -16,6 +16,7 @@
 		<div id="identity">
 		@foreach($payments as $payment)
             <h5 id="address">Address: <br> {{ $payment->user->address }}
+			{{ $payment->user->lga }}
             <br><br>
             Phone: <br> {{ $payment->user->phone }}</h5>
 		
