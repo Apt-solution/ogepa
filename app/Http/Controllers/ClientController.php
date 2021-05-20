@@ -5,18 +5,24 @@ use App\Http\Requests\FormValidationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
+use App\Services\UserService;
+use App\Services\ChartService;
 use DataTables;
 use DB;
 
 class ClientController extends Controller
 {
-    protected $clientService;
+    protected $clientService, $userService, $chartService;
     public function __construct(
-        ClientService $clientService
+        ClientService $clientService,
+        UserService $userService,
+        ChartService $chartService
 
     )
     {
         $this->clientService = $clientService;
+        $this->userService = $userService;
+        $this->chartService = $chartService;
         $this->middleware('auth');
     }
 
@@ -36,9 +42,6 @@ class ClientController extends Controller
         return redirect()->back()->with('status', 'User Account Created');
     }
 
-    
-
-
     public function showClient($id)
     {
         $users = User::findorFail($id);
@@ -48,7 +51,10 @@ class ClientController extends Controller
     public function ClientProfile($id)
     {
         $users = User::findorFail($id);
-        return view('userprofile', compact('users'));
+        $data = $this->userService->paymentHistory($id);
+        $userchart = $this->chartService->userChart($id);
+        $total = $this->clientService->total($id);
+        return view('userprofile', compact('users', 'data', 'userchart', 'total'));
     }
 
     public function UpdateClient(FormValidationRequest $request , $id)

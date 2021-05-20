@@ -49,6 +49,8 @@ class UserController extends Controller
         return $pdf->stream(); */
         return view('user.receipt', compact(['data', 'payment']));
     }
+
+
     
 }
 

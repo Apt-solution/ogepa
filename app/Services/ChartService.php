@@ -10,6 +10,7 @@ use Session;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use App\Services\ResidentMonRemitService;
 use App\Services\YearlyRemitService;
+use Carbon\Carbon;
 
 class ChartService
 {
@@ -148,6 +149,19 @@ class ChartService
         ->addData([$residential, $commercial, $industrial, $medical])
         ->setLabels(['Residential', 'Commercial', 'Industrial', 'Medical'])
         ->setColors(['#008000', '#008080', '#ffc63b', '#FF0000']);
+
+        return $chart;
+    }
+
+    public function userChart($user_id)
+    {
+        $current = Carbon::now();
+        $total = $this->payment->where('user_id', $user_id)->where('status', 'successful')->whereyear('created_at', $current->year)->sum('amount');
+        $chart = (new LarapexChart)->donutChart()
+        ->setTitle('User Chart')
+        ->setSubtitle('Year ' . Date('Y') )
+        ->addData([$total])
+        ->setLabels(['User']);
 
         return $chart;
     }

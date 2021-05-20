@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use App\Models\User;
+use App\Models\ClientType;
+
 use Illuminate\Http\Request;
 use App\Services\AdminService;
+use App\Services\UserService;
 use Session;
 
 class AdminController extends Controller
 {
 
-    protected $adminService;
+    protected $adminService, $userService;
     public function __construct(
-        AdminService $adminService
+        AdminService $adminService,
+        UserService $userService
     ) {
         $this->adminService = $adminService;
+        $this->userService = $userService;
     }
 
 
@@ -48,5 +55,13 @@ class AdminController extends Controller
     {
         $payments = $this->adminService->getSearchPayment();
         return view('admin.payment')->with('payments', $payments);
+    }
+
+    public function userReceipt($id)
+    {
+       $id = Payment::where('id', $id)->value('id');
+       $payments = $this->adminService->userReceipt($id);
+       return view('admin.receipt', compact('payments'));
+       
     }
 }

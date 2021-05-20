@@ -42,18 +42,6 @@ Route::get('/trypay', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
-Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
-Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
-Route::get('/industrial', [DataTableController::class, 'industryUser'])->name('industry.user');
-Route::get('/medical', [DataTableController::class, 'medicalUser'])->name('medical.user');
-Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
-Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
-Route::get('/index', [DataTableController::class, 'index'])->name('users.index');
-Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
-Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
-Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
-Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
 
 
 
@@ -64,6 +52,18 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
     Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
     Route::get('getSearchPayment', [AdminController::class, 'getSearchPayment']);
+    Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
+    Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
+    Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
+    Route::get('/industrial', [DataTableController::class, 'industryUser'])->name('industry.user');
+    Route::get('/medical', [DataTableController::class, 'medicalUser'])->name('medical.user');
+    Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
+    Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
+    Route::get('/index', [DataTableController::class, 'index'])->name('users.index');
+    Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
+    Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
+    Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
+    Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
 });
 
 Route::middleware(['user'])->group(function () {
