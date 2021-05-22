@@ -157,10 +157,11 @@ class ChartService
     {
         $current = Carbon::now();
         $total = $this->payment->where('user_id', $user_id)->where('status', 'successful')->whereyear('created_at', $current->year)->sum('amount');
-        $chart = (new LarapexChart)->donutChart()
+        $chart = (new LarapexChart)->radialChart()
         ->setTitle('User Chart')
         ->setSubtitle('Year ' . Date('Y') )
         ->addData([$total])
+        ->setHeight('300')
         ->setLabels(['User']);
 
         return $chart;

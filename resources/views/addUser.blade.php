@@ -28,8 +28,8 @@
             </div>
             @endif
             <div class="card">
-                <div class="card-header bg-success">
-                    <h5 class="card-title">Account Creation</h5>
+                <div class="card-header" style="background-color: #191970;">
+                    <h5 class="card-title text-white">Account Creation</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{route('user.reg')}}" method="post">
@@ -102,7 +102,7 @@
                         </div>
                         @error('address')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
-                        <button class="btn btn-outline-success float-right">Create account</button>
+                        <button class="btn btn-outline-primary float-right">Create account</button>
                     </form>
                 </div>
             </div>

@@ -3,7 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-
+        <div class="card"  style="background-color: #191970;">
+            <div class="card-header text-center text-white h-100 ">
+                <h5  class="lead">Set Amount To Be Paid By All Category Of Users </h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         @if (\Session::has('success'))
         <div class="alert alert-success">
             <ul>

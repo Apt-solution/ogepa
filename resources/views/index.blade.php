@@ -2,12 +2,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12 mx-auto">
-            <h4 id="ed" onclick="sayHello()" class="lead">User's Data</h4>
-            <hr>
-            <div class="mb-2">
-                <a href="{{ URL::to('/addUser') }}" class="btn btn-outline-success btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>
-            </div>
+        <div class="col-12  card p-3" style="background-color: #191970;">
+            <h4 class="lead text-white" >User's Information</h4>
+        </div>
+        <div class="mb-2">
+            <a href="{{ URL::to('/addUser') }}" class="btn btn-outline-success btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>
         </div>
     </div>
     @if(Route::current()->getName() == "allUser")

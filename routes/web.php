@@ -48,6 +48,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
+    Route::view('/automatedPrice/residential', 'admin.residentialPayment')->name('residentialPayment');
+    Route::view('/automatedPrice/commercial', 'admin.commercialPayment')->name('commercialPayment');
+    Route::view('/automatedPrice/medical', 'admin.medicalPayment')->name('medicalPayment');
+    Route::view('/automatedPrice/industrial', 'admin.industrialPayment')->name('industrialPayment');
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
     Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
@@ -64,6 +68,7 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
     Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
+    Route::get('/checkPayment', [AdminController::class, 'getUserPayment'])->name('checkPayment');
 });
 
 Route::middleware(['user'])->group(function () {

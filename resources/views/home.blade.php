@@ -5,13 +5,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12 jumbotron bg-dark" style="height: 20%;">
-            <h4>Welcome, Admin!</h4>
+        <div class="col-12 jumbotron  shadow-lg" style="height: 20%; background-color:#191970;">
+            <h5 class="text-white">Welcome, Admin!</h5>
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
         <div class="col-3 text-center">
-            <div class="card p-1 elevation-1">
+            <div class="card p-1">
                 <div class="row">
                     <div class="col">
                         <a href="{{ route('residential.user') }}" class="btn btn-success rounded p-4 btn-flat"><i class="fas fa-house-user p-3"></i></a>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-3 text-center">
-            <div class="card p-1 elevation-1">
+            <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
                         <a href="{{ route('commercial.user') }}" class="btn btn-info rounded p-4 btn-flat"><i class="fas fa-store p-3"></i></a>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="col-3  text-center">
-            <div class="card p-1 elevation-1">
+            <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
                         <a href="{{ route('industry.user') }}" class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></a>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="col-3 text-center">
-            <div class="card p-1 elevation-1">
+            <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
                         <a href="{{ route('medical.user') }}" class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></a>
@@ -65,7 +65,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="card elevation-2">
+            <div class="card ">
                 <div class="card-header text-left text-bold bg-success">Residential</div>
                 <div class="card-body">
                     {!! $residentialChart->container() !!}
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card elevation-2">
+            <div class="card ">
                 <div class="card-header text-left text-bold" style = "background-color:teal; color:white;">Commercial</div>
                 <div class="card-body">
                     {!! $commercialChart->container() !!}
@@ -83,7 +83,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="card elevation-2">
+            <div class="card ">
                 <div class="card-header text-left text-bold bg-warning" style="color:white;">Industrial</div>
                 <div class="card-body">
                     {!! $industrialChart->container() !!}
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card elevation-2">
+            <div class="card ">
                 <div class="card-header text-left text-bold bg-danger">Medical</div>
                 <div class="card-body">
                     {!! $medicalChart->container() !!}
@@ -101,8 +101,8 @@
     </div>
     <div class="row">
         <div class="col-12 mx-auto">
-           <div class="card elevation-2">
-               <div class="card-header text-bold">Comparison between the category of users</div>
+           <div class="card shadow-lg">
+               <div class="card-header text-white text-bold" style="background-color:#191970 ;">Comparison between the category of users</div>
                <div class="card-body">
                {!! $allClientTypeChart->container() !!}
                </div>

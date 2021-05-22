@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Services\AdminService;
 use App\Services\UserService;
 use Session;
+use DB;
 
 class AdminController extends Controller
 {
@@ -64,4 +65,13 @@ class AdminController extends Controller
        return view('admin.receipt', compact('payments'));
        
     }
+
+    public function getUserPayment(Request $request)
+    {    
+        return view('admin.paymentHistory');
+    }
+
+    
+
+
 }
