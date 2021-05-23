@@ -27,7 +27,7 @@
 
             <div class="acordeon">
                 <input id="acordeon-3" type="checkbox" name="acordeons">
-                <label for="acordeon-3" class="text-sm"><i class="fas fa-user-plus pr-1"></i>Set Automated Payment</label>
+                <label for="acordeon-3" class="text-sm"><i class="fas fa-wallet pr-1"></i>Set Automated Payment</label>
                 <div class="acordeon-content">
                     <p ><a class="text-xs" href="{{ route('residentialPayment') }}" style="background-color: #0b0f24; margin:-15px; padding-left:10px"><i class="fas fa-house-user pr-1"></i>Residential</a></p>
                     <hr style="border:1px solid red">
@@ -41,6 +41,10 @@
 
             <div class="acordeon">
                 <a class="text-sm text-white" href="{{route('payments')}}"><i class="fas fa-receipt pr-1"></i>View Payment(s) </a>
+            </div>
+
+            <div class="acordeon">
+                <a class="text-sm text-white" href="{{route('automatedPrice')}}"><i class="fas fa-home pr-1"></i>Automated Payment</a>
             </div>
 
         </div>

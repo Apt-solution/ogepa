@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12  card p-3" style="background-color: #191970;">
+        <div class="col-12  card p-3" style="background-color: black;">
             <h4 class="lead text-white" >User's Information</h4>
         </div>
         <div class="mb-2">
