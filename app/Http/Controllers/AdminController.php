@@ -66,17 +66,7 @@ class AdminController extends Controller
        
     }
 
-    public function getUserPayment(Request $request)
-    {    
-        if ($request->ajax()) {
-            $medical = DB::select('select * from payments where status = ?', ['successful']);
-            return Datatables::of($medical)
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-        
-        return view('admin.paymentHistory');
-    }
+
 
     
 

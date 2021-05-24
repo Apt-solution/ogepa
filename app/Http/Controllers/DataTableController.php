@@ -97,4 +97,10 @@ class DataTableController extends Controller
         
         return view('index');
     }
+
+    
+    public function getUserPayment(Request $request)
+    {            
+        return view('admin.paymentHistory');
+    }
 }

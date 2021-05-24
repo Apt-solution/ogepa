@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12  card p-3" style="background-color: black;">
-            <h4 class="lead text-white" >User's Information</h4>
+        <div class="col-12  card bg-dark">
+            User's Information
         </div>
         <div class="mb-2">
             <a href="{{ URL::to('/addUser') }}" class="btn btn-outline-success btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>

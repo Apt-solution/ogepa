@@ -64,7 +64,7 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
     Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
-    Route::get('/checkPayment', [AdminController::class, 'getUserPayment'])->name('checkPayment');
+    Route::get('/checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkPayment');
 });
 
 Route::middleware(['user'])->group(function () {
