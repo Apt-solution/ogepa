@@ -100,21 +100,18 @@ class DataTableController extends Controller
         return view('index');
     }
 
+    public function getPayment()
+    {
+       return view('admin.paymentHistory');
+    }
     
     public function getUserPayment(Request $request)
     {       
-        if($request->ajax())
-        {
-            $data = Payment::latest()->get();
-            return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                        return $actionBtn;  
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }     
-        return view('admin.paymentHistory');
+        $payments = DB::table('payments')
+        ->join('users', 'payments.user_id', '=', 'users.id')
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.first_name', 'users.last_name', 'users.ogwema_ref'])
+        ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
+        return Datatables::of($payments)->make(true);
+ 
     }
 }

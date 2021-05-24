@@ -51,7 +51,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
     Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
-    Route::get('getSearchPayment', [AdminController::class, 'getSearchPayment']);
     Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
     Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
     Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
@@ -64,7 +63,9 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
     Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
-    Route::get('/checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkPayment');
+    Route::get('checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
+    Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
+
 });
 
 Route::middleware(['user'])->group(function () {

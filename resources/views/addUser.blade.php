@@ -2,14 +2,14 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<div class="container">
-    <div class="row">
-        <div class="card bg-dark h-50">
-            <div class="card-heading">
-                Register New User
-            </div>
+<div class="row">
+    <div class="card bg-dark p-1">
+        <div class="card-heading">
+            Register New User
         </div>
     </div>
+</div>
+<div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
             @if(Session::has('status'))
