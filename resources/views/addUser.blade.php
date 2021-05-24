@@ -2,22 +2,6 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-        $('#industry').hide();
-        $('#client').change(function(){
-            var clientType = $(this).children("option:selected").val();
-            if(clientType == "Industrial" || clientType == "Medical" )
-            {
-                $('#industry').show();
-            }
-            else{
-                $('#industry').hide();
-            }
-        })
-    });
-</script>
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
@@ -62,12 +46,6 @@
                             </select>
                         </div>
                         @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div id="industry" class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Industry Name</label>
-                            <input type="text" name="industry" value="{{ old('industry') }}" class="form-control" placeholder="OGWAMA" aria-label="lname" aria-describedby="basic-addon1">
-                        </div>
-                        @error('industry')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
