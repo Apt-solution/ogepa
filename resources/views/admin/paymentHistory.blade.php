@@ -22,21 +22,41 @@
     </div>
     <div class="col-md-4" style="margin-top: 32px;">
         <div class="form-group">
-            <button class="btn btn-primary">Search</button>
+            <button class="btn btn-primary ">Search</button>
         </div>
     </div>
 </div>
-<div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table history table-bordered">
         <thead class="bg-dark">
             <th>ID</th>
             <th>Amount</th>
             <th>Ref No</th>
             <th>Date Paid</th>
+            <th>Action</th>
         </thead>
         <tbody>
 
         </tbody>
     </table>
-</div>
+<script>
+$(document).ready(function(){
+    var table = $('.history').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('checkPayment') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'amount', name: 'amount'},
+            {data: 'ref', name: 'ref'},
+            {data: 'updated_at', name: 'updated_at'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+})
+</script>
 @endsection
