@@ -17,16 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'address',
+        'full_name',
+        'location',
         'phone',
         'email',
         'lga',
-        'ogwema_ref',
+        'ogwama_ref',
         'password',
         'role',
-        'client_type'
     ];
 
     /**
@@ -68,6 +66,10 @@ class User extends Authenticatable
         return $this->belongsTo(ClientType::class, 'client_type', 'client_type');
     }
 
+    public function clients()
+    {
+        return $this->hasMany('App\Client', 'id', 'entered_by');
+    }
     
 
     

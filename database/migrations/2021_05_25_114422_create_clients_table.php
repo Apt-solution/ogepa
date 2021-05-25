@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientTypesTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateClientTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_types', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->enum('client_type', ['residential', 'commercial', 'industrial', 'medical']);
+            $table->integer('user_id');
+            $table->enum('type', ['Residential', 'Commercial', 'Medical', 'Industrial']);
             $table->string('sub_client_type');
-            $table->decimal('monthly_payment', 12, 2);
+            $table->integer('no_of_sub_client_type')->nullable();
+            $table->string('address');
+            $table->integer('enteredBy');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateClientTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_types');
+        Schema::dropIfExists('clients');
     }
 }
