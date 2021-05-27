@@ -22,7 +22,7 @@ class User extends Authenticatable
         'phone',
         'email',
         'lga',
-        'ogwama_ref',
+        'ogwema_ref',
         'password',
         'role',
     ];
