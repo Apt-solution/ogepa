@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Services\AdminService;
+use App\Services\ChartService;
 use App\Models\User;
 use App\Models\Payment;
 use Carbon\Carbon;
 use DB;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class HomeController extends Controller
 {
@@ -16,11 +19,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    protected $adminService;
-    public function __construct(AdminService $adminService)
+    protected $adminService, $chartService;
+    public function __construct(AdminService $adminService, ChartService $chartService)
     {
         $this->middleware('auth');
         $this->adminService = $adminService;
+        $this->chartService = $chartService;
+
     }
 
     /**
@@ -38,16 +43,21 @@ class HomeController extends Controller
         if (\Auth::User()->role === 'user') {
             return redirect('user_profile');
         }
-        $residential = User::where('client_type', 'residential')->count();
-        $commercial = User::where('client_type', 'commercial')->count();
-        $industrial = User::where('client_type', 'industrial')->count();
-        $medical = User::where('client_type', 'medical')->count();
+        $residential = Client::where('type', 'residential')->count();
+        $residential == '' ? $residential: 0;
+        $commercial = Client::where('type', 'commercial')->count();
+        $industrial = Client::where('type', 'industrial')->count();
+        $medical = Client::where('type', 'medical')->count();
         $monthRemmitance = $this->adminService->getMonthRemmitance();
-        // dd($monthRemmitance);
+        $industrialChart = $this->chartService->getIndustrialChart();
+        $medicalChart = $this->chartService->getMedicalChart();
+        $commercialChart = $this->chartService->getCommercialChart();
+        $residentialChart = $this->chartService->getResidentialChart();
+        $allClientTypeChart = $this->chartService->allClientTypeChart();
         if (\Auth::User()->role === 'admin') {
             $this->adminService->userMonthlyPrice();
         }
-        return view('home', compact(['residential', 'commercial', 'industrial', 'medical']))->with('remmitance', $monthRemmitance);
+        return view('home', compact(['residential', 'commercial', 'industrial', 'medical', 'industrialChart', 'medicalChart', 'commercialChart', 'residentialChart', 'allClientTypeChart']))->with('remmitance', $monthRemmitance);
     }
 
 

@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Payment;
+
 
 class ClientService
 {
@@ -11,9 +13,11 @@ class ClientService
     protected $user;
 
     public function __construct(
-        User $user
+        User $user,
+        Payment $payment
     ) {
         $this->user = $user;
+        $this->payment = $payment;
     }
 
     public function addNewClient($request)
@@ -31,7 +35,7 @@ class ClientService
             'lga' => $request['lga'],
             'client_type' => $request['client_type'],
         );
-        return$this->user->create($data);
+        return $this->user->create($data);
     }
 
     private function generateOgwemaRef()
@@ -45,5 +49,8 @@ class ClientService
         return $ref;
     }
 
-  
+    public function total($id)
+    {
+        return $this->payment->where('user_id', $id)->where('status', 'successful')->sum('amount');
+    }
 }

@@ -20,14 +20,14 @@
                                         <h6 class="f-w-600">{{ $data['user_details']->first_name.' '.$data['user_details']->last_name }}</h6>
                                         <p>{{ $data['user_details']->phone }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                         <p>Ogwema Ref: {{ $data['user_details']->ogwema_ref }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                        <p><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">view payment history</a></p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                        <p><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">View Payment History</a></p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModal" style="color: #000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Payment histories</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Payment Histories</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -35,14 +35,14 @@
                                                     <div class="modal-body">
                                                         <table class="table table-striped">
                                                             <tr>
-                                                                <td>payment date</td>
-                                                                <td>amount</td>
+                                                                <td>Payment Date</td>
+                                                                <td>Amount</td>
                                                             </tr>
                                                             @foreach($data['paymentHistories'] as $payment)
                                                             <tr>
                                                                 <td>{{ $payment->created_at }}</td>
                                                                 <td>{{ $payment->amount }}</td>
-                                                                <td><a href="">download receipt</a></td>
+                                                                <td><a href="{{route('user.receipt', $payment->id) }}">Download Receipt</a></td>
                                                             </tr>
                                                             @endforeach
                                                         </table>
@@ -81,30 +81,23 @@
                                                 <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['total_due'], 2) }}</h6>
                                             </div>
                                         </div>
-                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Make Payment</h6>
+                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 ">Make Payment</h6>
                                         <div class="row">
-                                            <input type="button" name="answer" value="MAKE A PAYMENT" onclick="showDiv()" />
+                                            <input type="button" class="btn btn-primary btn-flat rounded" name="answer" value="MAKE A PAYMENT" onclick="showDiv()" />
                                             <div id="welcomeDiv" style="display:none;" class="answer_list">
                                                 <p>&nbsp;</p>
-                                                <form method="POST" action="{{ route('confirmPay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                                <form method="POST" style="margin-top: -20px;" action="{{ route('confirmPay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
                                                     @csrf
-                                                    <input type="number" id="amount-entered" class="form-control" placeholder="enter amount" min="500" required>
+                                                    <input type="number" id="amount-entered" class="form-control"  placeholder="Enter amount" min="500" required>
                                                     <input type="hidden" name="amount" id="amount">
                                                     <input type="hidden" name="charges" id="charges">
                                                     <input type="hidden" name="total_due" id="total_due">
-
-
-                                                    <input type="submit" class="btn btn-success btn-block" value="CONTINUE TO PAY">
+                                                    <input type="submit" class="btn btn-success btn-block mt-2" value="CONTINUE TO PAY">
 
                                                 </form>
 
                                             </div>
                                         </div>
-                                        <ul class="social-link list-unstyled m-t-40 m-b-10">
-                                            <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
-                                            <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
-                                            <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>

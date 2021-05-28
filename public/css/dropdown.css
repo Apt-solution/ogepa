@@ -1,0 +1,83 @@
+/*--------------------------------------------------->
+ACORDEON CORE
+Created By: DestructiveBurn.com
+----------------------------------------------------->
+
+/* Acordeon Grid */
+.acordeon-tabs { 
+}
+/* Acordeon Core */
+.acordeon {
+    position: relative;
+    width: 100%;
+    color:white;
+    overflow: hidden;
+    border-bottom: solid 1px #35040c;
+}
+/* Acordeon Title Section */
+.acordeon label {
+    position: relative;
+    display: block;
+    padding: 0 0 0 1em;
+    background:  black;
+    font-weight: bold;
+    line-height: 3;
+    cursor: pointer;
+}
+
+.acordeon a {
+    position: relative;
+    display: block;
+    color: white;
+    padding: 0 0 0 1em;
+    background:  black;
+    font-weight: bold;
+    line-height: 3;
+    cursor: pointer;
+    text-decoration: none;
+}
+/* Acordeon Content For Anything */
+.acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    background: #0b0f24;
+    -webkit-transition: max-height .35s;
+    transition: max-height .35s;
+}
+/* Acordeon Content P Text */
+.acordeon-content p {
+    margin: 15px;
+}
+/* Acordeon Check Box Hidden */
+.acordeon input {
+	display:none;
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+/* :checked */
+input:checked ~ .acordeon-content {
+    max-height: 10em;
+}
+/* Acordeon Icon*/
+label::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 3em;
+    height: 3em;
+    line-height: 3;
+    text-align: center;
+    -webkit-transition: all .35s;
+    transition: all .35s;
+}
+/* Acordeon Icon Content*/
+input[type=checkbox] + label::after {
+    content: "+";
+}
+/* Acordeon Icon Content Animation*/
+input[type=checkbox]:checked + label::after {
+    -webkit-transform: rotate(315deg);
+    transform: rotate(315deg);
+}

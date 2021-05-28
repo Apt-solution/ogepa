@@ -14,7 +14,7 @@ $(document).ready(function() {
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
-            <div class="card elevation-3">
+            <div class="card">
                 <div class="card-header bg-success">
                     <h5 class="card-title"><a style="color:white;" href="{{ url()->previous() }}"><span class="fas fa-arrow-left pr-4"></span></a> Update user's data</h5>
                 </div>
@@ -83,7 +83,7 @@ $(document).ready(function() {
                         </div>
                         @error('address')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
 
-                        <button class="btn btn-success float-right">UPDATE USER</button>
+                        <button class="btn btn-outline-success float-right">Update</button>
                     </form>
                 </div>
             </div>

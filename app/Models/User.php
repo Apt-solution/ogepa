@@ -17,16 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'address',
+        'full_name',
+        'location',
         'phone',
         'email',
         'lga',
         'ogwema_ref',
         'password',
         'role',
-        'client_type'
     ];
 
     /**
@@ -48,9 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function payment()
+    public function payments()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany(Payment::class);
     }
 
     public function remmitance()
@@ -67,6 +65,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(ClientType::class, 'client_type', 'client_type');
     }
+
+    public function clients()
+    {
+        return $this->hasMany('App\Client', 'id', 'entered_by');
+    }
+    
 
     
 }

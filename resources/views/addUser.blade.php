@@ -2,11 +2,13 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>
+<div class="row">
+    <div class="card bg-dark p-1">
+        <div class="card-heading">
+            Register New User
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
@@ -17,8 +19,8 @@
             </div>
             @endif
             <div class="card">
-                <div class="card-header bg-success">
-                    <h5 class="card-title">Account Creation</h5>
+                <div class="card-header" style="background-color: black;">
+                    <h5 class="card-title text-white">Account Creation</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{route('user.reg')}}" method="post">
@@ -43,15 +45,15 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Client Type</label>
-                            <select name="client_type" class="form-select" id="">
-                                <option>Residential</option>
-                                <option>Industrial</option>
-                                <option>Commercial</option>
-                                <option>Medical</option>
+                            <select name="client_type" class="form-select" id="client">
+                                <option value="Residential">Residential</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Medical">Medical</option>
                             </select>
                         </div>
                         @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
+                        
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select name="lga" width="15%" class="form-select">
@@ -77,7 +79,7 @@
                                 <option value="Yewa_South">Yewa_South</option>
                             </select>
                         </div>
-                        @error('state')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+                        @error('lga')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text">Address</label>
@@ -85,7 +87,7 @@
                         </div>
                         @error('address')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
-                        <button class="btn btn-success float-right">ADD NEW USER</button>
+                        <button class="btn btn-outline-dark float-right">Create account</button>
                     </form>
                 </div>
             </div>

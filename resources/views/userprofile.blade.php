@@ -1,160 +1,153 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @section('content')
-<script>
-    $(document).ready(function(){
-        $('#profile-tab').click(function(){
-             $('#change').text("User's Payment History");   
-        });
-        $('#home-tab').click(function(){
-             $('#change').text("User's Profile");   
-        });
-    });
-</script>
-<div class="container bg-white" style="height: 100%;">
-            <div class="text-center bg-success rounded mb-3 p-3">
-                <h5 id="change" style="font-family: tahoma;">User's Profile</h5>
+<div class="container">
+    <div class="main-body">
+    
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ asset('home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4> {{ $users->first_name }} <br> {{ $users->last_name }}</h4>
+                      <p class="text-secondary mb-1">{{ ucwords($users->client_type) }} User</p>
+                      <p class="badge badge-success p-2">{{ $users->ogwema_ref }}</p><br>
+                      <a class="btn btn-outline-primary" href="{{route('user.show', $users->id) }}">Edit User</a> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mt-3 text-center">
+                {!! $userchart->container() !!}
+              </div>
             </div>
-            <form>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            @if($users->client_type == "residential")
-                            <img src="{{asset('images/residential.jpeg') }}" alt=""/>
-                            @endif
-                            @if($users->client_type == "industrial")
-                            <img src="{{asset('images/industry.jpeg') }}" alt=""/>
-                            @endif
-                            @if($users->client_type == "commercial")
-                            <img src="{{asset('images/commercial.jpeg') }}" alt=""/>
-                            @endif
-                            @if($users->client_type == "medical")
-                            <img class="text-warning" src="{{asset('images/medical.jfif') }}" alt=""/>
-                            @endif
-                        </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Full Name</h6>
                     </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                        {{ $users->first_name }} {{ $users->last_name }}
-                                    </h5>
-                                    <h6>
-                                        {{ ucwords($users->client_type) }} User
-                                    </h6>
-                                    <p class="proile-rating">USER'S ID : <span>{{ $users->ogwema_ref }}</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Payment History</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $users->first_name }} {{ $users->last_name }}
                     </div>
-                    <div class="col-md-2">
-                        <a class="profile-edit-btn" href="{{route('user.show', $users->id) }}">Edit Profile</a> 
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
                     </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $users->email }} 
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Phone</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $users->phone }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Local Govt</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ ucwords($users->lga) }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $users->address }}
+                    </div>
+                  </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                        </div>
+              </div>
+              <div class="row gutters-sm">
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3"><i class="fas fa-file-invoice  text-info mr-2"></i>Monthly Invoice</h6>
+                      <small>Web Design</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>Website Markup</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>One Page</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>Mobile Template</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>Backend API</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Id:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ $users->ogwema_ref }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Client Type:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ ucwords($users->client_type) }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>fullname:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ $users->first_name }} {{ $users->last_name }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ $users->phone }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Local Govt:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ ucwords($users->lga) }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Address:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ $users->address }}</p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Last Payment:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>2000</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Amount Owed:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>400</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Amount to pay:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>2000</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total amount to pay:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>2400</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button disabled class="btn btn-default btn-flat">Print Receipt</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-            </form>           
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Monthly Receipt</h6>
+                      <div class="table-responsive-sm" style="overflow:scroll; max-height:280px;">
+                          <table class="table text-sm table-bordered border-info">
+                            <tr class="text-bold">
+                                <td>Payment Date</td>
+                                <td>Amount</td>
+                                <td>Receipt</td>
+                            </tr>
+                            @forelse($data as $payment)
+                            <tr>
+                                <td>{{ $payment->created_at }}</td>
+                                <td>{{ $payment->amount }}</td>
+                                <td><a href="{{route('receipt', $payment->id) }}">Download Receipt</a></td>
+                            </tr>
+                            @empty
+                              <tr>
+                                <td colspan="3" class="text-bold text-center">
+                                  No Payment Record Found
+                                </td>
+                              </tr>
+                            @endforelse
+                            <tr>
+                              <th scope="row" class="text-right">Total</th>
+                              <th colspan="2">{{ $total }}</th>
+                            </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> 
+{{ $userchart->script() }}
 @endsection

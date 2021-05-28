@@ -20,6 +20,7 @@
                 <th>Phone</th>
                 <th>amount</th>
                 <th>date paid</th>
+                <th>Ref No</th>
             </tr>
             <?php $total = 0; ?>
             @foreach($payments as $payment)
@@ -29,6 +30,7 @@
                 <td>{{ $payment->user->phone }}</td>
                 <td>{{ $payment->amount }}</td>
                 <td>{{ $payment->updated_at }}</td>
+                <td>{{ $payment->ref }}</td>
             </tr>
             <?php $total += $payment->amount ?>
             @endforeach

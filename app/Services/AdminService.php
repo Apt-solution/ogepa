@@ -67,4 +67,9 @@ class AdminService
         ->whereDate('created_at', '<=', $request['to'])
         ->where('status', 'successful')->get();
     }
+
+    public function userReceipt($id)
+    {
+      return $this->payment::where('id', $id)->with('user')->get();    
+    }
 }

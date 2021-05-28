@@ -5,17 +5,24 @@ use App\Http\Requests\FormValidationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
+use App\Services\UserService;
+use App\Services\ChartService;
 use DataTables;
+use DB;
 
 class ClientController extends Controller
 {
-    protected $clientService;
+    protected $clientService, $userService, $chartService;
     public function __construct(
-        ClientService $clientService
+        ClientService $clientService,
+        UserService $userService,
+        ChartService $chartService
 
     )
     {
         $this->clientService = $clientService;
+        $this->userService = $userService;
+        $this->chartService = $chartService;
         $this->middleware('auth');
     }
 
@@ -35,24 +42,6 @@ class ClientController extends Controller
         return redirect()->back()->with('status', 'User Account Created');
     }
 
-    public function index(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = User::latest()->get();
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                           $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-        
-        return view('index');
-    }
-
     public function showClient($id)
     {
         $users = User::findorFail($id);
@@ -62,7 +51,10 @@ class ClientController extends Controller
     public function ClientProfile($id)
     {
         $users = User::findorFail($id);
-        return view('userprofile', compact('users'));
+        $data = $this->userService->paymentHistory($id);
+        $userchart = $this->chartService->userChart($id);
+        $total = $this->clientService->total($id);
+        return view('userprofile', compact('users', 'data', 'userchart', 'total'));
     }
 
     public function UpdateClient(FormValidationRequest $request , $id)
@@ -77,7 +69,6 @@ class ClientController extends Controller
         $user->save();
         return redirect()->back()->withInput()  
                                 ->with('status', 'User Info Updated successfully');
-
     }
 
 }

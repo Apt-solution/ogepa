@@ -8,7 +8,17 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DataTableController;
+use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\VarDumper\Cloner\Data;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
+use DB;
+use App\Models\User;
+use App\Models\Payment;
+use Carbon\Carbon;
+use PDF;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,14 +42,6 @@ Route::get('/trypay', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
-Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
-Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
-Route::get('/index', [ClientController::class, 'index'])->name('users.index');
-Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
-Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
-Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('user.delete');
-Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
 
 
 
@@ -49,13 +51,31 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
     Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
-    Route::get('getSearchPayment', [AdminController::class, 'getSearchPayment']);
+    Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
+    Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
+    Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
+    Route::get('/industrial', [DataTableController::class, 'industryUser'])->name('industry.user');
+    Route::get('/medical', [DataTableController::class, 'medicalUser'])->name('medical.user');
+    Route::get('/addUser', [ClientController::class, 'addUser'])->name('user');
+    Route::post('/addUser', [ClientController::class, 'regClient'])->name('user.reg');
+    Route::get('/index', [DataTableController::class, 'index'])->name('users.index');
+    Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
+    Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
+    Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
+    Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
+    Route::get('checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
+    Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
+    Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
+    Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
+
 });
 
 Route::middleware(['user'])->group(function () {
     Route::get('user_profile', [UserController::class, 'userProfile'])->name('user_profile');
     Route::get('makePayment', [UserController::class, 'makePayment']);
-   Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
+    Route::get('user_profile/receipt/{id}', [UserController::class, 'getReceipt'])->name('user.receipt');
+    Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });
+

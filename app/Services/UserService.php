@@ -31,6 +31,7 @@ class UserService
         $data['current_billing'] = $this->currentBilling($user_id);
         $data['total_due'] = $this->totalDue($user_id);
         $data['paymentHistories'] = $this->paymentHistory($user_id);
+        $data['monthlyPayment'] = $this->monthlyPayment($user_id);
         // dd($data);
         return $data;
     }
@@ -105,4 +106,45 @@ class UserService
         return $this->payment->where('user_id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
     }
 
+    public function getReceipt(int $user_id)
+    {
+        // dd($user_id);
+        return $this->payment->where('id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
+    }
+
+    public function getClient($id)
+    {
+        $user_id = $this->user->where('id', $id);
+        $data['user_details'] = $this->user->where('id', $user_id)->first();
+        $data['current_billing'] = $this->currentBilling($user_id);
+        $data['total_due'] = $this->totalDue($user_id);
+        $data['paymentHistories'] = $this->paymentHistory($user_id);
+        // dd($data);
+        return $data;
+    }
+
+    public function monthlyPayment(int $id)
+    {
+       $id = User::findorFail($id);
+       if($id->client_type == "residential")
+       {
+           $amount = ClientType::where('client_type', 'residential')->value('monthly_payment');
+           return $amount;
+       }
+       elseif($id->client_type == "commercial")
+       {
+           $amount = ClientType::where('client_type', 'commercial')->value('monthly_payment');
+           return $amount;
+       }
+       elseif($id->client_type == "medical")
+       {
+           $amount = ClientType::where('client_type', 'medical')->value('monthly_payment');
+           return $amount;
+       }
+       elseif($id->client_type == "industrial")
+       {
+           $amount = ClientType::where('client_type', 'industrial')->value('monthly_payment');
+           return $amount;
+       }
+    }
 }
