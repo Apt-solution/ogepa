@@ -65,6 +65,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
     Route::get('checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
     Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
+    Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
+    Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
 
 });
 

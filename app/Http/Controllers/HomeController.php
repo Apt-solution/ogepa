@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Services\AdminService;
 use App\Services\ChartService;
@@ -42,10 +43,11 @@ class HomeController extends Controller
         if (\Auth::User()->role === 'user') {
             return redirect('user_profile');
         }
-        $residential = User::where('client_type', 'residential')->count();
-        $commercial = User::where('client_type', 'commercial')->count();
-        $industrial = User::where('client_type', 'industrial')->count();
-        $medical = User::where('client_type', 'medical')->count();
+        $residential = Client::where('type', 'residential')->count();
+        $residential == '' ? $residential: 0;
+        $commercial = Client::where('type', 'commercial')->count();
+        $industrial = Client::where('type', 'industrial')->count();
+        $medical = Client::where('type', 'medical')->count();
         $monthRemmitance = $this->adminService->getMonthRemmitance();
         $industrialChart = $this->chartService->getIndustrialChart();
         $medicalChart = $this->chartService->getMedicalChart();

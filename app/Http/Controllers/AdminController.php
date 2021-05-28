@@ -62,8 +62,23 @@ class AdminController extends Controller
     {
        $id = Payment::where('id', $id)->value('id');
        $payments = $this->adminService->userReceipt($id);
-       return view('admin.receipt', compact('payments'));
-       
+       return view('admin.receipt', compact('payments')); 
+    }
+
+    public function addSubAdmin()
+    {
+        return view('admin.addSubAdmin');
+    }
+
+    public function registerSubAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $this->adminService->registerAdmin($request->all());
     }
 
 
