@@ -65,6 +65,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
     Route::get('checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
     Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
+    Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
+    Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
+
 
 });
 

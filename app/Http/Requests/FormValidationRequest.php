@@ -24,12 +24,8 @@ class FormValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['required','string'],
-            'last_name'  => ['required','string'],
-            'phone' => ['required','digits:11'],
-            'lga' => ['required'],
-            'client_type' => ['required'],
-            'address' => ['required','string']
+           
+           
         ];
     }
 }

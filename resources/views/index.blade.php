@@ -16,7 +16,6 @@
                 <table class="table table-bordered all-user text-center" style="width:100%">
                     <thead class="bg-dark">
                         <th>First Name</th>
-                        <th>Last Name</th>
                         <th>Phone</th>
                         <th>User No</th>
                         <th>Type</th>
@@ -131,13 +130,12 @@ $(document).ready(function(){
         ajax: "{{ route('users.index') }}",
         columns: 
         [
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'phone', name: 'phone'},
-            {data: 'ogwema_ref', name: 'ogwema_ref'},
-            {data: 'client_type', name: 'client_type'},
-            {data: 'lga', name: 'lga'},
-            {data: 'address', name: 'address'},
+            {data: 'users.full_name', name: 'users.full_name'},
+            {data: 'phone', name: 'users.phone'},
+            {data: 'user_id', name: 'clients.user_id'},
+            {data: 'type', name: 'clients.type'},
+            {data: 'lga', name: 'clients.lga'},
+            {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
                 name: 'action', 

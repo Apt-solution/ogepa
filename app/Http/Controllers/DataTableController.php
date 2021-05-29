@@ -13,7 +13,9 @@ class DataTableController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::latest()->get();
+            $data = DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref']);
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -21,7 +23,7 @@ class DataTableController extends Controller
                            <a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
                            <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
                             return $btn;
-                    })->rawColumns(['action', 'checkbox'])
+                    })->rawColumns(['action'])
                     ->make(true);
         }
         

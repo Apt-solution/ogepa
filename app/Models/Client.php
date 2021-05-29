@@ -13,6 +13,8 @@ class Client extends Model
         'type',
         'sub_client_type',
         'no_of_sub_client_type',
+        'lga',
+        'ogwama_ref',
         'enteredBy'
     ];
 

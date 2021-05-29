@@ -5,7 +5,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	
 	<title>User's Receipt</title>
-	<link rel='stylesheet' type='text/css' href="{{asset('css/style1.css') }}"  />
+	<link rel='stylesheet' type='text/css' href="{{asset('css/receipt.css') }}"  />
 </head>
 
 <body>
