@@ -15,6 +15,7 @@ use Symfony\Component\VarDumper\Cloner\Data;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use DB;
 use App\Models\User;
+use App\Models\Client;
 use App\Models\Payment;
 use Carbon\Carbon;
 use PDF;

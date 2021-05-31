@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Models\Client;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Hash;
 use App\Models\Payment;
 
@@ -42,7 +43,7 @@ class ClientService
         'type'  => $request['type'],
         'sub_client_type'      => $request['sub_client_type'],
         'no_of_sub_client_type'      => $request['no_of_sub_client_type'],
-        'ogwama_ref'      => bcrypt($ogwemaRef),
+        'ogwama_ref'      => $ogwemaRef,
         'address' => $request['address'],
         'lga'        => $request['lga'],
         'enteredBy' => \Auth::User()->id,
@@ -66,11 +67,9 @@ class ClientService
         return $this->payment->where('user_id', $id)->where('status', 'successful')->sum('amount');
     }
 
-    private function PSP(Request $request)
+    public function ClientProfile($id)
     {
-        if($request->input('type') == "PSP")
-        {
-            return 'subAdmin';
-        }
+        return $this->client->where('user_id', $id)->with('user')->first();
+        
     }
 }

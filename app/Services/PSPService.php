@@ -40,7 +40,7 @@ class PSPService
        $client = array(
         'user_id' =>  $user_id,
         'type'  => 'PSP',
-        'ogwama_ref'      => bcrypt($ogwemaRef),
+        'ogwama_ref'      => $ogwemaRef,
         'enteredBy' => \Auth::User()->id,
     );
        return $this->client->create($client);

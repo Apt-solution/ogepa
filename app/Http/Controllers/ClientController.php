@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\FormValidationRequest;
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
@@ -9,6 +10,8 @@ use App\Services\UserService;
 use App\Services\ChartService;
 use DataTables;
 use DB;
+
+
 
 class ClientController extends Controller
 {
@@ -44,8 +47,8 @@ class ClientController extends Controller
 
     public function showClient($id)
     {
-        $users = User::findorFail($id);
-        return view('showUser', compact('users'));
+       $users = $this->clientService->ClientProfile($id);
+       return view('showUser', compact('users'));
     }
 
     public function ClientProfile($id)

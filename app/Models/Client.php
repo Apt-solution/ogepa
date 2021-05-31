@@ -14,6 +14,7 @@ class Client extends Model
         'sub_client_type',
         'no_of_sub_client_type',
         'lga',
+        'address',
         'ogwama_ref',
         'enteredBy'
     ];

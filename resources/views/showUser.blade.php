@@ -6,6 +6,13 @@ $(document).ready(function() {
     $('.js-example-basic-single').select2();
 });
 </script>
+<div class="row">
+        <div class="card bg-dark p-1">
+            <div class="card-heading">
+                Update User's Data
+            </div>
+        </div>
+    </div>
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
@@ -24,7 +31,7 @@ $(document).ready(function() {
                     @csrf
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">First Name</label>
-                            <input type="text" name="first_name" value="{{ $users->first_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="first_name" value="{{ $users->user->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
                         @error('first_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
                        
