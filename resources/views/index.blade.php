@@ -15,11 +15,12 @@
             <div class="table-responsive">
                 <table class="table table-bordered all-user text-center" style="width:100%">
                     <thead class="bg-dark">
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Fullname</th>
                         <th>Phone</th>
                         <th>User No</th>
-                        <th>Type</th>
+                        <th>Categories</th>
+                        <th>Sub-Categories</th>
+                        <th>No of Sub-Categories</th>
                         <th>Local Govt</th>
                         <th>Address</th>
                         <th>Action</th>
@@ -37,11 +38,12 @@
             <div class="table-responsive">
                 <table class="table table-bordered table-striped residential text-center" style="width:100%">
                     <thead class="bg-green">
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Fullname</th>
                         <th>Phone</th>
                         <th>User No</th>
-                        <th>Type</th>
+                        <th>Categories</th>
+                        <th>Sub-Categories</th>
+                        <th>No of Sub-Categories</th>
                         <th>Local Govt</th>
                         <th>Address</th>
                         <th>Action</th>
@@ -59,11 +61,12 @@
             <div class="table-responsive">
                 <table class="table table-bordered commercial text-center" style="width:100%">
                     <thead class="bg-info">
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Fullname</th>
                         <th>Phone</th>
                         <th>User No</th>
-                        <th>Type</th>
+                        <th>Categories</th>
+                        <th>Sub-Categories</th>
+                        <th>No of Sub-Categories</th>
                         <th>Local Govt</th>
                         <th>Address</th>
                         <th>Action</th>
@@ -81,11 +84,12 @@
             <div class="table-responsive">
                 <table class="table table-bordered industry text-center" style="width:100%">
                     <thead class="bg-warning">
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Fullname</th>
                         <th>Phone</th>
                         <th>User No</th>
-                        <th>Type</th>
+                        <th>Categories</th>
+                        <th>Sub-Categories</th>
+                        <th>No of Sub-Categories</th>
                         <th>Local Govt</th>
                         <th>Address</th>
                         <th>Action</th>
@@ -103,12 +107,12 @@
             <div class="table-responsive">
                 <table class="table table-bordered medical text-center" style="width:100%">
                     <thead class="bg-danger">
-                    
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Fullname</th>
                         <th>Phone</th>
                         <th>User No</th>
-                        <th>Type</th>
+                        <th>Categories</th>
+                        <th>Sub-Categories</th>
+                        <th>No of Sub-Categories</th>
                         <th>Local Govt</th>
                         <th>Address</th>
                         <th>Action</th>
@@ -131,13 +135,14 @@ $(document).ready(function(){
         ajax: "{{ route('users.index') }}",
         columns: 
         [
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'phone', name: 'phone'},
-            {data: 'ogwema_ref', name: 'ogwema_ref'},
-            {data: 'client_type', name: 'client_type'},
-            {data: 'lga', name: 'lga'},
-            {data: 'address', name: 'address'},
+            {data: 'full_name', name: 'users.full_name'},
+            {data: 'phone', name: 'users.phone'},
+            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'type', name: 'clients.type'},
+            {data: 'sub_client_type', name: 'clients.sub_client_type'},
+            {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
+            {data: 'lga', name: 'clients.lga'},
+            {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
                 name: 'action', 
@@ -153,13 +158,14 @@ $(document).ready(function(){
         ajax: "{{ route('residential.user') }}",
         columns: 
         [
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'phone', name: 'phone'},
-            {data: 'ogwema_ref', name: 'ogwema_ref'},
-            {data: 'client_type', name: 'client_type'},
-            {data: 'lga', name: 'lga'},
-            {data: 'address', name: 'address'},
+            {data: 'full_name', name: 'users.full_name'},
+            {data: 'phone', name: 'users.phone'},
+            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'type', name: 'clients.type'},
+            {data: 'sub_client_type', name: 'clients.sub_client_type'},
+            {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
+            {data: 'lga', name: 'clients.lga'},
+            {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
                 name: 'action', 
@@ -175,13 +181,14 @@ $(document).ready(function(){
         ajax: "{{ route('commercial.user') }}",
         columns: 
         [
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'phone', name: 'phone'},
-            {data: 'ogwema_ref', name: 'ogwema_ref'},
-            {data: 'client_type', name: 'client_type'},
-            {data: 'lga', name: 'lga'},
-            {data: 'address', name: 'address'},
+            {data: 'full_name', name: 'users.full_name'},
+            {data: 'phone', name: 'users.phone'},
+            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'type', name: 'clients.type'},
+            {data: 'sub_client_type', name: 'clients.sub_client_type'},
+            {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
+            {data: 'lga', name: 'clients.lga'},
+            {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
                 name: 'action', 
@@ -198,13 +205,14 @@ $(document).ready(function(){
         ajax: "{{ route('industry.user') }}",
         columns: 
         [
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'phone', name: 'phone'},
-            {data: 'ogwema_ref', name: 'ogwema_ref'},
-            {data: 'client_type', name: 'client_type'},
-            {data: 'lga', name: 'lga'},
-            {data: 'address', name: 'address'},
+            {data: 'full_name', name: 'users.full_name'},
+            {data: 'phone', name: 'users.phone'},
+            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'type', name: 'clients.type'},
+            {data: 'sub_client_type', name: 'clients.sub_client_type'},
+            {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
+            {data: 'lga', name: 'clients.lga'},
+            {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
                 name: 'action', 
@@ -221,13 +229,14 @@ $(document).ready(function(){
         ajax: "{{ route('medical.user') }}",
         columns: 
         [
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'phone', name: 'phone'},
-            {data: 'ogwema_ref', name: 'ogwema_ref'},
-            {data: 'client_type', name: 'client_type'},
-            {data: 'lga', name: 'lga'},
-            {data: 'address', name: 'address'},
+            {data: 'full_name', name: 'users.full_name'},
+            {data: 'phone', name: 'users.phone'},
+            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'type', name: 'clients.type'},
+            {data: 'sub_client_type', name: 'clients.sub_client_type'},
+            {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
+            {data: 'lga', name: 'clients.lga'},
+            {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
                 name: 'action', 

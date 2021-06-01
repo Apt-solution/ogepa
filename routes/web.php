@@ -15,6 +15,7 @@ use Symfony\Component\VarDumper\Cloner\Data;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use DB;
 use App\Models\User;
+use App\Models\Client;
 use App\Models\Payment;
 use Carbon\Carbon;
 use PDF;
@@ -50,7 +51,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
+    Route::get('/print-industrial-bill', [AdminController::class, 'printIndustrialBill'])->name('print-industrial-bill');
     Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
+    Route::post('/add-industrial-data', [AdminController::class, 'addIndustrialData'])->name('add-industrial-data');
+    Route::post('/industrial-bill', [AdminController::class, 'industrialBill'])->name('industrial-bill');
+    Route::get('/print-invoice', [AdminController::class, 'printInvoice'])->name('print-invoice');
     Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
     Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
     Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
@@ -67,6 +72,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
     Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
+    Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
+    Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
+    Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
+
 
 });
 
@@ -79,3 +88,14 @@ Route::middleware(['user'])->group(function () {
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });
 
+Route::get('/test', function () {
+    $year = Carbon::now();
+    $users = DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->join('payments', 'users.id', '=', 'payments.user_id')
+            ->where('clients.type', 'residential')
+            ->where('payments.status', 'successful')
+            ->whereYear('payments.updated_at', $year->year)
+            ->sum('amount');
+    return $users;
+});

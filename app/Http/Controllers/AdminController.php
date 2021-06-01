@@ -79,6 +79,42 @@ class AdminController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $this->adminService->registerAdmin($request->all());
+        return redirect()->back()->with('success', 'sub-admin added successfully');
+    }
+
+    public function addIndustrialPayment()
+    {
+        $industries = $this->adminService->getIndustrialClients();
+        $industriesCharges = $this->adminService->getIndustrialCharge();
+        return view('admin.addIndustrialPayment')->with('industries', $industries)->with('industriesCharges', $industriesCharges);
+    }
+
+    public function addIndustrialData(Request $request)
+    {
+        $data = $this->adminService->addIndustrialCharge($request->all());
+        return redirect()->back()->with('success', 'charges added successfully');
+    }
+
+    public function printIndustrialBill()
+    {
+        return view('admin.printIndustrialBill');
+    }
+
+    public function industrialBill(Request $request)
+    {
+        $bill = $this->adminService->getIndustrialBill($request->month);
+        if($bill->isEmpty()){
+            return redirect()->back()->with('error', 'no data found');
+        }
+        Session::put('month', $request->month);
+        return redirect()->route('print-invoice');
+    }
+
+    public function printInvoice()
+    {
+        $month =  Session::get('month');
+        $bills = $this->adminService->getIndustrialBill($month);
+        return view('admin.printInvoice')->with('bills', $bills);
     }
 
 

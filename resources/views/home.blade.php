@@ -118,18 +118,3 @@
 {{ $allClientTypeChart->script() }}
 @endsection
 
-<!-- <div class="row">
-        <div class="col text-center col-md-3">
-            <div class="card p-2 elevation-0">
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-credit-card p-3"></i></button>
-                    </div>
-                    <div class="col">
-                        <h5 class="lead">{{ date('M-Y') }} Remmitance</h5>
-                        <span style="margin-right: 40px; font-weight:bolder"> &#8358;{{ number_format($remmitance, 2) }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
