@@ -81,3 +81,14 @@ Route::middleware(['user'])->group(function () {
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });
 
+Route::get('/test', function () {
+    $year = Carbon::now();
+    $users = DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->join('payments', 'users.id', '=', 'payments.user_id')
+            ->where('clients.type', 'residential')
+            ->where('payments.status', 'successful')
+            ->whereYear('payments.updated_at', $year->year)
+            ->sum('amount');
+    return $users;
+});

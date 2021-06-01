@@ -22,11 +22,13 @@
         <table class="table table-striped table-bordered col-md-10">
             <tr>
                 <th>Client type</th>
+                <th>Catrgories</th>
                 <th>Monthly Billing</th>
             </tr>
             @foreach($automatedPrice as $automatedPrices)
             <tr>
                 <td>{{ $automatedPrices->client_type }}</td>
+                <td>{{ $automatedPrices->sub_client_type }}</td>
                 <td>{{ $automatedPrices->monthly_payment }}</td>
                 <td><a href="#" data-toggle="modal" data-target="#exampleModal{{ $automatedPrices->id }}"><i class="fa fa-edit btn btn-primary"></i></a></td>
             </tr>
