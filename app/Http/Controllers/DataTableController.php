@@ -15,7 +15,11 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $data = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address']);
+            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->where('clients.type', 'residential')
+            ->orWhere('clients.type', 'industrial')
+            ->orWhere('clients.type', 'medical')
+            ->orWhere('clients.type', 'commercial')->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -121,9 +125,10 @@ class DataTableController extends Controller
     
     public function getUserPayment(Request $request)
     {       
-        $payments = DB::table('payments')
-        ->join('users', 'payments.user_id', '=', 'users.id')
-        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.first_name', 'users.last_name', 'users.ogwema_ref'])
+        $payments = DB::table('users')
+        ->join('clients', 'clients.user_id', '=', 'users.id')
+        ->join('payments', 'payments.user_id', '=', 'users.id')
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','clients.ogwama_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
  

@@ -84,7 +84,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered industry text-center" style="width:100%">
                     <thead class="bg-warning">
-                        <th>Fullname</th>
+                        <th>Industry Name</th>
                         <th>Phone</th>
                         <th>User No</th>
                         <th>Categories</th>
