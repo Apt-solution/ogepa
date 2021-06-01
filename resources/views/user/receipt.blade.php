@@ -5,7 +5,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	
 	<title>User's Receipt</title>
-	<link rel='stylesheet' type='text/css' href="{{asset('css/style1.css') }}"  />
+	<link rel='stylesheet' type='text/css' href="{{asset('css/receipt.css') }}"  />
 </head>
 
 <body>
@@ -14,20 +14,28 @@
 		<h5 id="header">RECEIPT</h5>
 		
 		<div id="identity">
-		
-            <h5 id="address">Address: <br>{{ $data['user_details']->address }}
-            <br><br>
-            Phone: <br> {{ $data['user_details']->phone }}</h5>
-
+            <div style="float: left;">
+              <img id="image" style="height: 100px; width:100px; margin-top:-10px" src="{{asset('images/ogunLogo.jpg')}}" alt="logo" />
+            </div>
+           
             <div style="text-align: right;">
               <img id="image" style="height: 100px; width:100px; margin-top:-10px" src="{{asset('images/ogwama.png')}}" alt="logo" />
             </div>
-		
+
+            <div style="margin-top: 20px;">
+            	<h5>Address:</h5>
+  				<p>{{ $data['user_details']->address }}</p>
+            </div>
+             <div style="margin-top: 20px;">
+            	<h5>Phone:</h5>
+  				<p>{{ $data['user_details']->phone }}</p>
+            </div>
+             
 		</div>
 		
 		<div style="clear:both"></div>
 		
-		<div id="customer">
+		<div id="customer" style="margin-top: 20px;">
 
             <h4 id="customer-title">{{ $data['user_details']->first_name }} <br>{{ $data['user_details']->last_name }}</h4>
 

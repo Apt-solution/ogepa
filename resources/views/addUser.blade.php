@@ -26,35 +26,85 @@
                     <form action="{{route('user.reg')}}" method="post">
                         @csrf
                         <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">First Name</label>
-                            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
-                        </div>
-                        @error('first_name')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Last Name</label>
-                            <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" placeholder="Doe" aria-label="lname" aria-describedby="basic-addon1">
-                        </div>
-                        @error('last_name')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
-                        </div>
-                        @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Client Type</label>
-                            <select name="client_type" class="form-select" id="client">
+                            <label class="input-group-text" id="basic-addon1">Create a new account for</label>
+                            <select name="type" class="form-select" id="clientType">
+                                <option selected disabled >Choose</option>
                                 <option value="Residential">Residential</option>
                                 <option value="Industrial">Industrial</option>
                                 <option value="Commercial">Commercial</option>
                                 <option value="Medical">Medical</option>
                             </select>
                         </div>
-                        @error('client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-                        
+                        @error('type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
+                        <div class="input-group mb-3" id="resident" >
+                            <label class="input-group-text" id="basic-addon1">Category:</label>
+                            <select name="sub_client_type" class="form-select">
+                                <option selected disabled >Choose</option>
+                                <option value="Bungalow">Bungalow</option>
+                                <option value="Duplex">Duplex</option>
+                                <option value="Flat">Flat</option>
+                                <option value="Self-Contain">Self-Contain</option>
+                                <option value="Minor Shop">Minor Shop</option>
+                                <option value="Room">Room</option>
+                            </select>
+                        </div>
+                        @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
+                        <div class="input-group mb-3" id="commercial">
+                            <label class="input-group-text" id="basic-addon1">Category:</label>
+                            <select name="sub_client_type" class="form-select">
+                                <option selected disabled >Choose</option>
+                                <option value="Eatery">Eatery</option>
+                                <option value="Super Store">Super Store</option>
+                                <option value="Commercial Bank">Commercial Bank</option>
+                                <option value="Micro Finance Bank">Micro Finance Bank</option>
+                                <option value="School">School</option>
+                                <option value="Food-Canteen">Food-Canteen</option>
+                                <option value="Printing Shop">Printing Shop</option>
+                                <option value="Shopping Complex">Shopping Complex</option>
+                                <option value="Medium Category Entry">Medium Category Entry</option>
+                                <option value="Medium Store">Medium Store</option>
+                                <option value="Mini Supermarket">Mini Supermarket</option>
+                                <option value="Church/Mosque">Church / Mosque</option>
+                                <option value="Fuel Station">Fuel Station</option>
+                                <option value="Bakery">Bakery</option>
+                                <option value="Hospital and Municipal Waste">Hospital and Municipal Waste</option>
+                            </select>
+                        </div>
+                        @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
+                        <div class="input-group mb-3" id="industry">
+                            <label class="input-group-text" id="basic-addon1">Category:</label>
+                            <select name="sub_client_type" class="form-select">
+                                <option selected disabled >Choose</option>
+                                <option value="Foods, Tobacco & Beverages Production & Processing">Foods, Tobacco & Beverages Production & Processing</option>
+                                <option value="Chemical, Petrochemicals and Allied Products">Chemical, Petrochemicals and Allied Products</option>
+                                <option value="Engineering and Construction">Engineering and Construction</option>
+                                <option value="Resources Recovery and General Services">Resources Recovery and General Services</option>
+                            </select>
+                        </div>
+                        @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
+                        <div class="input-group mb-3" id="catNo">
+                            <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
+                            <input type="text" name="no_of_sub_client_type" value="" class="form-control" placeholder="1" aria-label="fname" aria-describedby="basic-addon1">
+                        </div>
+                        @error('no_of_sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1 fullName">Fullname / Industry Name</label>
+                            <input type="text" name="full_name" value="{{ old('full_name') }}" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
+                        </div>
+                        @error('full_name')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1">Phone Number</label>
+                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                        </div>
+                        @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+                    
+                        <div class="input-group mb-3" id="lga">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select name="lga" width="15%" class="form-select">
                                 <option selected>Choose...</option>
@@ -81,7 +131,7 @@
                         </div>
                         @error('lga')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" id="address">
                             <label class="input-group-text">Address</label>
                             <textarea name="address" class="form-control" aria-label="With textarea">{{ old('address') }}</textarea>
                         </div>
@@ -94,4 +144,55 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('#commercial').hide();
+        $('#industry').hide();
+        $('#resident').hide();
+
+       $('select#clientType').change(function(){
+            var clientType = $(this).children("option:selected").val();
+            if(clientType == "Residential")
+            {
+                $('#resident').show();
+                $('#commercial').hide();
+                $('#industry').hide();
+                $('#lga').show();
+                $('#catNo').show();
+                $('#location').hide();
+                $('#address').show();
+
+            }
+            else if(clientType == "Commercial")
+            {
+                $('#resident').hide();
+                $('#commercial').show();
+                $('#industry').hide();
+                $('#lga').show();
+                $('#catNo').show();
+                $('#location').hide();
+                $('#address').show();
+            }
+            else if(clientType == "Industrial")
+            {
+                $('#resident').hide();
+                $('#commercial').hide();
+                $('#industry').show();
+                $('#lga').show();
+                $('#location').hide();
+                $('#catNo').show();
+                $('#address').show();
+            }
+            else if(clientType == "Medical")
+            {
+                $('#resident').hide();
+                $('#commercial').hide();
+                $('#industry').hide();
+                $('#lga').show();
+                $('#catNo').hide();
+                $('#address').show();
+            }
+       });
+    });
+</script>
 @endsection

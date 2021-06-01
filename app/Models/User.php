@@ -21,8 +21,6 @@ class User extends Authenticatable
         'location',
         'phone',
         'email',
-        'lga',
-        'ogwema_ref',
         'password',
         'role',
     ];
@@ -70,6 +68,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Client', 'id', 'entered_by');
     }
+
+
     
 
     

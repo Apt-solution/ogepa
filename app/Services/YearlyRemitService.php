@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Payment;
 use App\Models\User;
+use DB;
 use Carbon\Carbon;
 
 
@@ -16,45 +17,54 @@ class YearlyRemitService
 
     public function residentialYearlyRemit()
     {
+    
         $current = Carbon::now();
-        $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'residential')
-            ->where('payments.status','successful')
-            ->whereYear('payments.created_at', $current->year)
+        $users = DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->join('payments', 'users.id', '=', 'payments.user_id')
+            ->where('clients.type', 'residential')
+            ->where('payments.status', 'successful')
+            ->whereYear('payments.updated_at', $current->year)
             ->sum('amount');
-        return $users; 
+        return $users;
     }
 
     public function commercialYearlyRemit()
     {
         $current = Carbon::now();
-        $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'commercial')
-            ->where('payments.status','successful')
-            ->whereYear('payments.created_at', $current->year)
-            ->sum('amount');
+        $users = DB::table('users')
+        ->join('clients', 'users.id', '=', 'clients.user_id')
+        ->join('payments', 'users.id', '=', 'payments.user_id')
+        ->where('clients.type', 'commercial')
+        ->where('payments.status', 'successful')
+        ->whereYear('payments.updated_at', $current->year)
+        ->sum('amount');
         return $users; 
     }
 
     public function industrialYearlyRemit()
     {
         $current = Carbon::now();
-        $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'industrial')
-            ->where('payments.status','successful')
-            ->whereYear('payments.created_at', $current->year)
-            ->sum('amount');
+        $users =  $users = DB::table('users')
+        ->join('clients', 'users.id', '=', 'clients.user_id')
+        ->join('payments', 'users.id', '=', 'payments.user_id')
+        ->where('clients.type', 'industrial')
+        ->where('payments.status', 'successful')
+        ->whereYear('payments.updated_at', $current->year)
+        ->sum('amount');
         return $users; 
     }
 
     public function medicalYearlyRemit()
     {
         $current = Carbon::now();
-        $users = User::join('payments', 'payments.user_id', '=', 'users.id')
-            ->where('users.client_type', 'medical')
-            ->where('payments.status','successful')
-            ->whereYear('payments.created_at', $current->year)
-            ->sum('amount');
+        $users =  $users = DB::table('users')
+        ->join('clients', 'users.id', '=', 'clients.user_id')
+        ->join('payments', 'users.id', '=', 'payments.user_id')
+        ->where('clients.type', 'medical')
+        ->where('payments.status', 'successful')
+        ->whereYear('payments.updated_at', $current->year)
+        ->sum('amount');
         return $users; 
     }
 }

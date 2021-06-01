@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->decimal('amount', 12, 2);
-            $table->decimal('bank_charges', 4, 2);
+            $table->decimal('bank_charges', 14, 2);
             $table->string('ref');
             $table->string('paystack_ref')->nullable();
             $table->enum('status', ['pending', 'successful'])->default('pending');

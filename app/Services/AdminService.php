@@ -100,4 +100,24 @@ class AdminService
     {
         return $this->clientType->where('client_type','Industrial')->get();
     }
+
+    public function addIndustrialCharge(array $credentials)
+    {
+        $num = count($credentials['id']);
+        for ($i=0; $i < $num; $i++) { 
+            $this->remmitance->create([
+                'user_id' => $credentials['id'][$i],
+                'amount_to_pay' => $credentials['amount'][$i],
+                'month_due' => $credentials['amount'][$i],
+                'admin_id' => \Auth::User()->id,
+            ]);
+        }
+        return $credentials;
+    }
+
+    public function getIndustrialBill($month)
+    {
+        return $this->remmitance->whereMonth('created_at', $month)
+        ->whereYear('created_at', date('Y'))->get();
+    }
 }
