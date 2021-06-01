@@ -79,6 +79,14 @@ class AdminController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $this->adminService->registerAdmin($request->all());
+        return redirect()->back()->with('success', 'sub-admin added successfully');
+    }
+
+    public function addIndustrialPayment()
+    {
+        $industries = $this->adminService->getIndustrialClients();
+        $industriesCharges = $this->adminService->getIndustrialCharge();
+        return view('admin.addIndustrialPayment')->with('industries', $industries)->with('industriesCharges', $industriesCharges);
     }
 
 

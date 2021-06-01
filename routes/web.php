@@ -67,6 +67,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
     Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
+    Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
 
 });
 

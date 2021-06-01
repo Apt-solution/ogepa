@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->integer('user_id');
             $table->enum('type', ['Residential', 'Commercial', 'Medical', 'Industrial']);
             $table->string('sub_client_type');
-            $table->integer('no_of_sub_client_type')->nullable();
+            $table->integer('no_of_sub_client_type')->default(1);
             $table->string('address');
             $table->integer('enteredBy');
             $table->timestamps();
