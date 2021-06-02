@@ -34,7 +34,7 @@
             <div class="col-md-10 invoice">
 
                 <div class="ref-space"></div>
-                <span class="ref">{{ $bill->user->ogwema_ref }}</span><br>
+                <span class="ref">{{ $bill->user->ogwama_ref }}</span><br>
                 <div class="other-space"></div>
                 <span class="name">{{ $bill->user->full_name }}</span><br>
                 <span class="name">{{ $bill->user->location }}</span><br>

@@ -31,6 +31,8 @@ class ClientService
         $data = array(
             'full_name'  => $request['full_name'],
             'phone'      => $request['phone'],
+            'ogwama_ref' => $ogwemaRef,
+            'location'   => $request['lga'],
             'email'      => $request['phone'],
             'password'   => bcrypt($ogwemaRef),
         );
