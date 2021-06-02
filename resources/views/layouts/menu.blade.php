@@ -8,6 +8,9 @@
     <!-- <li style="margin-bottom: -15px;"><a  href="{{ route('payments') }}" class="text-sm"> <i class="fas fa-receipt pr-1"></i> View Payments</a></li> -->
     <li style="margin-bottom: -15px;"><a  href="{{ route('automatedPrice') }}" class="text-sm"> <i class="fas fa-wallet"></i> Set Automated Payment</a></li>
     <!-- <li style="margin-bottom: -15px;"><a href="{{route('showHistory') }}" class="text-sm"><i class="fas fa-history pr-1"></i>View Payment History</a></li> -->
+    <!-- <li style="margin-bottom: -15px;"><a href="{{route('addSubAdmin') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Sub Admin</a></li> -->
+    <li style="margin-bottom: -15px;"><a href="{{route('add-industrial-payment') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Industrial Payment</a></li>
+    <li style="margin-bottom: -15px;"><a href="{{route('print-industrial-bill') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Print Industrial Bill</a></li>
     @endif
 
     @if(\Auth::User()->role === 'user')

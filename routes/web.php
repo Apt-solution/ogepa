@@ -51,7 +51,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
+    Route::get('/print-industrial-bill', [AdminController::class, 'printIndustrialBill'])->name('print-industrial-bill');
     Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
+    Route::post('/add-industrial-data', [AdminController::class, 'addIndustrialData'])->name('add-industrial-data');
+    Route::post('/industrial-bill', [AdminController::class, 'industrialBill'])->name('industrial-bill');
+    Route::get('/print-invoice', [AdminController::class, 'printInvoice'])->name('print-invoice');
     Route::get('/allUser', [ClientController::class, 'allUser'])->name('allUser');
     Route::get('/residential', [DataTableController::class, 'residentialUser'])->name('residential.user');
     Route::get('/commercial', [DataTableController::class, 'commercialUser'])->name('commercial.user');
@@ -66,6 +70,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
     Route::get('checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
     Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
+    Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
+    Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
+    Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
     Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
     Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
 

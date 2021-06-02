@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateUsersTable extends Migration
 {
@@ -25,6 +26,22 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Insert some stuff
+        DB::table('users')->insert(
+            array(
+                'email' => 'admin@ogwama.com',
+                'full_name' => 'admin',
+                'location' => 'Abeokuta',
+                'ogwema_ref' => 'ooo',
+                'phone' => '23490989098',
+                'lga' => 'Abeokuta_South',
+                'password' => '$2y$10$H21XXthP1v1td1YxHNxytOMt4bmbXc3gfswaeNyoOB.Sj6Gnac7PK', //password
+                'role' => 'admin',
+                'created_at' => '2021-05-11 11:40:41',
+                'updated_at' => '2021-05-11 11:40:41'
+            )
+        );
     }
 
     /**
