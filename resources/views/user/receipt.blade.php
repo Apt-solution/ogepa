@@ -36,17 +36,20 @@
 		<div style="clear:both"></div>
 		
 		<div id="customer" style="margin-top: 20px;">
-
-            <h4 id="customer-title">{{ $data['user_details']->first_name }} <br>{{ $data['user_details']->last_name }}</h4>
+			<h5>Fullname:</h5>
+            <h4 id="customer-title">{{ $data['user_details']->full_name }} <br>{{ $data['user_details']->last_name }}</h4>
 
             <table id="meta">
 			@foreach($payment as $pay)
+				<tr>
+                    <td class="meta-head">Ogwama Code</td>
+                    <td><h4>{{$pay->ref}}</h4></td>
+                </tr>
                 <tr>
                     <td class="meta-head">Invoice #</td>
                     <td><h4>{{$pay->ref}}</h4></td>
                 </tr>
                 <tr>
-
                     <td class="meta-head">Date</td>
                     <td><h4 id="date">{{$pay->created_at->format('d-M-Y')}}</h4></td>
                 </tr>
