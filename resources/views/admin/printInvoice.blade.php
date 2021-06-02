@@ -34,7 +34,7 @@
             <div class="col-md-10 invoice">
 
                 <div class="ref-space"></div>
-                <span class="ref">{{ $bill->user->ogwama_ref }}</span><br>
+                <h5 class="ref" style="margin-right:300px; margin-top:100px">{{ $bill->user->ogwama_ref }}</><br>
                 <div class="other-space"></div>
                 <span class="name">{{ $bill->user->full_name }}</span><br>
                 <span class="name">{{ $bill->user->location }}</span><br>
@@ -106,7 +106,7 @@ for (var i = 0; i < arrayLength; i++) {
         height: 130px;
     }
     .ref-space{
-        height: 65px;
+      
     }
     .amount-in-words{
         margin-left: 200px;
