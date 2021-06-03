@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel='stylesheet' type='text/css' href="{{asset('css/print.css') }}"  />
 @section('content')
 <div class="container">
     <div class="row">
@@ -34,7 +34,7 @@
             <div class="col-md-10 invoice">
 
                 <div class="ref-space"></div>
-                <h5 class="ref" style="margin-right:300px; margin-top:100px">{{ $bill->user->ogwama_ref }}</><br>
+                <span class="ref" style="margin-top: 1000px;">{{ $bill->user->ogwama_ref }}</span><br>
                 <div class="other-space"></div>
                 <span class="name">{{ $bill->user->full_name }}</span><br>
                 <span class="name">{{ $bill->user->location }}</span><br>
@@ -106,7 +106,7 @@ for (var i = 0; i < arrayLength; i++) {
         height: 130px;
     }
     .ref-space{
-      
+        height: 90px;
     }
     .amount-in-words{
         margin-left: 200px;

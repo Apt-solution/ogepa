@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\FormValidationRequest;
+use App\Http\Requests\PSPFormValidation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
@@ -24,7 +24,7 @@ class PSPController extends Controller
         return view('PSP.register');
     }
 
-    public function regPSP(FormValidationRequest $request)
+    public function regPSP(PSPFormValidation $request)
     {
         $this->PSPService->addNewPSP($request->all());
         return redirect()->back()->with('status', 'PSP Account Created');

@@ -30,8 +30,9 @@ class PSPService
             'phone'      => $request['phone'],
             'location'   => $request['location'],
             'role'       =>  'subAdmin',
-            'email'      => $request['phone'],
-            'password'   => bcrypt($ogwemaRef),
+            'email'      => $request['email'],
+            'ogwama_ref'   => $ogwemaRef,
+            'password'   => bcrypt($request['password']),
         );
 
        $newUser = $this->user->create($data);
