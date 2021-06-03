@@ -28,8 +28,7 @@
 </div>
     <table class="table history table-bordered table-striped">
         <thead class="bg-dark">
-            <th>First name</th>
-            <th>Last name</th>
+            <th>Fullname / Industry Name</th>
             <th>Ogwama No</th>
             <th>Ref No</th>
             <th>Amount</th>
@@ -48,9 +47,8 @@ $(document).ready(function(){
         ajax: "{{ route('checkHistory') }}",
         columns: 
         [
-            {data: 'first_name', name: 'users.first_name'},
-            {data: 'last_name', name: 'users.last_name'},
-            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
+            {data: 'full_name', name: 'users.full_name'},
+            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
             {data: 'ref', name: 'payments.ref'},
             {data: 'amount', name: 'payments.amount'}, 
             {data: 'updated_at', name: 'payments.updated_at'}

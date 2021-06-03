@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
-        <div class="col-3 text-center">
+        <div class="col-md-3 col-sm-6 text-center">
             <div class="card p-1">
                 <div class="row">
                     <div class="col">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 text-center">
+        <div class="col-md-3 col-sm-6 text-center">
             <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3  text-center">
+        <div class="col-md-3 col-sm-6 text-center">
             <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 text-center">
+        <div class="col-md-3 col-sm-6 text-center">
             <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
