@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('full_name');
             $table->string('location')->nullable();
             $table->string('phone');
+            $table->string('ogwama_ref')->unique();
             $table->string('email')->nullable();
             $table->enum('role', ['admin', 'user', 'subAdmin'])->default('user');
             $table->timestamp('email_verified_at')->nullable();
@@ -33,9 +34,8 @@ class CreateUsersTable extends Migration
                 'email' => 'admin@ogwama.com',
                 'full_name' => 'admin',
                 'location' => 'Abeokuta',
-                'ogwema_ref' => 'ooo',
+                'ogwama_ref' => 'ooo',
                 'phone' => '23490989098',
-                'lga' => 'Abeokuta_South',
                 'password' => '$2y$10$H21XXthP1v1td1YxHNxytOMt4bmbXc3gfswaeNyoOB.Sj6Gnac7PK', //password
                 'role' => 'admin',
                 'created_at' => '2021-05-11 11:40:41',
