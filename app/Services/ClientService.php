@@ -71,8 +71,7 @@ class ClientService
 
     public function ClientProfile($id)
     {
-        return $this->client->where('user_id', $id)->with('user')->first();
-        
+        return $this->client->where('user_id', $id)->with('user')->first();  
     }
 
     public function updateClient($request, $id)

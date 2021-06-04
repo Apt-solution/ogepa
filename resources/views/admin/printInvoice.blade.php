@@ -4,6 +4,9 @@
         background-image: url('/images/INDUSTRIAL.png');
         background-repeat: no-repeat;
         background-size: 100%;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 11pt;
+        
         width: 900px;
     }
     .ref-space{

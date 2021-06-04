@@ -75,6 +75,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
     Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
     Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
+    Route::get('/invoice/{id}',[ClientController::class, 'showInvoice'])->name('userInvoice');
+
 
 
 });
