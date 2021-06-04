@@ -26,8 +26,9 @@
                 @foreach($industries as $industry)
                 <div class="row col-md-12">
                     <div class="col-md-6 form-group">
-                        <label for="">Industry</label>
-                        <input type="text" name="company[]" readonly class="form-control" value="{{ $industry->user->full_name }}">
+                        <label for="">Industry</label><br>
+                        {{ $industry->user->full_name }}
+                        <!--<input type="text" name="company[]" readonly class="form-control" value="{{ $industry->user->full_name }}">-->
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">Select Type</label>
@@ -40,10 +41,10 @@
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">Amount</label>
-                        <input type="number" required id="amount{{ $industry->id }}" name="amount[]" class="form-control">
+                        <input type="number" required id="amount{{ $industry->id }}" name="amount[]" value="50000" class="form-control">
                     </div>
                 </div>
-                <input type="hidden" name="id[]" value="{{ $industry->id }}">
+                <input type="hidden" name="id[]" value="{{ $industry->user_id }}">
                 @endforeach
 
                 <input type="submit" class="btn btn-primary">

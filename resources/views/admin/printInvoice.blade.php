@@ -1,11 +1,81 @@
-@extends('layouts.app')
-
-@section('content')
+<style>
+ 
+    .invoice {
+        background-image: url('public/images/INDUSTRIAL.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 900px;
+    }
+    .ref-space{
+        height: 10px;
+    }
+    .other-space{
+        height: 140px;
+    }
+    .name {
+        margin-left: 150px;
+        margin-top: 50px;
+        padding: 10px;
+    }
+    .space2 {
+        height: 100px;
+    }
+    .amount {
+        margin-left: 100px;
+    }
+    .money {
+        margin-left: 350px;
+    }
+    .date {
+        margin-left: 90px;
+    }
+    .space3{
+        height: 67px;
+    }
+    .money2{
+        margin-left: 620px;
+    }
+    .amount-in-words{
+        margin-left: 300px;
+        text-transform: capitalize;
+    }
+    .money3{
+        margin-left: 100px;
+    }
+    .top-space {
+        height: 220px;
+    }
+    @media print {
+  #printPageButton {
+    display: none;
+  }
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(window).on('load', function() {
+var doc = new jsPDF();
+var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+        return true;
+    }
+};
+$('#pdfview').click(function () {
+    doc.fromHTML($('#pdfdiv').html(), 15, 15, {
+        'width': 700,
+            'elementHandlers': specialElementHandlers
+    });
+    doc.save('file.pdf');
+});
+});
+</script>
+    
+<button id="printPageButton" onClick="window.print()">Print</button>
 <div class="container">
     <div class="row">
         <div class="card bg-dark h-50">
             <div class="card-heading">
-                Print Invoice
+                <!--Print Invoice-->
             </div>
         </div>
     </div>
@@ -26,30 +96,48 @@
         </div>
         @endif
 
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin: 0px auto;">
 
             @foreach($bills as $bill)
             
 
-            <div class="col-md-10 invoice">
+
+            <div class="invoice" id="pdfdiv">
 
                 <div class="ref-space"></div>
-                <h5 class="ref" style="margin-right:300px; margin-top:100px">{{ $bill->user->ogwama_ref }}</><br>
+                <div class="ref" style="margin-left:720px; margin-top:70px">{{ $bill->user->ogwema_ref }}</div><br>
                 <div class="other-space"></div>
                 <span class="name">{{ $bill->user->full_name }}</span><br>
+                <p></p>
                 <span class="name">{{ $bill->user->location }}</span><br>
                 <div class="space2"></div>
-                <span class="amount">OGWAMA Bill</span> <span class="money">{{ $bill->amount_to_pay }}</span><span class="date">{{ $bill->created_at->format('M Y') }}</span>
+                <span class="amount">OGWAMA Bill</span> <span class="money">{{ $bill->amount_to_pay }}</span><span class="date">{{ 'May, 2021' }}</span>
                 <div class="space3"></div>
                 <span class="money2">{{ $bill->amount_to_pay }}</span><br>
+                <p></p>
                 <span class="money2">{{ '0.00' }}</span><br>
+                <p></p>
                 <span class="money2">{{ $bill->amount_to_pay }}</span><br>
                 <div class="mid-space"></div>
+                
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
                 <span class="money3">{{ $bill->amount_to_pay }}</span><br>
                 <p></p>
                 <span class="amount-in-words" id="words{{ $bill->id }}"></span>
                 <div class="top-space"></div>
-                <div class="top-space"></div>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <!--<div class="top-space"></div>-->
             </div>
             @endforeach
 
@@ -98,61 +186,5 @@ for (var i = 0; i < arrayLength; i++) {
 
 </script>
 
-<style>
-    .ref{
-        margin-left: 650px;
-    }
-    .other-space{
-        height: 130px;
-    }
-    .ref-space{
-      
-    }
-    .amount-in-words{
-        margin-left: 200px;
-    }
-    .space2 {
-        height: 120px;
-    }
 
-    .amount {
-        margin-left: 100px;
-    }
 
-    .money {
-        margin-left: 250px;
-    }
-    .space3{
-        height: 20px;
-    }
-    .money2{
-        margin-left: 530px;
-    }
-    .money3{
-        margin-left: 100px;
-    }
-
-    .date {
-        margin-left: 90px;
-    }
-
-    .invoice {
-        background-image: url('images/INDUSTRIAL.png');
-        background-repeat: no-repeat;
-        background-size: 100%;
-    }
-
-    .top-space {
-        height: 220px;
-    }
-
-    .mid-space {
-        height: 240px;
-    }
-
-    .name {
-        margin-left: 120px;
-    }
-</style>
-
-@endsection
