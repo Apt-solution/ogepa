@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{asset('public/css/dropdown.css') }}">
 <div class="sidebar" style="background-color: black;">
     @if(\Auth::User()->role === 'admin')
     <li style="margin-bottom: -15px;"><a href="{{route('home')}}" class="text-sm"><i class="fas fa-home"></i> Dashboard</a></li>

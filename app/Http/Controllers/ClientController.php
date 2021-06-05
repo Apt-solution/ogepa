@@ -66,10 +66,4 @@ class ClientController extends Controller
         return redirect()->back()->with('status', 'User Data is Updated Successfully');
     }
 
-    public function showInvoice($id)
-    {
-       $users = $this->clientService->ClientProfile($id);
-       return view('admin.invoiceData', compact('users'));
-    }
-
 }
