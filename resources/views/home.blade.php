@@ -14,7 +14,7 @@
             <div class="card p-1">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('residential.user') }}" class="btn btn-success rounded p-4 btn-flat"><i class="fas fa-house-user p-3"></i></a>
+                        <a href="#" class="btn btn-success rounded p-4 btn-flat"><i class="fas fa-house-user p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead text-success">Residential</h5>
@@ -27,7 +27,7 @@
             <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('commercial.user') }}" class="btn btn-info rounded p-4 btn-flat"><i class="fas fa-store p-3"></i></a>
+                        <a href="#" class="btn btn-info rounded p-4 btn-flat"><i class="fas fa-store p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead text-info">Commercial</h5>
@@ -40,7 +40,7 @@
             <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('industry.user') }}" class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></a>
+                        <a href="#" class="btn btn-warning rounded p-4 btn-flat"><i class="fas fa-industry p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead text-warning">Industry</h5>
@@ -53,7 +53,7 @@
             <div class="card p-1 ">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('medical.user') }}" class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></a>
+                        <a href="#" class="btn btn-danger rounded p-4 btn-flat"><i class="fas fa-hospital p-3"></i></a>
                     </div>
                     <div class="col">
                         <h5 class="lead text-danger">Medical</h5>

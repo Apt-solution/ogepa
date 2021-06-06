@@ -60,18 +60,10 @@ class ClientController extends Controller
         return view('userprofile', compact('users', 'data', 'userchart', 'total'));
     }
 
-    public function UpdateClient(FormValidationRequest $request , $id)
+    public function UpdateClient(Request $request, $id)
     {
-        $user = User::findorFail($id);
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->phone = $request->input('phone');
-        $user->client_type = $request->input('client_type');
-        $user->lga = $request->input('lga');
-        $user->address = $request->input('address');
-        $user->save();
-        return redirect()->back()->withInput()  
-                                ->with('status', 'User Info Updated successfully');
+        $this->clientService->updateClient($request->all(), $id);
+        return redirect()->back()->with('status', 'User Data is Updated Successfully');
     }
 
 }

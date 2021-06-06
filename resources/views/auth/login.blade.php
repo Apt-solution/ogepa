@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name') }}</title>
+    <title>OGWAMA - Login</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -31,10 +31,10 @@
     <![endif]-->
 
 </head>
-<body style="background-color: mint; background-image:url({{asset('/images/80.png')}}); background-repeat:no-repeat;background-size:contain;" class="hold-transition login-page">
+<body style="background-color: mint; background-image:url({{asset('public/images/80.png')}}); background-repeat:no-repeat;background-size:contain;" class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><img class="" src="{{asset('/images/OGWAMA.png') }}" width="120" height="120" alt="OGWAMA LOGO"></a>
+        <a href="{{ url('/home') }}"><img class="" src="{{asset('public/images/OGWAMA.png') }}" width="120" height="120" alt="OGWAMA LOGO"></a>
     </div>
 
     <!-- /.login-logo -->

@@ -31,7 +31,7 @@ $(document).ready(function() {
                     @csrf
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 ">Client Type</label>
-                            <select selected name="client_type" class="form-select" id="clientType">
+                            <select selected name="type" class="form-select" id="clientType">
                                     <option selected value="{{$users->type}}">{{$users->type}}</option>
                             </select>
                         </div>
@@ -47,41 +47,6 @@ $(document).ready(function() {
                                 <option value="Self-Contain">Self-Contain</option>
                                 <option value="Minor Shop">Minor Shop</option>
                                 <option value="Room">Room</option>
-                            </select>
-                        </div>
-                        @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div class="input-group mb-3" id="commercial">
-                            <label class="input-group-text" id="basic-addon1">Category:</label>
-                            <select name="sub_client_type" class="form-select">
-                            <option selected value="{{$users->sub_client_type}}">{{$users->sub_client_type}}</option>
-                                <option value="Eatery">Eatery</option>
-                                <option value="Super Store">Super Store</option>
-                                <option value="Commercial Bank">Commercial Bank</option>
-                                <option value="Micro Finance Bank">Micro Finance Bank</option>
-                                <option value="School">School</option>
-                                <option value="Food-Canteen">Food-Canteen</option>
-                                <option value="Printing Shop">Printing Shop</option>
-                                <option value="Shopping Complex">Shopping Complex</option>
-                                <option value="Medium Category Entry">Medium Category Entry</option>
-                                <option value="Medium Store">Medium Store</option>
-                                <option value="Mini Supermarket">Mini Supermarket</option>
-                                <option value="Church/Mosque">Church / Mosque</option>
-                                <option value="Fuel Station">Fuel Station</option>
-                                <option value="Bakery">Bakery</option>
-                                <option value="Hospital and Municipal Waste">Hospital and Municipal Waste</option>
-                            </select>
-                        </div>
-                        @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div class="input-group mb-3" id="industry">
-                            <label class="input-group-text" id="basic-addon1">Category:</label>
-                            <select name="sub_client_type" class="form-select">
-                                <option value="{{$users->sub_client_type}}">{{$users->sub_client_type}}</option>
-                                <option value="Foods, Tobacco & Beverages Production & Processing">Foods, Tobacco & Beverages Production & Processing</option>
-                                <option value="Chemical, Petrochemicals and Allied Products">Chemical, Petrochemicals and Allied Products</option>
-                                <option value="Engineering and Construction">Engineering and Construction</option>
-                                <option value="Resources Recovery and General Services">Resources Recovery and General Services</option>
                             </select>
                         </div>
                         @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -104,6 +69,12 @@ $(document).ready(function() {
                         </div>
                         @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
 
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1 email">Email <span class="text-xs text-tiny">(optional)</span></label>
+                            <input type="text" name="email" value="{{ $users->user->email }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
+                        </div>
+                        @error('email')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+                        
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select name="lga" class="form-select" id="inputGroupSelect01">

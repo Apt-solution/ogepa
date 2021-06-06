@@ -33,7 +33,7 @@ class ClientService
             'phone'      => $request['phone'],
             'ogwama_ref' => $ogwemaRef,
             'location'   => $request['lga'],
-            'email'      => $request['phone'],
+            'email'      => $request['email'],
             'password'   => bcrypt($ogwemaRef),
         );
 
@@ -71,7 +71,27 @@ class ClientService
 
     public function ClientProfile($id)
     {
-        return $this->client->where('user_id', $id)->with('user')->first();
-        
+        return $this->client->where('user_id', $id)->with('user')->first();  
+    }
+
+    public function updateClient($request, $id)
+    {
+       $user = $this->user->where('id',$id)->first();
+       return $user->update([
+            'full_name'  => $request['full_name'],
+            'phone'      => $request['phone'],
+            'location'   => $request['lga'],
+            'email'      => $request['email']
+       ]);
+
+       $client = $this->client->where('user_id', $id)->first();
+       return $client->update([
+            'sub_client_type'            => $request['sub_client_type'],
+            'no_of_sub_client_type'      => $request['no_of_sub_client_type'],
+            'address'                    => $request['address'],
+            'lga'                       => $request['lga'],
+       ]);
+
+
     }
 }
