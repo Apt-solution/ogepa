@@ -19,8 +19,6 @@ class CreateClientsTable extends Migration
             $table->enum('type', ['Residential', 'Commercial', 'Medical', 'Industrial', 'PSP']);
             $table->string('sub_client_type')->nullable();
             $table->integer('no_of_sub_client_type')->default(1);
-            $table->string('ogwama_ref')->unique();
-            $table->enum('lga', ['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south'])->nullable();
             $table->string('address')->nullable();
             $table->integer('enteredBy');
             $table->timestamps();

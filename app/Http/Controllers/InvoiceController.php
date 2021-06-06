@@ -24,6 +24,7 @@ class InvoiceController extends Controller
         $this->middleware('auth');
     }
 
+   
     public function showInvoice($id)
     {
        $users = $this->clientService->ClientProfile($id);
@@ -46,17 +47,17 @@ class InvoiceController extends Controller
         );
         $datas = Industrial::create($industrial);
         $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $amtWord = $amt->format($request['total2'],);
+        $amtWord = $amt->format($request['total1'],);
         return view('admin.industrialInvoice', compact('datas', 'amtWord'));
     }
 
-    public function industrialInvoice()
-    {
-        $month =  Session::get('month');
-        $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $amtWord = $amt->format(1000);
-        $bills = $this->adminService->getIndustrialBill($month);
-        return view('admin.industrialInvoice', compact('bills', 'amtWord'));
-    }
+    // public function industrialInvoice()
+    // {
+    //     $month =  Session::get('month');
+    //     $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+    //     $amtWord = $amt->format(1000);
+    //     $bills = $this->adminService->getIndustrialBill($month);
+    //     return view('admin.industrialInvoice', compact('bills', 'amtWord'));
+    // }
 
 }

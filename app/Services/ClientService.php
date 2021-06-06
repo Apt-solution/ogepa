@@ -31,10 +31,10 @@ class ClientService
         $data = array(
             'full_name'  => $request['full_name'],
             'phone'      => $request['phone'],
-            'ogwama_ref' => $ogwemaRef,
-            'location'   => $request['lga'],
+            'ogwema_ref' => $ogwemaRef,
             'email'      => $request['email'],
             'password'   => bcrypt($ogwemaRef),
+            'lga'        => $request['lga'],
         );
 
        $newUser = $this->user->create($data);
@@ -45,11 +45,9 @@ class ClientService
         'type'  => $request['type'],
         'sub_client_type'      => $request['sub_client_type'],
         'no_of_sub_client_type'      => $request['no_of_sub_client_type'],
-        'ogwama_ref'      => $ogwemaRef,
-        'address' => $request['address'],
-        'lga'        => $request['lga'],
+        'address' => $request['address'],       
         'enteredBy' => \Auth::User()->id,
-    );
+        );
        return $this->client->create($client);
     }
 
@@ -57,7 +55,7 @@ class ClientService
     {
         $ref = rand(11111111, 99999999);
         // check if code exist before
-        $chk = $this->client->where('ogwama_ref', $ref)->first();
+        $chk = $this->user->where('ogwema_ref', $ref)->first();
         if ($chk) {
             $this->generateOgwemaRef();
         }

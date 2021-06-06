@@ -15,7 +15,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $data = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'residential')
             ->orWhere('clients.type', 'industrial')
             ->orWhere('clients.type', 'medical')
@@ -38,7 +38,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $residential = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Residential');
             return Datatables::of($residential)
                     ->addIndexColumn()
@@ -59,7 +59,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $commercial =DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Commercial');
             return Datatables::of($commercial)
                     ->addIndexColumn()
@@ -80,7 +80,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $industry = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Industrial');
             return Datatables::of($industry)
                     ->addIndexColumn()
@@ -102,7 +102,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $medical = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Medical');
             return Datatables::of($medical)
                     ->addIndexColumn()
@@ -128,7 +128,7 @@ class DataTableController extends Controller
         $payments = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
         ->join('payments', 'payments.user_id', '=', 'users.id')
-        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','clients.ogwama_ref'])
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwama_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
  
