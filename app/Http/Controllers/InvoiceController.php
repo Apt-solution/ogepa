@@ -5,17 +5,22 @@ use App\Models\Industrial;
 
 use Illuminate\Http\Request;
 use App\Services\ClientService;
-
+use App\Services\AdminService;
+use NumberFormatter;
+use Session;
 
 class InvoiceController extends Controller
 {
 
-    protected $clientService, $userService, $chartService;
+    protected $clientService, $userService, $adminService;
     public function __construct(
-        ClientService $clientService
+        ClientService $clientService,
+        AdminService $adminService
     )
     {
         $this->clientService = $clientService;
+        $this->adminService = $adminService;
+
         $this->middleware('auth');
     }
 
@@ -40,6 +45,18 @@ class InvoiceController extends Controller
             'amtWords'      => $request['amtWords']
         );
         $datas = Industrial::create($industrial);
-        return view('admin.invoice', compact('datas'));
+        $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        $amtWord = $amt->format($request['total2'],);
+        return view('admin.industrialInvoice', compact('datas', 'amtWord'));
     }
+
+    public function industrialInvoice()
+    {
+        $month =  Session::get('month');
+        $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        $amtWord = $amt->format(1000);
+        $bills = $this->adminService->getIndustrialBill($month);
+        return view('admin.industrialInvoice', compact('bills', 'amtWord'));
+    }
+
 }

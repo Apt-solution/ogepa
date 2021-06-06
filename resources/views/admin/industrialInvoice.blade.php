@@ -3,13 +3,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <!-- Load paper.css for happy printing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
     <title>Document</title>
 <style>
     @page { size: A4 }
+
+    @media print {
+        .pageBreak{
+            page-break-after:always;
+        }
+    }
     body{
         font-family: 'Times New Roman', Times, serif;
         font-size: 14px;
@@ -106,58 +111,60 @@
 </style>
 </head>
 <body class="A4">
+
     <div class="container sheet">
         <div class="name">
-            <p>Name</p>
+            <p>{{ $datas->industryName }}</p>
         </div>
         <div class="address">
-            <p>address</p>
+            <p>{{ $datas->address }}</p>
         </div>
         <div class="desc">
             <p>OGWAMA BILL</p>
         </div>
         <div class="trip">
-            <p>1</p>
+            <p>{{ $datas->trip }}</p>
         </div>
         <div class="per-trip">
-            <p>200</p>
+            <p>{{ $datas->perTrip }}</p>
         </div>
         <div class="total1">
-            <p>2000</p>
+            <p>{{ $datas->total1 }}</p>
         </div>
         <div class="month">
-            <p>MAY</p>
+            <p>{{ $datas->invoiceMonth }}</p>
         </div>
         <div class="current">
-            <p>200</p>
+        {{ $datas->currentCharge }}
         </div>
         <div class="net">
-            <p>2000</p>
+            <p>{{ $datas->netArreas }}</p>
         </div>
         <div class="total2">
-            <p>MAY</p>
+            <p>{{ $datas->total2 }}</p>
         </div>
         <div class="due">
-            <p>200</p>
+            <p>{{ $datas->total2 }}</p>
         </div>
         <div class="month2">
-            <p>2000</p>
+            <p>{{ $datas->invoiceMonth }}</p>
         </div>
         <div class="amtPaid">
-            <p>MAY</p>
+            <p>{{ $datas->total2 }}</p>
         </div>
         <div class="amtWord">
-            <p>MAY</p>
+            <p>{{ strtoupper($amtWord) }}</p>
         </div>
         <div class="amtPaid2">
-            <p>MAY</p>
+            <p>{{ $datas->total2 }}</p>
         </div>
         <div class="due1">
-            <p>200</p>
+            <p>{{ $datas->total2 }}</p>
         </div>
         <div class="month3">
-            <p>2000</p>
+            <p>{{ $datas->invoiceMonth }}</p>
         </div>
     </div>
 </body>
+
 </html>

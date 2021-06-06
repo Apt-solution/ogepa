@@ -40,7 +40,7 @@ $(document).ready(function() {
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Invoice Month</label>
-                            <input type="text" name="invoiceMonth" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <textarea name="invoiceMonth" class="form-control" aria-label="With textarea"></textarea>
                     </div>
 
                     <div class="input-group mb-3">
