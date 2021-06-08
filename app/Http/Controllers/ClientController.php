@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormValidationRequest;
 use App\Models\Client;
 use App\Models\User;
+use App\Models\ClientType;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
 use App\Services\UserService;
@@ -34,15 +35,16 @@ class ClientController extends Controller
         return view('index');
     }
     
-    public function addUser()
+    public function addUser(Request  $request)
     {
-        return view('addUser');
+        $monthlyPayment = $this->clientService->monthlyPayment($request['sub_client_type']);
+        return view('addUser', compact($monthlyPayment));
     }
 
     public function regClient(FormValidationRequest $request)
     {
         $this->clientService->addNewClient($request->all());
-        return redirect()->back()->with('status', 'User Account Created');
+        return redirect()->back()->with('status', 'User Account Created')->with('monthlyPayment');
     }
 
     public function showClient($id)
@@ -64,6 +66,13 @@ class ClientController extends Controller
     {
         $this->clientService->updateClient($request->all(), $id);
         return redirect()->back()->with('status', 'User Data is Updated Successfully');
+    }
+
+    public function getPayment(Request $request)
+    {
+    
+        $payment = ClientType::where('sub_client_type', $request->sub_category)->value('monthly_payment');
+        return response($payment);
     }
 
 }

@@ -72,6 +72,15 @@ class User extends Authenticatable
         return $this->hasMany(Client::class, 'id', 'entered_by');
     }
 
+    public function client()
+    {
+        return $this->hasOne('App\Client');
+    }
+
+    public function industrialRemmitances()
+    {
+        return $this->hasMany('App\IndustrialRemmitance');
+    }
 
     
 

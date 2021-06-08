@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+<script src="{{ asset('js/myScript.js') }}"></script>
+
 <script>
 $(document).ready(function() {
     $.noConflict();
@@ -26,10 +28,16 @@ $(document).ready(function() {
                     <h5 class="card-title"><a style="color:white;" href="{{ url()->previous() }}"><span class="fas fa-arrow-left pr-4"></span></a> Update user's data</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('user.update', $users->id)}}" method="post">
+                    <form action="{{route('user.update', $users->user->id)}}" method="post">
                     @method('PUT')
                     @csrf
-                    <div class="input-group mb-3">
+                        <div class="input-group mb-3">
+                                <label class="input-group-text" id="basic-addon1">Fullname / Industry Name</label>
+                                <input type="text" name="full_name" value="{{ $users->user->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                        </div>
+                        @error('full_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
+                    
+                        <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 ">Client Type</label>
                             <select selected name="type" class="form-select" id="clientType">
                                     <option selected value="{{$users->type}}">{{$users->type}}</option>
@@ -39,30 +47,26 @@ $(document).ready(function() {
 
                         <div class="input-group mb-3" id="resident" >
                             <label class="input-group-text" id="basic-addon1">Category:</label>
-                            <select name="sub_client_type" class="form-select">
+                            <select name="sub_client_type" id="sub_category" class="form-select">
                                 <option selected value="{{$users->sub_client_type}}">{{$users->sub_client_type}}</option>
-                                <option value="Bungalow">Bungalow</option>
-                                <option value="Duplex">Duplex</option>
-                                <option value="Flat">Flat</option>
-                                <option value="Self-Contain">Self-Contain</option>
-                                <option value="Minor Shop">Minor Shop</option>
-                                <option value="Room">Room</option>
                             </select>
                         </div>
                         @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3" id="catNo">
                             <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
-                            <input type="text" name="no_of_sub_client_type" value="{{ $users->no_of_sub_client_type }}" class="form-control" placeholder="1" aria-label="fname" aria-describedby="basic-addon1">
+                            <select name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
+                               <option value="{{ $users->no_of_sub_client_type }}">{{ $users->no_of_sub_client_type }}</option> 
+                            </select>                
                         </div>
                         @error('no_of_sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
-
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" id="basic-addon1">Fullname / Industry Name</label>
-                            <input type="text" name="full_name" value="{{ $users->user->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
-                        </div>
-                        @error('full_name')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
                        
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1">Monthly Payment</label>
+                            <input type="text" name="monthlyPayment" id="monthlyPayment" value="{{ $users->initialAmount }}" class="form-control" placeholder="200000" aria-label="lname" aria-describedby="basic-addon1">                
+                        </div>
+                        @error('monthlyPayment')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
                             <input type="text" name="phone" value="{{ $users->user->phone }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
@@ -79,7 +83,7 @@ $(document).ready(function() {
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select name="lga" class="form-select" id="inputGroupSelect01">
                                 <option>Choose...</option>
-                                <option selected value="{{$users->lga}}">{{$users->lga}}</option>
+                                <option selected value="{{$users->lga}}">{{$users->user->lga}}</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
                                 <option value="Ado_Odo_Ota">Ado_Odo_Ota</option>
                                 <option value="Ewekoro">Ewekoro</option>
@@ -106,59 +110,12 @@ $(document).ready(function() {
                         </div>
                         @error('address')<p style="margin-top: -14px;" class="text-danger text-sm" >{{ $message }}</p>@enderror
 
-                        <button class="btn btn-outline-success float-right">Update</button>
+                        <button class="btn btn-outline-success float-right">Update Data</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-      
-       $('select#clientType').change(function(){
-            var clientType = $(this).children("option:selected").val();
-            if(clientType == "Residential")
-            {
-                $('#resident').show();
-                $('#commercial').hide();
-                $('#industry').hide();
-                $('#lga').show();
-                $('#catNo').show();
-                $('#location').hide();
-                $('#address').show();
 
-            }
-            else if(clientType == "Commercial")
-            {
-                $('#resident').hide();
-                $('#commercial').show();
-                $('#industry').hide();
-                $('#lga').show();
-                $('#catNo').show();
-                $('#location').hide();
-                $('#address').show();
-            }
-            else if(clientType == "Industrial")
-            {
-                $('#resident').hide();
-                $('#commercial').hide();
-                $('#industry').show();
-                $('#lga').show();
-                $('#location').hide();
-                $('#catNo').show();
-                $('#address').show();
-            }
-            else if(clientType == "Medical")
-            {
-                $('#resident').hide();
-                $('#commercial').hide();
-                $('#industry').hide();
-                $('#lga').show();
-                $('#catNo').hide();
-                $('#address').show();
-            }
-       });
-    });
-</script>
 @endsection

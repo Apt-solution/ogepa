@@ -77,6 +77,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
     Route::get('/invoice/{id}',[InvoiceController::class, 'showInvoice'])->name('userInvoice');
     Route::post('/invoiceData',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
+    Route::get('/getAmount', [ClientController::class, 'getPayment'])->name('getAmount');
     
 });
 
