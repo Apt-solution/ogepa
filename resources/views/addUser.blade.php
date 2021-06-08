@@ -112,7 +112,6 @@
 
                         <button class="btn btn-outline-dark float-right">Create account</button>
                     </form>
-                    <button id="getAmount" class="btn btn-primary">Check</button>
                 </div>
             </div>
         </div>

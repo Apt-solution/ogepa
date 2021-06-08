@@ -31,7 +31,8 @@ class FormValidationRequest extends FormRequest
            'phone'  => ['required', 'digits:11', 'unique:users,phone'],
            'email'  => ['unique:users,email'],
            'lga'    => ['required'],
-           'address'    => ['required']
+           'address'    => ['required'],
+           'monthlyPayment' => ['required']
         ];
     }
 }
