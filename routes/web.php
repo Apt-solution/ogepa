@@ -88,5 +88,6 @@ Route::middleware(['user'])->group(function () {
     Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
+    Route::get('/isLogin', [UserController::class, 'getIsLogin']);
 });
 

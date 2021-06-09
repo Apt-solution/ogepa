@@ -31,7 +31,6 @@ class UserService
         $data['current_billing'] = $this->currentBilling($user_id);
         $data['total_due'] = $this->totalDue($user_id);
         $data['paymentHistories'] = $this->paymentHistory($user_id);
-        $data['monthlyPayment'] = $this->monthlyPayment($user_id);
         // dd($data);
         return $data;
     }
@@ -123,28 +122,8 @@ class UserService
         return $data;
     }
 
-    public function monthlyPayment(int $id)
+    public function getIsLogin()
     {
-       $id = User::findorFail($id);
-       if($id->client_type == "residential")
-       {
-           $amount = ClientType::where('client_type', 'residential')->value('monthly_payment');
-           return $amount;
-       }
-       elseif($id->client_type == "commercial")
-       {
-           $amount = ClientType::where('client_type', 'commercial')->value('monthly_payment');
-           return $amount;
-       }
-       elseif($id->client_type == "medical")
-       {
-           $amount = ClientType::where('client_type', 'medical')->value('monthly_payment');
-           return $amount;
-       }
-       elseif($id->client_type == "industrial")
-       {
-           $amount = ClientType::where('client_type', 'industrial')->value('monthly_payment');
-           return $amount;
-       }
+        return $this->user->where('id', \Auth::User()->id)->where('role', 'user')->value('isLogin');
     }
 }
