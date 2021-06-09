@@ -20,7 +20,6 @@ class CreateClientsTable extends Migration
             $table->string('sub_client_type')->nullable();
             $table->integer('no_of_sub_client_type')->default(1);
             $table->string('address')->nullable();
-            $table->decimal('initialAmount', 12, 2);
             $table->integer('enteredBy');
             $table->timestamps();
         });

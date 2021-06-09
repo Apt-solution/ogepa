@@ -37,8 +37,7 @@ class ClientService
             'ogwema_ref' => $ogwemaRef,
             'email'      => $request['email'],
             'password'   => bcrypt('phone'),
-            'lga'        => $request['lga'],
-            'monthlyPayment' =>  $request['monthlyPayment']
+            'lga'        => $request['lga']
         );
 
        $newUser = $this->user->create($data);
