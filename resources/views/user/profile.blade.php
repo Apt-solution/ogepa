@@ -88,7 +88,7 @@
                                                 <p>&nbsp;</p>
                                                 <form method="POST" style="margin-top: -20px;" action="{{ route('confirmPay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
                                                     @csrf
-                                                    <input type="number" id="amount-entered" class="form-control"  placeholder="Enter amount" min="500" required>
+                                                    <input type="number" readonly value="{{ $data['total_due'] }}" id="amount-entered" class="form-control"  placeholder="Enter amount" min="500" required>
                                                     <input type="hidden" name="amount" id="amount">
                                                     <input type="hidden" name="charges" id="charges">
                                                     <input type="hidden" name="total_due" id="total_due">
@@ -114,7 +114,7 @@
         document.getElementById('welcomeDiv').style.display = "block";
     }
 
-    $("#amount-entered").keyup(function() {
+    $(document).ready(function(){ 
         amount = $("#amount-entered").val();
         // getting paystack amount and 15 naira pay
         charges = (amount * 0.015) + 20;
