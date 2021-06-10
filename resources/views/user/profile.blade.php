@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Local Govt.</p>
-                                                <h6 class="text-muted f-w-400">{{ $data['user_details']->lga }}</h6>
+                                                <h6 class="text-muted f-w-400">{{ $data['user_details']->user->lga }}</h6>
                                             </div>
                                         </div>
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Billing</h6>

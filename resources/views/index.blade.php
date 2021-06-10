@@ -6,7 +6,7 @@
             User's Information
         </div>
         <div class="mb-2">
-            <a href="{{ URL::to('/addUser') }}" class="btn btn-outline-dark btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>
+            <a href="#" class="btn btn-outline-dark btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>
         </div>
     </div>
     @if(Route::current()->getName() == "allUser")
@@ -137,11 +137,11 @@ $(document).ready(function(){
         [
             {data: 'full_name', name: 'users.full_name'},
             {data: 'phone', name: 'users.phone'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'type', name: 'clients.type'},
             {data: 'sub_client_type', name: 'clients.sub_client_type'},
             {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
-            {data: 'lga', name: 'clients.lga'},
+            {data: 'lga', name: 'users.lga'},
             {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
@@ -160,11 +160,11 @@ $(document).ready(function(){
         [
             {data: 'full_name', name: 'users.full_name'},
             {data: 'phone', name: 'users.phone'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'type', name: 'clients.type'},
             {data: 'sub_client_type', name: 'clients.sub_client_type'},
             {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
-            {data: 'lga', name: 'clients.lga'},
+            {data: 'lga', name: 'users.lga'},
             {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
@@ -183,11 +183,11 @@ $(document).ready(function(){
         [
             {data: 'full_name', name: 'users.full_name'},
             {data: 'phone', name: 'users.phone'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'type', name: 'clients.type'},
             {data: 'sub_client_type', name: 'clients.sub_client_type'},
             {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
-            {data: 'lga', name: 'clients.lga'},
+            {data: 'lga', name: 'users.lga'},
             {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
@@ -207,11 +207,11 @@ $(document).ready(function(){
         [
             {data: 'full_name', name: 'users.full_name'},
             {data: 'phone', name: 'users.phone'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'type', name: 'clients.type'},
             {data: 'sub_client_type', name: 'clients.sub_client_type'},
             {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
-            {data: 'lga', name: 'clients.lga'},
+            {data: 'lga', name: 'users.lga'},
             {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 
@@ -231,11 +231,11 @@ $(document).ready(function(){
         [
             {data: 'full_name', name: 'users.full_name'},
             {data: 'phone', name: 'users.phone'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'type', name: 'clients.type'},
             {data: 'sub_client_type', name: 'clients.sub_client_type'},
             {data: 'no_of_sub_client_type', name: 'clients.no_of_sub_client_type'},
-            {data: 'lga', name: 'clients.lga'},
+            {data: 'lga', name: 'users.lga'},
             {data: 'address', name: 'clients.address'},
             {
                 data: 'action', 

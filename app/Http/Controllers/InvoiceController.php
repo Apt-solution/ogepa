@@ -46,7 +46,7 @@ class InvoiceController extends Controller
         );
         $datas = Industrial::create($industrial);
         $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $amtWord = $amt->format($request['total2'],);
+        $amtWord = $amt->format($request['total1']);
         return view('admin.industrialInvoice', compact('datas', 'amtWord'));
     }
 

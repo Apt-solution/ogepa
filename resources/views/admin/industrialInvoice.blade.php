@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <!-- Load paper.css for happy printing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
-    <title>Document</title>
+    <title>Industrial Invoice</title>
 <style>
     @page { size: A4 }
 
@@ -141,25 +141,25 @@
             <p>{{ $datas->netArreas }}</p>
         </div>
         <div class="total2">
-            <p>{{ $datas->total2 }}</p>
+            <p>{{ $datas->total1 }}</p>
         </div>
         <div class="due">
-            <p>{{ $datas->total2 }}</p>
+            <p>{{ $datas->total1 }}</p>
         </div>
         <div class="month2">
             <p>{{ $datas->invoiceMonth }}</p>
         </div>
         <div class="amtPaid">
-            <p>{{ $datas->total2 }}</p>
+            <p>{{ $datas->total1 }}</p>
         </div>
         <div class="amtWord">
             <p>{{ strtoupper($amtWord) }}</p>
         </div>
         <div class="amtPaid2">
-            <p>{{ $datas->total2 }}</p>
+            <p>{{ $datas->total1 }}</p>
         </div>
         <div class="due1">
-            <p>{{ $datas->total2 }}</p>
+            <p>{{ $datas->total1}}</p>
         </div>
         <div class="month3">
             <p>{{ $datas->invoiceMonth }}</p>
