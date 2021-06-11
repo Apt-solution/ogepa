@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\ClientType;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Payment;
-
+use Illuminate\Validation\Rule;
 
 class ClientService
 {
@@ -73,7 +73,7 @@ class ClientService
 
     public function ClientProfile($id)
     {
-        return $this->client->where('user_id', $id)->with('user')->first();  
+        return $this->user->where('id', $id)->with('client')->first();  
     }
 
     public function updateClient($request, $id)

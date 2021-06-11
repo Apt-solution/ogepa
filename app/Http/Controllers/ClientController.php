@@ -11,8 +11,7 @@ use App\Services\UserService;
 use App\Services\ChartService;
 use DataTables;
 use DB;
-
-
+use Illuminate\Validation\Rule;
 
 class ClientController extends Controller
 {
@@ -50,12 +49,12 @@ class ClientController extends Controller
     public function showClient($id)
     {
        $users = $this->clientService->ClientProfile($id);
-       return view('showUser', compact('users'));
+    //    return view('showUser', compact('users'));
+        return response()->view('showUser', compact('users'));
     }
 
     public function ClientProfile($id)
     {
-        $users = User::findorFail($id);
         $data = $this->userService->paymentHistory($id);
         $userchart = $this->chartService->userChart($id);
         $total = $this->clientService->total($id);
@@ -64,6 +63,21 @@ class ClientController extends Controller
 
     public function UpdateClient(Request $request, $id)
     {
+        $validated = $request->validate([
+            'phone' => ['required', 
+                        'digits:11',
+                         Rule::unique('users')->ignore($id)
+                       ],
+            'email' => ['email',
+                        'regex:/(.+)@(.+)\.(.+)/i',
+                        Rule::unique('users')->ignore($id)
+                       ],
+            'no_of_sub_client_type' => ['required'],
+            'full_name' => ['required','string'],
+            'address'    => ['required'],
+            'monthlyPayment' => ['required', 'regex:/^\d+(\.\d{1,2})?$/']
+        ]);
+
         $this->clientService->updateClient($request->all(), $id);
         return redirect()->back()->with('status', 'User Data is Updated Successfully');
     }

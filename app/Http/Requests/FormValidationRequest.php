@@ -26,13 +26,13 @@ class FormValidationRequest extends FormRequest
         return [
            'type' => ['required'],
            'sub_client_type' => ['required'],
-           'no_of_sub_client_type' => ['required', 'integer'],
+           'no_of_sub_client_type' => ['required'],
            'full_name' => ['required','string'],
            'phone'  => ['required', 'digits:11', 'unique:users,phone'],
-           'email'  => ['unique:users,email'],
+           'email'  => ['required', 'unique:users,email', 'regex:/(.+)@(.+)\.(.+)/i'],
            'lga'    => ['required'],
            'address'    => ['required'],
-           'monthlyPayment' => ['required']
+           'monthlyPayment' => ['required', 'regex:/^\d+(\.\d{1,2})?$/']
         ];
     }
 }

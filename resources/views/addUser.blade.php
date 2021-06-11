@@ -27,13 +27,13 @@
                         @csrf
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 fullName">Fullname / Industry Name</label>
-                            <input type="text" name="full_name" value="{{ old('full_name') }}" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
+                            <input required type="text" name="full_name" value="{{ old('full_name') }}" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
                         @error('full_name')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3" id="type">
                             <label class="input-group-text" id="basic-addon1">Create a new account for</label>
-                            <select name="type" class="form-select" id="clientType">
+                            <select required name="type" class="form-select" id="clientType">
                                 <option selected disabled >Choose</option>
                                 <option value="Residential">Residential</option>
                                 <option value="Industrial">Industrial</option>
@@ -45,7 +45,7 @@
 
                         <div class="input-group mb-3" id="resident" >
                             <label class="input-group-text" id="basic-addon1">Category:</label>
-                            <select name="sub_client_type" id="sub_category" class="form-select">
+                            <select required name="sub_client_type" id="sub_category" class="form-select">
                                <option selected disabled>Choose</option> 
                             </select>
                         </div>
@@ -53,7 +53,7 @@
 
                         <div class="input-group mb-3" id="catNo">
                             <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
-                            <select name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
+                            <select required name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
                                <option selected disabled>Choose</option> 
                             </select>                
                         </div>
@@ -61,25 +61,25 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Monthly Payment</label>
-                            <input type="text" name="monthlyPayment" id="monthlyPayment" value="" class="form-control" placeholder="200000" aria-label="lname" aria-describedby="basic-addon1">                
+                            <input required type="text" name="monthlyPayment"  value="{{ old('monthlyPayment') }}" id="monthlyPayment" value="" class="form-control" placeholder="200000" aria-label="lname" aria-describedby="basic-addon1">                
                         </div>
                         @error('monthlyPayment')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                            <input required type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
                         @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 email">Email <span class="text-xs text-tiny">(optional)</span></label>
-                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="email" required name="email" value="{{ old('email') }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
                         @error('email')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
                         <div class="input-group mb-3" id="lga">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
-                            <select name="lga" width="15%" class="form-select">
+                            <select required name="lga" width="15%" class="form-select">
                                 <option selected disabled>Choose...</option>
                                 <option value="Abeokuta_North">Abeokuta_North</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
@@ -106,7 +106,7 @@
 
                         <div class="input-group mb-3" id="address">
                             <label class="input-group-text">Address</label>
-                            <textarea name="address" class="form-control" aria-label="With textarea">{{ old('address') }}</textarea>
+                            <textarea required name="address" class="form-control" aria-label="With textarea">{{ old('address') }}</textarea>
                         </div>
                         @error('address')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
@@ -193,7 +193,7 @@
        $("select#no_of_sub_category, select#sub_category").change(function(){
        
         $clientType = $('#sub_category').children("option:selected").val();
-            $.ajax({
+        $.ajax({
             type: 'GET',
             data: {'sub_category':$clientType},
             url: '{{ URL::to('getAmount') }}',
