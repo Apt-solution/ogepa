@@ -61,20 +61,20 @@ class AdminService
     public function getMonthRemmitance()
     {
         return $this->payment->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'))->sum('amount');
+            ->whereYear('created_at', date('Y'))->sum('amount');
     }
 
     public function getSearchPayment()
     {
         $request = Session::get('request');
         return $this->payment->whereDate('created_at', '>=', $request['from'])
-        ->whereDate('created_at', '<=', $request['to'])
-        ->where('status', 'successful')->get();
+            ->whereDate('created_at', '<=', $request['to'])
+            ->where('status', 'successful')->get();
     }
 
     public function userReceipt($id)
     {
-      return $this->payment::where('id', $id)->with('user')->get();    
+        return $this->payment::where('id', $id)->with('user')->get();
     }
 
     public function registerAdmin(array $data)
@@ -93,18 +93,18 @@ class AdminService
 
     public function getIndustrialClients()
     {
-        return $this->client->where('type','Industrial')->get();
+        return $this->client->where('type', 'Industrial')->get();
     }
 
     public function getIndustrialCharge()
     {
-        return $this->clientType->where('client_type','Industrial')->get();
+        return $this->clientType->where('client_type', 'Industrial')->get();
     }
 
     public function addIndustrialCharge(array $credentials)
     {
         $num = count($credentials['id']);
-        for ($i=0; $i < $num; $i++) { 
+        for ($i = 0; $i < $num; $i++) {
             $this->remmitance->create([
                 'user_id' => $credentials['id'][$i],
                 'amount_to_pay' => $credentials['amount'][$i],
@@ -118,6 +118,17 @@ class AdminService
     public function getIndustrialBill($month)
     {
         return $this->remmitance->whereMonth('created_at', $month)
-        ->whereYear('created_at', date('Y'))->get();
+            ->whereYear('created_at', date('Y'))->get();
+    }
+
+    public function getUnenteredIndustrialPayment()
+    {
+        return $this->client->where('type', 'industrial')->get();
+    }
+
+    public function checkIfAmountExist(array $request)
+    {
+        return $this->remmitance->where('user_id', $request['industry_id'])
+            ->whereMonth('created_at', $request['month'])->first();
     }
 }

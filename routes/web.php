@@ -73,8 +73,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
+    Route::post('/add-amount-paid', [AdminController::class, 'addAmountPaid'])->name('add-amount-paid');
     Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
     Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
+    Route::get('/industrial-paid-payment', [AdminController::class, 'industrialPayment'])->name('industrial-paid-payment');
     Route::get('/invoice/{id}',[InvoiceController::class, 'showInvoice'])->name('userInvoice');
     Route::post('/invoiceData',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
     

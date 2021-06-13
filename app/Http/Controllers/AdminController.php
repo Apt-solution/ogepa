@@ -117,6 +117,20 @@ class AdminController extends Controller
         return view('admin.printInvoice')->with('bills', $bills);
     }
 
+    public function industrialPayment()
+    {
+        $industries = $this->adminService->getUnenteredIndustrialPayment();
+        return view('admin.industrialPayment')->with('industries', $industries);
+    }
+
+    public function addAmountPaid(Request $request)
+    {
+        $checkIfAmountExist = $this->adminService->checkIfAmountExist($request->all());
+        if(!$checkIfAmountExist){
+            return redirect()->back()->with('error', 'no data found');
+        }
+    }
+
 
 
     
