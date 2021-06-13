@@ -73,14 +73,15 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/add-sub-admin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
-    Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
-    Route::post('/add-psp', [PSPController::class, 'regPSP'])->name('regPSP');
-    Route::get('/show-psp/{id}', [PSPController::class, 'PSPDetails'])->name('PSPDetails');
-    Route::put('/update-psp/{id}', [PSPController::class, 'updataPSP'])->name('updatePSP');
+    Route::get('/psp-vendor', [PSPController::class, 'showPSPVendor'])->name('showPSPVendor');
+    Route::post('/add-psp-vendor', [PSPController::class, 'regPSPVendor'])->name('regPSPVendor');
+    Route::get('/psp-vendor/{id}', [PSPController::class, 'PSPVendorDetails'])->name('PSPDetails');
+    Route::put('/update-psp-vendor/{id}', [PSPController::class, 'updatePSPVendor'])->name('updatePSPVendor');
+    Route::get('/list-psp', [DataTableController::class, 'passAllPSPToTable'])->name('PSPList');
+    Route::get('/list-vendor', [DataTableController::class, 'passAllVendorToTable'])->name('vendorList');
     Route::get('/invoice/{id}', [InvoiceController::class, 'showInvoice'])->name('userInvoice');
     Route::post('/invoice-data',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
-    Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount');
-    
+    Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount'); 
 });
 
 Route::middleware(['user'])->group(function () {
@@ -90,6 +91,6 @@ Route::middleware(['user'])->group(function () {
     Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
-    Route::get('/isLogin', [UserController::class, 'getIsLogin']);
+    Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
 });
 
