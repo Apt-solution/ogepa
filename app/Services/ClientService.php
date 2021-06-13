@@ -89,7 +89,6 @@ class ClientService
 
        $client = $this->client->where('user_id', $id)->first();
        return $client->update([
-            'type'  => $request['type'],
             'sub_client_type'      => $request['sub_client_type'],
             'no_of_sub_client_type'      => $request['no_of_sub_client_type'],
             'address' => $request['address'],  

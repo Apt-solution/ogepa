@@ -14,7 +14,7 @@ class AddInitialAmountToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->decimal('initialAmount', 12, 2)->after('address');
+            $table->decimal('initialAmount', 12, 2)->after('address')->default(0);
         });
     }
 

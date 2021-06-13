@@ -48,11 +48,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/automatedPrice', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
+    Route::get('/automated-price', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
-    Route::post('/editAutomatedPrice', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
+    Route::post('/edit-automated-price', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
     Route::get('/print-industrial-bill', [AdminController::class, 'printIndustrialBill'])->name('print-industrial-bill');
-    Route::post('/searchPayment', [AdminController::class, 'searchPayment'])->name('searchPayment');
+    Route::post('/search-payment', [AdminController::class, 'searchPayment'])->name('searchPayment');
     Route::post('/add-industrial-data', [AdminController::class, 'addIndustrialData'])->name('add-industrial-data');
     Route::post('/industrial-bill', [AdminController::class, 'industrialBill'])->name('industrial-bill');
     Route::get('/print-invoice', [AdminController::class, 'printInvoice'])->name('print-invoice');
@@ -68,16 +68,18 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
     Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
-    Route::get('checkPayment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
-    Route::get('/paymentHistories', [DataTableController::class, 'getPayment'])->name('showHistory');
-    Route::get('/addSubAdmin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
+    Route::get('check-payment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
+    Route::get('/payment-histories', [DataTableController::class, 'getPayment'])->name('showHistory');
+    Route::get('/add-sub-admin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
     Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
-    Route::post('/addPSP', [PSPController::class, 'regPSP'])->name('regPSP');
-    Route::get('/invoice/{id}',[InvoiceController::class, 'showInvoice'])->name('userInvoice');
-    Route::post('/invoiceData',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
-    Route::get('/getAmount', [ClientController::class, 'getPayment'])->name('getAmount');
+    Route::post('/add-psp', [PSPController::class, 'regPSP'])->name('regPSP');
+    Route::get('/show-psp/{id}', [PSPController::class, 'PSPDetails'])->name('PSPDetails');
+    Route::put('/update-psp/{id}', [PSPController::class, 'updataPSP'])->name('updatePSP');
+    Route::get('/invoice/{id}', [InvoiceController::class, 'showInvoice'])->name('userInvoice');
+    Route::post('/invoice-data',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
+    Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount');
     
 });
 

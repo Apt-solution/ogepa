@@ -73,7 +73,7 @@
                         
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 email">Email <span class="text-xs text-tiny">(optional)</span></label>
-                            <input type="email" required name="email" value="{{ old('email') }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
                         @error('email')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
@@ -95,7 +95,7 @@
                                 <option value="Obafemi_Owode">Obafemi_Owode</option>
                                 <option value="Odeda">Odeda</option>
                                 <option value="Odogbolu">Odogbolu</option>
-                                <option value="Ogun_Water_Side">Ogun_Water_Side</option>
+                                <option value="Ogun_WaterSide">Ogun_Water_Side</option>
                                 <option value="Remo_North">Remo_North</option>
                                 <option value="Sagamu">Sagamu</option>
                                 <option value="Yewa_North">Yewa_North</option>
@@ -196,7 +196,7 @@
         $.ajax({
             type: 'GET',
             data: {'sub_category':$clientType},
-            url: '{{ URL::to('getAmount') }}',
+            url: "{{ URL::to('get-amount') }}",
             success: function(data)
             {
                $no_of_sub_category = $('select#no_of_sub_category').children("option:selected").val();

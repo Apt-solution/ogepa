@@ -171,7 +171,7 @@ $(document).ready(function() {
                 $.ajax({
                     type: 'GET',
                     data: {'sub_category':$clientType},
-                    url: '{{ URL::to('getAmount') }}',
+                    url: '{{ URL::to('get-amount') }}',
                     success: function(data)
                     {
                         $no_of_sub_category = $('select#no_of_sub_category').children("option:selected").val();

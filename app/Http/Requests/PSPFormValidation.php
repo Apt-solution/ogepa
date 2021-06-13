@@ -24,11 +24,12 @@ class PSPFormValidation extends FormRequest
     public function rules()
     {
         return [
+            'type'      => ['required'],
             'full_name' => ['required'],
-            'phone'     => ['required','digits:11','numeric', 'unique:users,phone'],
+            'phone'     => ['required', 'unique:users,phone'],
             'location'  => ['required', 'string'],
-            'password'  => ['required', 'confirmed'],
-            'email'     => ['required', 'unique:users,email']
+            'email'     => ['unique:users,email'],
+            'lga'       => ['required']
         ];
     }
 }
