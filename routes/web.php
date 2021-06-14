@@ -78,10 +78,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/invoice/{id}',[InvoiceController::class, 'showInvoice'])->name('userInvoice');
     Route::post('/invoiceData',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
     
-
-
-
-
 });
 
 Route::middleware(['user'])->group(function () {

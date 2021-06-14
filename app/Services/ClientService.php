@@ -48,7 +48,6 @@ class ClientService
         'address' => $request['address'],       
         'enteredBy' => \Auth::User()->id,
         );
-        
        return $this->client->create($client);
     }
 

@@ -80,7 +80,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $industry = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-           ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Industrial');
             return Datatables::of($industry)
                     ->addIndexColumn()
@@ -128,7 +128,11 @@ class DataTableController extends Controller
         $payments = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
         ->join('payments', 'payments.user_id', '=', 'users.id')
+<<<<<<< HEAD
         ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwema_ref'])
+=======
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwama_ref'])
+>>>>>>> 10d0fdc1432d842a8702e04853d68e7027880f9b
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
  

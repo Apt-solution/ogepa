@@ -159,7 +159,7 @@
             <p>{{ $datas->total1 }}</p>
         </div>
         <div class="due1">
-            <p>{{ $datas->total1}}</p>
+            <p>{{ $datas->total1 }}</p>
         </div>
         <div class="month3">
             <p>{{ $datas->invoiceMonth }}</p>
