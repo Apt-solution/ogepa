@@ -17,4 +17,23 @@
     <li><a href="{{ route('user_profile') }}">my profile</a></li>
     @endif
 </div>
-
+<!-- <script>
+    $(document).ready(function(){
+        $.noConflict();
+        $.ajax({
+            type: 'GET',
+            url: '{{ URL::to('isLogin') }}',
+            success: function(data)
+            {
+                if(data == '0')
+                {
+                    console.log(data);
+                }
+                else if(data == '1')
+                {
+                    console.log(data);
+                }
+            }
+        });
+    });
+</script> -->

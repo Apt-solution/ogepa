@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\remmitance;
 use App\Models\Payment;
 use App\Models\Client;
+use App\Models\IndustrialRemmitance;
+use App\Services\UserService;
 use Session;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,19 +16,24 @@ class AdminService
 {
 
     protected $clientType, $user, $remmitance, $payment, $client;
+    protected $industrialRemmitance, $userService;
 
     public function __construct(
         ClientType $clientType,
         User $user,
         remmitance $remmitance,
         Payment $payment,
-        Client $client
+        Client $client,
+        IndustrialRemmitance $industrialRemmitance,
+        UserService $userService
     ) {
         $this->clientType = $clientType;
         $this->user = $user;
         $this->remmitance = $remmitance;
         $this->payment = $payment;
         $this->client = $client;
+        $this->industrialRemmitance = $industrialRemmitance;
+        $this->userService = $userService;
     }
 
     public function getAutomatedPrice()
@@ -121,14 +128,26 @@ class AdminService
             ->whereYear('created_at', date('Y'))->get();
     }
 
-    public function getUnenteredIndustrialPayment()
-    {
-        return $this->client->where('type', 'industrial')->get();
-    }
+    // public function getUnenteredIndustrialPayment()
+    // {
+    //     return $this->client->where('type', 'industrial')->get();
+    // }
 
     public function checkIfAmountExist(array $request)
     {
-        return $this->remmitance->where('user_id', $request['industry_id'])
-            ->whereMonth('created_at', $request['month'])->first();
+        return $this->industrialRemmitance->where('user_id', $request['industry_id'])
+            ->where('month_due', $request['month'])->first();
+    }
+
+    public function addIndustrialAmountPaid(array $data)
+    {
+        $reference = $this->userService->getPaymentRef();
+        return $this->payment->create([
+            'user_id' => $data['user_id'],
+            'amount' => $data['amount'],
+            'bank_charges' => 0,
+            'ref' => $reference,
+            'status' => 'successful'
+        ]);
     }
 }

@@ -25,7 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'lga'
+        'lga',
+        'isLogin'
     ];
 
     /**
@@ -72,6 +73,15 @@ class User extends Authenticatable
         return $this->hasMany(Client::class, 'id', 'entered_by');
     }
 
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }
+
+    public function industrialRemmitances()
+    {
+        return $this->hasMany('App\IndustrialRemmitance');
+    }
 
     
 
