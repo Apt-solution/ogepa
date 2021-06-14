@@ -122,12 +122,12 @@ class ClientTypeSeeder extends Seeder
             ],
             [
                 'client_type' => 'industrial',
-                'sub_client_type' => '10_ton',
+                'sub_client_type' => '10 ton',
                 'monthly_payment' => '60000',
             ],
             [
                 'client_type' => 'industrial',
-                'sub_client_type' => '15_20_ton',
+                'sub_client_type' => '15-20 ton',
                 'monthly_payment' => '90000',
             ],
             [

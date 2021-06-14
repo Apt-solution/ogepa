@@ -4,10 +4,11 @@ namespace App\Services;
 
 use App\Models\Client;
 use App\Models\User;
-
+use App\Models\ClientType;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Payment;
-
+use Illuminate\Validation\Rule;
 
 class ClientService
 {
@@ -17,11 +18,13 @@ class ClientService
     public function __construct(
         User $user,
         Payment $payment,
-        Client $client
+        Client $client,
+        ClientType $clientType
     ) {
         $this->user = $user;
         $this->payment = $payment;
         $this->client = $client;
+        $this->clientType = $clientType;
     }
 
     public function addNewClient($request)
@@ -33,8 +36,8 @@ class ClientService
             'phone'      => $request['phone'],
             'ogwema_ref' => $ogwemaRef,
             'email'      => $request['email'],
-            'password'   => bcrypt($ogwemaRef),
-            'lga'        => $request['lga'],
+            'password'   => bcrypt('password'),
+            'lga'        => $request['lga']
         );
 
        $newUser = $this->user->create($data);
@@ -45,7 +48,8 @@ class ClientService
         'type'  => $request['type'],
         'sub_client_type'      => $request['sub_client_type'],
         'no_of_sub_client_type'      => $request['no_of_sub_client_type'],
-        'address' => $request['address'],       
+        'address' => $request['address'], 
+        'initialAmount' => $request['monthlyPayment'],      
         'enteredBy' => \Auth::User()->id,
         );
        return $this->client->create($client);
@@ -69,27 +73,31 @@ class ClientService
 
     public function ClientProfile($id)
     {
-        return $this->client->where('user_id', $id)->with('user')->first();  
+        return $this->user->where('id', $id)->with('client')->first();  
     }
 
     public function updateClient($request, $id)
     {
        $user = $this->user->where('id',$id)->first();
-       return $user->update([
+       $user->update([
             'full_name'  => $request['full_name'],
             'phone'      => $request['phone'],
-            'location'   => $request['lga'],
-            'email'      => $request['email']
+            'email'      => $request['email'],
+            'password'   => bcrypt('password'),
+            'lga'        => $request['lga'],
        ]);
 
        $client = $this->client->where('user_id', $id)->first();
        return $client->update([
-            'sub_client_type'            => $request['sub_client_type'],
+            'sub_client_type'      => $request['sub_client_type'],
             'no_of_sub_client_type'      => $request['no_of_sub_client_type'],
-            'address'                    => $request['address'],
-            'lga'                       => $request['lga'],
+            'address' => $request['address'],  
+            'initialAmount' => $request['monthlyPayment']    
        ]);
+    }
 
-
+    public function monthlyPayment()
+    {
+       return $this->clientType->where('sub_client_type', 'room')->get('monthly_payment'); 
     }
 }

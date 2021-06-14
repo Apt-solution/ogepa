@@ -117,6 +117,34 @@ class AdminController extends Controller
         return view('admin.printInvoice')->with('bills', $bills);
     }
 
+    public function industrialPayment()
+    {
+        $industries = $this->adminService->getIndustrialClients();
+        return view('admin.industrialPayment')->with('industries', $industries);
+    }
+
+    public function addAmountPaid(Request $request)
+    {
+        // check if the money 
+        $checkIfAmountExist = $this->adminService->checkIfAmountExist($request->all());
+        if(!$checkIfAmountExist){
+            return redirect()->back()->with('error', 'industry selected dont have payment in selected month');
+        }
+        Session::put('user_id', $request['industry_id']);
+        return redirect('enter-amount-paid');
+    }
+
+    public function enterAmountPaid()
+    {
+        return view('admin.enterAmountPaid');
+    }
+
+    public function addIndustrialAmountPaid(Request $request)
+    {
+        $this->adminService->addIndustrialAmountPaid($request->all());
+        return redirect()->route('industrial-paid-payment')->with('success', 'amount entered successfully');
+    }
+
 
 
     

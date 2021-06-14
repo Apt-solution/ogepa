@@ -50,6 +50,12 @@ class UserController extends Controller
         return view('user.receipt', compact(['data', 'payment']));
     }
 
+    public function getIsLogin()
+    {
+        $isLogin = $this->userService->getIsLogin();
+        return response($isLogin);
+    }
+
 
     
 }

@@ -16,7 +16,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->enum('type', ['Residential', 'Commercial', 'Medical', 'Industrial', 'PSP']);
+            $table->enum('type', ['Residential', 'Commercial', 'Medical', 'Industrial', 'PSP', 'Vendor']);
             $table->string('sub_client_type')->nullable();
             $table->integer('no_of_sub_client_type')->default(1);
             $table->string('address')->nullable();
