@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\FormValidationRequest;
+use App\Http\Requests\PSPFormValidation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
@@ -24,30 +24,29 @@ class PSPController extends Controller
         return view('PSP.register');
     }
 
-    public function regPSP(FormValidationRequest $request)
+    public function regPSP(PSPFormValidation $request)
     {
         $this->PSPService->addNewPSP($request->all());
-        return redirect()->back()->with('status', 'PSP Account Created');
+        return redirect()->back()->with('status', 'Account Created');
     }
 
-    public function showClient($id)
+    public function UpdatePSP(Request $request , $id)
     {
-        $users = User::findorFail($id);
-        return view('showUser', compact('users'));
-    }
+        $validated = $request->validate([
+            'phone' => ['required', 
+                        'digits:11',
+                         Rule::unique('users')->ignore($id)
+                       ],
+            'email' => ['email',
+                        'regex:/(.+)@(.+)\.(.+)/i',
+                        Rule::unique('users')->ignore($id)
+                       ],
+            'full_name' => ['required','string'],
+            'lga'       => ['required'],
+            'location'  => ['required']
+        ]);
 
-
-    public function UpdateClient(FormValidationRequest $request , $id)
-    {
-        $user = User::findorFail($id);
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->phone = $request->input('phone');
-        $user->client_type = $request->input('client_type');
-        $user->lga = $request->input('lga');
-        $user->address = $request->input('address');
-        $user->save();
-        return redirect()->back()->withInput()  
-                                ->with('status', 'User Info Updated successfully');
+        $this->PSPService->updatePSP($request->all(), $id);
+        return redirect()->back()->with('status', 'User Data is Updated Successfully');
     }
 }

@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{asset('public/css/dropdown.css') }}">
 <div class="sidebar" style="background-color: black;">
     @if(\Auth::User()->role === 'admin')
     <li style="margin-bottom: -15px;"><a href="{{route('home')}}" class="text-sm"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -11,10 +10,30 @@
     <!-- <li style="margin-bottom: -15px;"><a href="{{route('addSubAdmin') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Sub Admin</a></li> -->
     <li style="margin-bottom: -15px;"><a href="{{route('add-industrial-payment') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Industrial Payment</a></li>
     <li style="margin-bottom: -15px;"><a href="{{route('print-industrial-bill') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Print Industrial Bill</a></li>
+    <li style="margin-bottom: -15px;"><a href="{{route('industrial-paid-payment') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Industrial Paid Payment</a></li>
     @endif
 
     @if(\Auth::User()->role === 'user')
     <li><a href="{{ route('user_profile') }}">my profile</a></li>
     @endif
 </div>
-
+<!-- <script>
+    $(document).ready(function(){
+        $.noConflict();
+        $.ajax({
+            type: 'GET',
+            url: '{{ URL::to('isLogin') }}',
+            success: function(data)
+            {
+                if(data == '0')
+                {
+                    console.log(data);
+                }
+                else if(data == '1')
+                {
+                    console.log(data);
+                }
+            }
+        });
+    });
+</script> -->

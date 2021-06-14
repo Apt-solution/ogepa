@@ -7,7 +7,7 @@
 
         <div class="page-content page-container" id="page-content">
             <div class="padding">
-                <div class="row container d-flex justify-content-center">
+                <div class="row container d-flex justify-content-center" style="margin-top: 100px;">
                     <div class="col-xl-10 col-md-12">
                         <div class="card user-card-full">
                             <div class="row m-l-0 m-r-0">

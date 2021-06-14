@@ -15,7 +15,7 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $data = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'residential')
             ->orWhere('clients.type', 'industrial')
             ->orWhere('clients.type', 'medical')
@@ -23,8 +23,7 @@ class DataTableController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '
-                           <a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
                            <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
                             return $btn;
                     })->rawColumns(['action'])
@@ -39,14 +38,14 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $residential = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Residential');
             return Datatables::of($residential)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
-                            return $btn;
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                         return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -60,14 +59,14 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $commercial =DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Commercial');
             return Datatables::of($commercial)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
-                            return $btn;
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                         return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -81,14 +80,15 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $industry = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Industrial');
             return Datatables::of($industry)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
-                            return $btn;
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a> |
+                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-primary p-1"><i class="fas fa-receipt"></i></a>';
+                         return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -102,14 +102,14 @@ class DataTableController extends Controller
         if ($request->ajax()) {
             $medical = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select(['users.id', 'users.full_name', 'users.phone', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.lga', 'clients.ogwama_ref', 'clients.address'])
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', 'Medical');
             return Datatables::of($medical)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                           <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
-                            return $btn;
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                         return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -128,7 +128,7 @@ class DataTableController extends Controller
         $payments = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
         ->join('payments', 'payments.user_id', '=', 'users.id')
-        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','clients.ogwama_ref'])
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwama_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
  

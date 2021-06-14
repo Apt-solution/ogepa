@@ -1,46 +1,64 @@
 <style>
  
     .invoice {
-        background-image: url('public/images/INDUSTRIAL.png');
+        background-image: url('/images/INDUSTRIAL.png');
         background-repeat: no-repeat;
         background-size: 100%;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 11pt;
+        
         width: 900px;
     }
     .ref-space{
         height: 10px;
+        font-weight: bold;
+
     }
     .other-space{
         height: 140px;
     }
     .name {
         margin-left: 150px;
-        margin-top: 50px;
+        margin-top: 20px;
         padding: 10px;
+        font-weight: bold;
+
     }
     .space2 {
         height: 100px;
     }
     .amount {
         margin-left: 100px;
+        font-weight: bold;
+
     }
     .money {
         margin-left: 350px;
+        font-weight: bold;
+
     }
     .date {
         margin-left: 90px;
+        font-weight: bold;
+
     }
     .space3{
         height: 67px;
     }
     .money2{
         margin-left: 620px;
+        font-weight: bold;
+
     }
     .amount-in-words{
         margin-left: 300px;
         text-transform: capitalize;
+        font-weight: bold;
     }
     .money3{
         margin-left: 100px;
+        font-weight: bold;
+
     }
     .top-space {
         height: 220px;
@@ -62,7 +80,7 @@ var specialElementHandlers = {
 };
 $('#pdfview').click(function () {
     doc.fromHTML($('#pdfdiv').html(), 15, 15, {
-        'width': 700,
+        'width': 800,
             'elementHandlers': specialElementHandlers
     });
     doc.save('file.pdf');
@@ -105,7 +123,7 @@ $('#pdfview').click(function () {
             <div class="invoice" id="pdfdiv">
 
                 <div class="ref-space"></div>
-                <div class="ref" style="margin-left:720px; margin-top:70px">{{ $bill->user->ogwema_ref }}</div><br>
+                <div class="ref" style="margin-left:720px; margin-top:70px;font-weight: bold;">{{ $bill->user->ogwama_ref }}</div><br>
                 <div class="other-space"></div>
                 <span class="name">{{ $bill->user->full_name }}</span><br>
                 <p></p>

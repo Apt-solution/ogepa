@@ -21,21 +21,20 @@
                     <h5 class="card-title text-white">Account Creation</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('regPSP')}}" method="post">
+                    <form action="" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="input-group mb-3" id="type">
                             <label class="input-group-text" id="basic-addon1">Create a new account for</label>
                             <select required name="type" class="form-select" id="clientType">
-                                <option selected disabled >Choose</option>
-                                <option value="PSP">PSP</option>
-                                <option value="Vendor">Vendor</option>
+                                <option selected ></option>
                             </select>
                         </div>
                         @error('type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 fullName">Company Name</label>
-                            <input type="text" name="full_name" value="{{ old('full_name') }}" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="full_name" value="" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
@@ -44,7 +43,7 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 fullName">Email <span class="text-xs text-tiny">(optional)</span></label>
-                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="psp@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="email" value="" class="form-control" placeholder="psp@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-envelope"></span></div>
                             </div>
@@ -53,7 +52,7 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="phone" value="" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-phone"></span></div>
                             </div>
@@ -89,14 +88,14 @@
                         
                         <div class="input-group mb-3" id="location">
                             <label class="input-group-text">Zone</label>
-                            <input type="text" name="location" value="{{ old('location') }}" class="form-control" placeholder="Abeokuta" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="location" value="" class="form-control" placeholder="Abeokuta" aria-label="lname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-map-marker"></span></div>
                             </div>
                         </div>
                         @error('location')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
 
-                        <button class="btn btn-outline-dark float-right">Create account</button>
+                        <button class="btn btn-outline-dark float-right">update account</button>
                     </form>
                 </div>
             </div>
