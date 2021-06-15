@@ -21,7 +21,7 @@ class PSPService
         $this->client = $client;
     }
 
-    public function addNewPSP($request)
+    public function addNewPSPVendor($request)
     {
         $ogwemaRef = $this->generateOgwemaRef();
         // dd($ogwemaRef);
@@ -48,7 +48,7 @@ class PSPService
 
     }
 
-    public function updatePSP($request, $id)
+    public function updatePSPVendor($request, $id)
     {
         $user = $this->user->where('id',$id)->first();
         $user->update([
@@ -74,6 +74,11 @@ class PSPService
             $this->generateOgwemaRef();
         }
         return $ref;
+    }
+
+    public function showPSPVendor($id)
+    {
+        return $this->user->where('id', $id)->with('client')->first();
     }
 
 }

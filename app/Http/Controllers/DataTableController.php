@@ -131,6 +131,47 @@ class DataTableController extends Controller
         ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwama_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
- 
+    }
+
+    public function passAllPSPToTable(Request $request)
+    {
+        if ($request->ajax()) {
+            $psp =DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'users.location',  'clients.user_id', 'clients.type'])
+            ->where('clients.type', 'PSP');
+            return Datatables::of($psp)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<a href="/show-psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                         return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        
+        return view('PSPVendor.psp-vendor-table');
+    }
+
+    public function passAllVendorToTable(Request $request)
+    {
+        if ($request->ajax()) {
+            $vendor =DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'users.location',  'clients.user_id', 'clients.type'])
+            ->where('clients.type', 'Vendor');
+            return Datatables::of($vendor)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                         return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        
+        return view('PSPVendor.psp-vendor-table');
     }
 }
