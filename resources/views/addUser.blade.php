@@ -127,7 +127,7 @@
         var industrial = ['Choose', '10 ton', '15-20 ton', 'compactor'];
         
         
-        var no =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; 
+        var no =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]; 
 
        $('select#clientType').change(function(){
         var clientType = $(this).children("option:selected").val();
@@ -142,7 +142,7 @@
                 {
                     $('#sub_category').append('<option value="'+resident+'">'+ resident + '</option>');
                 }  
-                for( const catNo of no)
+                for(let catNo = 1; catNo <= 1000; catNo++)
                 {
                     $('#no_of_sub_category').append('<option value="'+catNo+'">'+ catNo + '</option>');
 
@@ -150,6 +150,7 @@
             }
             else if(clientType == 'Commercial')
             {
+                var x = 1;
                 $('#no_of_sub_category').text('');
                 $('#sub_category').text('');
                 $('#catNo').show();
@@ -159,11 +160,11 @@
                    
                     $('#sub_category').append('<option value="'+resident+'">'+ resident + '</option>');
                 } 
-                for( const catNo of no)
+                for(let catNo = 1; catNo <= 1000; catNo++)
                 {
                     $('#no_of_sub_category').append('<option value="'+catNo+'">'+ catNo + '</option>');
 
-                } 
+                }
             }
             else if(clientType == 'Industrial')
             {
