@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Industrial;
-
 use Illuminate\Http\Request;
 use App\Services\ClientService;
 use App\Services\AdminService;
@@ -45,7 +43,6 @@ class InvoiceController extends Controller
             'total2'        => $request['total2'],
             'amtWords'      => $request['amtWords']
         );
-        $datas = Industrial::create($industrial);
         $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
         $amtWord = $amt->format($request['total1'],);
         return view('admin.industrialInvoice', compact('datas', 'amtWord'));
