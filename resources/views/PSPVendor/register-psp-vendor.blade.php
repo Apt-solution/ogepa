@@ -21,7 +21,7 @@
                     <h5 class="card-title text-white">Account Creation</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('regPSP')}}" method="post">
+                    <form action="{{route('regPSPVendor')}}" method="post">
                         @csrf
                         <div class="input-group mb-3" id="type">
                             <label class="input-group-text" id="basic-addon1">Create a new account for</label>

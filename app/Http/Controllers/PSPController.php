@@ -9,6 +9,7 @@ use App\Services\UserService;
 use App\Services\PSPService;
 use DataTables;
 use DB;
+use Illuminate\Validation\Rule;
 
 class PSPController extends Controller
 {
@@ -19,18 +20,18 @@ class PSPController extends Controller
         $this->middleware('auth');
     }
     
-    public function showPSP()
+    public function showPSPVendor()
     {
-        return view('PSP.register');
+        return view('PSPVendor.register-psp-vendor');
     }
 
-    public function regPSP(PSPFormValidation $request)
+    public function regPSPVendor(PSPFormValidation $request)
     {
-        $this->PSPService->addNewPSP($request->all());
+        $this->PSPService->addNewPSPVendor($request->all());
         return redirect()->back()->with('status', 'Account Created');
     }
 
-    public function UpdatePSP(Request $request , $id)
+    public function updatePSPVendor(Request $request , $id)
     {
         $validated = $request->validate([
             'phone' => ['required', 
@@ -46,7 +47,13 @@ class PSPController extends Controller
             'location'  => ['required']
         ]);
 
-        $this->PSPService->updatePSP($request->all(), $id);
+        $this->PSPService->updatePSPVendor($request->all(), $id);
         return redirect()->back()->with('status', 'User Data is Updated Successfully');
+    }
+
+    public function PSPVendorDetails($id)
+    {
+        $psp_vendor = $this->PSPService->showPSPVendor($id);
+        return view('PSPVendor.psp-vendor-details', compact('psp_vendor'));
     }
 }
