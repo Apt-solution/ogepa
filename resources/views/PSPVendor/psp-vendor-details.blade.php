@@ -3,7 +3,7 @@
 <div class="row">
     <div class="card bg-dark p-1">
         <div class="card-heading">
-            Register New PSP
+            Update PSP & Vendor Here
         </div>
     </div>
 </div>
@@ -21,20 +21,20 @@
                     <h5 class="card-title text-white">Account Creation</h5>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('updatePSPVendor', $psp_vendor->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="input-group mb-3" id="type">
                             <label class="input-group-text" id="basic-addon1">Create a new account for</label>
                             <select required name="type" class="form-select" id="clientType">
-                                <option selected ></option>
+                                <option selected value="{{ $psp_vendor->client->type }}">{{ $psp_vendor->client->type }}</option>
                             </select>
                         </div>
                         @error('type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 fullName">Company Name</label>
-                            <input type="text" name="full_name" value="" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="full_name" value="{{ $psp_vendor->full_name }}" class="form-control" placeholder="John / OGWAMA" aria-label="fname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
@@ -43,7 +43,7 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 fullName">Email <span class="text-xs text-tiny">(optional)</span></label>
-                            <input type="text" name="email" value="" class="form-control" placeholder="psp@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="email" value="{{ $psp_vendor->email }}" class="form-control" placeholder="psp@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-envelope"></span></div>
                             </div>
@@ -52,7 +52,7 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input type="text" name="phone" value="" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="phone" value="{{ $psp_vendor->phone }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-phone"></span></div>
                             </div>
@@ -62,7 +62,8 @@
                         <div class="input-group mb-3" id="lga">
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select required name="lga" width="15%" class="form-select">
-                                <option selected disabled>Choose...</option>
+                                <option selected value="{{ $psp_vendor->lga }}"> {{ $psp_vendor->lga  }}</option>
+                                <option disabled>Choose</option>
                                 <option value="Abeokuta_North">Abeokuta_North</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
                                 <option value="Ado_Odo_Ota">Ado_Odo_Ota</option>
@@ -88,7 +89,7 @@
                         
                         <div class="input-group mb-3" id="location">
                             <label class="input-group-text">Zone</label>
-                            <input type="text" name="location" value="" class="form-control" placeholder="Abeokuta" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="location" value="{{ $psp_vendor->location }}" class="form-control" placeholder="Abeokuta" aria-label="lname" aria-describedby="basic-addon1">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-map-marker"></span></div>
                             </div>
