@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Services\ClientService;
 use App\Services\AdminService;
 use NumberFormatter;
-use Session;
+use App\Models\IndustrialRemmitance;
 
 class InvoiceController extends Controller
 {
@@ -31,21 +31,28 @@ class InvoiceController extends Controller
 
     public function InvoiceData(Request $request)
     {
-        $industrial = array(
-            'industryName' => $request['industryName'],
+        $datas = array(
+            'industryName'  => $request['industryName'],
             'address'       => $request['address'],
-            'invoiceMonth'       => $request['invoiceMonth'],
-            'trip'       => $request['trip'],
+            'invoiceMonth'  => date('F', mktime(0, 0, 0, $request['month_due'], 10)),
+            'trip'          => $request['no_of_trip'],
             'perTrip'       => $request['perTrip'],
-            'total1'       => $request['total1'],
-            'currentCharge'       => $request['currentCharge'],
-            'netArreas'       => $request['netArreas'],
-            'total2'        => $request['total2'],
-            'amtWords'      => $request['amtWords']
+            'total1'        => $request['total1'],
+            'currentCharge' => $request['currentCharge'],
+            'netArreas'     => $request['netArreas'],
+            'amount_to_pay' => $request['amount_to_pay'],
+            'amtWord'       => $request['amtWord']
         );
-        $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $amtWord = $amt->format($request['total1'],);
-        return view('admin.industrialInvoice', compact('datas', 'amtWord'));
+        
+        $industrial = $request->validate([
+            'month_due'     => ['required'],
+            'no_of_trip'    => ['required'],
+            'amount_to_pay' => ['required']
+        ]);
+        
+        $industrial['user_id'] = $request['user_id'];
+        $industrial_remmitance = IndustrialRemmitance::create($industrial);
+        return view('admin.industrialInvoice', compact('datas'));
     }
 
     // public function industrialInvoice()

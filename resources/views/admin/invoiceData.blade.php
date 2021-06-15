@@ -26,43 +26,55 @@ $(document).ready(function() {
                     <h5 class="card-title"><a style="color:white;" href="{{ route('industry.user') }}"><span class="fas fa-arrow-left pr-4"></span></a> Add Invoice Data</h5>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('invoiceData') }}" method="post">
                     @csrf
+                    <input type="hidden" name="user_id" value="{{ $users->id }}">
+                    <div class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1">Ogwama Code:</label>
+                            <input type="text" name="ogwamaCode" readonly value="{{ $users->ogwema_ref }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                    </div>
+
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Fullname / Industry Name</label>
-                            <input type="text" name="industryName" disabled value="{{ $users->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="industryName" readonly value="{{ $users->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
                     
                     <div class="input-group mb-3">
                             <label class="input-group-text">Address</label>
-                            <textarea name="address" class="form-control" aria-label="With textarea">{{ $users->client->address }}</textarea>
+                            <textarea readonly name="address" class="form-control" aria-label="With textarea">{{ $users->client->address }}</textarea>
                     </div>
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Invoice Month</label>
-                            <select class="form-control" name="month" id="invoiceMonth">
+                            <select class="form-control" name="month_due" id="invoiceMonth">
                             </select>
                     </div>
+                    @error('month_due')
+                        <div style="margin-top: -14px;" class="text-danger text-xs">{{  $message  }}</div>
+                    @enderror  
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Trips</label>
-                            <select class="form-control" name="trip" id="noOfTrip">
+                            <select class="form-control" name="no_of_trip" id="noOfTrip">
                             </select>                   
                     </div>
+                    @error('no_of_trip')
+                        <div style="margin-top: -14px;" class="text-danger text-xs">{{  $message  }}</div>
+                    @enderror
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Per Trips(#)</label>
-                            <input type="text" disabled name="perTrip" id="perTrip" value="{{ $users->client->initialAmount }}" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly name="perTrip" id="perTrip" value="{{ $users->client->initialAmount }}" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Total (#)</label>
-                            <input type="text" disabled id="total1" name="total1" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly id="total1" name="total1" value="{{ $users->client->initialAmount }}" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Current Charges(#)</label>
-                            <input type="text" readonly name="currentCharge" id="current" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly name="currentCharge" id="current" class="form-control" value="{{ $users->client->initialAmount }}" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
@@ -72,12 +84,15 @@ $(document).ready(function() {
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Money to be paid</label>
-                            <input type="text"  name="total2" id="total2" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text"  name="amount_to_pay" id="total2" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
+                    @error('amount_to_pay')
+                        <div style="margin-top: -14px;" class="text-danger text-xs">{{  $message  }}</div>
+                    @enderror
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Amount Paid in Words</label>
-                            <input type="text" name="amtWords" id="amtWords" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="amtWord" id="amtWords" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
                         <button class="btn btn-outline-success float-right">Generate Invoice</button>
                     </form>
@@ -138,10 +153,30 @@ function toWordsconver(s) {
     return str_val.replace(/\s+/g, ' ');
 }
 $(document).ready(function(){
-    for(let month = 1; month <=12; month++)
+
+    let month = {
+        'Jan': 1,
+        'Feb': 2,
+        'Mar': 3,
+        'Apr': 4,
+        'May': 5,
+        'Jun': 6,
+        'Jul': 7,
+        'Aug': 8,
+        'Sept': 9,
+        'Oct': 10,
+        'Nov': 11,
+        'Dec': 12
+    };
+
+    for(const key in month){
+        console.log(key + ":" + month[key]);
+        $('#invoiceMonth').append('<option value="'+month[key]+'">'+ key + '</option>');
+    }
+
+    for(let trip = 1; trip <=12; trip++)
     {
-        $('#invoiceMonth').append('<option value="'+month+'">'+ month + '</option>');
-        $('#noOfTrip').append('<option value="'+month+'">'+ month + '</option>');
+        $('#noOfTrip').append('<option value="'+trip+'">'+ trip + '</option>');
     }
 
     $('select#noOfTrip').change(function(){
@@ -160,7 +195,7 @@ $(document).ready(function(){
         let total2 = net2 + current2;
         $('#total2').val(total2);
         let Inwords = toWordsconver(total2);
-        $('#amtWords').val(Inwords);
+        $('#amtWords').val(Inwords + "Naira Only");
     });
 })
 </script>
