@@ -37,7 +37,9 @@ class InvoiceService
 
     public function getAmountPaid($user_id)
     {
-        return $this->payment->where('user_id', $user_id)->sum('amount');
+        return $this->payment->where('user_id', $user_id)
+                            ->where('status', 'successful')
+                            ->sum('amount');
     }
 
     public function getArreas($user_id)
