@@ -79,7 +79,7 @@
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Money to be paid</label>
-                            <input type="text"  name="amount_to_pay" id="total2" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly  name="amount_to_pay" id="total2" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
                     @error('amount_to_pay')
                         <div style="margin-top: -14px;" class="text-danger text-xs">{{  $message  }}</div>
@@ -98,6 +98,8 @@
 </div>
 <script>
 $(document).ready(function(){
+
+
 
     let month = {
         'Jan': 1,
