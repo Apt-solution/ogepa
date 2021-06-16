@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <script src="{{ asset('js/moneyToWord.js') }}"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="row">
         <div class="card bg-dark p-1">
             <div class="card-heading">
@@ -9,6 +10,13 @@
         </div>
     </div>
 <div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="w3-panel w3-leftbar w3-border-blue w3-pale-blue">
+                <p class="mt-2">Note: Kindly check through all the below data..Once invoice has been generated no changes can be reverted</p>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
                 @if(Session::has('status'))
@@ -89,7 +97,7 @@
                             <label class="input-group-text" id="basic-addon1">Amount Paid in Words</label>
                             <input type="text" name="amtWord" id="amtWords" value="" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
-                        <button class="btn btn-outline-success float-right">Generate Invoice</button>
+                        <button  onclick="myFunction();" class="btn btn-outline-success float-right">Generate Invoice</button>
                     </form>
                 </div>
             </div>
@@ -97,9 +105,11 @@
     </div>
 </div>
 <script>
+   function myFunction() {
+      if(!confirm("Are You Sure You Want To Proceed?"))
+      event.preventDefault();
+  }
 $(document).ready(function(){
-
-
 
     let month = {
         'Jan': 1,

@@ -37,12 +37,6 @@ class InvoiceController extends Controller
 
     public function InvoiceData(Request $request)
     {
-        $check_invoice = $this->invoiceService->checkInvoice($request['user_id'], $request['month_due']);
-        if($check_invoice === 1){
-            return redirect()->back()->with('status', 'Invoice of this month has been Generated For this User');
-        }
-
-        $amount_paid = $this->invoiceService->getAmountPaid($request['user_id'], $request['month_due']);
 
         $datas = array(
             'industryName'  => $request['industryName'],
@@ -63,6 +57,11 @@ class InvoiceController extends Controller
             'amount_to_pay' => ['required']
         ]); 
         $industrial['user_id'] = $request['user_id'];
+
+        $check_invoice = $this->invoiceService->checkInvoice($request['user_id'], $request['month_due']);
+        if($check_invoice === 1){
+            return redirect()->back()->with('status', 'Invoice Of This Month Has Been Generated For This User');
+        }
 
         $industrial_remmitance = IndustrialRemmitance::create($industrial);
         return view('admin.industrialInvoice', compact('datas'));
