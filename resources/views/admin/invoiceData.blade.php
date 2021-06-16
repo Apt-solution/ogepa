@@ -79,7 +79,7 @@ $(document).ready(function() {
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Net Arreas (#)</label>
-                            <input type="text"  name="netArreas" value="" id="net" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly  name="netArreas" value="{{ $arreas }}" id="net" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
@@ -185,10 +185,7 @@ $(document).ready(function(){
         let total = perTrip * noOfTrip;
         $('#total1').val(total);
         $('#current').val(total);
-    });
-
-    $('#net').focusout(function(){
-        let net = $(this).val();
+        let net = $('#net').val();
         let current = $('#current').val();
         let net2 = parseInt(net, 10);
         let current2 = parseInt(current, 10)
@@ -197,6 +194,7 @@ $(document).ready(function(){
         let Inwords = toWordsconver(total2);
         $('#amtWords').val(Inwords + "Naira Only");
     });
+
 })
 </script>
 @endsection

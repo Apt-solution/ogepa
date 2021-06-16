@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
-use App\Services\AdminService;
+use App\Services\InvoiceService;
 use NumberFormatter;
 use App\Models\IndustrialRemmitance;
+use App\Models\Payment;
+
 
 class InvoiceController extends Controller
 {
 
-    protected $clientService, $userService, $adminService;
+    protected $clientService, $userService, $invoiceService;
     public function __construct(
         ClientService $clientService,
-        AdminService $adminService
+        InvoiceService $invoiceService
     )
     {
         $this->clientService = $clientService;
-        $this->adminService = $adminService;
+        $this->invoiceService = $invoiceService;
 
         $this->middleware('auth');
     }
@@ -26,11 +28,22 @@ class InvoiceController extends Controller
     public function showInvoice($id)
     {
        $users = $this->clientService->ClientProfile($id);
-       return view('admin.invoiceData', compact('users'));
+       $payment = $this->invoiceService->getAmountPaid($id);
+       $remmitance = $this->invoiceService->getArreas($id);
+       $arreas = $remmitance - $payment; 
+       
+       return view('admin.invoiceData', compact('users', 'arreas'));
     }
 
     public function InvoiceData(Request $request)
     {
+        $check_invoice = $this->invoiceService->checkInvoice($request['user_id'], $request['month_due']);
+        if($check_invoice === 1){
+            return redirect()->back()->with('status', 'Invoice of this month has been Generated For this User');
+        }
+
+        $amount_paid = $this->invoiceService->getAmountPaid($request['user_id'], $request['month_due']);
+
         $datas = array(
             'industryName'  => $request['industryName'],
             'address'       => $request['address'],
@@ -48,20 +61,11 @@ class InvoiceController extends Controller
             'month_due'     => ['required'],
             'no_of_trip'    => ['required'],
             'amount_to_pay' => ['required']
-        ]);
-        
+        ]); 
         $industrial['user_id'] = $request['user_id'];
+
         $industrial_remmitance = IndustrialRemmitance::create($industrial);
         return view('admin.industrialInvoice', compact('datas'));
     }
-
-    // public function industrialInvoice()
-    // {
-    //     $month =  Session::get('month');
-    //     $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-    //     $amtWord = $amt->format(1000);
-    //     $bills = $this->adminService->getIndustrialBill($month);
-    //     return view('admin.industrialInvoice', compact('bills', 'amtWord'));
-    // }
 
 }
