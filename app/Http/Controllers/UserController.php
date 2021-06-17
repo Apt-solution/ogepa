@@ -56,6 +56,16 @@ class UserController extends Controller
         return response($isLogin);
     }
 
+    public function changeUserPassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'min:6', 'confirmed']
+        ]);
+
+        $this->userService->changePassword($request->all());
+        return redirect()->back()->with('status', 'Password Change Succesfully');
+    }
+
 
     
 }

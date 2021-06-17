@@ -126,4 +126,14 @@ class UserService
     {
         return $this->user->where('id', \Auth::User()->id)->where('role', 'user')->value('isLogin');
     }
+
+    public function changePassword(array $data)
+    {
+        return $this->user->where('id',  \Auth::user()->id)
+        ->update([
+            'password' => bcrypt($data['password']),
+            'isLogin' => 1
+        ]);
+    }
+
 }

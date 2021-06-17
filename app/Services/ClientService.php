@@ -36,7 +36,7 @@ class ClientService
             'phone'      => $request['phone'],
             'ogwema_ref' => $ogwemaRef,
             'email'      => $request['email'],
-            'password'   => bcrypt('password'),
+            'password'   => bcrypt(12345678),
             'lga'        => $request['lga']
         );
 
@@ -83,7 +83,7 @@ class ClientService
             'full_name'  => $request['full_name'],
             'phone'      => $request['phone'],
             'email'      => $request['email'],
-            'password'   => bcrypt('password'),
+            'password'   => bcrypt(12345678),
             'lga'        => $request['lga'],
        ]);
 

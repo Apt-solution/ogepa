@@ -3,7 +3,7 @@
 <div class="row">
     <div class="card bg-dark p-1">
         <div class="card-heading">
-            Register New PSP
+            Register New PSP / Vendor
         </div>
     </div>
 </div>

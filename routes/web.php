@@ -74,10 +74,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
     Route::post('/add-amount-paid', [AdminController::class, 'addAmountPaid'])->name('add-amount-paid');
-    Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
-    Route::post('/add-psp', [PSPController::class, 'regPSP'])->name('regPSP');
-    Route::get('/show-psp/{id}', [PSPController::class, 'PSPDetails'])->name('PSPDetails');
-    Route::put('/update-psp/{id}', [PSPController::class, 'updataPSP'])->name('updatePSP');
     Route::get('/psp-vendor', [PSPController::class, 'showPSPVendor'])->name('showPSPVendor');
     Route::post('/add-psp-vendor', [PSPController::class, 'regPSPVendor'])->name('regPSPVendor');
     Route::get('/psp-vendor/{id}', [PSPController::class, 'PSPVendorDetails'])->name('PSPDetails');
@@ -96,6 +92,7 @@ Route::middleware(['user'])->group(function () {
     Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
+    Route::put('/change-password', [UserController::class, 'changeUserPassword'])->name('changePassword');
     Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
 });
 

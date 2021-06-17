@@ -12,13 +12,13 @@
         <div class="col-10 mt-2 mx-auto">
             @if(Session::has('status'))
             <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong>Account Created</strong>
+                <strong>{{ Session::get('status') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
-                    <h5 class="card-title text-white">Account Creation</h5>
+                    <h5 class="card-title text-white">Update PSP / Vendor Account</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('updatePSPVendor', $psp_vendor->id) }}" method="post">

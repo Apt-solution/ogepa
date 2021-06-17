@@ -45,7 +45,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body bg-info">
-        <p class="lead text-sm">If you are accessing these page for the first time, kindly login with your ogwama code and the word "password"</p>
+        <p class="lead text-sm">If you are accessing these page for the first time, kindly login with your ogwama code and the word "12345678"</p>
         <p class="lead text-sm">And if you have logged in before, close this modal and continue. <br>Thanks.</p>
         </div>
       <div class="modal-footer">
