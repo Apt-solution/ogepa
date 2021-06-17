@@ -101,17 +101,12 @@
                     </div>
                         <button  onclick="myFunction();" class="btn btn-outline-success float-right">Generate Invoice</button>
                     </form>
-                    <button id="btn" class="btn btn-primary">Back</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-$('#btn').click(function(){
-    swal('Hello')
-});
-
    function myFunction() {
       if(!confirm("Are You Sure You Want To Proceed?"))
       event.preventDefault();
