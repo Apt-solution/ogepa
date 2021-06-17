@@ -10,12 +10,6 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-            @if(Session::has('status'))
-            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong>{{ Session::get('status') }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
                     <h5 class="card-title text-white">Update PSP / Vendor Account</h5>
@@ -78,7 +72,7 @@
                                 <option value="Obafemi_Owode">Obafemi_Owode</option>
                                 <option value="Odeda">Odeda</option>
                                 <option value="Odogbolu">Odogbolu</option>
-                                <option value="Ogun_Water_Side">Ogun_WaterSide</option>
+                                <option value="Ogun_WaterSide">Ogun_WaterSide</option>
                                 <option value="Remo_North">Remo_North</option>
                                 <option value="Sagamu">Sagamu</option>
                                 <option value="Yewa_North">Yewa_North</option>
@@ -103,4 +97,10 @@
         </div>
     </div>
 </div>
+<script>
+    $status = {!! json_encode(Session::get('status')) !!}
+        if($status){
+            swal("Account Updated!", "Click Ok to Continue!", "success");
+        }
+</script>
 @endsection

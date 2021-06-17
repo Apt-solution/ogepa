@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
                 @if(Session::has('status'))
-                    <div class="alert alert-success text-center">
+                    <div class="alert alert-danger text-center">
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
@@ -50,6 +50,7 @@
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Invoice Month</label>
                             <select class="form-control" name="month_due" id="invoiceMonth">
+                            <option selected disabled value="0">Choose</option>
                             </select>
                     </div>
                     @error('month_due')
@@ -59,6 +60,7 @@
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Trips</label>
                             <select class="form-control" name="no_of_trip" id="noOfTrip">
+                                <option selected disabled value="0">Choose</option>
                             </select>                   
                     </div>
                     @error('no_of_trip')
@@ -99,16 +101,22 @@
                     </div>
                         <button  onclick="myFunction();" class="btn btn-outline-success float-right">Generate Invoice</button>
                     </form>
+                    <button id="btn" class="btn btn-primary">Back</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
+$('#btn').click(function(){
+    swal('Hello')
+});
+
    function myFunction() {
       if(!confirm("Are You Sure You Want To Proceed?"))
       event.preventDefault();
   }
+  
 $(document).ready(function(){
 
     let month = {

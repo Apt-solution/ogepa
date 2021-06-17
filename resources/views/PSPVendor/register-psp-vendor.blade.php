@@ -10,12 +10,6 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-            @if(Session::has('status'))
-            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong>Account Created</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
                     <h5 class="card-title text-white">Account Creation</h5>
@@ -103,4 +97,10 @@
         </div>
     </div>
 </div>
+
+<script>
+$status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Account Created!", "Click Ok to Continue!", "success");
+    }</script>
 @endsection

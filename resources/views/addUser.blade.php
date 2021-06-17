@@ -2,6 +2,7 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <div class="row">
     <div class="card bg-dark p-1">
         <div class="card-heading">
@@ -12,12 +13,6 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-            @if(Session::has('status'))
-            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong>Account Created</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
                     <h5 class="card-title text-white">Account Creation</h5>
@@ -118,6 +113,11 @@
     </div>
 </div>
 <script>
+    $status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Account Created!", "Click Ok to Continue!", "success");
+    }
+
     $(document).ready(function(){
         var residential = ['Choose', 'Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
         var commercial = ['Choose','Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',

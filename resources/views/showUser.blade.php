@@ -16,11 +16,6 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-                @if(Session::has('status'))
-                    <div class="alert alert-success text-center">
-                        <p>{{ Session::get('status') }}</p>
-                    </div>
-                @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
                     <h5 class="card-title text-white"><a style="color:white;" href="{{ url()->previous() }}"><span class="fas fa-arrow-left pr-4"></span></a> Update user's data</h5>
@@ -117,6 +112,12 @@ $(document).ready(function() {
 </div>
 
 <script>
+
+    $status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Account Updated!", "Click Ok to Continue!", "success");
+    }
+    
     $(document).ready(function(){
         var residential = ['Choose', 'Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
         var commercial = ['Choose','Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
