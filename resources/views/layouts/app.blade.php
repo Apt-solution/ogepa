@@ -170,7 +170,12 @@
         });
     </script>
 
-<script>   
+<script>
+   $status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Password Changed Succesfully!", "Click Ok to Continue!", "success");
+    }
+
     $(document).ready(function(){
         $.ajax({
             type: 'GET',

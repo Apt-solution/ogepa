@@ -124,19 +124,18 @@ class DataTableController extends Controller
         return view('index');
     }
 
-    public function getPayment()
-    {
-       return view('admin.paymentHistory');
-    }
-    
+       
     public function getUserPayment(Request $request)
     {       
+        if($request->ajax()){
         $payments = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
         ->join('payments', 'payments.user_id', '=', 'users.id')
-        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwama_ref'])
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwema_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
+        }
+        return view('admin.paymentHistory');
     }
 
     public function passAllPSPToTable(Request $request)
