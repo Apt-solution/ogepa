@@ -56,7 +56,7 @@
         <form action="{{ route('changePassword') }}" method="post">
         @csrf
         @method('PUT')
-            <div class="modal-body bg-dark">
+            <div class="modal-body bg-info">
                 <div class="form-group">
                     <label for="">Enter Password:</label>
                     <input type="password" name="password" class="form-control">
