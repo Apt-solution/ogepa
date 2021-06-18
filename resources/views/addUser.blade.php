@@ -116,6 +116,7 @@
     $status = {!! json_encode(Session::get('status')) !!}
     if($status){
         swal("Account Created!", "Click Ok to Continue!", "success");
+        {{  Session::forget('status') }}
     }
 
     $(document).ready(function(){

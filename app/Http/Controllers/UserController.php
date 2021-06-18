@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Services\InvoiceService;
 use App\Models\Payment;
 use PDF;
 
 class UserController extends Controller
 {
 
-    protected $userService;
+    protected $userService, $invoiceService;
     public function __construct(
-        UserService $userService
+        UserService $userService,
+        InvoiceService $invoiceService
     )
     {
         $this->userService = $userService;
+        $this->invoiceService = $invoiceService;
     }
     
     public function userProfile()
@@ -48,6 +51,7 @@ class UserController extends Controller
         /* $pdf = PDF::loadView('user.receipt', ['payment' => $payment, 'data' => $data]);
         return $pdf->stream(); */
         return view('user.receipt', compact(['data', 'payment']));
+       
     }
 
     public function getIsLogin()

@@ -171,7 +171,7 @@
     </script>
 
 <script>
-   $status = {!! json_encode(Session::get('status')) !!}
+   $status = {!! json_encode(Session::get('password')) !!}
     if($status){
         swal("Password Changed Succesfully!", "Click Ok to Continue!", "success");
     }

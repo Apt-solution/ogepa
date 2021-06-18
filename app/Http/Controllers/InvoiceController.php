@@ -31,8 +31,9 @@ class InvoiceController extends Controller
        $payment = $this->invoiceService->getAmountPaid($id);
        $remmitance = $this->invoiceService->getArreas($id);
        $arreas = $remmitance - $payment; 
+       $total2 = $arreas + $users->client->initialAmount;
        
-       return view('admin.invoiceData', compact('users', 'arreas'));
+       return view('admin.invoiceData', compact('users', 'arreas', 'total2'));
     }
 
     public function InvoiceData(Request $request)

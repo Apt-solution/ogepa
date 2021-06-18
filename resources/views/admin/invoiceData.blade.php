@@ -107,10 +107,15 @@
     </div>
 </div>
 <script>
+   
    function myFunction() {
       if(!confirm("Are You Sure You Want To Proceed?"))
       event.preventDefault();
   }
+  $status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Invoice of this month had been generated for this user", "Come back next month", "error");
+    }
   
 $(document).ready(function(){
 
