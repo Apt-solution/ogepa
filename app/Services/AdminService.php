@@ -136,7 +136,9 @@ class AdminService
     public function checkIfAmountExist(array $request)
     {
         return $this->industrialRemmitance->where('user_id', $request['industry_id'])
-            ->where('month_due', $request['month'])->first();
+            ->where('month_due', $request['month'])
+            ->whereYear('created_at', date('Y'))
+            ->first();
     }
 
     public function addIndustrialAmountPaid(array $data)
