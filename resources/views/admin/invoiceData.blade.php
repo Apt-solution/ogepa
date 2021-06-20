@@ -30,7 +30,7 @@ $(document).ready(function() {
                     @csrf
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Fullname / Industry Name</label>
-                            <input type="text" name="industryName" value="{{ $users->user->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" name="industryName" value="{{ $users->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
                     
                     <div class="input-group mb-3">

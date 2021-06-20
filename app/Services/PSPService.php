@@ -30,7 +30,7 @@ class PSPService
             'phone'      => $request['phone'],
             'ogwema_ref' => $ogwemaRef,
             'email'      => $request['email'],
-            'password'   => bcrypt('password'),
+            'password'   => bcrypt(12345678),
             'location'   => $request['location'],
             'role'       => 'subAdmin',
             'lga'        => $request['lga']
@@ -79,6 +79,16 @@ class PSPService
     public function showPSPVendor($id)
     {
         return $this->user->where('id', $id)->with('client')->first();
+    }
+
+    public function noOfPSP()
+    {
+        return $this->client->where('type', 'PSP')->count();
+    }
+
+    public function noOfVendor()
+    {
+        return $this->client->where('type', 'Vendor')->count();
     }
 
 }

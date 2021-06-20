@@ -47,6 +47,7 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">Category:</label>
                             <select required name="sub_client_type" id="sub_category" class="form-select">
                                 <option selected value="{{$users->client->sub_client_type}}">{{$users->client->sub_client_type}}</option>
+                                 <option disabled>Choose</option>
                             </select>
                         </div>
                         @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -55,6 +56,8 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
                             <select required name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
                                <option selected value="{{ $users->client->no_of_sub_client_type }}">{{ $users->client->no_of_sub_client_type }}</option> 
+                                <option disabled>Choose</option>
+
                             </select>                
                         </div>
                         @error('no_of_sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -81,7 +84,7 @@ $(document).ready(function() {
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select required name="lga" class="form-select" id="inputGroupSelect01">
                                 <option selected value="{{$users->lga}}">{{$users->lga}}</option>
-                                <option>Choose...</option>
+                                <option disabled>Choose...</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
                                 <option value="Ado_Odo_Ota">Ado_Odo_Ota</option>
                                 <option value="Ewekoro">Ewekoro</option>
@@ -118,15 +121,15 @@ $(document).ready(function() {
 
 <script>
     $(document).ready(function(){
-        var residential = ['Choose', 'Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
-        var commercial = ['Choose','Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
+        var residential = ['Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
+        var commercial = ['Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
                           'Food_Canteen', 'Big_Eatery', 'Small_Eatery', 'Super_Store', 'Medium_Store', 
                           'Mini_Supermarket', 'Religion_Center', 'Fuel_Station', 'Bakery', 'Hospital'
                          ];
-        var industrial = ['Choose', '10 ton', '15-20 ton', 'compactor'];
+        var industrial = ['10 ton', '15-20 ton', 'compactor'];
         
         
-        var no =['Choose', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; 
+        var no =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; 
         $type = {!! json_encode($users->client->type) !!}
         if($type == 'Residential')
         {

@@ -5,11 +5,18 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
+use App\Services\PSPService;
 use DataTables;
 use DB;
 
 class DataTableController extends Controller
 {
+    protected $pspService;
+    public function __construct(PSPService $pspService)
+    {
+       $this->pspService = $pspService;
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -23,8 +30,7 @@ class DataTableController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                           <a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
                             return $btn;
                     })->rawColumns(['action'])
                     ->make(true);
@@ -43,8 +49,7 @@ class DataTableController extends Controller
             return Datatables::of($residential)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -64,8 +69,7 @@ class DataTableController extends Controller
             return Datatables::of($commercial)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -85,9 +89,8 @@ class DataTableController extends Controller
             return Datatables::of($industry)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a> |
-                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-primary p-1"><i class="fas fa-receipt"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-info p-1"><i class="fas fa-receipt"></i></a>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -107,8 +110,7 @@ class DataTableController extends Controller
             return Datatables::of($medical)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="#" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -118,19 +120,18 @@ class DataTableController extends Controller
         return view('index');
     }
 
-    public function getPayment()
-    {
-       return view('admin.paymentHistory');
-    }
-    
+       
     public function getUserPayment(Request $request)
     {       
+        if($request->ajax()){
         $payments = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
         ->join('payments', 'payments.user_id', '=', 'users.id')
-        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwama_ref'])
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwema_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
+        }
+        return view('admin.paymentHistory');
     }
 
     public function passAllPSPToTable(Request $request)
@@ -143,15 +144,16 @@ class DataTableController extends Controller
             return Datatables::of($psp)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/show-psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
         
-        return view('PSPVendor.psp-vendor-table');
+        $psp = $this->pspService->noOfPSP();
+        $vendor = $this->pspService->noOfVendor();
+        return view('PSPVendor.psp-vendor-table', compact('psp', 'vendor'));
     }
 
     public function passAllVendorToTable(Request $request)
@@ -164,14 +166,15 @@ class DataTableController extends Controller
             return Datatables::of($vendor)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
+                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
         
-        return view('PSPVendor.psp-vendor-table');
+        $psp = $this->pspService->noOfPSP();
+        $vendor = $this->pspService->noOfVendor();
+        return view('PSPVendor.psp-vendor-table', compact('psp', 'vendor'));
     }
 }
