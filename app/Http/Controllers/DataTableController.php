@@ -30,7 +30,12 @@ class DataTableController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>';
                             return $btn;
                     })->rawColumns(['action'])
                     ->make(true);
@@ -49,7 +54,13 @@ class DataTableController extends Controller
             return Datatables::of($residential)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                        ';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -69,7 +80,12 @@ class DataTableController extends Controller
             return Datatables::of($commercial)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -90,7 +106,12 @@ class DataTableController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-info p-1"><i class="fas fa-receipt"></i></a>';
+                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-info p-1"><i class="fas fa-receipt"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -110,7 +131,12 @@ class DataTableController extends Controller
             return Datatables::of($medical)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
+                        $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -144,7 +170,12 @@ class DataTableController extends Controller
             return Datatables::of($psp)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>';
+                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -166,7 +197,13 @@ class DataTableController extends Controller
             return Datatables::of($vendor)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i>';
+                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
+                        <form action="/delete-user/'.$row->id.'" method="post">
+                        '.csrf_field().'
+                        '.method_field("DELETE").'
+                        <button class="btn btn-danger btn-xs" title="DELETE USER DATA" id="deleteUser"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                        ';
                          return $btn;
                     })
                     ->rawColumns(['action'])

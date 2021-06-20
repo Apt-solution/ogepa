@@ -8,13 +8,18 @@
         <div class="mb-2">
             <a href="{{ route('showPSPVendor') }}" class="btn btn-outline-dark btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New PSP / Vendor</a>
         </div>
+        @if(Session::has('status'))
+            <div id="alert" class="alert alert-danger text-center">
+                {{ Session::get('status') }}
+            </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body bg-danger pb-4 rounded-sm text-white">
                     <a href="{{ route('PSPList') }}">PSP</a>
-                    <p>{{ $psp   }}</p>
+                    <p>{{ $psp }}</p>
                 </div>
             </div>
         </div>
@@ -22,7 +27,7 @@
             <div class="card">
                 <div class="card-body bg-info pb-4 rounded-sm text-white">
                 <a href="{{ route('vendorList') }}">Vendor</a>
-                    <p>{{ $vendor  }}</p>
+                    <p>{{ $vendor }}</p>
                 </div>
             </div>
         </div>
@@ -73,11 +78,6 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-    
-    $('#showPSP').click(function(){
-        $('#psp').show();
-    });
-
     $.noConflict();
       var table = $('.psp').DataTable({
         processing: true,
@@ -121,6 +121,15 @@ $(document).ready(function(){
         ]
     });
 
+    
+    $('.psp, .vendor').on('click', '#deleteUser', function(){
+        if(!confirm("Note: Once you delete this user, all of these user's record will be removed across board. \nDo you still want to continue?"))
+        event.preventDefault();
+    });
+
+    setTimeout(() => {
+    $('#alert').fadeOut();
+   }, 2000);
 });
 </script>
 @endsection
