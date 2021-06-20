@@ -67,10 +67,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/index', [DataTableController::class, 'index'])->name('users.index');
     Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
     Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
+    Route::delete('/delete-user/{id}', [ClientController::class, 'deleteClient'])->name('deleteUser');
     Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
-    Route::get('check-payment', [DataTableController::class, 'getUserPayment'])->name('checkHistory');
-    Route::get('/payment-histories', [DataTableController::class, 'getPayment'])->name('showHistory');
+    Route::get('/payment-histories', [DataTableController::class, 'getUserPayment'])->name('showHistory');
     Route::get('/add-sub-admin', [AdminController::class, 'addSubAdmin'])->name('addSubAdmin');
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');

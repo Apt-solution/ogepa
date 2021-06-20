@@ -121,10 +121,10 @@ class UserService
         return $this->payment->where('user_id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
     }
 
-    public function getReceipt(int $user_id)
+    public function getReceipt($id)
     {
         // dd($user_id);
-        return $this->payment->where('id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
+        return $this->payment->where('id', $id)->where('status', 'successful')->orderBy('id', 'desc')->get();
     }
 
     public function getClient($id)

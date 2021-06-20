@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormValidationRequest;
 use App\Models\Client;
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\Remmitance;
+use App\Models\IndustrialRemmitance;
 use App\Models\ClientType;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
@@ -82,9 +85,23 @@ class ClientController extends Controller
         return redirect()->back()->with('status', 'User Data is Updated Successfully');
     }
 
+    public function deleteClient($id)
+    {
+        $user = User::where('id', $id);
+        $client = Client::where('user_id', $id);
+        $payment = Payment::where('user_id', $id);
+        $remmitance = Remmitance::where('user_id', $id);
+        $industrial_remmitance = IndustrialRemmitance::where('user_id', $id);
+        $client->delete();
+        $user->delete();
+        $payment->delete();
+        $remmitance->delete();
+        $industrial_remmitance->delete();
+        return redirect()->back()->with('status', 'Data Deleted');
+    }
+
     public function getPayment(Request $request)
     {
-    
         $payment = ClientType::where('sub_client_type', $request->sub_category)->value('monthly_payment');
         return response($payment);
     }

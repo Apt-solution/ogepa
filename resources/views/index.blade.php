@@ -8,6 +8,11 @@
         <div class="mb-2">
             <a href="{{ URL::to('/addUser') }}" class="btn btn-outline-dark btn-flat rounded"><span class="fas fa-plus-circle pr-2"></span>Add New User</a>
         </div>
+        @if(Session::has('status'))
+            <div id="alert" class="alert alert-danger text-center">
+                {{ Session::get('status') }}
+            </div>
+        @endif
     </div>
     @if(Route::current()->getName() == "allUser")
     <div class="row">
@@ -174,6 +179,7 @@ $(document).ready(function(){
             },
         ]
     });
+    
     // commercial
     var table = $('.commercial').DataTable({
         processing: true,
@@ -245,6 +251,15 @@ $(document).ready(function(){
             },
         ]
     });
+
+    $('.residential, .commercial, .industry, .medical, .allUser').on('click', '#deleteUser', function(){
+        if(!confirm("Note: Once you delete this user, all of these user's record will be removed across board. \nDo you still want to continue?"))
+        event.preventDefault();
+    });
+
+   setTimeout(() => {
+    $('#alert').fadeOut();
+   }, 2000);
 
 });
 </script>
