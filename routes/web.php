@@ -66,6 +66,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/index', [DataTableController::class, 'index'])->name('users.index');
     Route::get('/show/{id}', [ClientController::class, 'showClient'])->name('user.show');
     Route::put('/update/{id}', [ClientController::class, 'updateClient'])->name('user.update');
+    Route::delete('/delete/{id}', [ClientController::class, 'deleteClient'])->name('deleteUser');
     Route::get('/profile/{id}', [ClientController::class, 'ClientProfile'])->name('user.profile');
     Route::get('profile/{id}/receipt', [AdminController::class, 'userReceipt'])->name('receipt');
     Route::get('/payment-histories', [DataTableController::class, 'getUserPayment'])->name('showHistory');

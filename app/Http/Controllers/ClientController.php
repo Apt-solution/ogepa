@@ -82,9 +82,15 @@ class ClientController extends Controller
         return redirect()->back()->with('status', 'User Data is Updated Successfully');
     }
 
+    public function deleteClient($id)
+    {
+        $user = User::findorFail($id);
+        $user->delete();
+        return redirect()->back()->with('status', 'User is permanently Deleted');
+    }
+
     public function getPayment(Request $request)
     {
-    
         $payment = ClientType::where('sub_client_type', $request->sub_category)->value('monthly_payment');
         return response($payment);
     }

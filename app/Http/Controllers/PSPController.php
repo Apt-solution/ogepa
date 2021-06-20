@@ -39,7 +39,6 @@ class PSPController extends Controller
                          Rule::unique('users')->ignore($id)
                        ],
             'email' => ['email',
-                        'regex:/(.+)@(.+)\.(.+)/i',
                         Rule::unique('users')->ignore($id)
                        ],
             'full_name' => ['required','string'],
@@ -48,7 +47,7 @@ class PSPController extends Controller
         ]);
 
         $this->PSPService->updatePSPVendor($request->all(), $id);
-        return redirect()->back()->with('status', 'User Data is Updated Successfully');
+        return redirect()->back()->with('status', 'Data is Updated Successfully');
     }
 
     public function PSPVendorDetails($id)
