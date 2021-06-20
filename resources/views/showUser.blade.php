@@ -16,11 +16,11 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-                @if(Session::has('status'))
-                    <div class="alert alert-success text-center">
-                        <p>{{ Session::get('status') }}</p>
-                    </div>
-                @endif
+            @if(Session::has('status'))
+                <div class="alert alert-success text-center">
+                    {{  Session::get('status') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
                     <h5 class="card-title text-white"><a style="color:white;" href="{{ url()->previous() }}"><span class="fas fa-arrow-left pr-4"></span></a> Update user's data</h5>
@@ -47,7 +47,11 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">Category:</label>
                             <select required name="sub_client_type" id="sub_category" class="form-select">
                                 <option selected value="{{$users->client->sub_client_type}}">{{$users->client->sub_client_type}}</option>
+<<<<<<< HEAD
                                  <option disabled>Choose</option>
+=======
+                                <option disabled>Choose</option>
+>>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                             </select>
                         </div>
                         @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -56,8 +60,12 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
                             <select required name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
                                <option selected value="{{ $users->client->no_of_sub_client_type }}">{{ $users->client->no_of_sub_client_type }}</option> 
+<<<<<<< HEAD
                                 <option disabled>Choose</option>
 
+=======
+                               <option disabled>Choose</option>
+>>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                             </select>                
                         </div>
                         @error('no_of_sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -98,7 +106,7 @@ $(document).ready(function() {
                                 <option value="Obafemi_Owode">Obafemi_Owode</option>
                                 <option value="Odeda">Odeda</option>
                                 <option value="Odogbolu">Odogbolu</option>
-                                <option value="Ogun_Water_Side">Ogun_Water_Side</option>
+                                <option value="Ogun_WaterSide">Ogun_Water_Side</option>
                                 <option value="Remo_North">Remo_North</option>
                                 <option value="Sagamu">Sagamu</option>
                                 <option value="Yewa_North">Yewa_North</option>
@@ -120,6 +128,12 @@ $(document).ready(function() {
 </div>
 
 <script>
+
+    $status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Account Updated!", "Click Ok to Continue!", "success");
+    }
+    
     $(document).ready(function(){
         var residential = ['Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
         var commercial = ['Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',

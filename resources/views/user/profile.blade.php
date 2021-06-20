@@ -8,7 +8,7 @@
         <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
 
-        <div class="page-content page-container" id="page-content">
+        <div class="page-content page-container" id="page-content" style="margin-top: 60px;;">
             <div class="padding">
                 <div class="row container d-flex justify-content-center">
                     <div class="col-xl-10 col-md-12">
@@ -73,14 +73,21 @@
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Billing</h6>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">{{ date('M-Y') }} Billing</p>
+                                                <p class="m-b-10 f-w-600">{{ $data['month_name']. date('-Y') }} Billing</p>
                                                 <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['current_billing'], 2) }}</h6>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Arrears</p>
+                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['total_due'], 2) }}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Total Due</p>
                                                 <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['total_due'], 2) }}</h6>
                                             </div>
                                         </div>
+                                        <p>&nbsp;</p>
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 ">Make Payment</h6>
                                         <div class="row">
                                             <input type="button" class="btn btn-primary btn-flat rounded" name="answer" value="MAKE A PAYMENT" onclick="showDiv()" />
@@ -117,7 +124,10 @@
     $(document).ready(function(){ 
         amount = $("#amount-entered").val();
         // getting paystack amount and 15 naira pay
-        charges = (amount * 0.015) + 20;
+        charges = (amount * 0.015) + 200;
+        if(charges > 2000){
+            charges = 2200;
+        }
         total_due = parseInt(amount) + parseInt(charges);
         $("#amount").val(amount)
         $("#charges").val(charges)

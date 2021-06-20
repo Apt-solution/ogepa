@@ -44,7 +44,7 @@ $(document).ready(function(){
     var table = $('.history').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('checkHistory') }}",
+        ajax: "{{ route('showHistory') }}",
         columns: 
         [
             {data: 'full_name', name: 'users.full_name'},

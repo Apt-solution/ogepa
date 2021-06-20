@@ -111,58 +111,61 @@
 </style>
 </head>
 <body class="A4">
-
     <div class="container sheet">
         <div class="name">
-            <p>{{ $datas->industryName }}</p>
+            <p>{{ $datas['industryName'] }}</p>
         </div>
         <div class="address">
-            <p>{{ $datas->address }}</p>
+            <p>{{ $datas['address'] }}</p>
         </div>
         <div class="desc">
             <p>OGWAMA BILL</p>
         </div>
         <div class="trip">
-            <p>{{ $datas->trip }}</p>
+            <p>{{ $datas['trip'] }}</p>
         </div>
         <div class="per-trip">
-            <p>{{ $datas->perTrip }}</p>
+            <p>{{ $datas['perTrip'] }}</p>
         </div>
         <div class="total1">
-            <p>{{ $datas->total1 }}</p>
+            <p>{{ $datas['total1'] }}</p>
         </div>
         <div class="month">
-            <p>{{ $datas->invoiceMonth }}</p>
+            <p>{{ $datas['invoiceMonth'] }}</p>
         </div>
         <div class="current">
-        {{ $datas->currentCharge }}
+        {{ $datas['currentCharge'] }}
         </div>
         <div class="net">
-            <p>{{ $datas->netArreas }}</p>
+            <p>{{ $datas['netArreas'] }}</p>
         </div>
         <div class="total2">
-            <p>{{ $datas->total1 }}</p>
+            <p>{{ $datas['amount_to_pay'] }}</p>
         </div>
         <div class="due">
-            <p>{{ $datas->total1 }}</p>
+            <p>{{ $datas['amount_to_pay'] }}</p>
         </div>
         <div class="month2">
-            <p>{{ $datas->invoiceMonth }}</p>
+            <p>{{ $datas['invoiceMonth'] }}</p>
         </div>
         <div class="amtPaid">
+<<<<<<< HEAD
             <p>{{ $datas->total1 }}</p>
+=======
+            <p>{{ $datas['amount_to_pay'] }}</p>
+>>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
         </div>
         <div class="amtWord">
-            <p>{{ strtoupper($amtWord) }}</p>
+            <p>{{ $datas['amtWord'] }}</p>
         </div>
         <div class="amtPaid2">
-            <p>{{ $datas->total1 }}</p>
+            <p>{{ $datas['amount_to_pay'] }}</p>
         </div>
         <div class="due1">
-            <p>{{ $datas->total1 }}</p>
+            <p>{{ $datas['amount_to_pay'] }}</p>
         </div>
         <div class="month3">
-            <p>{{ $datas->invoiceMonth }}</p>
+            <p>{{ $datas['invoiceMonth'] }}</p>
         </div>
     </div>
 </body>
