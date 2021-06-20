@@ -42,10 +42,7 @@
 
                 <div class="input-group mb-3 col-md-6">
                     <label for="">Month</label>
-                    <select class="js-example-basic-single form-control" name="month">
-                        @for ($i=1; $i < 13; $i++) 
-                        <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
+                    <select id="month" class="js-example-basic-single form-control" name="month">
                     </select>
                 </div>
 
@@ -59,9 +56,27 @@
 </div>
 
 <script>
-    // In your Javascript (external .js resource or <script> tag)
+    let month = {
+        'Jan': 1,
+        'Feb': 2,
+        'Mar': 3,
+        'Apr': 4,
+        'May': 5,
+        'Jun': 6,
+        'Jul': 7,
+        'Aug': 8,
+        'Sept': 9,
+        'Oct': 10,
+        'Nov': 11,
+        'Dec': 12
+    };
+
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+        for(const key in month){
+        console.log(key + ":" + month[key]);
+        $('#month').append('<option value="'+month[key]+'">'+ key + '</option>');
+    }
     });
 </script>
 @endsection
