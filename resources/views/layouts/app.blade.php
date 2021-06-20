@@ -6,10 +6,17 @@
     <title>OGWAMA</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+
+     <!-- Sweet Alert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -37,6 +44,41 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+<!-- Button trigger modal -->
+<p id="trigger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></p>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><i id="icon" class="fas fa-info-circle mr-2 bg-info"></i>Change your password</h5>
+      </div>
+        <form action="{{ route('changePassword') }}" method="post">
+        @csrf
+        @method('PUT')
+            <div class="modal-body bg-info">
+                <div class="form-group">
+                    <label for="">Enter Password:</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                @error('password')
+                    <div style="margin-top:-20px" class="text-sm text-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="">Re-enter Password:</label>
+                    <input type="password" name="password_confirmation" class="form-control">
+                </div>
+                @error('password')
+                    <div style="margin-top:-20px" class="text-sm text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" >Change Password</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
     <div class="wrapper">
         <!-- Main Header -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: black;">
@@ -127,6 +169,27 @@
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         });
     </script>
+
+<script>
+   $status = {!! json_encode(Session::get('password')) !!}
+    if($status){
+        swal("Password Changed Succesfully!", "Click Ok to Continue!", "success");
+    }
+
+    $(document).ready(function(){
+        $.ajax({
+            type: 'GET',
+            url: '{{ URL::to('is-login') }}',
+            success: function(data)
+            {
+                if(data == '0')
+                {
+                 $('#trigger').trigger('click');
+                }
+            }
+        });
+    });
+</script>
 
     @yield('third_party_scripts')
 

@@ -44,11 +44,11 @@ $(document).ready(function(){
     var table = $('.history').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('checkHistory') }}",
+        ajax: "{{ route('showHistory') }}",
         columns: 
         [
             {data: 'full_name', name: 'users.full_name'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'ref', name: 'payments.ref'},
             {data: 'amount', name: 'payments.amount'}, 
             {data: 'updated_at', name: 'payments.updated_at'}

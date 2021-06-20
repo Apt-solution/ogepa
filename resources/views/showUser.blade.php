@@ -16,11 +16,11 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-                @if(Session::has('status'))
-                    <div class="alert alert-success text-center">
-                        <p>{{ Session::get('status') }}</p>
-                    </div>
-                @endif
+            @if(Session::has('status'))
+                <div class="alert alert-success text-center">
+                    {{  Session::get('status') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header" style="background-color: black;">
                     <h5 class="card-title text-white"><a style="color:white;" href="{{ url()->previous() }}"><span class="fas fa-arrow-left pr-4"></span></a> Update user's data</h5>
@@ -47,6 +47,7 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">Category:</label>
                             <select required name="sub_client_type" id="sub_category" class="form-select">
                                 <option selected value="{{$users->client->sub_client_type}}">{{$users->client->sub_client_type}}</option>
+                                <option disabled>Choose</option>
                             </select>
                         </div>
                         @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -55,6 +56,7 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
                             <select required name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
                                <option selected value="{{ $users->client->no_of_sub_client_type }}">{{ $users->client->no_of_sub_client_type }}</option> 
+                               <option disabled>Choose</option>
                             </select>                
                         </div>
                         @error('no_of_sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -81,7 +83,7 @@ $(document).ready(function() {
                             <label class="input-group-text" for="inputGroupSelect01">Local Govt:</label>
                             <select required name="lga" class="form-select" id="inputGroupSelect01">
                                 <option selected value="{{$users->lga}}">{{$users->lga}}</option>
-                                <option>Choose...</option>
+                                <option disabled>Choose...</option>
                                 <option value="Abeokuta_South">Abeokuta_South</option>
                                 <option value="Ado_Odo_Ota">Ado_Odo_Ota</option>
                                 <option value="Ewekoro">Ewekoro</option>
@@ -95,7 +97,7 @@ $(document).ready(function() {
                                 <option value="Obafemi_Owode">Obafemi_Owode</option>
                                 <option value="Odeda">Odeda</option>
                                 <option value="Odogbolu">Odogbolu</option>
-                                <option value="Ogun_Water_Side">Ogun_Water_Side</option>
+                                <option value="Ogun_WaterSide">Ogun_Water_Side</option>
                                 <option value="Remo_North">Remo_North</option>
                                 <option value="Sagamu">Sagamu</option>
                                 <option value="Yewa_North">Yewa_North</option>
@@ -117,16 +119,22 @@ $(document).ready(function() {
 </div>
 
 <script>
+
+    $status = {!! json_encode(Session::get('status')) !!}
+    if($status){
+        swal("Account Updated!", "Click Ok to Continue!", "success");
+    }
+    
     $(document).ready(function(){
-        var residential = ['Choose', 'Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
-        var commercial = ['Choose','Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
+        var residential = ['Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
+        var commercial = ['Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
                           'Food_Canteen', 'Big_Eatery', 'Small_Eatery', 'Super_Store', 'Medium_Store', 
                           'Mini_Supermarket', 'Religion_Center', 'Fuel_Station', 'Bakery', 'Hospital'
                          ];
-        var industrial = ['Choose', '10 ton', '15-20 ton', 'compactor'];
+        var industrial = ['10 ton', '15-20 ton', 'compactor'];
         
         
-        var no =['Choose', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; 
+        var no =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; 
         $type = {!! json_encode($users->client->type) !!}
         if($type == 'Residential')
         {
