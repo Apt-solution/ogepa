@@ -5,6 +5,9 @@
     <div class="row">
 
 
+
+
+
         <div class="page-content page-container" id="page-content">
             <div class="padding">
                 <div class="row container d-flex justify-content-center" style="margin-top: 100px;">
@@ -35,7 +38,22 @@
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Total payment: &#8358; {{ number_format(($total = $payment->amount + $payment->bank_charges), 2) }}</h6>
                                         <div class="row">
                                             <p>&nbsp;</p>
-                                            <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+
+
+                                            <form method="POST" action="{{ route('pay') }}" id="paymentForm">
+                                                {{ csrf_field() }}
+
+                                                <input name="name" type="hidden" value="{{ \Auth::User()->full_name }}" placeholder="Name" />
+                                                <input name="email" value="" type="hidden" placeholder="Your Email" />
+                                                <input name="phone" type="hidden" value="{{ \Auth::User()->phone }}" placeholder="Phone number" />
+                                                <input type="hidden" name="amount" value="{{ $total }}">
+                                                <input type="hidden" name="ref" value="{{ $payment->ref }}">
+
+                                                <input type="submit" id="payment-btn" class="btn btn-success btn-block" value="PAY {{ number_format($total, 2) }}">
+                                            </form>
+
+
+                                            <!-- <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
                                                 <input type="hidden" name="email" value="yd4u2c@yahoo.com"> {{-- required --}}
                                                 <input type="hidden" name="orderID" value="345">
                                                 <input type="hidden" name="amount" value="{{ ($total) * 100 }}"> {{-- required in kobo --}}
@@ -47,7 +65,7 @@
 
                                                 <input type="submit" id="payment-btn" class="btn btn-success btn-block" value="PAY {{ $total }}">
 
-                                            </form>
+                                            </form> -->
 
                                         </div>
                                         <ul class="social-link list-unstyled m-t-40 m-b-10">
@@ -101,6 +119,7 @@
 
     $("#amount-entered").keyup(function() {
         amount = $("#amount-entered").val();
+        console.log(amount)
         // getting paystack amount and 15 naira pay
         charges = (amount * 0.015) + 20;
         total_due = parseInt(amount) + parseInt(charges);

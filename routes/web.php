@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Auth;
@@ -44,9 +45,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-
-
-
 Route::middleware(['admin'])->group(function () {
     Route::get('/automated-price', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
     Route::get('/industrial-paid-payment', [AdminController::class, 'industrialPayment'])->name('industrial-paid-payment');
@@ -54,7 +52,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/enter-amount-paid', [AdminController::class, 'enterAmountPaid'])->name('enter-amount-paid');
     Route::post('/edit-automated-price', [AdminController::class, 'editAutomatedPrice'])->name('editAutomatedPrice');
     Route::get('/print-industrial-bill', [AdminController::class, 'printIndustrialBill'])->name('print-industrial-bill');
-    
     Route::post('/search-payment', [AdminController::class, 'searchPayment'])->name('searchPayment');
     Route::post('/add-industrial-amount-paid', [AdminController::class, 'addIndustrialAmountPaid'])->name('add-industrial-amount-paid');
     Route::post('/add-industrial-data', [AdminController::class, 'addIndustrialData'])->name('add-industrial-data');
@@ -78,10 +75,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
     Route::post('/add-amount-paid', [AdminController::class, 'addAmountPaid'])->name('add-amount-paid');
-    Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
-    Route::post('/add-psp', [PSPController::class, 'regPSP'])->name('regPSP');
-    Route::get('/show-psp/{id}', [PSPController::class, 'PSPDetails'])->name('PSPDetails');
-    Route::put('/update-psp/{id}', [PSPController::class, 'updataPSP'])->name('updatePSP');
     Route::get('/psp-vendor', [PSPController::class, 'showPSPVendor'])->name('showPSPVendor');
     Route::post('/add-psp-vendor', [PSPController::class, 'regPSPVendor'])->name('regPSPVendor');
     Route::get('/psp-vendor/{id}', [PSPController::class, 'PSPVendorDetails'])->name('PSPDetails');
@@ -89,8 +82,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/list-psp', [DataTableController::class, 'passAllPSPToTable'])->name('PSPList');
     Route::get('/list-vendor', [DataTableController::class, 'passAllVendorToTable'])->name('vendorList');
     Route::get('/invoice/{id}', [InvoiceController::class, 'showInvoice'])->name('userInvoice');
-    Route::post('/invoice-data',[InvoiceController::class, 'invoiceData'])->name('invoiceData');
-    Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount'); 
+    Route::post('/invoice-data', [InvoiceController::class, 'invoiceData'])->name('invoiceData');
+    Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount');
 });
 
 Route::middleware(['user'])->group(function () {
@@ -98,8 +91,12 @@ Route::middleware(['user'])->group(function () {
     Route::get('makePayment', [UserController::class, 'makePayment']);
     Route::get('user_profile/receipt/{id}', [UserController::class, 'getReceipt'])->name('user.receipt');
     Route::post('confirmPay', [UserController::class, 'confirmPay'])->name('confirmPay');
-    Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
-    Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
+    // Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+    // Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
+    // The route that the button calls to initialize payment
+    Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
+    // The callback url after a payment
+    Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
+    Route::put('/change-password', [UserController::class, 'changeUserPassword'])->name('changePassword');
     Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
 });
-

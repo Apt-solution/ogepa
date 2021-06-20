@@ -49,7 +49,7 @@
                     </select>
                 </div>
 
-                <input type="submit" class="btn btn-primary" value="add amount paid">
+                <input type="submit" class="btn btn-primary" value="Add amount paid">
 
             </form>
         </div>

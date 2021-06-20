@@ -43,7 +43,7 @@ class ClientController extends Controller
     public function regClient(FormValidationRequest $request)
     {
         $this->clientService->addNewClient($request->all());
-        return redirect()->back()->with('status', 'User Account Created')->with('monthlyPayment');
+        return redirect()->back()->with('status', 'Account Created');
     }
 
     public function showClient($id)

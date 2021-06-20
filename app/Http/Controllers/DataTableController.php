@@ -5,11 +5,18 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\ClientService;
+use App\Services\PSPService;
 use DataTables;
 use DB;
 
 class DataTableController extends Controller
 {
+    protected $pspService;
+    public function __construct(PSPService $pspService)
+    {
+       $this->pspService = $pspService;
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -86,8 +93,7 @@ class DataTableController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
-                        <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a> |
-                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-primary p-1"><i class="fas fa-receipt"></i></a>';
+                        <a href="/invoice/'.$row->id.'" data-id="'.$row->id.'" id="User" data-bs-toggle="tooltip" data-bs-placement="top" title="Invoice Data" class="badge badge-info p-1"><i class="fas fa-receipt"></i></a>';
                          return $btn;
                     })
                     ->rawColumns(['action'])
@@ -143,7 +149,7 @@ class DataTableController extends Controller
             return Datatables::of($psp)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="/show-psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
+                        $btn = '<a href="/psp-vendor/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a> |
                         <a href="/profile/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user profile" class="badge badge-info p-1"><i class="fas fa-user-cog"></i></a>';
                          return $btn;
                     })
@@ -151,7 +157,9 @@ class DataTableController extends Controller
                     ->make(true);
         }
         
-        return view('PSPVendor.psp-vendor-table');
+        $psp = $this->pspService->noOfPSP();
+        $vendor = $this->pspService->noOfVendor();
+        return view('PSPVendor.psp-vendor-table', compact('psp', 'vendor'));
     }
 
     public function passAllVendorToTable(Request $request)
@@ -172,6 +180,8 @@ class DataTableController extends Controller
                     ->make(true);
         }
         
-        return view('PSPVendor.psp-vendor-table');
+        $psp = $this->pspService->noOfPSP();
+        $vendor = $this->pspService->noOfVendor();
+        return view('PSPVendor.psp-vendor-table', compact('psp', 'vendor'));
     }
 }
