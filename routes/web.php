@@ -75,13 +75,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/register-sub-dmin', [AdminController::class, 'registerSubAdmin'])->name('register-sub-admin');
     Route::get('/add-industrial-payment', [AdminController::class, 'addIndustrialPayment'])->name('add-industrial-payment');
     Route::post('/add-amount-paid', [AdminController::class, 'addAmountPaid'])->name('add-amount-paid');
-<<<<<<< HEAD
-    Route::get('/psp', [PSPController::class, 'showPSP'])->name('showPSP');
-    Route::post('/add-psp', [PSPController::class, 'regPSP'])->name('regPSP');
-    Route::get('/show-psp/{id}', [PSPController::class, 'PSPDetails'])->name('PSPDetails');
-    Route::put('/update-psp/{id}', [PSPController::class, 'updataPSP'])->name('updatePSP');
-=======
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
     Route::get('/psp-vendor', [PSPController::class, 'showPSPVendor'])->name('showPSPVendor');
     Route::post('/add-psp-vendor', [PSPController::class, 'regPSPVendor'])->name('regPSPVendor');
     Route::get('/psp-vendor/{id}', [PSPController::class, 'PSPVendorDetails'])->name('PSPDetails');

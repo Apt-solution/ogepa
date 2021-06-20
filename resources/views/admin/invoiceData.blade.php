@@ -39,11 +39,7 @@
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Fullname / Industry Name</label>
-<<<<<<< HEAD
-                            <input type="text" name="industryName" value="{{ $users->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
-=======
                             <input type="text" name="industryName" readonly value="{{ $users->full_name }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                     </div>
                     
                     <div class="input-group mb-3">
@@ -53,13 +49,9 @@
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Invoice Month</label>
-<<<<<<< HEAD
-                             <input type="text" name="invoiceMonth" value="" class="form-control" value="" placeholder="1" aria-label="fname" aria-describedby="basic-addon1">
-=======
                             <select class="form-control" name="month_due" id="invoiceMonth">
                             <option selected disabled value="0">Choose</option>
                             </select>
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                     </div>
                     @error('month_due')
                         <div style="margin-top: -14px;" class="text-danger text-xs">{{  $message  }}</div>

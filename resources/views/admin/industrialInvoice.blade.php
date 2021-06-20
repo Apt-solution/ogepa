@@ -149,11 +149,7 @@
             <p>{{ $datas['invoiceMonth'] }}</p>
         </div>
         <div class="amtPaid">
-<<<<<<< HEAD
-            <p>{{ $datas->total1 }}</p>
-=======
             <p>{{ $datas['amount_to_pay'] }}</p>
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
         </div>
         <div class="amtWord">
             <p>{{ $datas['amtWord'] }}</p>

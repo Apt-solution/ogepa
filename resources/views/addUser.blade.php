@@ -127,12 +127,6 @@
                          ];
         var industrial = ['Choose', '10 ton', '15-20 ton', 'compactor'];
         
-<<<<<<< HEAD
-        
-        var no =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]; 
-
-=======
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
        $('select#clientType').change(function(){
         var clientType = $(this).children("option:selected").val();
             if(clientType == 'Residential')

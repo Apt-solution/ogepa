@@ -130,6 +130,12 @@ class AdminController extends Controller
         if(!$checkIfAmountExist){
             return redirect()->back()->with('error', 'industry selected dont have payment in selected month');
         }
+
+        // check if payment has been added in that month for the particular industry
+        $checkPayment = $this->adminService->checkIfPaymentExist($request->all());
+        if($checkPayment){
+            return redirect()->back()->with('error', 'payment already added for the particular industry');
+        }
         Session::put('user_id', $request['industry_id']);
         return redirect('enter-amount-paid');
     }

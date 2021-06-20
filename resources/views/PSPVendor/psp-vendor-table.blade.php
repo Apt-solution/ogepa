@@ -19,11 +19,7 @@
             <div class="card">
                 <div class="card-body bg-danger pb-4 rounded-sm text-white">
                     <a href="{{ route('PSPList') }}">PSP</a>
-<<<<<<< HEAD
-                    <p>{{ $psp   }}</p>
-=======
                     <p>{{ $psp }}</p>
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                 </div>
             </div>
         </div>
@@ -31,11 +27,7 @@
             <div class="card">
                 <div class="card-body bg-info pb-4 rounded-sm text-white">
                 <a href="{{ route('vendorList') }}">Vendor</a>
-<<<<<<< HEAD
-                    <p>{{ $vendor  }}</p>
-=======
                     <p>{{ $vendor }}</p>
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                 </div>
             </div>
         </div>

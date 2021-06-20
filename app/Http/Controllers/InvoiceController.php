@@ -51,13 +51,6 @@ class InvoiceController extends Controller
             'amount_to_pay' => $request['amount_to_pay'],
             'amtWord'       => $request['amtWord']
         );
-<<<<<<< HEAD
-        $datas = Industrial::create($industrial);
-        $amt = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $amtWord = $amt->format($request['total1']);
-        return view('admin.industrialInvoice', compact('datas', 'amtWord'));
-    }
-=======
         
         $industrial = $request->validate([
             'month_due'     => ['required'],
@@ -70,7 +63,6 @@ class InvoiceController extends Controller
         if($check_invoice === 1){
             return redirect()->back()->with('status', 'Invoice Of This Month Has Been Generated For This User');
         }
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
 
         $industrial_remmitance = IndustrialRemmitance::create($industrial);
         return view('admin.industrialInvoice', compact('datas'));

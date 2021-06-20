@@ -47,11 +47,7 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">Category:</label>
                             <select required name="sub_client_type" id="sub_category" class="form-select">
                                 <option selected value="{{$users->client->sub_client_type}}">{{$users->client->sub_client_type}}</option>
-<<<<<<< HEAD
-                                 <option disabled>Choose</option>
-=======
                                 <option disabled>Choose</option>
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                             </select>
                         </div>
                         @error('sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
@@ -60,12 +56,7 @@ $(document).ready(function() {
                             <label class="input-group-text" id="basic-addon1">No of Category / tons</label>
                             <select required name="no_of_sub_client_type" id="no_of_sub_category" class="form-select">
                                <option selected value="{{ $users->client->no_of_sub_client_type }}">{{ $users->client->no_of_sub_client_type }}</option> 
-<<<<<<< HEAD
-                                <option disabled>Choose</option>
-
-=======
                                <option disabled>Choose</option>
->>>>>>> 2b822cec2e02240d9a853cef41bcbaf43940fbc3
                             </select>                
                         </div>
                         @error('no_of_sub_client_type')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
