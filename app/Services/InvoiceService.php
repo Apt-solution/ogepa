@@ -40,14 +40,7 @@ class InvoiceService
     }
 
     public function getArreas($user_id, $month)
-    {
-        if($month == 1){
-            return $this->industrial_remmitance->where('user_id', $user_id)
-                                                ->where('month_due', $month)
-                                                ->whereYear('created_at', date('Y'))
-                                                ->value('arreas');
-        }
-        
+    {  
         return $this->industrial_remmitance->where('user_id', $user_id)
                                                 ->where('month_due', $month)
                                                 ->whereYear('created_at', date('Y'))
