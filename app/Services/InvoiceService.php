@@ -20,14 +20,6 @@ class InvoiceService
         $this->industrial_remmitance = $industrial_remmitance;
     }
 
-    // public function ifPaidForMonth($user_id, $month)
-    // {
-    //    return $this->payment->where('user_id', $request['user_id'])
-    //                         ->where('month_paid', $request['month_due'])
-    //                         ->whereYear('updated_at', date('Y'))
-    //                         ->where('status', 'successful');
-    // }
-
     public function checkInvoice($user_id, $month_due)
     {
         return $this->industrial_remmitance->where('user_id', $user_id)
@@ -35,16 +27,38 @@ class InvoiceService
                             ->whereYear('updated_at', date('Y'))->count();
     }
 
-    public function getAmountPaid($user_id)
+    public function getAllAmountPaid($user_id)
     {
         return $this->payment->where('user_id', $user_id)
                             ->where('status', 'successful')
                             ->sum('amount');
     }
 
-    public function getArreas($user_id)
+    public function getMoneyToPay($user_id)
     {
         return $this->industrial_remmitance->where('user_id', $user_id)->sum('amount_to_pay');
+    }
+
+    public function getArreas($user_id, $month)
+    {
+        if($month == 1){
+            return $this->industrial_remmitance->where('user_id', $user_id)
+                                                ->where('month_due', $month)
+                                                ->whereYear('created_at', date('Y'))
+                                                ->value('arreas');
+        }
+        
+        return $this->industrial_remmitance->where('user_id', $user_id)
+                                                ->where('month_due', $month)
+                                                ->whereYear('created_at', date('Y'))
+                                                ->value('arreas');
+    }
+
+    public function checkOldInvoice($user_id)
+    {
+        return $this->industrial_remmitance->where('user_id', $user_id)
+                                            ->whereYear('updated_at', date('Y'))
+                                            ->max('month_due');
     }
 
 }

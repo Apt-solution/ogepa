@@ -149,7 +149,26 @@ class AdminService
             'amount' => $data['amount'],
             'bank_charges' => 0,
             'ref' => $reference,
-            'status' => 'successful'
+            'status' => 'successful',
+            'month_paid' => $data['month']
         ]);
+    }
+
+    public function arreas($user_id, $month)
+    {
+       return $this->industrialRemmitance->where('user_id', $user_id)
+                                    ->where('month_due', $month)
+                                    ->whereYear('created_at', date('Y'))
+                                    ->value('amount_to_pay');
+    }
+
+    public function fillArreas($user_id, $month, $arreas)
+    {
+       return $this->industrialRemmitance->where('user_id', $user_id)
+                                ->where('month_due', $month)
+                                ->update([
+                                    'arreas' => $arreas
+                                ]);
+
     }
 }
