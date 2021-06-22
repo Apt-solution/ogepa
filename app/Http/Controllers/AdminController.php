@@ -135,7 +135,6 @@ class AdminController extends Controller
         if($checkIfMonthPaymentExist){
             return redirect()->back()->with('error', 'Payment for selected month already exist');
         }
-
         Session::put('user_id', $request['industry_id']);
         Session::put('month', $request['month']);
         return redirect('enter-amount-paid');

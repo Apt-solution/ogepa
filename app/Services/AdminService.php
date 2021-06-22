@@ -160,4 +160,12 @@ class AdminService
             'month_paid' => Session::get('month')
         ]);
     }
+
+    public function checkIfPaymentExist($request)
+    {
+        return $this->payment->where('user_id', $request['industry_id'])
+        ->whereMonth('created_at', date('m'))
+        ->whereYear('created_at', date('Y'))
+        ->first();
+    }
 }

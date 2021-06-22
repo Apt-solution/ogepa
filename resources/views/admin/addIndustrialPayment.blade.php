@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">Amount</label>
-                        <input type="number" required id="amount{{ $industry->id }}" name="amount[]" value="50000" class="form-control">
+                        <input type="number" id="amount{{ $industry->id }}" name="amount[]" value="0" class="form-control">
                     </div>
                 </div>
                 <input type="hidden" name="id[]" value="{{ $industry->user_id }}">
