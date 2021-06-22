@@ -60,6 +60,7 @@ class InvoiceController extends Controller
             'amount_to_pay' => ['required'],
         ]); 
         $industrial['user_id'] = $request['user_id'];
+        $industrial['arreas'] = $request['amount_to_pay'];
 
         $check_invoice = $this->invoiceService->checkInvoice($request['user_id'], $request['month_due']);
         if($check_invoice === 1){
