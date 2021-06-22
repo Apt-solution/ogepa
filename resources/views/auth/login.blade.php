@@ -70,14 +70,14 @@
 
                 <div class="input-group mb-3">
                     <input type="text"
-                           name="email"
+                           name="ogwema_ref"
                            value="{{ old('email') }}"
-                           placeholder="Phone Number"
-                           class="form-control @error('email') is-invalid @enderror">
+                           placeholder="Ogwama Code"
+                           class="form-control @error('ogwema_ref') is-invalid @enderror">
                     <div class="input-group-append">
-                        <div class="input-group-text"><span class="fas fa-phone"></span></div>
+                        <div class="input-group-text"><span class=""></span></div>
                     </div>
-                    @error('email')
+                    @error('ogwema_ref')
                     <span class="error invalid-feedback">{{ $message }}</span>
                     @enderror
                 </div>
@@ -85,7 +85,7 @@
                 <div class="input-group mb-3">
                     <input type="password"
                            name="password"
-                           placeholder="Ogwama Code"
+                           placeholder="Password"
                            class="form-control @error('password') is-invalid @enderror">
                     <div class="input-group-append">
                         <div class="input-group-text">
