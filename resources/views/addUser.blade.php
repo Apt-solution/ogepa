@@ -148,6 +148,7 @@
             }
             else if(clientType == 'Commercial')
             {
+                var x = 1;
                 $('#no_of_sub_category').text('');
                 $('#sub_category').text('');
                 $('#catNo').show();

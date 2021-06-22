@@ -78,6 +78,11 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+    
+    $('#showPSP').click(function(){
+        $('#psp').show();
+    });
+
     $.noConflict();
       var table = $('.psp').DataTable({
         processing: true,

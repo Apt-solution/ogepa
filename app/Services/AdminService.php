@@ -177,5 +177,11 @@ class AdminService
                                     'arreas' => $arreas
                                 ]);
 
+    public function checkIfPaymentExist($request)
+    {
+        return $this->payment->where('user_id', $request['industry_id'])
+        ->whereMonth('created_at', date('m'))
+        ->whereYear('created_at', date('Y'))
+        ->first();
     }
 }

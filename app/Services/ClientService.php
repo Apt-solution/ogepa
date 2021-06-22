@@ -43,7 +43,7 @@ class ClientService
        $newUser = $this->user->create($data);
        $user_id = $newUser->id;
 
-       $client = array(
+        $client = array(
         'user_id' =>  $user_id,
         'type'  => $request['type'],
         'sub_client_type'      => $request['sub_client_type'],
