@@ -12,16 +12,16 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mx-auto">
-            <div class="w3-panel w3-leftbar w3-border-blue w3-pale-blue">
+            <div class="w3-panel w3-leftbar w3-border-red w3-pale-red">
                 <p class="mt-2">Note: Kindly check through all the below data..Once invoice has been generated no changes can be reverted</p>
-                <p>Click on this <a href="{{ route('invoiceHistory') }}" title="List of invoice generated">link</a> to check all the list of invoice generated </p>
+                <p>Click on this <a href="{{ route('invoiceHistory') }}" class="badge badge-info p-2" title="List of invoice generated">link</a> to check all the list of invoice generated </p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
-                @if(Session::has('error'))
-                    <div class="alert alert-danger text-center">
+                @if(Session::has('status'))
+                    <div id="alert" class="alert alert-danger text-center">
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
@@ -186,6 +186,9 @@ $(document).ready(function(){
         });
     });
     
+    setTimeout(() => {
+    $('#alert').fadeOut();
+   }, 2000);
     
 
 })
