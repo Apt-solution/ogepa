@@ -28,12 +28,12 @@ class InvoiceController extends Controller
     public function showInvoice($id)
     {
        $users = $this->clientService->ClientProfile($id);
-       $payment = $this->invoiceService->getAmountPaid($id);
-       $remmitance = $this->invoiceService->getArreas($id);
+       $payment = $this->invoiceService->getAllAmountPaid($id);
+       $remmitance = $this->invoiceService->getMoneyToPay($id);
        $arreas = $remmitance - $payment; 
        $total2 = $arreas + $users->client->initialAmount;
        
-       return view('admin.invoiceData', compact('users', 'arreas', 'total2'));
+       return view('admin.invoiceData', compact('users', 'total2', 'arreas'));
     }
 
     public function InvoiceData(Request $request)
@@ -68,4 +68,10 @@ class InvoiceController extends Controller
         return view('admin.industrialInvoice', compact('datas'));
     }
 
+    public function getArreas(Request $request)
+    {
+        $month = $this->invoiceService->checkOldInvoice($request->user_id);
+        $arreas = $this->invoiceService->getArreas($request->user_id, $month);
+        return response($arreas);
+    }
 }
