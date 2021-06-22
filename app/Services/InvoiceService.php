@@ -39,10 +39,25 @@ class InvoiceService
         return $this->industrial_remmitance->where('user_id', $user_id)->sum('amount_to_pay');
     }
 
-    public function getArreas($user_id, $month)
+    public function updateArreas($user_id, $month, $arreas)
     {  
         return $this->industrial_remmitance->where('user_id', $user_id)
-                                                ->where('month_due', $month)
+                                            ->where('month_due', $month)
+                                            ->update([
+                                                'arreas' => $arreas
+                                            ]);
+    }
+    public function getArreas($user_id, $month)
+    {  
+        if ($month == 1) {
+            return $this->industrial_remmitance->where('user_id', $user_id)
+                                                ->where('month_due', 12)
+                                                ->whereYear('created_at', date('Y'))
+                                                ->value('arreas');
+
+        }
+        return $this->industrial_remmitance->where('user_id', $user_id)
+                                                ->where('month_due', $month - 1)
                                                 ->whereYear('created_at', date('Y'))
                                                 ->value('arreas');
     }
