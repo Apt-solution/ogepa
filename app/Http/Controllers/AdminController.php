@@ -79,7 +79,7 @@ class AdminController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $this->adminService->registerAdmin($request->all());
-        return redirect()->back()->with('success', 'sub-admin added successfully');
+        return redirect()->back()->with('success', 'commercial officer added successfully');
     }
 
     public function addIndustrialPayment()
@@ -130,7 +130,14 @@ class AdminController extends Controller
         if(!$checkIfAmountExist){
             return redirect()->back()->with('error', 'industry selected dont have payment in selected month');
         }
+        // check if payment fopr month selected has already been entered
+        $checkIfMonthPaymentExist = $this->adminService->checMonthPaymentExist($request->all());
+        if($checkIfMonthPaymentExist){
+            return redirect()->back()->with('error', 'Payment for selected month already exist');
+        }
+
         Session::put('user_id', $request['industry_id']);
+        Session::put('month', $request['month']);
         return redirect('enter-amount-paid');
     }
 

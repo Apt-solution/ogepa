@@ -90,10 +90,9 @@ class AdminService
             'full_name' => $data['name'],
             'email' => $data['email'],
             'location' => $data['location'],
-            'role' => 'subAdmin',
+            'role' => 'commercial_officer',
             'phone' => 000,
             'lga' => 'abeokuta_south',
-            'ogwema_ref' => 00,
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -141,6 +140,14 @@ class AdminService
             ->first();
     }
 
+    public function checMonthPaymentExist(array $data)
+    {
+        return $this->payment->where('user_id', $data['industry_id'])
+            ->where('month_paid', $data['month'])
+            ->where('status', 'successful')
+            ->first();
+    }
+
     public function addIndustrialAmountPaid(array $data)
     {
         $reference = $this->userService->getPaymentRef();
@@ -149,7 +156,8 @@ class AdminService
             'amount' => $data['amount'],
             'bank_charges' => 0,
             'ref' => $reference,
-            'status' => 'successful'
+            'status' => 'successful',
+            'month_paid' => Session::get('month')
         ]);
     }
 }
