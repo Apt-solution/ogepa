@@ -71,7 +71,7 @@ class ClientController extends Controller
                         'digits:11',
                          Rule::unique('users')->ignore($id)
                        ],
-            'email' => ['email',
+            'email' => [
                         'regex:/(.+)@(.+)\.(.+)/i',
                         Rule::unique('users')->ignore($id)
                        ],
