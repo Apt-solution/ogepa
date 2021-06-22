@@ -31,13 +31,13 @@
             <form method="post" action="{{ route('add-industrial-amount-paid') }}">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Session::get('user_id') }}">
-
+                <input type="hidden" name="month" value="{{ Session::get('month') }}">
                 <div class="input-group form-group mb-3 col-md-6">
                     <label for="">Amount</label><br /><p>&nbsp;</p>
                     <input type="number" name="amount" class="form-control" id="">
                 </div>
 
-                <input type="submit" class="btn btn-primary" value="enter amount paid">
+                <input type="submit" class="btn btn-primary" value="Enter amount paid">
 
             </form>
         </div>

@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <form action="{{ route('invoiceData') }}" method="post">
                     @csrf
-                    <input type="hidden" name="user_id" value="{{ $users->id }}">
+                    <input type="hidden" id="u_id" name="user_id" value="{{ $users->id }}">
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Ogwama Code:</label>
                             <input type="text" name="ogwamaCode" readonly value="{{ $users->ogwema_ref }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
@@ -84,7 +84,7 @@
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Net Arreas (#)</label>
-                            <input type="text" readonly  name="netArreas" value="{{ $arreas }}" id="net" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly  name="netArreas" value="" id="net" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
@@ -101,6 +101,7 @@
                     </div>
                         <button  onclick="myFunction();" class="btn btn-outline-success float-right">Generate Invoice</button>
                     </form>
+                    <button class="btn btn-primary" id="test">Click me</button>
                 </div>
             </div>
         </div>
@@ -114,11 +115,9 @@
   }
   $status = {!! json_encode(Session::get('status')) !!}
     if($status){
+        {{ Session::forget('status')  }}
         swal("Invoice of this month had been generated for this user", "Come back next month", "error");
     }
-  
-$(document).ready(function(){
-
     let month = {
         'Jan': 1,
         'Feb': 2,
@@ -133,6 +132,7 @@ $(document).ready(function(){
         'Nov': 11,
         'Dec': 12
     };
+$(document).ready(function(){
 
     for(const key in month){
         console.log(key + ":" + month[key]);
@@ -210,6 +210,26 @@ function toWordsconver(s) {
     }
     return str_val.replace(/\s+/g, ' ');
 }
+
+    var user_id = $('#u_id').val();
+    $.ajax({
+        type: 'GET',
+        url: '{{ URL::to('get-arreas') }}',
+        data: 
+        {
+            'user_id': user_id,
+            
+        },
+        success: function(data){
+            if(data){
+            $('#net').val(data);
+            }
+            else{
+                $('#net').val(0.00);
+            }
+        }
+    });
+    
 
 })
 </script>

@@ -19,7 +19,7 @@
                                         <div class="m-b-25"> <img src="{{ asset('public/images/user.png') }}" class="img-radius" alt="User-Profile-Image"> </div>
                                         <h6 class="f-w-600">{{ $data['user_details']->first_name.' '.$data['user_details']->last_name }}</h6>
                                         <p>{{ $data['user_details']->phone }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                        <p>Ogwema Ref: {{ $data['user_details']->ogwema_ref }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                        <p>Ogwama Ref: {{ $data['user_details']->ogwema_ref }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                     </div>
                                 </div>
                                 <div class="col-sm-8">

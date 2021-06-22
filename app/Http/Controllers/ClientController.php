@@ -69,6 +69,14 @@ class ClientController extends Controller
         $validated = $request->validate([
             'phone' => ['required', 
                         'digits:11',
+<<<<<<< HEAD
+=======
+                         Rule::unique('users')->ignore($id)
+                       ],
+            'email' => [
+                        'regex:/(.+)@(.+)\.(.+)/i',
+                        Rule::unique('users')->ignore($id)
+>>>>>>> cb7fd9a58f107a035979cfece032eaf766491ef2
                        ],
             'no_of_sub_client_type' => ['required'],
             'full_name' => ['required','string'],
