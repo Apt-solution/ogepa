@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
                 'email' => 'admin@ogwama.com',
                 'full_name' => 'admin',
                 'location' => 'Abeokuta',
-                'ogwema_ref' => 'ooo',
+                'ogwema_ref' => 'admin@ogwama.com',
                 'phone' => '23490989098',
                 'password' => '$2y$10$H21XXthP1v1td1YxHNxytOMt4bmbXc3gfswaeNyoOB.Sj6Gnac7PK', //password
                 'role' => 'admin',
