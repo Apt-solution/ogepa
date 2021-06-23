@@ -12,7 +12,8 @@ class IndustrialRemmitance extends Model
         'user_id',
         'amount_to_pay',
         'no_of_trip',
-        'month_due'
+        'month_due',
+        'arreas'
     ];
 
     public function user()

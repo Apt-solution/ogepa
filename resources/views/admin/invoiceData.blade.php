@@ -12,15 +12,16 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mx-auto">
-            <div class="w3-panel w3-leftbar w3-border-blue w3-pale-blue">
+            <div class="w3-panel w3-leftbar w3-border-red w3-pale-red">
                 <p class="mt-2">Note: Kindly check through all the below data..Once invoice has been generated no changes can be reverted</p>
+                <p>Click on this <a href="{{ route('invoiceHistory') }}" class="badge badge-info p-2" title="List of invoice generated">link</a> to check all the list of invoice generated </p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
                 @if(Session::has('status'))
-                    <div class="alert alert-danger text-center">
+                    <div id="alert" class="alert alert-danger text-center">
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
@@ -101,7 +102,6 @@
                     </div>
                         <button  onclick="myFunction();" class="btn btn-outline-success float-right">Generate Invoice</button>
                     </form>
-                    <button class="btn btn-primary" id="test">Click me</button>
                 </div>
             </div>
         </div>
@@ -113,11 +113,11 @@
       if(!confirm("Are You Sure You Want To Proceed?"))
       event.preventDefault();
   }
-  $status = {!! json_encode(Session::get('status')) !!}
-    if($status){
-        {{ Session::forget('status')  }}
-        swal("Invoice of this month had been generated for this user", "Come back next month", "error");
-    }
+//   $status = {!! json_encode(Session::get('error')) !!}
+//     if($status){
+//         swal("Invoice of this month had been generated for this user", "Come back next month", "error");
+//         {{ Session::forget('error')  }}
+//     }
     let month = {
         'Jan': 1,
         'Feb': 2,
@@ -211,24 +211,35 @@ function toWordsconver(s) {
     return str_val.replace(/\s+/g, ' ');
 }
 
+    let current = $('#current').val();
+    let net2 = parseInt(net, 10);
+
     var user_id = $('#u_id').val();
-    $.ajax({
-        type: 'GET',
-        url: '{{ URL::to('get-arreas') }}',
-        data: 
-        {
-            'user_id': user_id,
-            
-        },
-        success: function(data){
-            if(data){
-            $('#net').val(data);
+    $('#invoiceMonth').change(function(){
+        let m = $('#invoiceMonth').children("option:selected").val();
+        $.ajax({
+            type: 'GET',
+            url: '{{ URL::to('get-arreas') }}',
+            data: 
+            {
+                'user_id': user_id,
+                'month'  : m
+               
+            },
+            success: function(data){
+                if(data){
+                $('#net').val(data);
+                }
+                if(data == 0.00){
+                    $('#net').val(0.00);
+                }
             }
-            else{
-                $('#net').val(0.00);
-            }
-        }
+        });
     });
+    
+    setTimeout(() => {
+    $('#alert').fadeOut();
+   }, 2000);
     
 
 })
