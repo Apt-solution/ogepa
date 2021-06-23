@@ -80,8 +80,8 @@ class InvoiceController extends Controller
 
     public function getArreas(Request $request)
     {
-        // $month = $this->invoiceService->checkOldInvoice($request->user_id);
-        $arreas = $this->invoiceService->getArreas($request->user_id, $request->month);
+        $month = $this->invoiceService->checkOldInvoice($request->user_id);
+        $arreas = $this->invoiceService->getArreas($request->user_id, $month + 1);
         return response($arreas);
     }
 
