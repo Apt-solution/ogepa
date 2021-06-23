@@ -137,6 +137,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'payment already added for the particular industry');
         }
         Session::put('user_id', $request['industry_id']);
+        Session::put('month', $request['month']);
         return redirect('enter-amount-paid');
     }
 
@@ -148,6 +149,10 @@ class AdminController extends Controller
     public function addIndustrialAmountPaid(Request $request)
     {
         $this->adminService->addIndustrialAmountPaid($request->all());
+        $amount_paid = $request['amount'];
+        $amount_to_pay = $this->adminService->arreas($request['user_id'], $request['month']);
+        $arreas = $amount_to_pay - $amount_paid;
+        $this->adminService->fillArreas($request['user_id'], $request['month'], $arreas);
         return redirect()->route('industrial-paid-payment')->with('success', 'amount entered successfully');
     }
 

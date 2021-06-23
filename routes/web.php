@@ -84,6 +84,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/invoice/{id}', [InvoiceController::class, 'showInvoice'])->name('userInvoice');
     Route::post('/invoice-data', [InvoiceController::class, 'invoiceData'])->name('invoiceData');
     Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount');
+    Route::get('/get-arreas', [InvoiceController::class, 'getArreas'])->name('getArreas');
+    Route::get('/list-invoice', [InvoiceController::class, 'getInvoiceList'])->name('invoiceHistory');
+
 });
 
 Route::middleware(['user'])->group(function () {

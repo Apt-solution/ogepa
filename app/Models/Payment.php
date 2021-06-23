@@ -16,6 +16,7 @@ class Payment extends Model
         'ref',
         'paystack_ref',
         'status',
+        'month_paid'
     ];
 
     public function user()

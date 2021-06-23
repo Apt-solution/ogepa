@@ -75,7 +75,7 @@ $(document).ready(function() {
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1 email">Email <span class="text-xs text-tiny">(optional)</span></label>
-                            <input required type="email" name="email" value="{{ $users->email }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
+                            <input  type="email" name="email" value="{{ $users->email }}" class="form-control" placeholder="johndoe@gmail.com" aria-label="fname" aria-describedby="basic-addon1">
                         </div>
                         @error('email')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         

@@ -12,15 +12,16 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mx-auto">
-            <div class="w3-panel w3-leftbar w3-border-blue w3-pale-blue">
+            <div class="w3-panel w3-leftbar w3-border-red w3-pale-red">
                 <p class="mt-2">Note: Kindly check through all the below data..Once invoice has been generated no changes can be reverted</p>
+                <p>Click on this <a href="{{ route('invoiceHistory') }}" class="badge badge-info p-2" title="List of invoice generated">link</a> to check all the list of invoice generated </p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
                 @if(Session::has('status'))
-                    <div class="alert alert-danger text-center">
+                    <div id="alert" class="alert alert-danger text-center">
                         <p>{{ Session::get('status') }}</p>
                     </div>
                 @endif
@@ -31,7 +32,7 @@
                 <div class="card-body">
                     <form action="{{ route('invoiceData') }}" method="post">
                     @csrf
-                    <input type="hidden" name="user_id" value="{{ $users->id }}">
+                    <input type="hidden" id="u_id" name="user_id" value="{{ $users->id }}">
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Ogwama Code:</label>
                             <input type="text" name="ogwamaCode" readonly value="{{ $users->ogwema_ref }}" class="form-control" value="" placeholder="John" aria-label="fname" aria-describedby="basic-addon1">
@@ -84,7 +85,7 @@
 
                     <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Net Arreas (#)</label>
-                            <input type="text" readonly  name="netArreas" value="{{ $arreas }}" id="net" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
+                            <input type="text" readonly  name="netArreas" value="" id="net" class="form-control" value="" placeholder="" aria-label="fname" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
@@ -112,13 +113,11 @@
       if(!confirm("Are You Sure You Want To Proceed?"))
       event.preventDefault();
   }
-  $status = {!! json_encode(Session::get('status')) !!}
-    if($status){
-        swal("Invoice of this month had been generated for this user", "Come back next month", "error");
-    }
-  
-$(document).ready(function(){
-
+//   $status = {!! json_encode(Session::get('error')) !!}
+//     if($status){
+//         swal("Invoice of this month had been generated for this user", "Come back next month", "error");
+//         {{ Session::forget('error')  }}
+//     }
     let month = {
         'Jan': 1,
         'Feb': 2,
@@ -133,6 +132,7 @@ $(document).ready(function(){
         'Nov': 11,
         'Dec': 12
     };
+$(document).ready(function(){
 
     for(const key in month){
         console.log(key + ":" + month[key]);
@@ -159,6 +159,37 @@ $(document).ready(function(){
         let Inwords = toWordsconver(total2);
         $('#amtWords').val(Inwords + "Naira Only");
     });
+
+    let current = $('#current').val();
+    let net2 = parseInt(net, 10);
+
+    var user_id = $('#u_id').val();
+    $('#invoiceMonth').change(function(){
+        let m = $('#invoiceMonth').children("option:selected").val();
+        $.ajax({
+            type: 'GET',
+            url: '{{ URL::to('get-arreas') }}',
+            data: 
+            {
+                'user_id': user_id,
+                'month'  : m
+               
+            },
+            success: function(data){
+                if(data){
+                $('#net').val(data);
+                }
+                if(data == 0.00){
+                    $('#net').val(0.00);
+                }
+            }
+        });
+    });
+    
+    setTimeout(() => {
+    $('#alert').fadeOut();
+   }, 2000);
+    
 
 })
 </script>
