@@ -176,6 +176,7 @@ class AdminService
                                 ->update([
                                     'arreas' => $arreas
                                 ]);
+    }
 
     public function checkIfPaymentExist($request)
     {
