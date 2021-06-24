@@ -36,10 +36,6 @@ class PSPController extends Controller
         $validated = $request->validate([
             'phone' => ['required', 
                         'digits:11',
-                         Rule::unique('users')->ignore($id)
-                       ],
-            'email' => ['email',
-                        Rule::unique('users')->ignore($id)
                        ],
             'full_name' => ['required','string'],
             'lga'       => ['required'],

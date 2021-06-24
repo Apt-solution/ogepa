@@ -5,7 +5,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	
 	<title>User's Receipt</title>
-	<link rel='stylesheet' type='text/css' href="{{asset('css/receipt.css') }}"  />
+	<link rel='stylesheet' type='text/css' href="{{asset('public/css/receipt.css') }}"  />
 </head>
 
 <body>
@@ -19,7 +19,7 @@
             </div>
            
             <div style="text-align: right;">
-              <img id="image" style="height: 100px; width:100px; margin-top:-10px" src="{{asset('images/ogwama.png')}}" alt="logo" />
+              <img id="image" style="height: 100px; width:100px; margin-top:-10px" src="{{asset('public/images/ogwama.png')}}" alt="logo" />
             </div>
 
             <div style="margin-top: 20px;">
