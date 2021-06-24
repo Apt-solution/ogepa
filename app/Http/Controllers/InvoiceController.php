@@ -29,12 +29,7 @@ class InvoiceController extends Controller
    
     public function showInvoice($id)
     {
-       $users = $this->clientService->ClientProfile($id);
-    //    $payment = $this->invoiceService->getAllAmountPaid($id);
-    //    $remmitance = $this->invoiceService->getMoneyToPay($id);
-    //    $arreas = $remmitance - $payment; 
-    //    $total2 = $arreas + $users->client->initialAmount;
-       
+       $users = $this->clientService->ClientProfile($id);   
        return view('admin.invoiceData', compact('users'));
     }
 
@@ -68,11 +63,17 @@ class InvoiceController extends Controller
             return redirect()->back()->with('status', 'Invoice Of This Month Has Been Generated For This User');
         }
 
-        // $check_old_invoice = $this->invoiceService->checkOldInvoice($request['user_id']);
-        // $newInvoice = $check_old_invoice + 1;
-        // if($newInvoice < $request['month_due']){
-        //     return redirect()->back()->with('status', 'Invoice Of Last Month Has Not Been Generated For This User');
-        // }
+        $check_old_invoice = $this->invoiceService->checkOldInvoice($request['user_id']);
+        $newInvoice = $check_old_invoice + 1;
+        if($check_old_invoice){
+            if($newInvoice < $request['month_due']){
+                return redirect()->back()->with('status', 'Invoice Of Last Month Has Not Been Generated For This User');
+            }
+            if($check_old_invoice > $request['month_due']){
+                return redirect()->back()->with('status', 'Sorry, you can not generate invoice of an old month');
+            }
+        }
+        
         // $this->invoiceService->updateArreas($request['user_id'],  $request['month_due'],  $request['amount_to_pay']);
         $industrial_remmitance = IndustrialRemmitance::create($industrial);
         return view('admin.industrialInvoice', compact('datas'));

@@ -64,9 +64,15 @@ class InvoiceService
 
     public function checkOldInvoice($user_id)
     {
-        return $this->industrial_remmitance->where('user_id', $user_id)
-                                            ->whereYear('updated_at', date('Y'))
+        return $month = $this->industrial_remmitance->where('user_id', $user_id)
+                                            ->whereYear('created_at', date('Y'))
                                             ->max('month_due');
+        // if ($month == 12) {
+        //     return $this->industrial_remmitance->where('user_id', $user_id)
+        //                                         ->whereYear('created_at', date('Y') - 1)
+        //                                         ->max('month_due');
+        // }
+        
     }
 
 }
