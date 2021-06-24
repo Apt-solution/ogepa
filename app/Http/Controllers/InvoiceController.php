@@ -70,11 +70,10 @@ class InvoiceController extends Controller
                 return redirect()->back()->with('status', 'Invoice Of Last Month Has Not Been Generated For This User');
             }
             if($check_old_invoice > $request['month_due']){
-                return redirect()->back()->with('status', 'Sorry, you can not generate invoice of an old month');
+                return redirect()->back()->with('status', 'Sorry, you can not generate invoice of an old month, kindly check the invoice in the invoice history ');
             }
         }
         
-        // $this->invoiceService->updateArreas($request['user_id'],  $request['month_due'],  $request['amount_to_pay']);
         $industrial_remmitance = IndustrialRemmitance::create($industrial);
         return view('admin.industrialInvoice', compact('datas'));
     }
@@ -86,15 +85,32 @@ class InvoiceController extends Controller
         return response($arreas);
     }
 
+    public function getUserInvoiceData($id)
+    {
+        $invoice_data = $this->invoiceService->getUserInvoiceData($id);
+        $last_month_arrears = $this->invoiceService->getPreviousMonthArrears($id);
+        return view('admin.industrialInvoice', compact('invoice_data', 'last_month_arrears'));
+
+    }
+
     public function getInvoiceList(Request $request)
     {       
-        if($request->ajax()){
-        $payments = DB::table('users')
-        ->join('clients', 'clients.user_id', '=', 'users.id')
-        ->join('industrial_remmitances', 'industrial_remmitances.user_id', '=', 'users.id')
-        ->select(['industrial_remmitances.id', 'industrial_remmitances.amount_to_pay', 'industrial_remmitances.no_of_trip', 'industrial_remmitances.month_due', 'industrial_remmitances.arreas', 'users.full_name', 'clients.type', 'clients.sub_client_type', 'clients.initialAmount', 'users.ogwema_ref']);
-        return Datatables::of($payments)->make(true);
+        if ($request->ajax()) {
+            $payments = DB::table('users')
+            ->join('clients', 'clients.user_id', '=', 'users.id')
+            ->join('industrial_remmitances', 'industrial_remmitances.user_id', '=', 'users.id')
+            ->select(['industrial_remmitances.id', 'industrial_remmitances.amount_to_pay', 'industrial_remmitances.no_of_trip', 'industrial_remmitances.month_due', 'industrial_remmitances.arreas', 'users.full_name', 'clients.type', 'clients.sub_client_type', 'clients.initialAmount', 'users.ogwema_ref']);
+            return Datatables::of($payments)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<a href="/user-invoice-data/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Invoice" class="badge badge-primary p-1"><i class="fas fa-receipt"></i></a>';
+                         return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
         }
         return view('admin.invoiceHistory');
     }
+
+
 }

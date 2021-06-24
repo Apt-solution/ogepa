@@ -3,9 +3,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <!-- Load paper.css for happy printing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+    <script src="{{ asset('js/moneyToWord.js') }}"></script>
     <title>Industrial Invoice</title>
 <style>
     @page { size: A4 }
@@ -113,57 +115,173 @@
 <body class="A4">
     <div class="container sheet">
         <div class="name">
+        @isset( $datas['industryName'])
             <p>{{ $datas['industryName'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->full_name }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="address">
+        @isset( $datas['address'])
             <p>{{ $datas['address'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->address }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="desc">
             <p>OGWAMA BILL</p>
         </div>
         <div class="trip">
+        @isset( $datas['trip'])
             <p>{{ $datas['trip'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->no_of_trip }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="per-trip">
+        @isset( $datas['perTrip'])
             <p>{{ $datas['perTrip'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->initialAmount }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="total1">
+        @isset( $datas['total1'])
             <p>{{ $datas['total1'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->initialAmount * $data->no_of_trip }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="month">
+        @isset( $datas['invoiceMonth'])
             <p>{{ $datas['invoiceMonth'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ date('F', mktime(0, 0, 0,  $data->month_due, 10)) }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="current">
-        {{ $datas['currentCharge'] }}
+        @isset( $datas['currentCharge'])
+          <p>{{ $datas['currentCharge'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->initialAmount * $data->no_of_trip }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="net">
+        @isset( $datas['netArreas'])
             <p>{{ $datas['netArreas'] }}</p>
+        @endisset
+        @isset($invoice_data)
+            <p>{{ $last_month_arrears }}</p>
+        @endisset
         </div>
         <div class="total2">
+        @isset( $datas['amount_to_pay'])
             <p>{{ $datas['amount_to_pay'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->amount_to_pay }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="due">
+        @isset( $datas['amount_to_pay'])
             <p>{{ $datas['amount_to_pay'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->amount_to_pay }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="month2">
+        @isset( $datas['invoiceMonth'])
             <p>{{ $datas['invoiceMonth'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ date('F', mktime(0, 0, 0,  $data->month_due, 10)) }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="amtPaid">
+        @isset( $datas['amount_to_pay'])
             <p>{{ $datas['amount_to_pay'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->amount_to_pay }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="amtWord">
+        @isset($datas['amtWord'])
             <p>{{ $datas['amtWord'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->amount_to_pay }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="amtPaid2">
+        @isset( $datas['amount_to_pay'])
             <p>{{ $datas['amount_to_pay'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->amount_to_pay }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="due1">
+        @isset( $datas['amount_to_pay'])
             <p>{{ $datas['amount_to_pay'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ $data->amount_to_pay }}</p>
+        @endforeach
+        @endisset
         </div>
         <div class="month3">
+        @isset( $datas['invoiceMonth'])
             <p>{{ $datas['invoiceMonth'] }}</p>
+        @endisset
+        @isset($invoice_data)
+        @foreach($invoice_data as $data)
+            <p>{{ date('F', mktime(0, 0, 0,  $data->month_due, 10)) }}</p>
+        @endforeach
+        @endisset
         </div>
     </div>
 </body>
+<script>
+$(document).ready(function(){
+    let amtWords = toWordsconver(@{{ arrears }});
+   alert(toWordsconver(amtWords));
+});
+</script>
 
 </html>

@@ -86,7 +86,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount');
     Route::get('/get-arreas', [InvoiceController::class, 'getArreas'])->name('getArreas');
     Route::get('/list-invoice', [InvoiceController::class, 'getInvoiceList'])->name('invoiceHistory');
-
+    Route::get('/user-invoice-data/{id}', [InvoiceController::class, 'getUserInvoiceData'])->name('getUserInvoiceData');
 });
 
 Route::middleware(['user'])->group(function () {

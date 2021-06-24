@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Payment;
 use App\Models\IndustrialRemmitance;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class InvoiceService
 {
@@ -73,6 +74,36 @@ class InvoiceService
         //                                         ->max('month_due');
         // }
         
+    }
+    
+
+    public function getUserInvoiceData($id)
+    {
+       $invoiceData = DB::table('users')
+                                    ->join('clients', 'clients.user_id', 'users.id')
+                                    ->join('industrial_remmitances', 'industrial_remmitances.user_id', 'users.id')
+                                    ->where('industrial_remmitances.id', $id)
+                                    ->get();                          
+        return $invoiceData;
+    }
+
+    public function getPreviousMonthArrears($id)
+    {
+        $data = $this->getUserInvoiceData($id);
+        foreach($data as $m){
+            $user_id = $m->user_id;
+            $month = $this->industrial_remmitance->where('user_id', $user_id)
+                                                ->where('id', $id)
+                                                ->max('month_due');
+                                        
+        }
+        $last_month_arreas = $month - 1;
+    
+        return $this->industrial_remmitance->where('month_due', $month - 1)
+                                            ->where(function($query) {
+                                            $query->whereYear('created_at', date('Y'));
+                                            })->value('arreas');
+                                            
     }
 
 }
