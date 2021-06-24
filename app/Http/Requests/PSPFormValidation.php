@@ -28,7 +28,11 @@ class PSPFormValidation extends FormRequest
             'full_name' => ['required'],
             'phone'     => ['required', 'unique:users'],
             'location'  => ['required', 'string'],
+<<<<<<< HEAD
             'email'     => ['unique:users'],
+=======
+            // 'email'     => ['unique:users'],
+>>>>>>> 014cacbc9c37331e2ebeea643c16fb09c59cb3bc
             'lga'       => ['required']
         ];
     }

@@ -173,6 +173,7 @@ class AdminService
     {
        return $this->industrialRemmitance->where('user_id', $user_id)
                                 ->where('month_due', $month)
+                                ->whereYear('created_at', date('Y'))
                                 ->update([
                                     'arreas' => $arreas
                                 ]);

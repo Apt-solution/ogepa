@@ -26,6 +26,7 @@
         </div>
     </div>
 </div>
+<div class="table-responsive">
     <table class="table history table-bordered table-striped">
         <thead class="bg-dark">
             <th>Fullname / Industry Name</th>
@@ -40,6 +41,7 @@
 
         </tbody>
     </table>
+</div>
 <script>
 $(document).ready(function(){
     $.noConflict();

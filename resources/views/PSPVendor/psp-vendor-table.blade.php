@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container animate__animated animate__zoomInDown">
     <div class="row">
         <div class="col-12  card bg-dark p-1">
             PSP & Vendor List

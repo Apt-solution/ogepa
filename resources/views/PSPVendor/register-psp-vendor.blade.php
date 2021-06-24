@@ -7,7 +7,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container animate__animated animate__zoomInDown">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
             <div class="card">
