@@ -52,7 +52,7 @@ class InvoiceService
         if ($month == 1) {
             return $this->industrial_remmitance->where('user_id', $user_id)
                                                 ->where('month_due', 12)
-                                                ->whereYear('created_at', date('Y'))
+                                                ->whereYear('created_at', date          ('Y') - 1)
                                                 ->value('arreas');
 
         }

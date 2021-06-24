@@ -16,10 +16,10 @@
                             <div class="row m-l-0 m-r-0">
                                 <div class="col-sm-4 bg-c-lite-green user-profile">
                                     <div class="card-block text-center text-white">
-                                        <div class="m-b-25"> <img src="{{ asset('images/user.png') }}" class="img-radius" alt="User-Profile-Image"> </div>
+                                        <div class="m-b-25"> <img src="{{ asset('public/images/user.png') }}" class="img-radius" alt="User-Profile-Image"> </div>
                                         <h6 class="f-w-600">{{ $data['user_details']->first_name.' '.$data['user_details']->last_name }}</h6>
                                         <p>{{ $data['user_details']->phone }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                        <p>Ogwema Ref: {{ $data['user_details']->ogwema_ref }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                        <p>Ogwama Ref: {{ $data['user_details']->ogwema_ref }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                         <p><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">View Payment History</a></p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
 
                                         <!-- Modal -->

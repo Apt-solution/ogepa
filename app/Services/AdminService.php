@@ -90,10 +90,9 @@ class AdminService
             'full_name' => $data['name'],
             'email' => $data['email'],
             'location' => $data['location'],
-            'role' => 'subAdmin',
+            'role' => 'commercial_officer',
             'phone' => 000,
             'lga' => 'abeokuta_south',
-            'ogwema_ref' => 00,
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -141,6 +140,14 @@ class AdminService
             ->first();
     }
 
+    public function checMonthPaymentExist(array $data)
+    {
+        return $this->payment->where('user_id', $data['industry_id'])
+            ->where('month_paid', $data['month'])
+            ->where('status', 'successful')
+            ->first();
+    }
+
     public function addIndustrialAmountPaid(array $data)
     {
         $reference = $this->userService->getPaymentRef();
@@ -150,7 +157,7 @@ class AdminService
             'bank_charges' => 0,
             'ref' => $reference,
             'status' => 'successful',
-            'month_paid' => $data['month']
+            'month_paid' => Session::get('month')
         ]);
     }
 
@@ -164,10 +171,27 @@ class AdminService
 
     public function fillArreas($user_id, $month, $arreas)
     {
+<<<<<<< HEAD
         return $this->industrialRemmitance->where('user_id', $user_id)
             ->where('month_due', $month)
             ->update([
                 'arreas' => $arreas
             ]);
+=======
+       return $this->industrialRemmitance->where('user_id', $user_id)
+                                ->where('month_due', $month)
+                                ->whereYear('created_at', date('Y'))
+                                ->update([
+                                    'arreas' => $arreas
+                                ]);
+    }
+
+    public function checkIfPaymentExist($request)
+    {
+        return $this->payment->where('user_id', $request['industry_id'])
+        ->whereMonth('created_at', date('m'))
+        ->whereYear('created_at', date('Y'))
+        ->first();
+>>>>>>> ddb04843cee45e82e68b87a6a71cd777b7f7303a
     }
 }

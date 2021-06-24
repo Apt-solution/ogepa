@@ -13,11 +13,11 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
-<div class="container">
+<div class="container animate__animated animate__zoomInDown">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
             @if(Session::has('status'))
-                <div class="alert alert-success text-center">
+                <div id="alert" class="alert alert-success text-center">
                     {{  Session::get('status') }}
                 </div>
             @endif
@@ -119,6 +119,10 @@ $(document).ready(function() {
 </div>
 
 <script>
+
+ setTimeout(() => {
+    $('#alert').fadeOut();
+   }, 2000);
 
     $status = {!! json_encode(Session::get('status')) !!}
     if($status){
