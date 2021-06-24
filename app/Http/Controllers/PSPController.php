@@ -38,9 +38,6 @@ class PSPController extends Controller
                         'digits:11',
                          Rule::unique('users')->ignore($id)
                        ],
-            'email' => ['email',
-                        Rule::unique('users')->ignore($id)
-                       ],
             'full_name' => ['required','string'],
             'lga'       => ['required'],
             'location'  => ['required']
