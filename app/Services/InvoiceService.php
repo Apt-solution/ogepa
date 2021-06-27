@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Hash;
 use App\Models\Payment;
+use App\Models\Client;
+use App\Models\Remmitance;
 use App\Models\IndustrialRemmitance;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -15,10 +17,14 @@ class InvoiceService
 
     public function __construct(
         Payment $payment,
-        IndustrialRemmitance $industrial_remmitance
+        IndustrialRemmitance $industrial_remmitance,
+        Client $client,
+        Remmitance $remmitance
     ) {
         $this->payment = $payment;
         $this->industrial_remmitance = $industrial_remmitance;
+        $this->client = $client;
+        $this->remmitance = $remmitance;
     }
 
     public function checkInvoice($user_id, $month_due)
@@ -98,6 +104,28 @@ class InvoiceService
                                             ->where(function($query) {
                                             $query->whereYear('created_at', date('Y'));
                                             })->value('arreas');                                 
+    }
+
+    private function getAllIndustrialInvoiceData()
+    {
+       return $this->client->where('type', 'industrial')
+                                    ->whereNotNull('initialAmount')
+                                    ->get();
+    }
+
+    public function fillIndustrialInvoiceData()
+    {
+        $industrial_data = $this->getAllIndustrialInvoiceData();
+        foreach($industrial_data as $industrial)
+        {
+            $this->industrial_remmitance->create([
+                'user_id' => $industrial->user_id,
+                'amount_to_pay' => $industrial->initialAmount,
+                'arreas' => $industrial->initialAmount,
+                'month_due' => 1,
+                'admin_id' => \Auth::User()->id
+            ]);
+        }
     }
 
 }

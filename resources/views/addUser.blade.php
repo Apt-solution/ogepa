@@ -123,7 +123,7 @@
         var residential = ['Choose', 'Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
         var commercial = ['Choose','Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
                           'Food_Canteen', 'Big_Eatery', 'Small_Eatery', 'Super_Store', 'Medium_Store', 
-                          'Mini_Supermarket', 'Religion_Center', 'Fuel_Station', 'Bakery', 'Hospital', 'Hotel', 'Bear Parlour / Bar', 'Table Water Factory'
+                          'Mini_Supermarket', 'Religion_Center', 'Fuel_Station', 'Bakery', 'Hospital', 'Hotel', 'Bear Parlour / Bar', 'Table Water Factory', 'Frozen Foods'
                          ];
         var industrial = ['Choose', '10 ton', '15-20 ton', 'compactor'];
         

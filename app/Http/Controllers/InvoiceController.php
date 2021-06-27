@@ -80,7 +80,7 @@ class InvoiceController extends Controller
         }
         
         $industrial_remmitance = IndustrialRemmitance::create($industrial);
-        return view('admin.industrialInvoice', compact('datas'));
+        return view('invoice.industrialInvoice', compact('datas'));
     }
 
     public function getArreas(Request $request)
@@ -101,7 +101,7 @@ class InvoiceController extends Controller
             $amt_to_pay = $data->amount_to_pay;
             $amtWords = $amt->format($amt_to_pay);
         }
-        return view('admin.industrialInvoice', compact('invoice_data', 'last_month_arrears', 'amtWords'));
+        return view('invoice.industrialInvoice', compact('invoice_data', 'last_month_arrears', 'amtWords'));
     }
 
     public function getInvoiceList(Request $request)
@@ -123,5 +123,10 @@ class InvoiceController extends Controller
         return view('admin.invoiceHistory');
     }
 
+    public function generateAllIndustrialInvoice()
+    {
+       $this->invoiceService->fillIndustrialInvoiceData();
+       return 'Insertion successful';
+    }
 
 }
