@@ -88,9 +88,9 @@
     @elseif(Route::current()->getName() == "industry.user")
     <div class="row">
         <div class="col-md-12">
-        <form action="#" method="post">
+        <form action="{{route('industrialInvoice')}}" method="post">
         @csrf
-            <button class="btn btn-primary btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Industry Invoice</button>
+            <button disabled class="btn btn-primary btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Industry Invoice</button>
         </form>
             <div class="table-responsive">
                 <table class="table table-bordered industry text-center" style="width:100%">
