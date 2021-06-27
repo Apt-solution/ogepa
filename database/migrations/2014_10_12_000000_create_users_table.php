@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('location')->nullable();
-            $table->string('phone')->unique();
+            $table->string('phone')->unique()->nullable();
             $table->string('ogwema_ref')->unique();
             $table->string('email')->nullable();
             $table->enum('role', ['admin', 'user', 'subAdmin'])->default('user');
