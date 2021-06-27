@@ -61,16 +61,21 @@ class InvoiceController extends Controller
         if($check_invoice === 1){
             $request->session()->forget('status');
             return redirect()->back()->with('status', 'Invoice Of This Month Has Been Generated For This User');
+            $request->session()->forget('status');
         }
 
         $check_old_invoice = $this->invoiceService->checkOldInvoice($request['user_id']);
         $newInvoice = $check_old_invoice + 1;
         if($check_old_invoice){
             if($newInvoice < $request['month_due']){
+                $request->session()->forget('status');
                 return redirect()->back()->with('status', 'Invoice Of Last Month Has Not Been Generated For This User');
+                $request->session()->forget('status');
             }
             if($check_old_invoice > $request['month_due']){
+                $request->session()->forget('status');
                 return redirect()->back()->with('status', 'Sorry, you can not generate invoice of an old month, kindly check the invoice in the invoice history ');
+                $request->session()->forget('status');
             }
         }
         

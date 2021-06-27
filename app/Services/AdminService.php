@@ -158,6 +158,7 @@ class AdminService
     {
        return $this->industrialRemmitance->where('user_id', $user_id)
                                     ->where('month_due', $month)
+                                    ->orWhereMonth('created_at', date('M'))
                                     ->whereYear('created_at', date('Y'))
                                     ->value('amount_to_pay');
     }
@@ -166,6 +167,7 @@ class AdminService
     {
        return $this->industrialRemmitance->where('user_id', $user_id)
                                 ->where('month_due', $month)
+                                ->orWhereMonth('created_at', date('M'))
                                 ->whereYear('created_at', date('Y'))
                                 ->update([
                                     'arreas' => $arreas

@@ -25,20 +25,23 @@ class InvoiceService
     {
         return $this->industrial_remmitance->where('user_id', $user_id)
                             ->where('month_due', $month_due)
+                            ->orWhereMonth('created_at', date('M'))
                             ->whereYear('updated_at', date('Y'))->count();
     }
 
-    public function getAllAmountPaid($user_id)
-    {
-        return $this->payment->where('user_id', $user_id)
-                            ->where('status', 'successful')
-                            ->sum('amount');
-    }
+    // public function getAllAmountPaid($user_id)
+    // {
+    //     return $this->payment->where('user_id', $user_id)
+    //                         ->where('status', 'successful')
+    //                         ->orWhereMonth('updated_at', date('M'))
+    //                         ->whereYear('updated_at', date('Y'))
+    //                         ->sum('amount');
+    // }
 
-    public function getMoneyToPay($user_id)
-    {
-        return $this->industrial_remmitance->where('user_id', $user_id)->sum('amount_to_pay');
-    }
+    // public function getMoneyToPay($user_id)
+    // {
+    //     return $this->industrial_remmitance->where('user_id', $user_id)->sum('amount_to_pay');
+    // }
 
     public function getArreas($user_id, $month)
     {  
