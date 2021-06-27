@@ -34,10 +34,14 @@ class PSPController extends Controller
     public function updatePSPVendor(Request $request , $id)
     {
         $validated = $request->validate([
-            'phone' => ['required', 
+            'phone' => ['nullable', 
                         'digits:11',
                          Rule::unique('users')->ignore($id)
                        ],
+            'email' => ['nullable',
+                       'regex:/(.+)@(.+)\.(.+)/i',
+                       Rule::unique('users')->ignore($id)
+                      ],
             'full_name' => ['required','string'],
             'lga'       => ['required'],
             'location'  => ['required']

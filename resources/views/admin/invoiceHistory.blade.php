@@ -3,7 +3,7 @@
 <div class="row">
     <div class="card bg-dark h-50">
         <div class="card-heading">
-            Check Payment Records
+            Invoice Generated
         </div>
     </div>
 </div>

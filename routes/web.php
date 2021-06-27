@@ -103,3 +103,8 @@ Route::middleware(['user'])->group(function () {
     Route::put('/change-password', [UserController::class, 'changeUserPassword'])->name('changePassword');
     Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
 });
+
+
+Route::fallback(function(){
+    return redirect()->route('home');
+});

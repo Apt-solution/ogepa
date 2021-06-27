@@ -240,9 +240,7 @@
             <p>{{ $datas['amtWord'] }}</p>
         @endisset
         @isset($invoice_data)
-        @foreach($invoice_data as $data)
-            <p>{{ $data->amount_to_pay }}</p>
-        @endforeach
+            <p>{{ ucwords($amtWords) }}</p>
         @endisset
         </div>
         <div class="amtPaid2">
@@ -277,11 +275,4 @@
         </div>
     </div>
 </body>
-<script>
-$(document).ready(function(){
-    let amtWords = toWordsconver(@{{ arrears }});
-   alert(toWordsconver(amtWords));
-});
-</script>
-
 </html>

@@ -89,8 +89,14 @@ class InvoiceController extends Controller
     {
         $invoice_data = $this->invoiceService->getUserInvoiceData($id);
         $last_month_arrears = $this->invoiceService->getPreviousMonthArrears($id);
-        return view('admin.industrialInvoice', compact('invoice_data', 'last_month_arrears'));
-
+        foreach($invoice_data as $data)
+        {
+            // convert amount to pay to word
+            $amt = new NumberFormatter('en', NumberFormatter::SPELLOUT);
+            $amt_to_pay = $data->amount_to_pay;
+            $amtWords = $amt->format($amt_to_pay);
+        }
+        return view('admin.industrialInvoice', compact('invoice_data', 'last_month_arrears', 'amtWords'));
     }
 
     public function getInvoiceList(Request $request)
