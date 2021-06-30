@@ -89,6 +89,7 @@ class AdminService
         return $this->user->create([
             'full_name' => $data['name'],
             'email' => $data['email'],
+            'ogwema_ref' => $data['email'],
             'location' => $data['location'],
             'role' => 'commercial_officer',
             'phone' => 000,
@@ -188,5 +189,23 @@ class AdminService
             ->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
             ->first();
+    }
+
+    public function getCOmmercialOfficers()
+    {
+        return $this->user->where('role', 'commercial_officer')->orderBy('full_name', 'desc')->get();
+    }
+
+    public function enterIndustryFOrOfficer(array $credentials)
+    {
+        $num = count($credentials['user_id']);
+
+        for ($i=0; $i < $num; $i++) { 
+            $this->client->where('user_id', $credentials['user_id'][$i])
+            ->update([
+                'commercial_officer_id' => $credentials['commercial_officer_id']
+            ]);
+        }
+        return true;
     }
 }
