@@ -28,8 +28,6 @@ class FormValidationRequest extends FormRequest
            'sub_client_type' => ['required'],
            'no_of_sub_client_type' => ['required'],
            'full_name' => ['required','string'],
-           'phone'  => ['required', 'digits:11', 'unique:users'],
-           'email'  => [''],
            'lga'    => ['required'],
            'address'    => ['required'],
            'monthlyPayment' => ['required', 'regex:/^\d+(\.\d{1,2})?$/']

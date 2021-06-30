@@ -67,14 +67,6 @@ class ClientController extends Controller
     public function UpdateClient(Request $request, $id)
     {
         $validated = $request->validate([
-            'phone' => ['required', 
-                        'digits:11',
-                         Rule::unique('users')->ignore($id)
-                       ],
-            'email' => [
-                        'regex:/(.+)@(.+)\.(.+)/i',
-                        Rule::unique('users')->ignore($id)
-                       ],
             'no_of_sub_client_type' => ['required'],
             'full_name' => ['required','string'],
             'address'    => ['required'],

@@ -34,9 +34,6 @@ class PSPController extends Controller
     public function updatePSPVendor(Request $request , $id)
     {
         $validated = $request->validate([
-            'phone' => ['required', 
-                        'digits:11',
-                       ],
             'full_name' => ['required','string'],
             'lga'       => ['required'],
             'location'  => ['required']
