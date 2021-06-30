@@ -153,7 +153,7 @@ class DataTableController extends Controller
         $payments = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
         ->join('payments', 'payments.user_id', '=', 'users.id')
-        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwema_ref'])
+        ->select(['payments.id', 'payments.amount', 'payments.ref', 'payments.month_paid', 'payments.updated_at','users.full_name', 'clients.type','clients.sub_client_type','users.ogwema_ref'])
         ->where('status', 'successful')->orderBy('payments.updated_at', 'DESC');
         return Datatables::of($payments)->make(true);
         }

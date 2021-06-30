@@ -10,7 +10,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container animate__animated animate__zoomInDown">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
             <div class="card">
@@ -62,7 +62,7 @@
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" id="basic-addon1">Phone Number</label>
-                            <input required type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
+                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="08012345678" aria-label="lname" aria-describedby="basic-addon1">
                         </div>
                         @error('phone')<p style="margin-top: -14px;" class="text-danger text-sm">{{ $message }}</p>@enderror
                         
@@ -123,7 +123,7 @@
         var residential = ['Choose', 'Room', 'Self_Contain', 'Flat', 'Bungalow', 'Duplex', 'Minor_Shop'];
         var commercial = ['Choose','Commercial_Bank', 'Micro_Finance_Bank', 'School', 'Shopping_Complex', 'Printing_Shop',
                           'Food_Canteen', 'Big_Eatery', 'Small_Eatery', 'Super_Store', 'Medium_Store', 
-                          'Mini_Supermarket', 'Religion_Center', 'Fuel_Station', 'Bakery', 'Hospital'
+                          'Mini_Supermarket', 'Religion_Center', 'Fuel_Station', 'Bakery', 'Hospital', 'Hotel', 'Bear Parlour / Bar', 'Table Water Factory', 'Frozen Foods'
                          ];
         var industrial = ['Choose', '10 ton', '15-20 ton', 'compactor'];
         

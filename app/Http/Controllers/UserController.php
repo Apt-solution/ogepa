@@ -68,7 +68,8 @@ class UserController extends Controller
         ]);
 
         $this->userService->changePassword($request->all());
-        return redirect()->back()->with('status', 'Password Change Succesfully');
+        $request->session()->forget('password');
+        return redirect()->back()->with('password', 'Password Change Succesfully');
     }
 
 

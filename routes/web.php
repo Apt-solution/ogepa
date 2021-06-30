@@ -86,7 +86,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/get-amount', [ClientController::class, 'getPayment'])->name('getAmount');
     Route::get('/get-arreas', [InvoiceController::class, 'getArreas'])->name('getArreas');
     Route::get('/list-invoice', [InvoiceController::class, 'getInvoiceList'])->name('invoiceHistory');
-
+    Route::get('/user-invoice-data/{id}', [InvoiceController::class, 'getUserInvoiceData'])->name('getUserInvoiceData');
+    Route::post('/generate-industrial-invoice', [InvoiceController::class, 'generateAllIndustrialInvoice'])->name('industrialInvoice');
 });
 
 Route::middleware(['user'])->group(function () {
@@ -102,4 +103,9 @@ Route::middleware(['user'])->group(function () {
     Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
     Route::put('/change-password', [UserController::class, 'changeUserPassword'])->name('changePassword');
     Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
+});
+
+
+Route::fallback(function(){
+    return redirect()->route('home');
 });
