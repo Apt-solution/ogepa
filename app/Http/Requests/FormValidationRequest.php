@@ -35,4 +35,13 @@ class FormValidationRequest extends FormRequest
            'monthlyPayment' => ['required', 'regex:/^\d+(\.\d{1,2})?$/']
         ];
     }
+
+    public function messages()
+    {
+      return [
+
+
+      ];
+
+    }
 }

@@ -163,20 +163,23 @@ class AdminService
 
     public function arreas($user_id, $month)
     {
-        return $this->industrialRemmitance->where('user_id', $user_id)
-            ->where('month_due', $month)
-            ->whereYear('created_at', date('Y'))
-            ->value('amount_to_pay');
+       return $this->industrialRemmitance->where('user_id', $user_id)
+                                    ->where('month_due', $month)
+                                    ->orWhereMonth('created_at', date('M'))
+                                    ->whereYear('created_at', date('Y'))
+                                    ->value('amount_to_pay');
     }
 
     public function fillArreas($user_id, $month, $arreas)
     {
-        return $this->industrialRemmitance->where('user_id', $user_id)
-            ->where('month_due', $month)
-            ->whereYear('created_at', date('Y'))
-            ->update([
-                'arreas' => $arreas
-            ]);
+
+       return $this->industrialRemmitance->where('user_id', $user_id)
+                                ->where('month_due', $month)
+                                ->orWhereMonth('created_at', date('M'))
+                                ->whereYear('created_at', date('Y'))
+                                ->update([
+                                    'arreas' => $arreas
+                                ]);
     }
 
     public function checkIfPaymentExist($request)

@@ -3,7 +3,7 @@
 <div class="row">
     <div class="card bg-dark h-50">
         <div class="card-heading">
-            Check Payment Records
+            Invoice Generated
         </div>
     </div>
 </div>
@@ -36,6 +36,7 @@
             <th>Total Amount</th>
             <th>Arrears</th>
             <th>Month</th>
+            <th>Action</th>
         </thead>
         <tbody>
 
@@ -57,7 +58,13 @@ $(document).ready(function(){
             {data: 'no_of_trip', name: 'industrial_remmitances.no_of_trip'}, 
             {data: 'amount_to_pay', name: 'industrial_remmitances.amount_to_pay'},
             {data: 'arreas', name: 'industrial_remmitances.arreas'},
-            {data: 'month_due', name: 'industrial_remmitances.month_due'}
+            {data: 'month_due', name: 'industrial_remmitances.month_due'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
         ],
         
     });

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <script>
 $(document).ready(function() {
     $.noConflict();
@@ -13,7 +14,7 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
-<div class="container animate__animated animate__zoomInDown">
+<div class="container animate__animated animate__bounceInUp">
     <div class="row">
         <div class="col-10 mt-2 mx-auto">
             @if(Session::has('status'))
@@ -119,11 +120,9 @@ $(document).ready(function() {
 </div>
 
 <script>
-
  setTimeout(() => {
-    $('#alert').fadeOut();
+    $('#alert').addClass('animate__animated animate__rollOut');
    }, 2000);
-
     $status = {!! json_encode(Session::get('status')) !!}
     if($status){
         swal("Account Updated!", "Click Ok to Continue!", "success");
