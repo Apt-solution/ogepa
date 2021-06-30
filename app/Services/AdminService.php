@@ -172,6 +172,7 @@ class AdminService
 
     public function fillArreas($user_id, $month, $arreas)
     {
+
        return $this->industrialRemmitance->where('user_id', $user_id)
                                 ->where('month_due', $month)
                                 ->orWhereMonth('created_at', date('M'))
@@ -179,12 +180,13 @@ class AdminService
                                 ->update([
                                     'arreas' => $arreas
                                 ]);
+    }
 
     public function checkIfPaymentExist($request)
     {
         return $this->payment->where('user_id', $request['industry_id'])
-        ->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'))
-        ->first();
+            ->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
+            ->first();
     }
 }
