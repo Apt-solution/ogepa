@@ -33,6 +33,7 @@
             <th>Ogwama No</th>
             <th>Ref No</th>
             <th>Amount</th>
+            <th>Month Paid</th>
             <th>Date Paid</th>
         </thead>
         <tbody>
@@ -53,6 +54,7 @@ $(document).ready(function(){
             {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'ref', name: 'payments.ref'},
             {data: 'amount', name: 'payments.amount'}, 
+            {data: 'month_paid', name: 'payments.month_paid'},
             {data: 'updated_at', name: 'payments.updated_at'}
         ],
         

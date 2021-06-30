@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddArreasToIndustrialRemmitanceTable extends Migration
+class AddArrearsToRemmitancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddArreasToIndustrialRemmitanceTable extends Migration
      */
     public function up()
     {
-        Schema::table('industrial_remmitances', function (Blueprint $table) {
-            $table->decimal('arreas', 14, 2)->default(0.00)->after('month_due');
+        Schema::table('remmitances', function (Blueprint $table) {
+            $table->decimal('arrears', 14, 2)->default(0.00)->after('month_due');
         });
     }
 
@@ -25,8 +25,8 @@ class AddArreasToIndustrialRemmitanceTable extends Migration
      */
     public function down()
     {
-        Schema::table('industrial_remmitances', function (Blueprint $table) {
-            $table->dropColumn('arreas');
+        Schema::table('remmitances', function (Blueprint $table) {
+            $table->dropColumn('arrears');
         });
     }
 }

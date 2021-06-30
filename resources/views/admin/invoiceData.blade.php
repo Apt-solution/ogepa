@@ -5,7 +5,7 @@
 <div class="row">
         <div class="card bg-dark p-1">
             <div class="card-heading">
-                Invoice Data
+                Generate Industrial Invoice Data
             </div>
         </div>
     </div>
@@ -215,31 +215,27 @@ function toWordsconver(s) {
     let net2 = parseInt(net, 10);
 
     var user_id = $('#u_id').val();
-    $('#invoiceMonth').change(function(){
-        let m = $('#invoiceMonth').children("option:selected").val();
-        $.ajax({
-            type: 'GET',
-            url: '{{ URL::to('get-arreas') }}',
-            data: 
-            {
-                'user_id': user_id,
-                'month'  : m
-               
-            },
-            success: function(data){
-                if(data){
-                $('#net').val(data);
-                }
-                if(data == 0.00){
-                    $('#net').val(0.00);
-                }
+    let m = $('#invoiceMonth').children("option:selected").val();
+    $.ajax({
+        type: 'GET',
+        url: '{{ URL::to('get-arreas') }}',
+        data: 
+        {
+            'user_id': user_id,   
+        },
+        success: function(data){
+            if(data){
+            $('#net').val(data);
             }
-        });
+            if(data == 0.00){
+                $('#net').val(0.00);
+            }
+        }
     });
-    
+
     setTimeout(() => {
     $('#alert').fadeOut();
-   }, 2000);
+   }, 5000);
     
 
 })

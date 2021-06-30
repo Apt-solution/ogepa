@@ -40,6 +40,7 @@
     @elseif(Route::current()->getName() == "residential.user")
     <div class="row">
         <div class="col-12">
+        <button class="btn btn-success btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Residential Invoice</button>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped residential text-center" style="width:100%">
                     <thead class="bg-green">
@@ -63,6 +64,7 @@
     @elseif(Route::current()->getName() == "commercial.user")
     <div class="row">
         <div class="col-md-12 mx-auto">
+        <button class="btn btn-info btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Commercial Invoice</button>
             <div class="table-responsive">
                 <table class="table table-bordered commercial text-center" style="width:100%">
                     <thead class="bg-info">
@@ -86,6 +88,10 @@
     @elseif(Route::current()->getName() == "industry.user")
     <div class="row">
         <div class="col-md-12">
+        <form action="{{route('industrialInvoice')}}" method="post">
+        @csrf
+            <button disabled class="btn btn-primary btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Industry Invoice</button>
+        </form>
             <div class="table-responsive">
                 <table class="table table-bordered industry text-center" style="width:100%">
                     <thead class="bg-warning">
@@ -109,6 +115,7 @@
     @elseif(Route::current()->getName() == "medical.user")
     <div class="row">
         <div class="col-md-12">
+        <button class="btn btn-danger btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Medical Invoice</button>
             <div class="table-responsive">
                 <table class="table table-bordered medical text-center" style="width:100%">
                     <thead class="bg-danger">
