@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Payment;
 use App\Models\User;
 use App\Models\ClientType;
@@ -11,6 +12,7 @@ use App\Services\AdminService;
 use App\Services\UserService;
 use Session;
 use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class AdminController extends Controller
 {
@@ -60,9 +62,9 @@ class AdminController extends Controller
 
     public function userReceipt($id)
     {
-       $id = Payment::where('id', $id)->value('id');
-       $payments = $this->adminService->userReceipt($id);
-       return view('admin.receipt', compact('payments')); 
+        $id = Payment::where('id', $id)->value('id');
+        $payments = $this->adminService->userReceipt($id);
+        return view('admin.receipt', compact('payments'));
     }
 
     public function addSubAdmin()
@@ -103,7 +105,7 @@ class AdminController extends Controller
     public function industrialBill(Request $request)
     {
         $bill = $this->adminService->getIndustrialBill($request->month);
-        if($bill->isEmpty()){
+        if ($bill->isEmpty()) {
             return redirect()->back()->with('error', 'no data found');
         }
         Session::put('month', $request->month);
@@ -127,12 +129,12 @@ class AdminController extends Controller
     {
         // check if the money 
         $checkIfAmountExist = $this->adminService->checkIfAmountExist($request->all());
-        if(!$checkIfAmountExist){
+        if (!$checkIfAmountExist) {
             return redirect()->back()->with('error', 'industry selected dont have payment in selected month');
         }
         // check if payment fopr month selected has already been entered
         $checkIfMonthPaymentExist = $this->adminService->checMonthPaymentExist($request->all());
-        if($checkIfMonthPaymentExist){
+        if ($checkIfMonthPaymentExist) {
             return redirect()->back()->with('error', 'Payment for selected month already exist');
         }
         Session::put('user_id', $request['industry_id']);
@@ -155,9 +157,70 @@ class AdminController extends Controller
         return redirect()->route('industrial-paid-payment')->with('success', 'amount entered successfully');
     }
 
+    public function addIndForCommOff()
+    {
+        $officers = $this->adminService->getCOmmercialOfficers();
+        // dd($officers);
+        return view('admin.addIndForCommOff')->with('officers', $officers);
+    }
+
+    public function action(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $query = $request->get('query');
+            if ($query != '') {
+                $data = DB::table('users')
+                    ->join('clients', 'users.id', '=', 'clients.user_id')
+                    ->select('users.*', 'clients.*')
+                    ->where('clients.type', 'industrial')
+                    ->where('users.full_name', 'like', '%' . $query . '%')
+                    ->orWhere('users.phone', 'like', '%' . $query . '%')
+                    ->orderBy('users.id', 'desc')
+                    ->get();
 
 
-    
+                // $data = Client::where('code', 'like', '%' . $query . '%')
+                //     ->orWhere('description', 'like', '%' . $query . '%')
+                //     ->orderBy('id', 'desc')
+                //     ->get();
+            } else {
+                // $data = DB::table('users')
+                //     ->join('clients', 'users.id', '=', 'clients.user_id')
+                //     ->select('users.*', 'clients.*')
+                //     ->where('clients.type', 'industrial')
+                //     ->get();
+            }
+            $total_row = $data->count();
+            if ($total_row > 0) {
+                foreach ($data as $row) {
+                    $output .= '
+          <div class="col-sm-12 rst"
+          data-full_name = "' . $row->full_name . '"
+          data-phone = "' . $row->phone . '"
+          data-user_id = "' . $row->user_id . '"
+          style="cursor:pointer;"
+          >' . $row->full_name . ' (' . $row->user_id . ')</div>';
+                }
+            } else {
+                $output = '
+       <tr>
+       <td align="center" colspan="5">No Data Found</td>
+       </tr>
+       ';
+            }
+            $data = array(
+                'table_data'  => $output,
+                'total_data'  => $total_row
+            );
 
+            echo json_encode($data);
+        }
+    }
 
+    public function addIndustryForOfficer(Request $request)
+    {
+        $industryAdded = $this->adminService->enterIndustryFOrOfficer($request->all());
+        return redirect()->back()->with('success', 'industry added for commercial officer successfully');
+    }
 }

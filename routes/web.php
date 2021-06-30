@@ -47,6 +47,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/automated-price', [AdminController::class, 'automatedPrice'])->name('automatedPrice');
+    Route::get('/live_search/action', [AdminController::class, 'action'])->name('live_search.action');
+    Route::post('addIndustryForOfficer', [AdminController::class, 'addIndustryForOfficer'])->name('addIndustryForOfficer');
+    Route::get('/addIndForCommOff', [AdminController::class, 'addIndForCommOff'])->name('addIndForCommOff');
     Route::get('/industrial-paid-payment', [AdminController::class, 'industrialPayment'])->name('industrial-paid-payment');
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments');
     Route::get('/enter-amount-paid', [AdminController::class, 'enterAmountPaid'])->name('enter-amount-paid');
