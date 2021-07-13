@@ -130,6 +130,12 @@ class AdminController extends Controller
         if(!$checkIfAmountExist){
             return redirect()->back()->with('error', 'industry selected dont have payment in selected month');
         }
+
+        $checkMonth = $this->adminService->checkRecentMonth($request['industry_id']);
+        if($request['month'] < $checkMonth) {
+            return redirect()->back()->with('error', 'Sorry! You can only pay the recent month of invoice generated');
+        }
+
         Session::put('user_id', $request['industry_id']);
         Session::put('month', $request['month']);
         return redirect('enter-amount-paid');

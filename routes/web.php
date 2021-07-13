@@ -18,6 +18,7 @@ use DB;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Payment;
+use App\Models\Remmitance;
 use Carbon\Carbon;
 use PDF;
 
@@ -87,7 +88,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/get-arreas', [InvoiceController::class, 'getArreas'])->name('getArreas');
     Route::get('/list-invoice', [InvoiceController::class, 'getInvoiceList'])->name('invoiceHistory');
     Route::get('/user-invoice-data/{id}', [InvoiceController::class, 'getUserInvoiceData'])->name('getUserInvoiceData');
-    Route::post('/generate-industrial-invoice', [InvoiceController::class, 'generateAllIndustrialInvoice'])->name('industrialInvoice');
+    Route::post('/generate-commercial-invoice', [InvoiceController::class, 'generateAllCommercialInvoice'])->name('commercialInvoice');
+    Route::post('/generate-residential-invoice', [InvoiceController::class, 'generateAllResidentialInvoice'])->name('residentialInvoice');
+
 });
 
 Route::middleware(['user'])->group(function () {
@@ -105,6 +108,12 @@ Route::middleware(['user'])->group(function () {
     Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
 });
 
+Route::get('/last-month', function () {
+    $lastmonth = Carbon::now()->subMonths();
+    return Remmitance::where('user_id', 4)
+                        ->whereMonth('created_at', date('m') - 2)
+                        ->value('arrears');
+});
 
 Route::fallback(function(){
     return redirect()->route('home');

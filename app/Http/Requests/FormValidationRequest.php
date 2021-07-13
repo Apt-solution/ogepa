@@ -29,7 +29,7 @@ class FormValidationRequest extends FormRequest
            'no_of_sub_client_type' => ['required'],
            'full_name' => ['required','string'],
            'phone'  => ['nullable', 'digits:11', 'unique:users,phone'],
-           'email'  => ['nullable', 'email', 'unique:users,email'],
+           'email'  => ['nullable', 'regex:/(.+)@(.+)\.(.+)/i', 'email', 'unique:users,email'],
            'lga'    => ['required'],
            'address'    => ['required'],
            'monthlyPayment' => ['required', 'regex:/^\d+(\.\d{1,2})?$/']

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class remmitance extends Model
+class Remmitance extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,9 @@ class remmitance extends Model
         'amount_to_pay',
         'month_due',
         'admin_id',
+        'arrears',
+        'created_at',
+        'updated_at'
     ];
 
     public function user()

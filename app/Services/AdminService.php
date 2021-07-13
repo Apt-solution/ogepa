@@ -154,6 +154,14 @@ class AdminService
         ]);
     }
 
+    public function checkRecentMonth($user_id)
+    {
+        return $this->industrialRemmitance->where('user_id', $user_id)
+                                            ->whereYear('created_at', date('Y'))
+                                            ->max('month_due');
+
+    }
+
     public function arreas($user_id, $month)
     {
        return $this->industrialRemmitance->where('user_id', $user_id)

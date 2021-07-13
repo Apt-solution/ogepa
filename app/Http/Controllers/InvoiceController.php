@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+use DB;
+use DataTables;
+use Carbon\Carbon;
+use NumberFormatter;
+use App\Models\Payment;
 use App\Services\ClientService;
 use App\Services\InvoiceService;
-use NumberFormatter;
 use App\Models\IndustrialRemmitance;
-use App\Models\Payment;
-use DataTables;
-use DB;
+use Illuminate\Http\Request;
 
 
 class InvoiceController extends Controller
@@ -35,7 +36,6 @@ class InvoiceController extends Controller
 
     public function InvoiceData(Request $request)
     {
-
         $datas = array(
             'industryName'  => $request['industryName'],
             'address'       => $request['address'],
@@ -102,6 +102,7 @@ class InvoiceController extends Controller
             $amtWords = $amt->format($amt_to_pay);
         }
         return view('invoice.industrialInvoice', compact('invoice_data', 'last_month_arrears', 'amtWords'));
+        
     }
 
     public function getInvoiceList(Request $request)
@@ -123,10 +124,37 @@ class InvoiceController extends Controller
         return view('admin.invoiceHistory');
     }
 
-    public function generateAllIndustrialInvoice()
-    {
-       $this->invoiceService->fillIndustrialInvoiceData();
-       return 'Insertion successful';
+    public function generateAllCommercialInvoice(Request $request)
+    {  
+        $commercial_data = $this->invoiceService->getAllCommercialInvoiceData();
+        foreach($commercial_data as $commercial)
+        {
+            $month = $this->invoiceService->checkMonth($commercial->user_id);
+            if($month) {
+                $request->session()->forget('status');
+                return redirect()->back()->with('status', 'Invoice of this month has already exists');
+                $request->session()->forget('status');
+            }
+        }
+        $commercial_invoice_data = $this->invoiceService->fillCommercialInvoiceData();
+        return view('invoice.commercialInvoice', compact('commercial_invoice_data'));
+    }
+
+    public function generateAllResidentialInvoice(Request $request)
+    {  
+        $residential_data = $this->invoiceService->getAllResidentialInvoiceData();
+        foreach($residential_data as $residential)
+        {
+            $month = $this->invoiceService->checkMonth($residential->user_id);
+            if($month) {
+                $request->session()->forget('status');
+                return redirect()->back()->with('status', 'Invoice of this month has already exists');
+                $request->session()->forget('status');
+            }
+        }
+        $residential_invoice_data = $this->invoiceService->fillResidentialInvoiceData();
+        return view('invoice.residentialInvoice', compact('residential_invoice_data'));
+
     }
 
 }
