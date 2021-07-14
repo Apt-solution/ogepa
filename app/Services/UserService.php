@@ -8,6 +8,7 @@ use App\Models\remmitance;
 use App\Models\IndustrialRemmitance;
 use App\Models\Payment;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -32,9 +33,17 @@ class UserService
     public function getUserProfile()
     {
         $user_id = \Auth::User()->id;
-        
 
-        $currentBill = $this->currentBilling($user_id);
+        $userType = Auth::User()->client->type;
+
+        if ($userType === 'Industrial') {
+            $currentBill = $this->currentBilling($user_id);
+        }
+        
+        if ($userType === 'Residential') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
+
         $currentBilling = $currentBill->amount_to_pay;
 
         $monthNum  = $currentBill->month_due;
@@ -48,6 +57,15 @@ class UserService
         $data['paymentHistories'] = $this->paymentHistory($user_id);
         // dd($data);
         return $data;
+    }
+
+    public function getResidentialCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
+            return 0;
+        }
+        return $currentBill;
     }
 
     private function currentBilling(int $user_id)

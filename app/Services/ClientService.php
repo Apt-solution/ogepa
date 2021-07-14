@@ -42,6 +42,9 @@ class ClientService
 
        $newUser = $this->user->create($data);
        $user_id = $newUser->id;
+       $request['user_id'] = $user_id;
+
+       $this->generateDummyData($request);
 
         $client = array(
         'user_id' =>  $user_id,
@@ -53,6 +56,11 @@ class ClientService
         'enteredBy' => \Auth::User()->id,
         );
        return $this->client->create($client);
+    }
+
+    public function generateDummyData($request)
+    {
+        # code...
     }
 
     private function generateOgwemaRef()
