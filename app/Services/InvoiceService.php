@@ -97,13 +97,17 @@ class InvoiceService
                                                 ->where('id', $id)
                                                 ->whereYear('created_at', date('Y'))
                                                 ->max('month_due');
-                                        
-        }
-    
-        return $this->industrial_remmitance->where('month_due', $month - 1)
-                                            ->where(function($query) {
-                                            $query->whereYear('created_at', date('Y'));
-                                            })->value('arreas');                                 
+                                                
+            $arrears =  $this->industrial_remmitance->where('user_id', $user_id)
+                                                ->where('month_due', $month - 1)
+                                                ->whereYear('created_at', date('Y'))
+                                                ->value('arreas');  
+            if(is_null($arrears)) {
+                return 0.00;
+            }
+            
+            return $arrears;                    
+        }                                 
     }
 
     private function getAllIndustrialInvoiceData()

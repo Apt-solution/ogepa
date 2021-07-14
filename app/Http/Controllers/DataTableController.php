@@ -23,10 +23,8 @@ class DataTableController extends Controller
             $data = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
             ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
-            ->where('clients.type', 'residential')
-            ->orWhere('clients.type', 'industrial')
-            ->orWhere('clients.type', 'medical')
-            ->orWhere('clients.type', 'commercial')->get();
+            ->where('clients.type', '!=', 'PSP')
+            ->where('clients.type', '!=', 'Vendor');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
