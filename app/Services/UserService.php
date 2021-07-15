@@ -43,6 +43,10 @@ class UserService
         if ($userType === 'Residential') {
             $currentBill = $this->getResidentialCurrentBilling($user_id);
         }
+        
+        if ($userType === 'Commercial') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
 
         if ($userType === 'Commercial') {
             $currentBill = $this->getResidentialCurrentBilling($user_id);
@@ -64,6 +68,15 @@ class UserService
     }
 
     public function getResidentialCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
+            return 0;
+        }
+        return $currentBill;
+    }
+    
+    public function getCommercialCurrentBilling(int $user_id)
     {
         $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
         if (!$currentBill) {
