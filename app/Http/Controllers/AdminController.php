@@ -151,7 +151,7 @@ class AdminController extends Controller
     public function addIndustrialAmountPaid(Request $request)
     {
         $validate = $request->validate([
-            'amount_to_pay' => ['required']
+            'amount' => ['required']
         ]);
         $totalAmount = $this->adminService->checkAmountToPay($request['user_id']);
     
