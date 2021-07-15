@@ -53,7 +53,7 @@ class ClientService
         $user_id = $newUser->id;
         $request['user_id'] = $user_id;
 
-        $this->generateDummyData($request);
+        // $this->generateDummyData($request);
 
         $client = array(
             'user_id' =>  $user_id,

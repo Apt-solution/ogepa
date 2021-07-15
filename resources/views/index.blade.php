@@ -42,7 +42,7 @@
         <div class="col-12">
         <form action="{{route('residentialInvoice')}}" method="post">
         @csrf
-            <button disabled class="btn btn-success btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Residential Invoice</button>
+            <button disabled  class="btn btn-success btn-sm mb-2"> <i class="fas fa-print pr-2"></i>Generate Residential Invoice</button>
         </form>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped residential text-center" style="width:100%">

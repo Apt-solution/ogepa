@@ -48,9 +48,16 @@ class UserService
             $currentBill = $this->getResidentialCurrentBilling($user_id);
         }
 
+<<<<<<< HEAD
+=======
+        if ($userType === 'Commercial') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
+
+>>>>>>> 9e859718d02f6bc6366eae207836145687be07f6
         $currentBilling = $currentBill->amount_to_pay ?? 0.00;
 
-        $monthNum  = $currentBill->month_due;
+        $monthNum  = $currentBill->month_due ?? 0.00;
         $dateObj   = DateTime::createFromFormat('!m', $monthNum);
         $monthName = $dateObj->format('F'); // March
 
@@ -72,6 +79,15 @@ class UserService
         return $currentBill;
     }
     
+    public function getCommercialCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
+            return 0;
+        }
+        return $currentBill;
+    }
+
     public function getCommercialCurrentBilling(int $user_id)
     {
         $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
