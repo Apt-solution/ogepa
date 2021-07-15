@@ -240,7 +240,7 @@
             <p>{{ $datas['amtWord'] }}</p>
         @endisset
         @isset($invoice_data)
-            <p>{{ ucwords($amtWords) }}</p>
+            <p>{{ ucwords($amtWords) }} Naira Only</p>
         @endisset
         </div>
         <div class="amtPaid2">

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\ClientType;
 use App\Models\User;
-use App\Models\remmitance;
+use App\Models\Remmitance;
 use App\Models\IndustrialRemmitance;
 use App\Models\Payment;
 use DateTime;

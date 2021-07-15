@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\ClientType;
 use App\Models\User;
-use App\Models\remmitance;
+use App\Models\Remmitance;
 use App\Models\Payment;
 use App\Models\Client;
 use App\Models\IndustrialRemmitance;
@@ -176,7 +176,7 @@ class AdminService
 
        return $this->industrialRemmitance->where('user_id', $user_id)
                                 ->where('month_due', $month)
-                                ->orWhereMonth('created_at', date('M'))
+                                ->orWhereMonth('created_at', date('m'))
                                 ->whereYear('created_at', date('Y'))
                                 ->update([
                                     'arreas' => $arreas

@@ -139,7 +139,7 @@ $(document).ready(function(){
         $('#invoiceMonth').append('<option value="'+month[key]+'">'+ key + '</option>');
     }
 
-    for(let trip = 1; trip <=12; trip++)
+    for(let trip = 1; trip <=30; trip++)
     {
         $('#noOfTrip').append('<option value="'+trip+'">'+ trip + '</option>');
     }
