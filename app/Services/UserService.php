@@ -48,13 +48,10 @@ class UserService
             $currentBill = $this->getResidentialCurrentBilling($user_id);
         }
 
-<<<<<<< HEAD
-=======
         if ($userType === 'Commercial') {
             $currentBill = $this->getResidentialCurrentBilling($user_id);
         }
 
->>>>>>> 9e859718d02f6bc6366eae207836145687be07f6
         $currentBilling = $currentBill->amount_to_pay ?? 0.00;
 
         $monthNum  = $currentBill->month_due ?? 0.00;
