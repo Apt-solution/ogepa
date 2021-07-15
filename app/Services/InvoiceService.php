@@ -63,12 +63,7 @@ class InvoiceService
         // }
 
     }
-<<<<<<< HEAD
-
-
-=======
     
->>>>>>> 29a0a796ca332b2841cb118932f2f07482b3914b
     public function getUserInvoiceData($id)
     {
         $invoiceData = DB::table('users')
@@ -88,11 +83,6 @@ class InvoiceService
                                                 ->where('id', $id)
                                                 ->whereYear('created_at', date('Y'))
                                                 ->max('month_due');
-<<<<<<< HEAD
-                                                
-=======
-
->>>>>>> 29a0a796ca332b2841cb118932f2f07482b3914b
             $arrears =  $this->industrial_remmitance->where('user_id', $user_id)
                                                 ->where('month_due', $month - 1)
                                                 ->whereYear('created_at', date('Y'))
@@ -102,11 +92,7 @@ class InvoiceService
             }
             
             return $arrears;                    
-<<<<<<< HEAD
-        }                                 
-=======
         }
->>>>>>> 29a0a796ca332b2841cb118932f2f07482b3914b
     }
 
     private function getCategoryArrears($user_id)
@@ -153,29 +139,14 @@ class InvoiceService
 
     public function getAllResidentialInvoiceData()
     {
-<<<<<<< HEAD
-        return $this->client->where('type', 'industrial')
-            ->whereNotNull('initialAmount')
-            ->get();
-=======
        return $this->client->where('type', 'residential')
                                     ->with('user')
                                     ->whereNotNull('initialAmount')
                                     ->get();
->>>>>>> 29a0a796ca332b2841cb118932f2f07482b3914b
     }
 
     public function fillResidentialInvoiceData()
     {
-<<<<<<< HEAD
-        $industrial_data = $this->getAllIndustrialInvoiceData();
-        foreach ($industrial_data as $industrial) {
-            $this->industrial_remmitance->create([
-                'user_id' => $industrial->user_id,
-                'amount_to_pay' => $industrial->initialAmount,
-                'arreas' => $industrial->initialAmount,
-                'month_due' => 1,
-=======
         $datas = array();
         $month = Carbon::now();
         $residential_data = $this->getAllResidentialInvoiceData();
@@ -190,7 +161,6 @@ class InvoiceService
                 'month_due' =>   date('m'),
                 'created_at'    => $month,
                 'updated_at'    => $month,
->>>>>>> 29a0a796ca332b2841cb118932f2f07482b3914b
                 'admin_id' => \Auth::User()->id
             ]);
 
@@ -217,8 +187,4 @@ class InvoiceService
         return $this->remmitance->where('user_id', $user_id)
                                 ->whereMonth('created_at', date('m'))->exists();
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 29a0a796ca332b2841cb118932f2f07482b3914b
 }
