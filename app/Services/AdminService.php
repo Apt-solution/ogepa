@@ -162,6 +162,22 @@ class AdminService
         ]);
     }
 
+    public function checkRecentMonth($user_id)
+    {
+        return $this->industrialRemmitance->where('user_id', $user_id)
+                                            ->whereYear('created_at', date('Y'))
+                                            ->max('month_due');
+    }
+
+    public function checkAmountToPay($user_id)
+    {
+        $month = $this->checkRecentMonth($user_id);
+        return $this->industrialRemmitance->where('user_id', $user_id)
+                                            ->where('month_due', $month)
+                                            ->whereYear('created_at', date('Y'))
+                                            ->value('arreas');
+    }
+
     public function arreas($user_id, $month)
     {
        return $this->industrialRemmitance->where('user_id', $user_id)

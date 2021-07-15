@@ -47,6 +47,7 @@ class ClientController extends Controller
     {
         $this->clientService->addNewClient($request->all());
         return redirect()->back()->with('status', 'Account Created');
+        $request->session()->forget('status');
     }
 
     public function showClient($id)

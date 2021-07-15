@@ -14,6 +14,9 @@ class Remmitance extends Model
         'amount_to_pay',
         'month_due',
         'admin_id',
+        'arrears',
+        'created_at',
+        'updated_at'
     ];
 
     public function user()

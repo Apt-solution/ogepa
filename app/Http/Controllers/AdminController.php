@@ -132,11 +132,12 @@ class AdminController extends Controller
         if (!$checkIfAmountExist) {
             return redirect()->back()->with('error', 'industry selected dont have payment in selected month');
         }
-        // check if payment fopr month selected has already been entered
-        $checkIfMonthPaymentExist = $this->adminService->checMonthPaymentExist($request->all());
-        if ($checkIfMonthPaymentExist) {
-            return redirect()->back()->with('error', 'Payment for selected month already exist');
+
+        $checkMonth = $this->adminService->checkRecentMonth($request['industry_id']);
+        if($request['month'] < $checkMonth) {
+            return redirect()->back()->with('error', 'Sorry! You can only pay the recent month of invoice generated');
         }
+
         Session::put('user_id', $request['industry_id']);
         Session::put('month', $request['month']);
         return redirect('enter-amount-paid');
@@ -149,10 +150,18 @@ class AdminController extends Controller
 
     public function addIndustrialAmountPaid(Request $request)
     {
+        $validate = $request->validate([
+            'amount_to_pay' => ['required']
+        ]);
+        $totalAmount = $this->adminService->checkAmountToPay($request['user_id']);
+    
+        if($request['amount'] > $totalAmount) {
+            return redirect()->back()->with('error', "Amount is more than the amount to pay \n. kindly check the invoice history to check the anount to pay");
+        }
         $this->adminService->addIndustrialAmountPaid($request->all());
         $amount_paid = $request['amount'];
-        $amount_to_pay = $this->adminService->arreas($request['user_id'], $request['month']);
-        $arreas = $amount_to_pay - $amount_paid;
+        $amount_to_pay = $this->adminService->checkAmountToPay($request['user_id']);
+        $arreas = $amount_to_pay -  $amount_paid;
         $this->adminService->fillArreas($request['user_id'], $request['month'], $arreas);
         return redirect()->route('industrial-paid-payment')->with('success', 'amount entered successfully');
     }
