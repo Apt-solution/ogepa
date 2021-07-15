@@ -20,13 +20,13 @@ class DataTableController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $residential = DB::table('users')
+            $all = DB::table('users')
             ->join('clients', 'users.id', '=', 'clients.user_id')
             ->select(['users.id', 'users.full_name', 'users.phone', 'users.ogwema_ref', 'users.lga', 'clients.user_id', 'clients.type', 'clients.sub_client_type', 'clients.no_of_sub_client_type', 'clients.address'])
             ->where('clients.type', '!=', 'PSP')
             ->where('clients.type', '!=', 'Vendor');
             
-            return Datatables::of($residential)
+            return Datatables::of($all)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn = '<a href="/show/'.$row->id.'" data-id="'.$row->id.'" id="editUser" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User" class="badge badge-primary p-1"><i class="fas fa-user-edit"></i></a>
