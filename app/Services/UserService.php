@@ -43,8 +43,12 @@ class UserService
         if ($userType === 'Residential') {
             $currentBill = $this->getResidentialCurrentBilling($user_id);
         }
+        
+        if ($userType === 'Commercial') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
 
-        $currentBilling = $currentBill->amount_to_pay;
+        $currentBilling = $currentBill->amount_to_pay ?? 0.00;
 
         $monthNum  = $currentBill->month_due;
         $dateObj   = DateTime::createFromFormat('!m', $monthNum);
@@ -60,6 +64,15 @@ class UserService
     }
 
     public function getResidentialCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
+            return 0;
+        }
+        return $currentBill;
+    }
+    
+    public function getCommercialCurrentBilling(int $user_id)
     {
         $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
         if (!$currentBill) {
