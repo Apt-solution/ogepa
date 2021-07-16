@@ -169,9 +169,8 @@ class AdminService
                                             ->max('month_due');
     }
 
-    public function checkAmountToPay($user_id)
+    public function checkAmountToPay($user_id, $month)
     {
-        $month = $this->checkRecentMonth($user_id);
         return $this->industrialRemmitance->where('user_id', $user_id)
                                             ->where('month_due', $month)
                                             ->whereYear('created_at', date('Y'))
@@ -180,19 +179,28 @@ class AdminService
 
     public function arreas($user_id, $month)
     {
-       return $this->industrialRemmitance->where('user_id', $user_id)
+        $id = $this->industrialRemmitance->where('user_id', $user_id)
+                                        ->where('month_due', $month)
+                                        ->value('id');
+
+        return $this->industrialRemmitance->where('id', $id)
+                                    ->where('user_id', $user_id)
                                     ->where('month_due', $month)
                                     ->orWhereMonth('created_at', date('M'))
                                     ->whereYear('created_at', date('Y'))
                                     ->value('amount_to_pay');
     }
 
+    
     public function fillArreas($user_id, $month, $arreas)
     {
+       $id = $this->industrialRemmitance->where('user_id', $user_id)
+                                        ->where('month_due', $month)
+                                        ->value('id');
 
-       return $this->industrialRemmitance->where('user_id', $user_id)
+       return $this->industrialRemmitance->where('id', $id)
+                                ->where('user_id', $user_id)
                                 ->where('month_due', $month)
-                                ->orWhereMonth('created_at', date('m'))
                                 ->whereYear('created_at', date('Y'))
                                 ->update([
                                     'arreas' => $arreas

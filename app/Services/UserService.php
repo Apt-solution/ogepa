@@ -45,11 +45,11 @@ class UserService
         }
         
         if ($userType === 'Commercial') {
-            $currentBill = $this->getResidentialCurrentBilling($user_id);
+            $currentBill = $this->getCommercialCurrentBilling($user_id);
         }
 
         if ($userType === 'Medical') {
-            $currentBill = $this->getResidentialCurrentBilling($user_id);
+            $currentBill = $this->getMedicalCurrentBilling($user_id);
         }
 
         $currentBilling = $currentBill->amount_to_pay ?? 0.00;

@@ -153,15 +153,17 @@ class AdminController extends Controller
         $validate = $request->validate([
             'amount' => ['required']
         ]);
-        $totalAmount = $this->adminService->checkAmountToPay($request['user_id']);
-    
+
+        $month = $this->adminService->checkRecentMonth($request['user_id']);
+        $totalAmount = $this->adminService->checkAmountToPay($request['user_id'], $request['month']);
         if($request['amount'] > $totalAmount) {
             return redirect()->back()->with('error', "Amount is more than the amount to pay \n. kindly check the invoice history to check the anount to pay");
         }
-        $this->adminService->addIndustrialAmountPaid($request->all());
         $amount_paid = $request['amount'];
-        $amount_to_pay = $this->adminService->checkAmountToPay($request['user_id']);
+        $amount_to_pay = $this->adminService->checkAmountToPay($request['user_id'], $request['month']);
         $arreas = $amount_to_pay -  $amount_paid;
+        
+        $this->adminService->addIndustrialAmountPaid($request->all());
         $this->adminService->fillArreas($request['user_id'], $request['month'], $arreas);
         return redirect()->route('industrial-paid-payment')->with('success', 'amount entered successfully');
     }
