@@ -266,7 +266,7 @@ $(document).ready(function(){
         ]
     });
 
-    $('.residential, .commercial, .industry, .medical, .allUser').on('click', '#deleteUser', function(){
+    $('.residential, .commercial, .industry, .medical, .all-user').on('click', '#deleteUser', function(){
         if(!confirm("Note: Once you delete this user, all of these user's record will be removed across board. \nDo you still want to continue?"))
         event.preventDefault();
     });

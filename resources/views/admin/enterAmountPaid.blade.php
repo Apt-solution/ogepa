@@ -36,7 +36,7 @@
                     <label for="">Amount</label><br /><p>&nbsp;</p>
                     <input type="number" name="amount" class="form-control" id="">
                 </div>
-                @error('amount_to_pay')
+                @error('amount')
                     <p class="text-danger text-sm" style="margin-left:70px; margin-top:-20px" >{{ $message }}</p>
                 @enderror
 
