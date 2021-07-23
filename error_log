@@ -9,3 +9,5 @@ Stack trace:
 #3 /home/odysoftc/public_html/ogwama.org.ng/vendor/laravel/framework/src/Illuminate/Container/Container.php(655): Illuminate\Foundation\Application->resolve('view', Array)
 #4 /home/odysoftc/public_html/ogwama.org.ng/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(826): Illuminate\Container\Container->make('view', Array)
 #5 /home/odys in /home/odysoftc/public_html/ogwama.org.ng/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 838
+[15-Jul-2021 15:10:11 UTC] PHP Fatal error:  Cannot redeclare App\Services\UserService::getCommercialCurrentBilling() in /home/odysoftc/public_html/ogwama.org.ng/app/Services/UserService.php on line 88
+[15-Jul-2021 15:10:56 UTC] PHP Fatal error:  Cannot redeclare App\Services\UserService::getCommercialCurrentBilling() in /home/odysoftc/public_html/ogwama.org.ng/app/Services/UserService.php on line 88
