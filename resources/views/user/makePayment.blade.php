@@ -3,11 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-
-
-
-
-
         <div class="page-content page-container" id="page-content">
             <div class="padding">
                 <div class="row container d-flex justify-content-center" style="margin-top: 100px;">
