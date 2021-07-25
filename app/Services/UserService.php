@@ -51,29 +51,37 @@ class UserService
         if ($userType === 'Medical') {
             $currentBill = $this->getMedicalCurrentBilling($user_id);
         }
+        
+        $currentBilling = $currentBill['current_bill']->amount_to_pay ?? 0.00;
 
-        $currentBilling = $currentBill->amount_to_pay ?? 0.00;
-
-        $monthNum  = $currentBill->month_due ?? 0.00;
+        $monthNum  = $currentBill['current_bill']->month_due ?? 0.00;
         $dateObj   = DateTime::createFromFormat('!m', $monthNum);
         $monthName = $dateObj->format('F'); // March
 
         $data['user_details'] = $this->user->where('id', $user_id)->first();
         $data['current_billing'] = $currentBilling;
         $data['month_name'] = $monthName;
-        $data['total_due'] = $this->totalDue($user_id);
+        $data['total_due'] = $currentBill['current_bill']->arrears ?? 0.00;;
+        $data['arrears'] = $currentBill['previous_bill']->arrears ?? 0.00;;
         $data['paymentHistories'] = $this->paymentHistory($user_id);
         // dd($data);
         return $data;
     }
 
     public function getResidentialCurrentBilling(int $user_id)
-    {
+    { 
         $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+
         if (!$currentBill) {
             return 0;
         }
-        return $currentBill;
+
+        $previous = $this->remmitance->where('id', '<', $currentBill->id)->orderBy('id','desc')->first();
+        
+        $data['current_bill'] = $currentBill;
+        $data['previous_bill'] = $previous;
+
+        return $data;
     }
     
     public function getCommercialCurrentBilling(int $user_id)

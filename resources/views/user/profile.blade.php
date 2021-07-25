@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Arrears</p>
-                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['total_due'], 2) }}</h6>
+                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['arrears'], 2) }}</h6>
                                             </div>
                                         </div>
                                         <div class="row">
