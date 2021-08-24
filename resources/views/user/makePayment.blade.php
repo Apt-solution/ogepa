@@ -42,6 +42,7 @@
                                                 <input name="email" value="" type="hidden" placeholder="Your Email" />
                                                 <input name="phone" type="hidden" value="{{ \Auth::User()->phone }}" placeholder="Phone number" />
                                                 <input type="hidden" name="amount" value="{{ $total }}">
+                                                <input type="hidden" name="customer_payment" value="{{ $payment->amount }}">
                                                 <input type="hidden" name="ref" value="{{ $payment->ref }}">
 
                                                 <input type="submit" id="payment-btn" class="btn btn-success btn-block" value="PAY {{ number_format($total, 2) }}">

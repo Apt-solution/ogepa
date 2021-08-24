@@ -39,11 +39,11 @@ class UserService
         if ($userType === 'Industrial') {
             $currentBill = $this->currentBilling($user_id);
         }
-        
+
         if ($userType === 'Residential') {
             $currentBill = $this->getResidentialCurrentBilling($user_id);
         }
-        
+
         if ($userType === 'Commercial') {
             $currentBill = $this->getCommercialCurrentBilling($user_id);
         }
@@ -51,8 +51,8 @@ class UserService
         if ($userType === 'Medical') {
             $currentBill = $this->getMedicalCurrentBilling($user_id);
         }
-        
-        $currentBilling = $currentBill['current_bill']->amount_to_pay ?? 0.00;
+
+        $currentBilling = $currentBill->arrears ?? 0.00;
 
         $monthNum  = $currentBill['current_bill']->month_due ?? 0.00;
         $dateObj   = DateTime::createFromFormat('!m', $monthNum);
@@ -69,21 +69,16 @@ class UserService
     }
 
     public function getResidentialCurrentBilling(int $user_id)
-    { 
+    {
         $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
 
         if (!$currentBill) {
             return 0;
         }
 
-        $previous = $this->remmitance->where('id', '<', $currentBill->id)->orderBy('id','desc')->first();
-        
-        $data['current_bill'] = $currentBill;
-        $data['previous_bill'] = $previous;
-
-        return $data;
+        return $currentBill;
     }
-    
+
     public function getCommercialCurrentBilling(int $user_id)
     {
         $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
@@ -159,12 +154,46 @@ class UserService
 
     public function updatePayment(array $data)
     {
+        $this->updateArrears($data);
+
         return $this->payment->where('ref', $data['ref'])
             ->update([
                 'paystack_ref' => $data['paystack_ref'],
                 'status' => 'successful',
                 'response' => $data['response']
             ]);
+    }
+
+    public function updateArrears($data)
+    {
+        $user_id = \Auth::User()->id;
+
+        $userType = Auth::User()->client->type;
+
+        if ($userType === 'Industrial') {
+            $currentBill = $this->currentBilling($user_id);
+        }
+
+        if ($userType === 'Residential') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
+
+        if ($userType === 'Commercial') {
+            $currentBill = $this->getCommercialCurrentBilling($user_id);
+        }
+
+        if ($userType === 'Medical') {
+            $currentBill = $this->getMedicalCurrentBilling($user_id);
+        }
+
+        $currentBilling = $currentBill->arrears ?? 0.00;
+        $customerPayment = $data['response']['data']['meta']['customer_payment'];
+
+        $newArrears = $currentBilling - $customerPayment;
+
+        $currentBill->update([
+            'arrears' => $newArrears
+        ]);
     }
 
     public function paymentHistory(int $user_id)

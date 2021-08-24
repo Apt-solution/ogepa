@@ -32,7 +32,7 @@ class FlutterwaveController extends Controller
         // Enter the details of the payment
         $data = [
             'payment_options' => 'card,banktransfer',
-            'amount' => /*request()->amount */ 900,
+            'amount' => 3000,//request()->amount,
             'email' => $email,
             'tx_ref' => request()->ref,
             'currency' => "NGN",
@@ -40,7 +40,10 @@ class FlutterwaveController extends Controller
             'customer' => [
                 'email' => $email,
                 "phone_number" => request()->phone,
-                "name" => request()->name
+                "name" => request()->name,
+            ],
+            "meta" => [
+                "customer_payment" => request()->customer_payment
             ],
 
             "customizations" => [
@@ -48,7 +51,6 @@ class FlutterwaveController extends Controller
                 "description" => "payment to make"
             ]
         ];
-
 
         $payment = Flutterwave::initializePayment($data);
 
