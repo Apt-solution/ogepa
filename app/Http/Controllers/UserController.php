@@ -30,9 +30,9 @@ class UserController extends Controller
     }
 
     public function confirmPay(Request $request)
-    {
+    { 
         $request->validate([
-            'amount' => 'required|integer|min:500'
+            'amount' => 'required'
         ]);
         $this->userService->confirmPayment($request->all());
         return redirect('makePayment');
@@ -68,7 +68,6 @@ class UserController extends Controller
         ]);
 
         $this->userService->changePassword($request->all());
-        $request->session()->forget('password');
         return redirect()->back()->with('status', 'Password Changed Succesfully');
     }
 

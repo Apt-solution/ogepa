@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <!-- Load paper.css for happy printing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="{{ asset('js/moneyToWord.js') }}"></script>
     
     <title>Residential Invoices</title>
@@ -114,16 +115,17 @@
 </style>
 </head>
 <body class="A4">
-@foreach($residential_invoice_data as $key => $data)
-    <div class="container sheet">
+<div id="root">
+<template v-for="data in residential">
+    <div  class="container sheet">
         <div class="name">
-            <p>{{ $data[0]->full_name }}</p>
+            <p>@{{ data[0]['full_name'] }}</p>
         </div>
         <div class="address">
-            <p>{{ $data[0]->address }}</p>
+            <p>@{{ data[0]['address'] }}</p>
         </div>
         <div class="desc">
-            <p>OGWAMA BILL</p>
+            <p>@{{ msg  }}</p>
         </div>
         <div class="trip">
             <p></p>
@@ -132,49 +134,63 @@
             <p></p>
         </div>
         <div class="total1">
-            <p>{{ $data[0]->initialAmount }}</p>
+            <p>@{{ data[0]['initialAmount'] }}</p>
         </div>
         <div class="month">
             <p>{{ date('F', mktime(0, 0, 0,  date('m')-1, 10)) }}</p>
         </div>
         <div class="current">
-            <p>{{ $data[0]->initialAmount }}</p>
+            <p>@{{ data[0]['initialAmount'] }}</p>
         </div>
         <div class="net">
-            <p>{{ $data[0]->amount_to_pay - $data[0]->initialAmount }} </p>
+            <p>@{{ data[0]['amount_to_pay'] - data[0]['initialAmount'] }} </p>
         </div>
         <div class="total2">
-            <p>{{ $data[0]->amount_to_pay }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="due">
-            <p>{{ $data[0]->amount_to_pay }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="month2">
             <p>{{ date('F', mktime(0, 0, 0,  date('m')-1, 10)) }}</p>
         </div>
         <div class="amtPaid">
-            <p>{{ $data[0]->amount_to_pay }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="amtWord">
-            <p id="amtWord">{{ $data[0]->amount_to_pay }}</p>
+            <p id="amtWord">@{{ data[0]['amount_to_pay']  | toWord }} Naira Only</p>
         </div>
         <div class="amtPaid2">
-            <p>{{ $data[0]->amount_to_pay }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="due1">
-            <p>{{ $data[0]->amount_to_pay }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="month3">
             <p>{{ date('F', mktime(0, 0, 0,  date('m')-1, 10)) }}</p> 
         </div>
     </div>
-@endforeach
+</template>
+</div>
 </body>
 <script>
-    $(document).ready(function(){
-        // toWordsconver($('#amtWord').text());
-        $('#amtWord').text();
-    });
+new Vue({
+    el: '#root',
+    data(){
+        return{
+            msg: 'OGWAMA BILL',
+            residential: {!! json_encode($residential_invoice_data) !!}
+        }
+    },
+    
+    filters:{
+        toWord(value){
+            let newValue = Number.parseFloat(value).toFixed();
+            return toWordsconver(newValue);
+        }
+    }
+
+});
 
 </script>
 </html>

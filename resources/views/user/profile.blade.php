@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Arrears</p>
-                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['total_due'], 2) }}</h6>
+                                                <h6 class="text-muted f-w-400">&#8358; {{ number_format($data['arrears'], 2) }}</h6>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -93,9 +93,9 @@
                                             <input type="button" class="btn btn-primary btn-flat rounded" name="answer" value="MAKE A PAYMENT" onclick="showDiv()" />
                                             <div id="welcomeDiv" style="display:none;" class="answer_list">
                                                 <p>&nbsp;</p>
-                                                <form method="POST" style="margin-top: -20px;" action="{{ route('confirmPay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                                <form method="post" style="margin-top: -20px;" action="{{ route('confirmPay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
                                                     @csrf
-                                                    <input type="number" readonly value="{{ $data['total_due'] }}" id="amount-entered" class="form-control"  placeholder="Enter amount" min="500" required>
+                                                    <input type="number" readonly value="{{ $data['current_billing'] }}" id="amount-entered" class="form-control"  placeholder="Enter amount" min="500" required>
                                                     <input type="hidden" name="amount" id="amount">
                                                     <input type="hidden" name="charges" id="charges">
                                                     <input type="hidden" name="total_due" id="total_due">
@@ -124,7 +124,7 @@
     $(document).ready(function(){ 
         amount = $("#amount-entered").val();
         // getting paystack amount and 15 naira pay
-        charges = (amount * 0.015) + 200;
+        charges = (amount * 0.015) + 50;
         if(charges > 2000){
             charges = 2200;
         }

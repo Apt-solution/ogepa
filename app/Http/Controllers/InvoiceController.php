@@ -132,7 +132,7 @@ class InvoiceController extends Controller
             $month = $this->invoiceService->checkMonth($commercial->user_id);
             if($month) {
                 $request->session()->forget('status');
-                return redirect()->back()->with('status', 'Invoice of this month has already exists');
+                return redirect()->back()->with('status', 'Invoice of this month has already been generated');
                 $request->session()->forget('status');
             }
         }
@@ -148,7 +148,7 @@ class InvoiceController extends Controller
             $month = $this->invoiceService->checkMonth($residential->user_id);
             if($month) {
                 $request->session()->forget('status');
-                return redirect()->back()->with('status', 'Invoice of this month has already exists');
+                return redirect()->back()->with('status', 'Invoice of this month has already been generated');
                 $request->session()->forget('status');
             }
         }
