@@ -64,7 +64,7 @@ class UserController extends Controller
     public function changeUserPassword(Request $request)
     {
         $request->validate([
-            'password' => ['required', 'min:6', 'confirmed']
+            'password' => ['required', 'confirmed']
         ]);
 
         $this->userService->changePassword($request->all());

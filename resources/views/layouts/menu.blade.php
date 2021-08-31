@@ -13,6 +13,8 @@
     <!-- <li style="margin-bottom: -15px;"><a href="{{route('add-industrial-payment') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Industrial Payment</a></li> -->
     <!-- <li style="margin-bottom: -15px;"><a href="{{route('print-industrial-bill') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Print Industrial Bill</a></li> -->
     <li style="margin-bottom: -15px;"><a href="{{route('industrial-paid-payment') }}" class="text-sm"><i class="fas fa-user pr-1"></i>Add Industrial Paid Payment</a></li>
+    <li style="margin-bottom: -15px;"><a href="{{route('resetPwd')}}" class="text-sm"><i class="fas fa-user pr-1"></i>Reset User Password</a></li>
+
     @endif
 
     @if(\Auth::User()->role === 'user')

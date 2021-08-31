@@ -232,4 +232,19 @@ class AdminService
         }
         return true;
     }
+
+
+    public function ifOgwamaExist($ogwama_code)
+    {
+        return $this->user->where('ogwema_ref', $ogwama_code)->value('ogwema_ref');
+    }
+    public function resetPwd($ogwama)
+    {
+        return $this->user->where('ogwema_ref', $ogwama)
+            ->update([
+                'password' => bcrypt('12345678'),
+                'isLogin'   => 0
+            ]);
+
+    }
 }

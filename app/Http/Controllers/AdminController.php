@@ -234,4 +234,17 @@ class AdminController extends Controller
         $industryAdded = $this->adminService->enterIndustryFOrOfficer($request->all());
         return redirect()->back()->with('success', 'industry added for commercial officer successfully');
     }
+
+    public function resetUserPwd(Request $request)
+    {
+        $ogwama_code = $request->validate([
+            'ogwama_ref' => ['required']
+        ]);
+        $ogwama = $this->adminService->ifOgwamaExist($ogwama_code);
+        if(is_null($ogwama)) {
+            return redirect()->back()->with('status', 'Ogwama could not be found');
+        }
+        $this->adminService->resetPwd($ogwama_code);
+        return redirect()->back()->with('status', 'Password Reset Successfully');
+    }
 }
