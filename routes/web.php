@@ -93,7 +93,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/user-invoice-data/{id}', [InvoiceController::class, 'getUserInvoiceData'])->name('getUserInvoiceData');
     Route::post('/generate-commercial-invoice', [InvoiceController::class, 'generateAllCommercialInvoice'])->name('commercialInvoice');
     Route::post('/generate-residential-invoice', [InvoiceController::class, 'generateAllResidentialInvoice'])->name('residentialInvoice');
-
+    Route::view('/reset-user-password', 'admin.resetUserPassword')->name('resetPwd');
+    Route::post('/reset-user-pwd', [AdminController::class, 'resetUserPwd'])->name('resetUserPwd');
 });
 
 Route::middleware(['user'])->group(function () {
