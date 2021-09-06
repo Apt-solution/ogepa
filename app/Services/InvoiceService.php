@@ -83,8 +83,19 @@ class InvoiceService
                                                 ->where('id', $id)
                                                 ->whereYear('created_at', date('Y'))
                                                 ->max('month_due');
+
+            $current_date = Carbon::now();
+            $lastmonth = $current_date->setMonth($month)->subMonth()->month;
+        
+            if ($lastmonth == 12) {
+                return $this->industrial_remmitance->where('user_id', $user_id)
+                    ->where('month_due', 12)
+                    ->whereYear('created_at', date('Y') - 1)
+                    ->value('arreas');
+            }
+
             $arrears =  $this->industrial_remmitance->where('user_id', $user_id)
-                                                ->where('month_due', $month - 1)
+                                                ->where('month_due', $lastmonth)
                                                 ->whereYear('created_at', date('Y'))
                                                 ->value('arreas');  
             if(is_null($arrears)) {
