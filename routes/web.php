@@ -112,12 +112,6 @@ Route::middleware(['user'])->group(function () {
     Route::get('/is-login', [UserController::class, 'getIsLogin'])->name('isLogin');
 });
 
-Route::get('/last-month', function () {
-    $lastmonth = Carbon::now()->subMonths();
-    return Remmitance::where('user_id', 4)
-                        ->whereMonth('created_at', date('m') - 2)
-                        ->value('arrears');
-});
 
 Route::fallback(function(){
     return redirect()->route('home');
