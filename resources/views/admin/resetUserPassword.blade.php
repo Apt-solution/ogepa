@@ -15,7 +15,7 @@
         </div>  
     @endif
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <form action="{{route('resetUserPwd')}}" method="post">
             @csrf
                 <div class="form-group">

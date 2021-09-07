@@ -24,7 +24,8 @@ class IndustMonRemitService
                 ->select('users.*', 'clients.*', 'payments.*')
                 ->where('clients.type', 'industrial')
                 ->where('payments.status', 'successful')
-                ->whereMonth('payments.updated_at', date('01'))
+                ->where('month_paid', '1')
+                // ->whereMonth('payments.updated_at', date('01'))
                 ->whereYear('payments.updated_at', date('Y'))
                 ->sum('amount');
        return $users;
@@ -39,7 +40,8 @@ class IndustMonRemitService
                 ->select('users.*', 'clients.*', 'payments.*')
                 ->where('clients.type', 'industrial')
                 ->where('payments.status', 'successful')
-                ->whereMonth('payments.updated_at', date('02'))
+                ->where('month_paid', '2')
+                // ->whereMonth('payments.updated_at', date('02'))
                 ->whereYear('payments.updated_at', date('Y'))
                 ->sum('amount');
        return $users;
@@ -54,7 +56,8 @@ class IndustMonRemitService
                 ->select('users.*', 'clients.*', 'payments.*')
                 ->where('clients.type', 'industrial')
                 ->where('payments.status', 'successful')
-                ->whereMonth('payments.updated_at', date('03'))
+                ->where('month_paid', '3')
+                // ->whereMonth('payments.updated_at', date('03'))
                 ->whereYear('payments.updated_at', date('Y'))
                 ->sum('amount');
        return $users;
@@ -69,7 +72,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('04'))
+        ->where('month_paid', '4')
+        // ->orWhereMonth('payments.updated_at', date('04'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -84,7 +88,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('05'))
+        ->where('month_paid', '5')
+        // ->orWhereMonth('payments.updated_at', date('05'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -99,7 +104,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('06'))
+        ->where('month_paid', '6')
+        // ->whereMonth('payments.updated_at', date('06'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -114,7 +120,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('07'))
+        ->where('month_paid', '7')
+        // ->whereMonth('payments.updated_at', date('07'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -128,7 +135,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('08'))
+        ->where('month_paid', '8')
+        // ->whereMonth('payments.updated_at', date('08'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -142,7 +150,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('09'))
+        ->where('month_paid', '9')
+        // ->whereMonth('payments.updated_at', date('09'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -156,7 +165,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('10'))
+        ->where('month_paid', '10')
+        // ->whereMonth('payments.updated_at', date('10'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -170,7 +180,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('11'))
+        ->where('month_paid', '11')
+        // ->whereMonth('payments.updated_at', date('11'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;
@@ -184,7 +195,8 @@ class IndustMonRemitService
         ->select('users.*', 'clients.*', 'payments.*')
         ->where('clients.type', 'industrial')
         ->where('payments.status', 'successful')
-        ->whereMonth('payments.updated_at', date('12'))
+        ->where('month_paid', '12')
+        // ->whereMonth('payments.updated_at', date('12'))
         ->whereYear('payments.updated_at', date('Y'))
         ->sum('amount');
        return $users;

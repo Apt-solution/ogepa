@@ -242,7 +242,7 @@ class AdminController extends Controller
         ]);
         $ogwama = $this->adminService->ifOgwamaExist($ogwama_code);
         if(is_null($ogwama)) {
-            return redirect()->back()->with('status', 'Ogwama could not be found');
+            return redirect()->back()->with('status', 'Ogwama code could not be found');
         }
         $this->adminService->resetPwd($ogwama_code);
         return redirect()->back()->with('status', 'Password Reset Successfully');

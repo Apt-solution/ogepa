@@ -108,9 +108,10 @@ class InvoiceService
 
     private function getCategoryArrears($user_id)
     {
+        $last_month = Carbon::now()->subMonths();
+       
         return $this->remmitance->where('user_id', $user_id)
-                                                ->whereMonth('created_at', date('m') - 1 )
-                                                ->whereYear('created_at', date('Y'))
+                                                ->whereMonth('created_at', $last_month)
                                                 ->value('arrears');
     }
 
