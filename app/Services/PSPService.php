@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Client;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Payment;
-
+use Illuminate\Support\Facades\Auth;
 
 class PSPService
 {
@@ -21,18 +21,19 @@ class PSPService
         $this->client = $client;
     }
 
-    public function addNewPSP($request)
+    public function addNewPSPVendor($request)
     {
         $ogwemaRef = $this->generateOgwemaRef();
         // dd($ogwemaRef);
         $data = array(
             'full_name'  => $request['full_name'],
             'phone'      => $request['phone'],
-            'location'   => $request['location'],
-            'role'       =>  'subAdmin',
+            'ogwema_ref' => $ogwemaRef,
             'email'      => $request['email'],
-            'ogwama_ref'   => $ogwemaRef,
-            'password'   => bcrypt($request['password']),
+            'password'   => bcrypt(12345678),
+            'location'   => $request['location'],
+            'role'       => 'subAdmin',
+            'lga'        => $request['lga']
         );
 
        $newUser = $this->user->create($data);
@@ -40,21 +41,54 @@ class PSPService
 
        $client = array(
         'user_id' =>  $user_id,
-        'type'  => 'PSP',
-        'ogwama_ref'      => $ogwemaRef,
+        'type'  => $request['type'],  
         'enteredBy' => \Auth::User()->id,
-    );
+        );
        return $this->client->create($client);
+
+    }
+
+    public function updatePSPVendor($request, $id)
+    {
+        $user = $this->user->where('id',$id)->first();
+        $user->update([
+            'full_name'  => $request['full_name'],
+            'phone'      => $request['phone'],
+            'location'   => $request['location'],
+            'email'      => $request['email'],
+            'lga'        => $request['lga'],
+       ]);
+
+       $client = $this->client->where('user_id', $id)->first();
+       return $client->update([  
+            'enteredBy' =>  \Auth::User()->id,
+       ]);
     }
 
     private function generateOgwemaRef()
     {
         $ref = rand(11111111, 99999999);
         // check if code exist before
-        $chk = $this->client->where('ogwama_ref', $ref)->first();
+        $chk = $this->user->where('ogwema_ref', $ref)->first();
         if ($chk) {
             $this->generateOgwemaRef();
         }
         return $ref;
     }
+
+    public function showPSPVendor($id)
+    {
+        return $this->user->where('id', $id)->with('client')->first();
+    }
+
+    public function noOfPSP()
+    {
+        return $this->client->where('type', 'PSP')->count();
+    }
+
+    public function noOfVendor()
+    {
+        return $this->client->where('type', 'Vendor')->count();
+    }
+
 }

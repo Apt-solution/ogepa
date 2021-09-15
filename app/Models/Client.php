@@ -14,7 +14,8 @@ class Client extends Model
         'sub_client_type',
         'no_of_sub_client_type',
         'address',
-        'enteredBy'
+        'enteredBy',
+        'initialAmount'
     ];
 
     public function user()

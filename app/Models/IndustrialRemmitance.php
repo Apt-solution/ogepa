@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class remmitance extends Model
+class IndustrialRemmitance extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'user_id',
         'amount_to_pay',
+        'no_of_trip',
         'month_due',
-        'admin_id',
+        'arreas'
     ];
 
     public function user()

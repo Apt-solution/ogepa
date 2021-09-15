@@ -5,7 +5,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	
 	<title>User's Receipt</title>
-	<link rel='stylesheet' type='text/css' href="{{asset('css/receipt.css') }}"  />
+	<link rel='stylesheet' type='text/css' href="{{asset('public/css/receipt.css') }}"  />
 </head>
 
 <body>
@@ -19,7 +19,7 @@
             </div>
            
             <div style="text-align: right;">
-              <img id="image" style="height: 100px; width:100px; margin-top:-10px" src="{{asset('images/ogwama.png')}}" alt="logo" />
+              <img id="image" style="height: 100px; width:100px; margin-top:-10px" src="{{asset('public/images/ogwama.png')}}" alt="logo" />
             </div>
 
             <div style="margin-top: 20px;">
@@ -63,21 +63,21 @@
 		</div>
 		
 		<table id="items">
-		@foreach($payment as $pay)
+	
 		  <tr>
-		      <th>Item</th>
+		  	  <th>Name</th>
 		      <th>Description</th>
-		      <th>Unit Cost</th>
-		      <th>Quantity</th>
-		      <th>Price</th>
+		      <th>No of Trip</th>
+		      <th>Per Trip</th>
+		      <th>Total</th>
 		  </tr>
 		  
 		  <tr class="item-row">
-		      <td class="item-name"><div class="delete-wpr"><h4>Waste Product</h4></div></td>
+		      <td class="item-name"><div class="delete-wpr"><h4>OGWAMA Receipt</h4></div></td>
 		      <td class="description"><h4 disabled>Waste Payment for OGWAMA ({{$pay->created_at->format('M-Y')}})</h4></td>
-		      <td><h4 class="cost"><span>&#8358;</span>{{ number_format($data['monthlyPayment'], 2) }}</h4></td>
+		      <td><h4 class="cost"><span>&#8358;</span></h4></td>
 		      <td><h4 class="qty">1</h4></td>
-		      <td><span class="price"><span>&#8358;</span>{{ number_format($data['monthlyPayment'], 2) }}</span></td>
+		      <td><span class="price"><span>&#8358;</span></span></td>
 		  </tr>
 		  
 		  <tr>
@@ -102,7 +102,7 @@
 		      <td colspan="2" class="total-line balance">Balance Due</td>
 		      <td class="total-value balance"><div class="due"><span>&#8358;</span>{{ number_format($data['total_due'], 2) }}</div></td>
 		  </tr>
-		@endforeach
+	
 		</table>
 		
 		<div id="terms">

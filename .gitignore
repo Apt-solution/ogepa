@@ -6,9 +6,12 @@
 /vendor
 .env
 .env.backup
+index.php
+server.php
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+server.php

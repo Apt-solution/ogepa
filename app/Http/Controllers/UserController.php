@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Services\InvoiceService;
 use App\Models\Payment;
 use PDF;
 
 class UserController extends Controller
 {
 
-    protected $userService;
+    protected $userService, $invoiceService;
     public function __construct(
-        UserService $userService
+        UserService $userService,
+        InvoiceService $invoiceService
+       
     )
     {
         $this->userService = $userService;
+        $this->invoiceService = $invoiceService;
     }
     
     public function userProfile()
@@ -26,9 +30,9 @@ class UserController extends Controller
     }
 
     public function confirmPay(Request $request)
-    {
+    { 
         $request->validate([
-            'amount' => 'required|integer|min:500'
+            'amount' => 'required'
         ]);
         $this->userService->confirmPayment($request->all());
         return redirect('makePayment');
@@ -48,6 +52,23 @@ class UserController extends Controller
         /* $pdf = PDF::loadView('user.receipt', ['payment' => $payment, 'data' => $data]);
         return $pdf->stream(); */
         return view('user.receipt', compact(['data', 'payment']));
+       
+    }
+
+    public function getIsLogin()
+    {
+        $isLogin = $this->userService->getIsLogin();
+        return response($isLogin);
+    }
+
+    public function changeUserPassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed']
+        ]);
+
+        $this->userService->changePassword($request->all());
+        return redirect()->back()->with('status', 'Password Changed Succesfully');
     }
 
 

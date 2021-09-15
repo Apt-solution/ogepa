@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Models\ClientType;
 use App\Models\User;
-use App\Models\remmitance;
+use App\Models\Remmitance;
 use App\Models\Payment;
 use App\Models\Client;
+use App\Models\IndustrialRemmitance;
+use App\Services\UserService;
 use Session;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,19 +16,24 @@ class AdminService
 {
 
     protected $clientType, $user, $remmitance, $payment, $client;
+    protected $industrialRemmitance, $userService;
 
     public function __construct(
         ClientType $clientType,
         User $user,
         remmitance $remmitance,
         Payment $payment,
-        Client $client
+        Client $client,
+        IndustrialRemmitance $industrialRemmitance,
+        UserService $userService
     ) {
         $this->clientType = $clientType;
         $this->user = $user;
         $this->remmitance = $remmitance;
         $this->payment = $payment;
         $this->client = $client;
+        $this->industrialRemmitance = $industrialRemmitance;
+        $this->userService = $userService;
     }
 
     public function getAutomatedPrice()
@@ -61,20 +68,20 @@ class AdminService
     public function getMonthRemmitance()
     {
         return $this->payment->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'))->sum('amount');
+            ->whereYear('created_at', date('Y'))->sum('amount');
     }
 
     public function getSearchPayment()
     {
         $request = Session::get('request');
         return $this->payment->whereDate('created_at', '>=', $request['from'])
-        ->whereDate('created_at', '<=', $request['to'])
-        ->where('status', 'successful')->get();
+            ->whereDate('created_at', '<=', $request['to'])
+            ->where('status', 'successful')->get();
     }
 
     public function userReceipt($id)
     {
-      return $this->payment::where('id', $id)->with('user')->get();    
+        return $this->payment::where('id', $id)->with('user')->get();
     }
 
     public function registerAdmin(array $data)
@@ -82,29 +89,29 @@ class AdminService
         return $this->user->create([
             'full_name' => $data['name'],
             'email' => $data['email'],
+            'ogwema_ref' => $data['email'],
             'location' => $data['location'],
-            'role' => 'subAdmin',
+            'role' => 'commercial_officer',
             'phone' => 000,
             'lga' => 'abeokuta_south',
-            'ogwema_ref' => 00,
             'password' => Hash::make($data['password']),
         ]);
     }
 
     public function getIndustrialClients()
     {
-        return $this->client->where('type','Industrial')->get();
+        return $this->client->where('type', 'Industrial')->get();
     }
 
     public function getIndustrialCharge()
     {
-        return $this->clientType->where('client_type','Industrial')->get();
+        return $this->clientType->where('client_type', 'Industrial')->get();
     }
 
     public function addIndustrialCharge(array $credentials)
     {
         $num = count($credentials['id']);
-        for ($i=0; $i < $num; $i++) { 
+        for ($i = 0; $i < $num; $i++) {
             $this->remmitance->create([
                 'user_id' => $credentials['id'][$i],
                 'amount_to_pay' => $credentials['amount'][$i],
@@ -118,6 +125,126 @@ class AdminService
     public function getIndustrialBill($month)
     {
         return $this->remmitance->whereMonth('created_at', $month)
-        ->whereYear('created_at', date('Y'))->get();
+            ->whereYear('created_at', date('Y'))->get();
+    }
+
+    // public function getUnenteredIndustrialPayment()
+    // {
+    //     return $this->client->where('type', 'industrial')->get();
+    // }
+
+    public function checkIfAmountExist(array $request)
+    {
+        return $this->industrialRemmitance->where('user_id', $request['industry_id'])
+            ->where('month_due', $request['month'])
+            ->whereYear('created_at', date('Y'))
+            ->first();
+    }
+
+    public function checMonthPaymentExist(array $data)
+    {
+        return $this->payment->where('user_id', $data['industry_id'])
+            ->where('month_paid', $data['month'])
+            ->where('status', 'successful')
+            ->first();
+    }
+
+    public function addIndustrialAmountPaid(array $data)
+    {
+        $reference = $this->userService->getPaymentRef();
+        return $this->payment->create([
+            'user_id' => $data['user_id'],
+            'amount' => $data['amount'],
+            'bank_charges' => 0,
+            'ref' => $reference,
+            'status' => 'successful',
+            'month_paid' => Session::get('month')
+        ]);
+    }
+
+    public function checkRecentMonth($user_id)
+    {
+        return $this->industrialRemmitance->where('user_id', $user_id)
+                                            ->whereYear('created_at', date('Y'))
+                                            ->max('month_due');
+    }
+
+    public function checkAmountToPay($user_id, $month)
+    {
+        return $this->industrialRemmitance->where('user_id', $user_id)
+                                            ->where('month_due', $month)
+                                            ->whereYear('created_at', date('Y'))
+                                            ->value('arreas');
+    }
+
+    public function arreas($user_id, $month)
+    {
+        $id = $this->industrialRemmitance->where('user_id', $user_id)
+                                        ->where('month_due', $month)
+                                        ->value('id');
+
+        return $this->industrialRemmitance->where('id', $id)
+                                    ->where('user_id', $user_id)
+                                    ->where('month_due', $month)
+                                    ->orWhereMonth('created_at', date('M'))
+                                    ->whereYear('created_at', date('Y'))
+                                    ->value('amount_to_pay');
+    }
+
+    
+    public function fillArreas($user_id, $month, $arreas)
+    {
+       $id = $this->industrialRemmitance->where('user_id', $user_id)
+                                        ->where('month_due', $month)
+                                        ->value('id');
+
+       return $this->industrialRemmitance->where('id', $id)
+                                ->where('user_id', $user_id)
+                                ->where('month_due', $month)
+                                ->whereYear('created_at', date('Y'))
+                                ->update([
+                                    'arreas' => $arreas
+                                ]);
+    }
+
+    public function checkIfPaymentExist($request)
+    {
+        return $this->payment->where('user_id', $request['industry_id'])
+            ->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
+            ->first();
+    }
+
+    public function getCOmmercialOfficers()
+    {
+        return $this->user->where('role', 'commercial_officer')->orderBy('full_name', 'desc')->get();
+    }
+
+    public function enterIndustryFOrOfficer(array $credentials)
+    {
+        $num = count($credentials['user_id']);
+
+        for ($i=0; $i < $num; $i++) { 
+            $this->client->where('user_id', $credentials['user_id'][$i])
+            ->update([
+                'commercial_officer_id' => $credentials['commercial_officer_id']
+            ]);
+        }
+        return true;
+    }
+
+
+    public function ifOgwamaExist($ogwama_code)
+    {
+        return $this->user->where('ogwema_ref', $ogwama_code)->value('ogwema_ref');
+    }
+    public function resetPwd($ogwama)
+    {
+        return $this->user->where('ogwema_ref', $ogwama)
+            ->update([
+                'password' => bcrypt('12345678'),
+                'isLogin'   => 0
+            ]);
+
     }
 }

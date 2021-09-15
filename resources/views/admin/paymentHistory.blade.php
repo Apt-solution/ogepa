@@ -26,31 +26,35 @@
         </div>
     </div>
 </div>
+<div class="table-responsive">
     <table class="table history table-bordered table-striped">
         <thead class="bg-dark">
             <th>Fullname / Industry Name</th>
             <th>Ogwama No</th>
             <th>Ref No</th>
             <th>Amount</th>
+            <th>Month Paid</th>
             <th>Date Paid</th>
         </thead>
         <tbody>
 
         </tbody>
     </table>
+</div>
 <script>
 $(document).ready(function(){
     $.noConflict();
     var table = $('.history').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('checkHistory') }}",
+        ajax: "{{ route('showHistory') }}",
         columns: 
         [
             {data: 'full_name', name: 'users.full_name'},
-            {data: 'ogwama_ref', name: 'clients.ogwama_ref'},
+            {data: 'ogwema_ref', name: 'users.ogwema_ref'},
             {data: 'ref', name: 'payments.ref'},
             {data: 'amount', name: 'payments.amount'}, 
+            {data: 'month_paid', name: 'payments.month_paid'},
             {data: 'updated_at', name: 'payments.updated_at'}
         ],
         

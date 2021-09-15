@@ -3,10 +3,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <!-- Load paper.css for happy printing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
-    <title>Industrial Invoice</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="{{ asset('js/moneyToWord.js') }}"></script>
+    
+    <title>Residential Invoices</title>
 <style>
     @page { size: A4 }
 
@@ -25,18 +29,18 @@
     }
     .name{
         position: absolute;
-        top: 3.9cm;
-        left:2.7cm;
+        top: 4.5cm;
+        left:2.5cm;
     }
     .address{
         position: absolute;
-        top: 4.8cm;
-        left: 3.3cm;
+        top: 5.4cm;
+        left: 3cm;
     }
     .desc{
         position: absolute;
-        top: 9.5cm;
-        left:1.5cm;
+        top: 10.5cm;
+        left: 2.5cm;
     }
     .trip{
         position: absolute;
@@ -50,8 +54,8 @@
     }
     .total1{
         position: absolute;
-        top: 9.5cm;
-        left:10.8cm;
+        top: 10.5cm;
+        left: 11.5cm;
     }
     .month{
         position: absolute;
@@ -60,111 +64,139 @@
     }
     .current{
         position: absolute;
-        top: 11.4cm;
-        left:11cm;
+        top: 13cm;
+        left:5cm;
     }
     .net{
         position: absolute;
-        top: 11.9cm;
-        left:11cm;
+        top: 13.5cm;
+        left:4cm;
     }
     .total2{
         position: absolute;
-        top: 12.3cm;
-        left:10cm;
+        top: 14.2cm;
+        left: 2.5cm;
     }
     .due{
         position: absolute;
-        top: 19cm;
-        left:10cm;
+        top: 18cm;
+        left: 14.5cm;
     }
     .month2{
         position: absolute;
-        top: 19cm;
-        left:12.5cm;
+        top: 18cm;
+        left: 17cm;
     }
     .amtPaid{
         position: absolute;
-        top: 20.3cm;
-        left:1.3cm;
+        top: 19.2cm;
+        left:1.6cm;
     }
     .amtWord{
         position: absolute;
-        top: 21.3cm;
-        left:5.5cm;
+        top: 22cm;
+        left:5cm;
     }
     .amtPaid2{
         position: absolute;
-        top: 25.3cm;
-        left:1.3cm;
+        top: 25.2cm;
+        left:1.6cm;
     }
     .due1{
         position: absolute;
-        top: 24.3cm;
-        left: 14.6cm;
+        top: 24cm;
+        left: 14.8cm;
     }
     .month3{
         position: absolute;
-        top: 24.3cm;
-        left:16.8cm;
+        top: 24cm;
+        left: 17cm;
     }
 </style>
 </head>
 <body class="A4">
-
-    <div class="container sheet">
+<div id="root">
+<template v-for="data in commercial">
+    <div  class="container sheet">
         <div class="name">
-            <p>{{ $datas->industryName }}</p>
+            <p>@{{ data[0]['full_name'] }}</p>
         </div>
         <div class="address">
-            <p>{{ $datas->address }}</p>
+            <p>@{{ data[0]['address'] }}</p>
         </div>
         <div class="desc">
-            <p>OGWAMA BILL</p>
+            <p>@{{ msg  }}</p>
         </div>
         <div class="trip">
-            <p>{{ $datas->trip }}</p>
+            <p></p>
         </div>
         <div class="per-trip">
-            <p>{{ $datas->perTrip }}</p>
+            <p></p>
         </div>
         <div class="total1">
-            <p>{{ $datas->total1 }}</p>
+            <p>@{{ data[0]['initialAmount'] }}</p>
         </div>
         <div class="month">
-            <p>{{ $datas->invoiceMonth }}</p>
+            <p>{{ date('F', mktime(0, 0, 0,  date('m')-1, 10)) }}</p>
         </div>
         <div class="current">
-        {{ $datas->currentCharge }}
+            <p>@{{ data[0]['initialAmount'] }}</p>
         </div>
         <div class="net">
-            <p>{{ $datas->netArreas }}</p>
+            <p>@{{ data[0]['amount_to_pay'] - data[0]['initialAmount'] }} </p>
         </div>
         <div class="total2">
-            <p>{{ $datas->total1 }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="due">
-            <p>{{ $datas->total1 }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="month2">
-            <p>{{ $datas->invoiceMonth }}</p>
+            <p>{{ date('F', mktime(0, 0, 0,  date('m')-1, 10)) }}</p>
         </div>
         <div class="amtPaid">
-            <p>{{ $datas->total2 }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="amtWord">
-            <p>{{ strtoupper($amtWord) }}</p>
+            <p id="amtWord">@{{ data[0]['amount_to_pay']  | toWord }} Naira Only</p>
         </div>
         <div class="amtPaid2">
-            <p>{{ $datas->total1 }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="due1">
-            <p>{{ $datas->total1 }}</p>
+            <p>@{{ data[0]['amount_to_pay'] }}</p>
         </div>
         <div class="month3">
-            <p>{{ $datas->invoiceMonth }}</p>
+            <p>{{ date('F', mktime(0, 0, 0,  date('m')-1, 10)) }}</p> 
         </div>
     </div>
+</template>
+</div>
 </body>
+<script>
+new Vue({
+    el: '#root',
+    data(){
+        return{
+            msg: 'OGWAMA BILL',
+            commercial: {!! json_encode($commercial_invoice_data) !!}
+        }
+    },
+    
+    filters:{
+        toWord(value){
+            let newValue = Number.parseFloat(value).toFixed();
+            return toWordsconver(newValue);
+        }
+    },
 
+    mounted(){
+        console.log(this.residential);
+        this.residential.forEach((value, index) => {
+            console.log(index, value[0]['initialAmount']);
+        });
+    }
+});
+
+</script>
 </html>

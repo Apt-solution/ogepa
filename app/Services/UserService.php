@@ -4,51 +4,112 @@ namespace App\Services;
 
 use App\Models\ClientType;
 use App\Models\User;
-use App\Models\remmitance;
+use App\Models\Remmitance;
+use App\Models\IndustrialRemmitance;
 use App\Models\Payment;
+use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
 
     protected $clientType, $user, $remmitance, $payment;
+    protected $industrialRemmitance;
 
     public function __construct(
         ClientType $clientType,
         User $user,
         remmitance $remmitance,
-        Payment $payment
+        Payment $payment,
+        IndustrialRemmitance $industrialRemmitance
     ) {
         $this->clientType = $clientType;
         $this->user = $user;
         $this->remmitance = $remmitance;
         $this->payment = $payment;
+        $this->industrialRemmitance = $industrialRemmitance;
     }
 
     public function getUserProfile()
     {
         $user_id = \Auth::User()->id;
+
+        $userType = Auth::User()->client->type;
+
+        if ($userType === 'Industrial') {
+            $currentBill = $this->currentBilling($user_id);
+        }
+
+        if ($userType === 'Residential') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
+
+        if ($userType === 'Commercial') {
+            $currentBill = $this->getCommercialCurrentBilling($user_id);
+        }
+
+        if ($userType === 'Medical') {
+            $currentBill = $this->getMedicalCurrentBilling($user_id);
+        }
+
+        $currentBilling = $currentBill->arrears ?? 0.00;
+
+        $monthNum  = $currentBill['current_bill']->month_due ?? 0.00;
+        $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+        $monthName = $dateObj->format('F'); // March
+
         $data['user_details'] = $this->user->where('id', $user_id)->first();
-        $data['current_billing'] = $this->currentBilling($user_id);
-        $data['total_due'] = $this->totalDue($user_id);
+        $data['current_billing'] = $currentBilling;
+        $data['month_name'] = $monthName;
+        $data['total_due'] = $currentBill['current_bill']->arrears ?? 0.00;;
+        $data['arrears'] = $currentBill['previous_bill']->arrears ?? 0.00;;
         $data['paymentHistories'] = $this->paymentHistory($user_id);
-        $data['monthlyPayment'] = $this->monthlyPayment($user_id);
         // dd($data);
         return $data;
     }
-    
+
+    public function getResidentialCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+
+        if (!$currentBill) {
+            return 0;
+        }
+
+        return $currentBill;
+    }
+
+    public function getCommercialCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
+            return 0;
+        }
+        return $currentBill;
+    }
+
+    public function getMedicalCurrentBilling(int $user_id)
+    {
+        $currentBill = $this->remmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
+            return 0;
+        }
+        return $currentBill;
+    }
+
     private function currentBilling(int $user_id)
     {
         // dd($user_id);
-        $remmitance = $this->remmitance->where('user_id', $user_id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->get('amount_to_pay')->first();
-        if(!$remmitance){
+        $currentBill = $this->industrialRemmitance->where('user_id', $user_id)->orderBy('id', 'desc')->first();
+        if (!$currentBill) {
             return 0;
         }
-        return $remmitance->amount_to_pay;
+        return $currentBill;
     }
 
     private function totalDue(int $user_id)
     {
-        $totalBilling = $this->remmitance->where('user_id', $user_id)->sum('amount_to_pay');
+        $totalBilling = $this->industrialRemmitance->where('user_id', $user_id)->sum('amount_to_pay');
         // getting the total payments
         $totalPayments = $this->totalPayments($user_id);
         $totalDue = $totalBilling - $totalPayments;
@@ -58,7 +119,7 @@ class UserService
     private function totalPayments(int $user_id)
     {
         $totalPayments = $this->payment->where('user_id', $user_id)->where('status', 'successful')->sum('amount');
-        if(!$totalPayments){
+        if (!$totalPayments) {
             return 0;
         }
         return $totalPayments;
@@ -75,11 +136,11 @@ class UserService
         ]);
     }
 
-    private function getPaymentRef()
+    public function getPaymentRef()
     {
         $code = rand(1111111, 9999999);
         $chk = $this->payment->where('ref', $code)->first();
-        if($chk){
+        if ($chk) {
             $this->getPaymentRef();
         }
         return $code;
@@ -93,10 +154,45 @@ class UserService
 
     public function updatePayment(array $data)
     {
+        $this->updateArrears($data);
+
         return $this->payment->where('ref', $data['ref'])
-        ->update([
-            'paystack_ref' => $data['paystack_ref'],
-            'status' => 'successful'
+            ->update([
+                'paystack_ref' => $data['paystack_ref'],
+                'status' => 'successful',
+                'response' => $data['response']
+            ]);
+    }
+
+    public function updateArrears($data)
+    {
+        $user_id = \Auth::User()->id;
+
+        $userType = Auth::User()->client->type;
+
+        if ($userType === 'Industrial') {
+            $currentBill = $this->currentBilling($user_id);
+        }
+
+        if ($userType === 'Residential') {
+            $currentBill = $this->getResidentialCurrentBilling($user_id);
+        }
+
+        if ($userType === 'Commercial') {
+            $currentBill = $this->getCommercialCurrentBilling($user_id);
+        }
+
+        if ($userType === 'Medical') {
+            $currentBill = $this->getMedicalCurrentBilling($user_id);
+        }
+
+        $currentBilling = $currentBill->arrears ?? 0.00;
+        $customerPayment = $data['response']['data']['meta']['customer_payment'];
+
+        $newArrears = $currentBilling - $customerPayment;
+
+        $currentBill->update([
+            'arrears' => $newArrears
         ]);
     }
 
@@ -106,10 +202,10 @@ class UserService
         return $this->payment->where('user_id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
     }
 
-    public function getReceipt(int $user_id)
+    public function getReceipt($id)
     {
         // dd($user_id);
-        return $this->payment->where('id', $user_id)->where('status', 'successful')->orderBy('id', 'desc')->get();
+        return $this->payment->where('id', $id)->where('status', 'successful')->orderBy('id', 'desc')->get();
     }
 
     public function getClient($id)
@@ -123,28 +219,17 @@ class UserService
         return $data;
     }
 
-    public function monthlyPayment(int $id)
+    public function getIsLogin()
     {
-       $id = User::findorFail($id);
-       if($id->client_type == "residential")
-       {
-           $amount = ClientType::where('client_type', 'residential')->value('monthly_payment');
-           return $amount;
-       }
-       elseif($id->client_type == "commercial")
-       {
-           $amount = ClientType::where('client_type', 'commercial')->value('monthly_payment');
-           return $amount;
-       }
-       elseif($id->client_type == "medical")
-       {
-           $amount = ClientType::where('client_type', 'medical')->value('monthly_payment');
-           return $amount;
-       }
-       elseif($id->client_type == "industrial")
-       {
-           $amount = ClientType::where('client_type', 'industrial')->value('monthly_payment');
-           return $amount;
-       }
+        return $this->user->where('id', \Auth::User()->id)->where('role', 'user')->value('isLogin');
+    }
+
+    public function changePassword(array $data)
+    {
+        return $this->user->where('id',  \Auth::user()->id)
+            ->update([
+                'password' => bcrypt($data['password']),
+                'isLogin' => 1
+            ]);
     }
 }

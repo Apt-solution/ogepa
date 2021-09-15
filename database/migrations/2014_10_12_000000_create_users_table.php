@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('location')->nullable();
-            $table->string('phone')->unique();
-            $table->string('ogwema_ref')->unique();
+            $table->string('phone')->nullable();
+            $table->string('ogwema_ref')->unique()->nullable();
             $table->string('email')->nullable()->unique();
-            $table->enum('role', ['admin', 'user', 'subAdmin'])->default('user');
+            $table->enum('role', ['admin', 'user', 'subAdmin', 'commercial_officer'])->default('user');
             $table->enum('lga', ['abeokuta_north', 'abeokuta_south', 'Ado_Odo_Ota', 'ewekoro', 'ifo', 'ijebu_east', 'ijebu_north', 'ijebu_north_east', 'ijebu_ode', 'ikenne', 'imeko_afon', 'ipokia', 'obafemi_owode', 'odeda', 'odogbolu', 'ogun_waterside', 'remo_north', 'sagamu', 'yewa_north', 'yewa_south'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
                 'email' => 'admin@ogwama.com',
                 'full_name' => 'admin',
                 'location' => 'Abeokuta',
-                'ogwema_ref' => 'ooo',
+                'ogwema_ref' => 'admin@ogwama.com',
                 'phone' => '23490989098',
                 'password' => '$2y$10$H21XXthP1v1td1YxHNxytOMt4bmbXc3gfswaeNyoOB.Sj6Gnac7PK', //password
                 'role' => 'admin',
